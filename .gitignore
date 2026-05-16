@@ -5,3 +5,5 @@ dist
 .npm-cache2
 .DS_Store
 *.log
+.obsidian
+src/content/.obsidian

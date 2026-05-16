@@ -2,7 +2,7 @@
 import CategoryCard from "@/components/CategoryCard.astro";
 import ToolCard from "@/components/ToolCard.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { getCategories, getFeaturedTools, getLatestTools, getRankedTools } from "@/lib/directory";
+import { formatNumber, getCategories, getCategoryCounts, getFeaturedTools, getLatestTools, getRankedTools } from "@/lib/directory";
 import { languages, localizedPath, t, type Lang } from "@/lib/i18n";
 
 export function getStaticPaths() {
@@ -12,17 +12,48 @@ export function getStaticPaths() {
 const lang = Astro.params.lang as Lang;
 const [featuredTools, latestTools, rankedTools, categories] = await Promise.all([
   getFeaturedTools(),
-  getLatestTools(3),
-  getRankedTools(3),
+  getLatestTools(),
+  getRankedTools(),
   getCategories()
 ]);
+const categoryCounts = await getCategoryCounts();
+const quickLinks = [
+  { label: t(lang, "quickLatest"), href: localizedPath(lang, "/new") },
+  { label: t(lang, "quickSaved"), href: localizedPath(lang, "/rankings") },
+  { label: t(lang, "quickUsed"), href: localizedPath(lang, "/rankings") },
+  { label: t(lang, "quickExtensions"), href: localizedPath(lang, "/categories/productivity") },
+  { label: t(lang, "quickApps"), href: localizedPath(lang, "/tools") },
+  { label: t(lang, "quickDiscord"), href: localizedPath(lang, "/categories/developer-tools") }
+];
+const newsItems =
+  lang === "zh"
+    ? [
+        "多模态视频模型继续成为 AI 工具增长最快的方向",
+        "企业级 AI Agent 从演示走向工作流落地",
+        "搜索引擎开始更重视结构化工具目录页面",
+        "开源模型生态推动中小团队快速搭建 AI 产品"
+      ]
+    : [
+        "Multimodal video models remain one of the fastest-growing AI categories",
+        "Enterprise AI agents are moving from demos into real workflows",
+        "Search engines keep rewarding structured directory pages",
+        "Open models help small teams ship AI products faster"
+      ];
+const promptItems =
+  lang === "zh"
+    ? ["电商商品图生成", "短视频脚本", "SEO 文章大纲", "代码审查清单", "品牌广告文案", "会议纪要整理"]
+    : ["Product photo generation", "Short video scripts", "SEO article briefs", "Code review checklist", "Brand ad copy", "Meeting summary"];
+const guideItems =
+  lang === "zh"
+    ? ["10 个适合内容团队的 AI 写作工具", "如何挑选 AI 视频生成器", "AI 工具目录站的 SEO 页面矩阵", "从 Markdown 迁移到数据库的路线"]
+    : ["10 AI writing tools for content teams", "How to choose an AI video generator", "SEO page matrices for AI directories", "Moving from Markdown to a database"];
 ---
 
 <BaseLayout lang={lang} title={`${t(lang, "brand")} - ${t(lang, "heroTitle")}`} description={t(lang, "heroSubtitle")}>
   <section class="hero">
     <div class="container hero-grid">
       <div>
-        <p class="eyebrow">{t(lang, "allTools")}</p>
+        <p class="eyebrow">{t(lang, "dailyUpdated")}</p>
         <h1>{t(lang, "heroTitle")}</h1>
         <p class="lead">{t(lang, "heroSubtitle")}</p>
         <form class="search-panel" action={localizedPath(lang, "/tools")} method="get">
@@ -37,13 +68,95 @@ const [featuredTools, latestTools, rankedTools, categories] = await Promise.all(
         </div>
         <div class="stat">
           <strong>6</strong>
-          <span>Categories</span>
+          <span>{t(lang, "categories")}</span>
         </div>
         <div class="stat">
           <strong>2</strong>
           <span>{t(lang, "languagesReady")}</span>
         </div>
       </aside>
+    </div>
+  </section>
+
+  <section class="quick-section">
+    <div class="container quick-links">
+      {quickLinks.map((item) => <a href={item.href}>{item.label}</a>)}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container directory-layout">
+      <div>
+        <div class="section-head compact">
+          <h2>{t(lang, "today")}</h2>
+          <a class="button secondary" href={localizedPath(lang, "/new")}>{t(lang, "more")}</a>
+        </div>
+        <div class="feed-list">
+          {
+            latestTools.map((tool, index) => (
+              <>
+                {index === 2 && (
+                  <article class="sponsor-card">
+                    <span class="pill featured">{t(lang, "sponsor")}</span>
+                    <h3>ZenMux</h3>
+                    <p>{lang === "zh" ? "具备保险机制的企业级大模型聚合器，确保 AI 的质量与可靠性。" : "Enterprise LLM gateway with reliability controls for production AI teams."}</p>
+                    <div class="tag-row">
+                      <span class="pill">#AI聊天生成器</span>
+                      <span class="pill">#LLMs</span>
+                      <span class="pill">#API</span>
+                    </div>
+                  </article>
+                )}
+                <article class="feed-row">
+                  <span class="tool-logo">{tool.logo}</span>
+                  <div>
+                    <h3><a href={localizedPath(lang, `/tools/${tool.slug}`)}>{tool.name[lang]}</a></h3>
+                    <p>{tool.description[lang]}</p>
+                    <div class="tag-row">
+                      {tool.tags.slice(0, 5).map((tag) => <span class="pill">#{tag}</span>)}
+                    </div>
+                  </div>
+                  <a class="button secondary" href={localizedPath(lang, `/tools/${tool.slug}`)}>{t(lang, "view")}</a>
+                </article>
+              </>
+            ))
+          }
+        </div>
+      </div>
+      <aside class="side-rail">
+        <div class="rail-panel">
+          <h2>{t(lang, "rankings")}</h2>
+          <div class="mini-list">
+            {
+              rankedTools.slice(0, 5).map((tool, index) => (
+                <a href={localizedPath(lang, `/tools/${tool.slug}`)}>
+                  <strong>#{index + 1}</strong>
+                  <span>{tool.name[lang]}</span>
+                  <small>{formatNumber(tool.monthlyVisits, lang)}</small>
+                </a>
+              ))
+            }
+          </div>
+        </div>
+        <div class="rail-panel">
+          <h2>{t(lang, "promptLibrary")}</h2>
+          <div class="prompt-cloud">
+            {promptItems.map((item) => <a href={localizedPath(lang, "/")}>{item}</a>)}
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>{t(lang, "categories")}</h2>
+        <a class="button secondary" href={localizedPath(lang, "/categories")}>{t(lang, "navCategories")}</a>
+      </div>
+      <div class="category-grid">
+        {categories.slice(0, 6).map((category) => <CategoryCard category={category} lang={lang} />)}
+      </div>
     </div>
   </section>
 
@@ -60,46 +173,41 @@ const [featuredTools, latestTools, rankedTools, categories] = await Promise.all(
   </section>
 
   <section class="section">
-    <div class="container">
-      <div class="section-head">
-        <h2>{t(lang, "categories")}</h2>
-        <a class="button secondary" href={localizedPath(lang, "/categories")}>{t(lang, "navCategories")}</a>
-      </div>
-      <div class="category-grid">
-        {categories.map((category) => <CategoryCard category={category} lang={lang} />)}
-      </div>
+    <div class="container seo-grid">
+      <section class="seo-panel">
+        <div class="section-head compact">
+          <h2>{t(lang, "aiNews")}</h2>
+          <a class="button secondary" href={localizedPath(lang, "/")}>{t(lang, "more")}</a>
+        </div>
+        <ol class="link-list">
+          {newsItems.map((item) => <li><a href={localizedPath(lang, "/")}>{item}</a></li>)}
+        </ol>
+      </section>
+      <section class="seo-panel">
+        <div class="section-head compact">
+          <h2>{t(lang, "topAiGuides")}</h2>
+          <a class="button secondary" href={localizedPath(lang, "/")}>{t(lang, "more")}</a>
+        </div>
+        <ol class="link-list">
+          {guideItems.map((item) => <li><a href={localizedPath(lang, "/")}>{item}</a></li>)}
+        </ol>
+      </section>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
-      <div class="section-head">
-        <h2>{t(lang, "latest")}</h2>
-        <a class="button secondary" href={localizedPath(lang, "/new")}>{t(lang, "navNew")}</a>
+      <div class="section-head compact">
+        <h2>{t(lang, "freeCategories")}</h2>
+        <a class="button secondary" href={localizedPath(lang, "/categories")}>{t(lang, "more")}</a>
       </div>
-      <div class="grid">
-        {latestTools.map((tool) => <ToolCard tool={tool} lang={lang} />)}
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="section-head">
-        <h2>{t(lang, "rankings")}</h2>
-        <a class="button secondary" href={localizedPath(lang, "/rankings")}>{t(lang, "navRankings")}</a>
-      </div>
-      <div class="ranking-list">
+      <div class="category-index">
         {
-          rankedTools.map((tool, index) => (
-            <article class="ranking-row">
-              <span class="rank-number">#{index + 1}</span>
-              <div>
-                <h3><a href={localizedPath(lang, `/tools/${tool.slug}`)}>{tool.name[lang]}</a></h3>
-                <p>{tool.tagline[lang]}</p>
-              </div>
-              <a class="button secondary" href={localizedPath(lang, `/tools/${tool.slug}`)}>{t(lang, "view")}</a>
-            </article>
+          categoryCounts.map(({ category, count }) => (
+            <a href={localizedPath(lang, `/categories/${category.slug}`)}>
+              <span>{category.name[lang]}</span>
+              <strong>{count} {lang === "zh" ? "个工具" : "tools"}</strong>
+            </a>
           ))
         }
       </div>

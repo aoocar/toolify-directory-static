@@ -68,6 +68,13 @@ export async function getRankedTools(limit?: number) {
   return (limit ? sorted.slice(0, limit) : sorted).map(withCategories);
 }
 
+export async function getCategoryCounts() {
+  return categories.map((category) => ({
+    category,
+    count: tools.filter((tool) => tool.categories.includes(category.slug)).length
+  }));
+}
+
 export function formatNumber(value: number, lang: Lang) {
   return new Intl.NumberFormat(lang === "zh" ? "zh-CN" : "en-US", {
     notation: value >= 10000 ? "compact" : "standard",

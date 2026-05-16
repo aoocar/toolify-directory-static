@@ -10,9 +10,11 @@ type Props = {
 
 const { lang, title, description } = Astro.props;
 const navItems = [
+  { href: localizedPath(lang, "/tools"), label: t(lang, "navProducts") },
   { href: localizedPath(lang, "/new"), label: t(lang, "navNew") },
   { href: localizedPath(lang, "/categories"), label: t(lang, "navCategories") },
   { href: localizedPath(lang, "/rankings"), label: t(lang, "navRankings") },
+  { href: localizedPath(lang, "/"), label: t(lang, "navPrompts") },
   { href: localizedPath(lang, "/submit"), label: t(lang, "navSubmit") }
 ];
 
@@ -28,6 +30,13 @@ const currentPath = Astro.url.pathname.replace(/^\/(en|zh)/, "") || "/";
     <title>{title}</title>
   </head>
   <body>
+    <div class="sponsor-strip">
+      <div class="container sponsor-strip-inner">
+        <span>{t(lang, "sponsor")}</span>
+        <strong>AdsCreator.com</strong>
+        <span>{lang === "zh" ? "粘贴网站 URL，即可生成 AI 广告素材" : "Paste a website URL to generate AI ad creatives"}</span>
+      </div>
+    </div>
     <header class="site-header">
       <div class="container nav">
         <a class="brand" href={localizedPath(lang, "/")} aria-label={t(lang, "brand")}>
