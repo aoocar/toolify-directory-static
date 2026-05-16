@@ -1,0 +1,60 @@
+---
+import "@/styles/global.css";
+import { languages, localizedPath, t, type Lang } from "@/lib/i18n";
+
+type Props = {
+  lang: Lang;
+  title: string;
+  description: string;
+};
+
+const { lang, title, description } = Astro.props;
+const navItems = [
+  { href: localizedPath(lang, "/new"), label: t(lang, "navNew") },
+  { href: localizedPath(lang, "/categories"), label: t(lang, "navCategories") },
+  { href: localizedPath(lang, "/rankings"), label: t(lang, "navRankings") },
+  { href: localizedPath(lang, "/submit"), label: t(lang, "navSubmit") }
+];
+
+const currentPath = Astro.url.pathname.replace(/^\/(en|zh)/, "") || "/";
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav">
+        <a class="brand" href={localizedPath(lang, "/")} aria-label={t(lang, "brand")}>
+          <span class="brand-mark">AI</span>
+          <span>{t(lang, "brand")}</span>
+        </a>
+        <nav class="nav-links" aria-label="Primary">
+          {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+          <span class="lang-switch" aria-label="Language">
+            {
+              languages.map((item) => (
+                <a href={localizedPath(item, currentPath)} aria-current={item === lang ? "true" : "false"}>
+                  {item.toUpperCase()}
+                </a>
+              ))
+            }
+          </span>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="container">
+        Static-first AI directory scaffold. Replace the data layer when the catalog grows.
+      </div>
+    </footer>
+  </body>
+</html>

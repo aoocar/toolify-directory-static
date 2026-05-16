@@ -1,0 +1,17 @@
+---
+import { localizedPath, type Lang } from "@/lib/i18n";
+import type { Category } from "@/lib/types";
+
+type Props = {
+  category: Category;
+  lang: Lang;
+};
+
+const { category, lang } = Astro.props;
+---
+
+<a class="category-card" href={localizedPath(lang, `/categories/${category.slug}`)}>
+  <span class="category-icon">{category.icon.slice(0, 2)}</span>
+  <h3>{category.name[lang]}</h3>
+  <p>{category.description[lang]}</p>
+</a>

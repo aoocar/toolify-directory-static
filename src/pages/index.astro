@@ -1,0 +1,15 @@
+---
+import { defaultLang, localizedPath } from "@/lib/i18n";
+
+const target = localizedPath(defaultLang, "/");
+---
+
+<html>
+  <head>
+    <meta http-equiv="refresh" content={`0;url=${target}`} />
+    <link rel="canonical" href={target} />
+  </head>
+  <body>
+    <a href={target}>Continue</a>
+  </body>
+</html>

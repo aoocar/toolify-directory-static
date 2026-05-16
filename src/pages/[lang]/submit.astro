@@ -1,0 +1,40 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { languages, t, type Lang } from "@/lib/i18n";
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+---
+
+<BaseLayout lang={lang} title={`${t(lang, "submitTitle")} - ${t(lang, "brand")}`} description={t(lang, "submitBody")}>
+  <section class="page-title">
+    <div class="container">
+      <h1>{t(lang, "submitTitle")}</h1>
+      <p class="lead">{t(lang, "submitBody")}</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="submit-panel">
+        <form class="form-grid">
+          <div class="field">
+            <label for="name">Tool name</label>
+            <input id="name" name="name" placeholder="Example AI" />
+          </div>
+          <div class="field">
+            <label for="website">Website</label>
+            <input id="website" name="website" placeholder="https://example.com" />
+          </div>
+          <div class="field">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" placeholder="What does this tool do?"></textarea>
+          </div>
+          <button class="button" type="button">Submit</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

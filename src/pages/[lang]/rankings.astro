@@ -1,0 +1,41 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { formatNumber, getRankedTools } from "@/lib/directory";
+import { languages, localizedPath, t, type Lang } from "@/lib/i18n";
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+const tools = await getRankedTools();
+---
+
+<BaseLayout lang={lang} title={`${t(lang, "rankings")} - ${t(lang, "brand")}`} description={t(lang, "heroSubtitle")}>
+  <section class="page-title">
+    <div class="container">
+      <h1>{t(lang, "rankings")}</h1>
+      <p class="lead">{t(lang, "heroSubtitle")}</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container ranking-list">
+      {
+        tools.map((tool, index) => (
+          <article class="ranking-row">
+            <span class="rank-number">#{index + 1}</span>
+            <div>
+              <h3><a href={localizedPath(lang, `/tools/${tool.slug}`)}>{tool.name[lang]}</a></h3>
+              <p>{tool.tagline[lang]}</p>
+              <div class="meta-row">
+                <span class="pill">{formatNumber(tool.monthlyVisits, lang)} {t(lang, "visits")}</span>
+                <span class="pill">{formatNumber(tool.savedCount, lang)} {t(lang, "saves")}</span>
+              </div>
+            </div>
+            <a class="button secondary" href={localizedPath(lang, `/tools/${tool.slug}`)}>{t(lang, "view")}</a>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

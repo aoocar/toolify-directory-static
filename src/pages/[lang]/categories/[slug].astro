@@ -1,0 +1,39 @@
+---
+import ToolCard from "@/components/ToolCard.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getCategories, getCategoryBySlug, getToolsByCategory } from "@/lib/directory";
+import { languages, localizedPath, t, type Lang } from "@/lib/i18n";
+
+export async function getStaticPaths() {
+  const categories = await getCategories();
+  return languages.flatMap((lang) =>
+    categories.map((category) => ({ params: { lang, slug: category.slug } }))
+  );
+}
+
+const lang = Astro.params.lang as Lang;
+const category = await getCategoryBySlug(Astro.params.slug ?? "");
+
+if (!category) {
+  return Astro.redirect(localizedPath(lang, "/categories"));
+}
+
+const tools = await getToolsByCategory(category.slug);
+---
+
+<BaseLayout lang={lang} title={`${category.name[lang]} - ${t(lang, "brand")}`} description={category.description[lang]}>
+  <section class="page-title">
+    <div class="container">
+      <h1>{category.name[lang]}</h1>
+      <p class="lead">{category.description[lang]}</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="grid">
+        {tools.map((tool) => <ToolCard tool={tool} lang={lang} />)}
+      </div>
+      {tools.length === 0 && <p>{t(lang, "empty")}</p>}
+    </div>
+  </section>
+</BaseLayout>
