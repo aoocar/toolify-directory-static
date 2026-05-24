@@ -38,6 +38,22 @@ Markdown files:
 
 Each Markdown file stores frontmatter only for now. Body content can be added later for long-form reviews or SEO descriptions.
 
+## Home page composition
+
+The home page intentionally follows a dense directory pattern rather than a marketing landing page:
+
+- Sponsor strip: `src/layouts/BaseLayout.astro`
+- Hero search and statistics: `src/pages/[lang]/index.astro`
+- Shortcut navigation: `quickLinks`
+- Daily feed: `getLatestTools()`
+- Sponsored feed insertion: static placeholder card
+- Ranking rail: `getRankedTools()`
+- Prompt tag cloud: static seed list
+- AI news and guide panels: static seed lists, ready to become content collections later
+- Category index: `getCategoryCounts()`
+
+When this grows, news, guides, prompts, and sponsors should become their own content collections or database tables.
+
 ## Migration path
 
 When the catalog grows, replace the internals of `src/lib/directory.ts`:

@@ -59,6 +59,20 @@ description:
 sample-ai.md
 ```
 
+首页“今天”工具流会根据 `updatedAt` 自动排序。
+
+精选工具由下面字段控制：
+
+```yaml
+featured: true
+```
+
+排行榜当前根据下面字段排序：
+
+```yaml
+monthlyVisits: 12000
+```
+
 ## 3. 添加新分类
 
 在下面目录中新建 Markdown 文件：
@@ -137,7 +151,21 @@ npm run build
 npm run preview
 ```
 
-## 7. GitHub 部署说明
+## 7. 首页模块说明
+
+首页被设计成目录型工作台，而不是普通营销页：
+
+- 顶部赞助横条位于 `src/layouts/BaseLayout.astro`。
+- 首页搜索和统计位于 `src/pages/[lang]/index.astro`。
+- 快捷入口包括最新 AI、最多保存、最多人使用、浏览器插件、Apps 和 Discord of AI。
+- “今天”工具流来自 `getLatestTools()`。
+- 信息流中预留赞助工具卡片。
+- 右侧排行榜来自 `getRankedTools()`。
+- 右侧提示词标签用于后续扩展提示词库。
+- AI 新闻和热门指南用于 SEO 内容拓展。
+- 免费分类索引来自 `getCategoryCounts()`。
+
+## 8. GitHub 部署说明
 
 如果部署到 Cloudflare Pages、Vercel 或 Netlify：
 

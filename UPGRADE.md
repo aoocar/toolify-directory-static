@@ -16,6 +16,7 @@ Recommended tasks:
 - Add real tools and categories.
 - Keep category slugs stable.
 - Add SEO descriptions to every category.
+- Turn the seeded AI news, guides, prompt tags, and sponsor cards into Markdown collections once they need frequent updates.
 - Add sitemap and RSS when content volume grows.
 - Add Pagefind once tool count is above 100.
 
@@ -73,7 +74,7 @@ Add these only after the content engine is working:
 
 - Tool submission workflow
 - Admin approval queue
-- Sponsored placements
+- Sponsored placements in the top strip, daily feed, category pages, and tool detail pages
 - Newsletter capture
 - Traffic analytics
 - Tool comparison pages

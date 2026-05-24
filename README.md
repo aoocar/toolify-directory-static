@@ -7,6 +7,7 @@ An Astro + Markdown static AI tools directory scaffold inspired by Toolify's inf
 - Static-first Astro site.
 - Bilingual routes for English and Chinese: `/en` and `/zh`.
 - Markdown-managed tools and categories.
+- Toolify-style home page with sponsor strip, quick links, daily tool feed, ranking rail, prompt tags, AI news, guides, and category index.
 - SEO-friendly pages for home, tool details, categories, rankings, newest tools, and submission.
 - Replaceable data access layer in `src/lib/directory.ts`.
 - Content schema validation in `src/content.config.ts`.
@@ -37,6 +38,7 @@ The production static files are generated in `dist`.
 - Static Astro pages with bilingual routes: `/en` and `/zh`.
 - Markdown seed data in `src/content/tools` and `src/content/categories`.
 - Public page code calls `src/lib/directory.ts` instead of reading raw data directly.
+- The home page is intentionally denser than a marketing landing page. It is structured as a directory dashboard: sponsor strip, search, shortcuts, daily feed, sponsored insertion, rankings, prompt tags, news/guides, and category index.
 - Future data migration can replace `directory.ts` internals with PostgreSQL, Supabase, Meilisearch, Typesense, or an API.
 
 ## Key routes

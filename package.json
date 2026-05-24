@@ -6,11 +6,13 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "vault:seed": "node scripts/seed-vault-from-site.mjs",
+    "vault:sync": "node scripts/sync-vault-to-site.mjs"
   },
   "dependencies": {
     "astro": "^5.7.13",
+    "js-yaml": "^4.1.1",
     "typescript": "^5.8.3"
-  },
-  "devDependencies": {}
+  }
 }

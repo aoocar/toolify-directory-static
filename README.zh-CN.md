@@ -7,6 +7,7 @@
 - Astro 静态站优先架构。
 - 已内置中英双语路由：`/zh` 和 `/en`。
 - 工具和分类内容使用 Markdown 管理。
+- 首页采用接近 Toolify 的目录站信息流：赞助横条、快捷入口、今日工具流、赞助工具穿插、侧边排行、提示词、AI 新闻、指南和分类索引。
 - 包含首页、工具详情页、分类页、排行榜、最新工具页、提交页等 SEO 友好页面。
 - 数据访问统一封装在 `src/lib/directory.ts`，后期方便替换数据源。
 - 内容字段校验集中在 `src/content.config.ts`。
@@ -37,6 +38,7 @@ npm run preview
 - Astro 静态页面，中英双语路由：`/zh` 和 `/en`。
 - 示例数据位于 `src/content/tools` 和 `src/content/categories`。
 - 页面代码只调用 `src/lib/directory.ts`，不直接读取底层数据。
+- 首页不是传统营销落地页，而是目录型工作台：搜索、快捷入口、工具信息流、赞助位、排行榜、提示词、新闻/指南和分类索引都在首屏及下方连续呈现。
 - 后期可以把 `directory.ts` 内部替换成 PostgreSQL、Supabase、Meilisearch、Typesense、Algolia 或 API。
 
 ## 主要路由

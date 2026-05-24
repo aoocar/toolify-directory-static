@@ -55,6 +55,22 @@ src/content/categories/*.md
 
 目前主要使用 Markdown frontmatter 存储结构化数据。后续可以在正文区域增加长评测、教程或 SEO 内容。
 
+## 首页组成
+
+首页刻意采用高信息密度的目录站结构，而不是普通营销落地页：
+
+- 顶部赞助横条：`src/layouts/BaseLayout.astro`
+- 首页搜索和统计：`src/pages/[lang]/index.astro`
+- 快捷入口：`quickLinks`
+- 今日工具流：`getLatestTools()`
+- 信息流赞助卡片：当前是静态占位，后续可接广告系统
+- 右侧排行榜：`getRankedTools()`
+- 提示词标签云：当前是静态种子数据，后续可接提示词库
+- AI 新闻和热门指南：当前是静态种子列表，后续可升级为内容集合
+- 分类索引：`getCategoryCounts()`
+
+当项目增长后，新闻、指南、提示词和赞助位建议独立成内容集合或数据库表。
+
 ## 迁移路线
 
 ### 100-1,000 个工具

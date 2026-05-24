@@ -55,6 +55,20 @@ description:
 
 The file name can match the slug, for example `sample-ai.md`.
 
+The newest tools are automatically shown in the home page daily feed according to `updatedAt`.
+
+Featured tools are controlled by:
+
+```yaml
+featured: true
+```
+
+Ranking order is currently based on:
+
+```yaml
+monthlyVisits: 12000
+```
+
 ## 3. Add A Category
 
 Create a new Markdown file under:
@@ -133,7 +147,21 @@ npm run build
 npm run preview
 ```
 
-## 7. GitHub Deployment Notes
+## 7. Home Page Sections
+
+The home page is modeled as a directory dashboard:
+
+- Sponsor strip in `src/layouts/BaseLayout.astro`.
+- Hero search and stats in `src/pages/[lang]/index.astro`.
+- Quick links for latest, saved, most used, apps, extensions, and Discord.
+- Daily tool feed from `getLatestTools()`.
+- Sponsored insertion card in the feed.
+- Ranking rail from `getRankedTools()`.
+- Prompt tag cloud.
+- AI news and guide lists.
+- Free category index from `getCategoryCounts()`.
+
+## 8. GitHub Deployment Notes
 
 For Cloudflare Pages, Vercel, or Netlify:
 
