@@ -16,7 +16,9 @@ const navItems = [
   { href: localizedPath(lang, "/rankings"), label: t(lang, "navRankings") },
   { href: localizedPath(lang, "/new"), label: t(lang, "navNew") },
   { href: localizedPath(lang, "/services"), label: t(lang, "navServices") },
-  { href: localizedPath(lang, "/submit"), label: t(lang, "navSubmit") }
+  { href: localizedPath(lang, "/submit"), label: t(lang, "navSubmit") },
+  { href: "https://d.limingdao.com/", label: t(lang, "navTransfer"), external: true },
+  { href: "https://cms.limingdao.com/", label: t(lang, "navDirectory"), external: true }
 ];
 
 const currentPath = Astro.url.pathname.replace(/^\/(en|zh)/, "") || "/";
@@ -46,7 +48,11 @@ const currentPath = Astro.url.pathname.replace(/^\/(en|zh)/, "") || "/";
           <span>{t(lang, "brand")}</span>
         </a>
         <nav class="nav-links" aria-label="Primary">
-          {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+          {navItems.map((item) => (
+            <a href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noopener noreferrer" : undefined}>
+              {item.label}
+            </a>
+          ))}
           <span class="lang-switch" aria-label="Language">
             {
               languages.map((item) => (

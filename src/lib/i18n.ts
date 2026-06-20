@@ -28,6 +28,8 @@ export const dictionary = {
     navNew: "New",
     navServices: "Services",
     navSubmit: "Recommend",
+    navTransfer: "Transfer Station",
+    navDirectory: "Nav Station",
 
     /* hero */
     heroTitle: "Discover Top Creators, Inspire Your AI Content",
@@ -141,6 +143,8 @@ export const dictionary = {
     navNew: "最新收录",
     navServices: "服务",
     navSubmit: "推荐账号",
+    navTransfer: "中转站",
+    navDirectory: "导航站",
 
     /* hero */
     heroTitle: "发现优质创作者，获取 AI 内容灵感",
