@@ -1,6 +1,7 @@
 ---
+import AccountCard from "@/components/AccountCard.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { formatNumber, getRankedTools } from "@/lib/directory";
+import { getRankedAccounts } from "@/lib/directory";
 import { languages, localizedPath, t, type Lang } from "@/lib/i18n";
 
 export function getStaticPaths() {
@@ -8,34 +9,50 @@ export function getStaticPaths() {
 }
 
 const lang = Astro.params.lang as Lang;
-const tools = await getRankedTools();
+const url = Astro.url;
+const tab = url.searchParams.get("tab") || "followers";
+
+let activeTab: "followers" | "engagement" | "growth" = "followers";
+if (tab === "engagement" || tab === "growth") {
+  activeTab = tab;
+}
+
+const rankedAccounts = await getRankedAccounts(activeTab);
 ---
 
-<BaseLayout lang={lang} title={`${t(lang, "rankings")} - ${t(lang, "brand")}`} description={t(lang, "heroSubtitle")}>
-  <section class="page-title">
-    <div class="container">
-      <h1>{t(lang, "rankings")}</h1>
-      <p class="lead">{t(lang, "heroSubtitle")}</p>
-    </div>
-  </section>
+<BaseLayout lang={lang} title={`${t(lang, "navRankings")} - ${t(lang, "brand")}`} description={t(lang, "heroSubtitle")}>
   <section class="section">
-    <div class="container ranking-list">
-      {
-        tools.map((tool, index) => (
-          <article class="ranking-row">
-            <span class="rank-number">#{index + 1}</span>
-            <div>
-              <h3><a href={localizedPath(lang, `/tools/${tool.slug}`)}>{tool.name[lang]}</a></h3>
-              <p>{tool.tagline[lang]}</p>
-              <div class="meta-row">
-                <span class="pill">{formatNumber(tool.monthlyVisits, lang)} {t(lang, "visits")}</span>
-                <span class="pill">{formatNumber(tool.savedCount, lang)} {t(lang, "saves")}</span>
-              </div>
-            </div>
-            <a class="button secondary" href={localizedPath(lang, `/tools/${tool.slug}`)}>{t(lang, "view")}</a>
-          </article>
-        ))
-      }
+    <div class="container">
+      <div class="section-head">
+        <h1>{t(lang, "navRankings")}</h1>
+        <div class="tab-row" role="tablist">
+          <a
+            class={`tab-button ${activeTab === "followers" ? "active" : ""}`}
+            href={`${localizedPath(lang, "/rankings")}?tab=followers`}
+            role="tab"
+          >
+            {t(lang, "rankByFollowers")}
+          </a>
+          <a
+            class={`tab-button ${activeTab === "engagement" ? "active" : ""}`}
+            href={`${localizedPath(lang, "/rankings")}?tab=engagement`}
+            role="tab"
+          >
+            {t(lang, "rankByEngagement")}
+          </a>
+          <a
+            class={`tab-button ${activeTab === "growth" ? "active" : ""}`}
+            href={`${localizedPath(lang, "/rankings")}?tab=growth`}
+            role="tab"
+          >
+            {t(lang, "rankByGrowth")}
+          </a>
+        </div>
+      </div>
+
+      <div class="grid">
+        {rankedAccounts.map((account) => <AccountCard account={account} lang={lang} />)}
+      </div>
     </div>
   </section>
 </BaseLayout>

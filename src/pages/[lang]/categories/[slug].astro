@@ -1,39 +1,51 @@
 ---
-import ToolCard from "@/components/ToolCard.astro";
+import AccountCard from "@/components/AccountCard.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { getCategories, getCategoryBySlug, getToolsByCategory } from "@/lib/directory";
+import { getAccountsByCategory, getCategoryBySlug } from "@/lib/directory";
 import { languages, localizedPath, t, type Lang } from "@/lib/i18n";
 
 export async function getStaticPaths() {
-  const categories = await getCategories();
-  return languages.flatMap((lang) =>
-    categories.map((category) => ({ params: { lang, slug: category.slug } }))
-  );
+  const categories = ["tech-review", "education", "lifestyle", "ai-content", "entertainment"];
+  const paths = [];
+
+  for (const lang of languages) {
+    for (const cat of categories) {
+      paths.push({ params: { lang, slug: cat } });
+    }
+  }
+
+  return paths;
 }
 
-const lang = Astro.params.lang as Lang;
-const category = await getCategoryBySlug(Astro.params.slug ?? "");
+const { lang, slug } = Astro.params as { lang: Lang; slug: string };
+const category = await getCategoryBySlug(slug);
 
 if (!category) {
-  return Astro.redirect(localizedPath(lang, "/categories"));
+  return Astro.redirect(localizedPath(lang, "/404"));
 }
 
-const tools = await getToolsByCategory(category.slug);
+const categoryAccounts = await getAccountsByCategory(slug);
 ---
 
 <BaseLayout lang={lang} title={`${category.name[lang]} - ${t(lang, "brand")}`} description={category.description[lang]}>
-  <section class="page-title">
-    <div class="container">
-      <h1>{category.name[lang]}</h1>
-      <p class="lead">{category.description[lang]}</p>
-    </div>
-  </section>
   <section class="section">
     <div class="container">
-      <div class="grid">
-        {tools.map((tool) => <ToolCard tool={tool} lang={lang} />)}
+      <div class="section-head">
+        <h1>{category.icon} {category.name[lang]}</h1>
+        <p class="lead">{category.description[lang]}</p>
       </div>
-      {tools.length === 0 && <p>{t(lang, "empty")}</p>}
+
+      {
+        categoryAccounts.length > 0 ? (
+          <div class="grid">
+            {categoryAccounts.map((account) => <AccountCard account={account} lang={lang} />)}
+          </div>
+        ) : (
+          <div class="empty-state">
+            <p>{t(lang, "empty")}</p>
+          </div>
+        )
+      }
     </div>
   </section>
 </BaseLayout>

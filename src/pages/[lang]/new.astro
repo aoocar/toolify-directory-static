@@ -1,7 +1,7 @@
 ---
-import ToolCard from "@/components/ToolCard.astro";
+import AccountCard from "@/components/AccountCard.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { getLatestTools } from "@/lib/directory";
+import { getLatestAccounts } from "@/lib/directory";
 import { languages, t, type Lang } from "@/lib/i18n";
 
 export function getStaticPaths() {
@@ -9,19 +9,18 @@ export function getStaticPaths() {
 }
 
 const lang = Astro.params.lang as Lang;
-const tools = await getLatestTools();
+const latestAccounts = await getLatestAccounts();
 ---
 
-<BaseLayout lang={lang} title={`${t(lang, "latest")} - ${t(lang, "brand")}`} description={t(lang, "heroSubtitle")}>
-  <section class="page-title">
-    <div class="container">
-      <h1>{t(lang, "latest")}</h1>
-      <p class="lead">{t(lang, "heroSubtitle")}</p>
-    </div>
-  </section>
+<BaseLayout lang={lang} title={`${t(lang, "navNew")} - ${t(lang, "brand")}`} description={t(lang, "heroSubtitle")}>
   <section class="section">
-    <div class="container grid">
-      {tools.map((tool) => <ToolCard tool={tool} lang={lang} />)}
+    <div class="container">
+      <div class="section-head">
+        <h1>{t(lang, "navNew")}</h1>
+      </div>
+      <div class="grid">
+        {latestAccounts.map((account) => <AccountCard account={account} lang={lang} />)}
+      </div>
     </div>
   </section>
 </BaseLayout>

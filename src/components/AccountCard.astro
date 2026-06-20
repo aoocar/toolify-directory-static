@@ -1,0 +1,45 @@
+---
+import { localizedPath, t, type Lang } from "@/lib/i18n";
+import { formatNumber, type AccountWithCategories } from "@/lib/directory";
+
+type Props = {
+  account: AccountWithCategories;
+  lang: Lang;
+};
+
+const { account, lang } = Astro.props;
+---
+
+<article class="tool-card">
+  <div class="card-header">
+    <span class="tool-logo">{account.avatar}</span>
+    <div>
+      <h3>
+        <a href={localizedPath(lang, `/accounts/${account.slug}`)}>
+          {account.name[lang]}
+        </a>
+        {account.verified && <span class="verified-badge" title={t(lang, "verified")}>✓</span>}
+      </h3>
+      <span class="platform-tag">{account.platformItem?.name[lang] || account.platform}</span>
+    </div>
+  </div>
+  <p class="tagline">{account.tagline[lang]}</p>
+  <div class="card-stats">
+    <div>
+      <span class="label">{t(lang, "followers")}:</span>
+      <strong>{formatNumber(account.followerCount, lang)}</strong>
+    </div>
+    <div>
+      <span class="label">{t(lang, "engagement")}:</span>
+      <strong>{formatNumber(account.avgEngagement, lang)}</strong>
+    </div>
+  </div>
+  <div class="tag-row">
+    {account.tags.slice(0, 3).map((tag) => <span class="pill">#{tag}</span>)}
+  </div>
+  <div class="card-actions">
+    <a class="button secondary full-width" href={localizedPath(lang, `/accounts/${account.slug}`)}>
+      {t(lang, "view")}
+    </a>
+  </div>
+</article>

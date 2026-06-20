@@ -1,0 +1,103 @@
+---
+import BusinessCTA from "@/components/BusinessCTA.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { formatNumber, getAccountBySlug, getAccounts } from "@/lib/directory";
+import { languages, localizedPath, t, type Lang } from "@/lib/i18n";
+
+export async function getStaticPaths() {
+  const allAccounts = await getAccounts();
+  const paths = [];
+
+  for (const lang of languages) {
+    for (const account of allAccounts) {
+      paths.push({
+        params: { lang, slug: account.slug }
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { lang, slug } = Astro.params as { lang: Lang; slug: string };
+const account = await getAccountBySlug(slug);
+
+if (!account) {
+  return Astro.redirect(localizedPath(lang, "/404"));
+}
+---
+
+<BaseLayout lang={lang} title={`${account.name[lang]} - ${t(lang, "brand")}`} description={account.tagline[lang]}>
+  <article class="detail-page section">
+    <div class="container detail-grid">
+      <div class="detail-main">
+        <header class="detail-header">
+          <span class="detail-logo">{account.avatar}</span>
+          <div>
+            <h1>
+              {account.name[lang]}
+              {account.verified && <span class="verified-badge" title={t(lang, "verified")}>✓</span>}
+            </h1>
+            <p class="lead">{account.tagline[lang]}</p>
+          </div>
+        </header>
+
+        <section class="detail-section">
+          <h2>{lang === "zh" ? "账号简介" : "About"}</h2>
+          <p>{account.description[lang]}</p>
+        </section>
+
+        <section class="detail-section">
+          <h2>{t(lang, "contentStyle")}</h2>
+          <div class="tag-row">
+            {account.contentStyle.map((style) => <span class="pill">#{style}</span>)}
+          </div>
+        </section>
+
+        <section class="detail-section">
+          <h2>{t(lang, "tags")}</h2>
+          <div class="tag-row">
+            {account.tags.map((tag) => <span class="pill">#{tag}</span>)}
+          </div>
+        </section>
+
+        <section class="detail-section highlight-cta-section">
+          <BusinessCTA lang={lang} type="detail" />
+        </section>
+      </div>
+
+      <aside class="detail-sidebar">
+        <div class="sidebar-panel">
+          <h2>{lang === "zh" ? "账号数据与特征" : "Account Stats"}</h2>
+          <table class="stats-table">
+            <tbody>
+              <tr>
+                <td><strong>{t(lang, "followers")}</strong></td>
+                <td>{formatNumber(account.followerCount, lang)}</td>
+              </tr>
+              <tr>
+                <td><strong>{t(lang, "engagement")}</strong></td>
+                <td>{formatNumber(account.avgEngagement, lang)}</td>
+              </tr>
+              <tr>
+                <td><strong>{t(lang, "growth")}</strong></td>
+                <td>+{account.growthRate}%</td>
+              </tr>
+              <tr>
+                <td><strong>{t(lang, "frequency")}</strong></td>
+                <td>{account.contentFrequency}</td>
+              </tr>
+              <tr>
+                <td><strong>{t(lang, "monetization")}</strong></td>
+                <td><span class="pill select">{account.monetization}</span></td>
+              </tr>
+            </tbody>
+          </table>
+          <a class="button primary full-width text-center" href={account.profileUrl} target="_blank" rel="noopener noreferrer">
+            {t(lang, "visitProfile")}
+          </a>
+        </div>
+      </aside>
+    </div>
+  </article>
+</BaseLayout>

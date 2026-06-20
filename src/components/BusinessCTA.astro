@@ -1,0 +1,21 @@
+---
+import { localizedPath, t, type Lang } from "@/lib/i18n";
+
+type Props = {
+  lang: Lang;
+  type?: "home-flow" | "detail" | "sidebar";
+};
+
+const { lang, type = "home-flow" } = Astro.props;
+---
+
+<article class={`sponsor-card business-cta-card ${type}`}>
+  <span class="pill featured">💡 {t(lang, "navServices")}</span>
+  <h3>{t(lang, "ctaTitle")}</h3>
+  <p>{t(lang, "ctaBody")}</p>
+  <div class="cta-actions">
+    <a class="button primary" href={localizedPath(lang, "/services")}>
+      {t(lang, "ctaButton")}
+    </a>
+  </div>
+</article>

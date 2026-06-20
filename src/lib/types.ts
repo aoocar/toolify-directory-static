@@ -1,34 +1,6 @@
 import type { Lang } from "@/lib/i18n";
 
-export type Pricing = "free" | "freemium" | "paid" | "contact";
-
-export type Category = {
-  slug: string;
-  icon: string;
-  name: Record<Lang, string>;
-  description: Record<Lang, string>;
-  seo?: SeoFields;
-  geo?: GeoFields;
-};
-
-export type Tool = {
-  slug: string;
-  website: string;
-  logo: string;
-  categories: string[];
-  tags: string[];
-  pricing: Pricing;
-  featured: boolean;
-  monthlyVisits: number;
-  savedCount: number;
-  publishedAt: string;
-  updatedAt: string;
-  name: Record<Lang, string>;
-  tagline: Record<Lang, string>;
-  description: Record<Lang, string>;
-  seo?: SeoFields;
-  geo?: GeoFields;
-};
+/* ── Shared ── */
 
 export type SeoFields = {
   primary_keyword?: string;
@@ -45,4 +17,65 @@ export type GeoFields = {
   answer_summary_en?: string;
   facts?: Array<Record<string, string>>;
   faq?: Array<Record<string, string>>;
+};
+
+/* ── Platform ── */
+
+export type Platform = {
+  slug: string;
+  icon: string;
+  name: Record<Lang, string>;
+  description: Record<Lang, string>;
+  baseUrl: string;
+  type: "short-video" | "video" | "image-text" | "social" | "knowledge";
+};
+
+/* ── Category (content niche) ── */
+
+export type Category = {
+  slug: string;
+  icon: string;
+  name: Record<Lang, string>;
+  description: Record<Lang, string>;
+  seo?: SeoFields;
+  geo?: GeoFields;
+};
+
+/* ── Account (core entity) ── */
+
+export type Monetization =
+  | "brand-deals"
+  | "ads"
+  | "courses"
+  | "e-commerce"
+  | "membership"
+  | "tips"
+  | "mixed"
+  | "unknown";
+
+export type ContentFrequency = "daily" | "weekly" | "biweekly" | "monthly" | "irregular";
+
+export type Account = {
+  slug: string;
+  profileUrl: string;
+  avatar: string;
+  platform: string;
+  platformId: string;
+  verified: boolean;
+  categories: string[];
+  tags: string[];
+  contentStyle: string[];
+  monetization: Monetization;
+  featured: boolean;
+  followerCount: number;
+  avgEngagement: number;
+  contentFrequency: ContentFrequency;
+  growthRate: number;
+  publishedAt: string;
+  updatedAt: string;
+  name: Record<Lang, string>;
+  tagline: Record<Lang, string>;
+  description: Record<Lang, string>;
+  seo?: SeoFields;
+  geo?: GeoFields;
 };

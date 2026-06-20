@@ -10,11 +10,12 @@ type Props = {
 
 const { lang, title, description } = Astro.props;
 const navItems = [
-  { href: localizedPath(lang, "/tools"), label: t(lang, "navProducts") },
-  { href: localizedPath(lang, "/new"), label: t(lang, "navNew") },
+  { href: localizedPath(lang, "/accounts"), label: t(lang, "navAccounts") },
+  { href: localizedPath(lang, "/platforms"), label: t(lang, "navPlatforms") },
   { href: localizedPath(lang, "/categories"), label: t(lang, "navCategories") },
   { href: localizedPath(lang, "/rankings"), label: t(lang, "navRankings") },
-  { href: localizedPath(lang, "/"), label: t(lang, "navPrompts") },
+  { href: localizedPath(lang, "/new"), label: t(lang, "navNew") },
+  { href: localizedPath(lang, "/services"), label: t(lang, "navServices") },
   { href: localizedPath(lang, "/submit"), label: t(lang, "navSubmit") }
 ];
 
@@ -32,15 +33,16 @@ const currentPath = Astro.url.pathname.replace(/^\/(en|zh)/, "") || "/";
   <body>
     <div class="sponsor-strip">
       <div class="container sponsor-strip-inner">
-        <span>{t(lang, "sponsor")}</span>
-        <strong>AdsCreator.com</strong>
-        <span>{lang === "zh" ? "粘贴网站 URL，即可生成 AI 广告素材" : "Paste a website URL to generate AI ad creatives"}</span>
+        <span>🔥 {t(lang, "slogan")}</span>
+        <a href={localizedPath(lang, "/services")} class="banner-cta-link">
+          {lang === "zh" ? "了解 AI 代运营服务 →" : "Learn AI Management Services →"}
+        </a>
       </div>
     </div>
     <header class="site-header">
       <div class="container nav">
         <a class="brand" href={localizedPath(lang, "/")} aria-label={t(lang, "brand")}>
-          <span class="brand-mark">AI</span>
+          <span class="brand-mark">🌅</span>
           <span>{t(lang, "brand")}</span>
         </a>
         <nav class="nav-links" aria-label="Primary">
@@ -61,8 +63,16 @@ const currentPath = Astro.url.pathname.replace(/^\/(en|zh)/, "") || "/";
       <slot />
     </main>
     <footer class="site-footer">
-      <div class="container">
-        Static-first AI directory scaffold. Replace the data layer when the catalog grows.
+      <div class="container footer-content">
+        <div class="footer-brand">
+          <strong>🌅 {t(lang, "brand")}</strong>
+          <p>{t(lang, "footerTagline")}</p>
+        </div>
+        <div class="footer-links">
+          <a href={localizedPath(lang, "/services")}>{t(lang, "navServices")}</a>
+          <a href={localizedPath(lang, "/submit")}>{t(lang, "navSubmit")}</a>
+          <a href={localizedPath(lang, "/contact")}>{t(lang, "contactTitle")}</a>
+        </div>
       </div>
     </footer>
   </body>

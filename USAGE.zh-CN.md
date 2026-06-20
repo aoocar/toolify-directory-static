@@ -1,177 +1,119 @@
-# 使用教程
+# 黎明岛 — 使用与内容维护指南
 
-## 1. 本地启动网站
+本文档介绍如何在日常运营中维护「黎明岛」自媒体账号目录平台的内容。
 
-```powershell
-Set-Location D:\project\codex\toolify
-npm install
+---
+
+## 1. 快速内容维护命令
+
+项目通过 Astro 的内容集合（Content Collections）管理数据，所有数据都是本地的 Markdown 文件。
+
+### 本地开发预览
+```bash
 npm run dev
 ```
+启动后可在浏览器中打开本地预览，内容修改后会实时热更新。
 
-访问：
-
-```text
-http://localhost:4321/zh
-http://localhost:4321/en
-```
-
-## 2. 添加新的 AI 工具
-
-在下面目录中新建 Markdown 文件：
-
-```text
-src/content/tools
-```
-
-示例：
-
-```yaml
----
-slug: sample-ai
-website: https://example.com
-logo: SA
-categories:
-  - productivity
-tags:
-  - notes
-  - automation
-pricing: freemium
-featured: false
-monthlyVisits: 12000
-savedCount: 320
-publishedAt: 2026-05-16
-updatedAt: 2026-05-16
-name:
-  en: Sample AI
-  zh: Sample AI
-tagline:
-  en: A short positioning sentence
-  zh: 一句简短定位语
-description:
-  en: A longer English description.
-  zh: 一段较长的中文介绍。
----
-```
-
-文件名建议和 `slug` 保持一致，例如：
-
-```text
-sample-ai.md
-```
-
-首页“今天”工具流会根据 `updatedAt` 自动排序。
-
-精选工具由下面字段控制：
-
-```yaml
-featured: true
-```
-
-排行榜当前根据下面字段排序：
-
-```yaml
-monthlyVisits: 12000
-```
-
-## 3. 添加新分类
-
-在下面目录中新建 Markdown 文件：
-
-```text
-src/content/categories
-```
-
-示例：
-
-```yaml
----
-slug: ai-agents
-icon: Agent
-name:
-  en: AI Agents
-  zh: AI Agent
-description:
-  en: Autonomous AI assistants and workflow agents.
-  zh: 自主 AI 助手和工作流 Agent。
----
-```
-
-然后在工具文件中引用该分类：
-
-```yaml
-categories:
-  - ai-agents
-```
-
-## 4. 添加新语言
-
-1. 打开 `src/lib/i18n.ts`。
-2. 在 `languages` 数组中添加语言代码。
-3. 在 `dictionary` 中添加界面文案翻译。
-4. 在所有 Markdown 的本地化字段中添加该语言。
-
-示例：
-
-```ts
-export const languages = ["en", "zh", "ja"] as const;
-```
-
-内容字段中补充：
-
-```yaml
-name:
-  en: Sample AI
-  zh: Sample AI
-  ja: Sample AI
-```
-
-## 5. 后期升级路线
-
-推荐增长路线：
-
-```text
-0-1,000 个工具：Astro + Markdown
-1,000-5,000 个工具：Astro + 生成 JSON
-5,000+ 个工具：PostgreSQL/Supabase + Meilisearch/Typesense
-```
-
-升级时尽量保持页面路由不变，只替换：
-
-```text
-src/lib/directory.ts
-```
-
-这样可以保持已有页面、组件和 SEO URL 稳定。
-
-## 6. 常用命令
-
-```powershell
-npm run dev
+### 生产静态构建
+```bash
 npm run build
-npm run preview
+```
+构建生成的 HTML 静态页面位于 `dist/` 目录，可直接部署至 Vercel、Cloudflare Pages 等平台。
+
+---
+
+## 2. 如何添加一个新账号 (Account)
+
+所有自媒体账号存放在 `src/content/accounts/` 目录下。
+
+### 步骤 1：创建 Markdown 文件
+在该目录下新建一个 `.md` 文件（建议以账号拼音或英文名命名，如 `mr-beast.md`）。
+
+### 步骤 2：填写结构化数据
+复制以下模板并根据实际账号修改：
+
+```yaml
+---
+slug: xiaohongshu-specimen          # 账号唯一ID，会作为路由URL的一部分
+profileUrl: https://www.xiaohongshu.com/user/profile/123456 # 账号主页完整链接
+avatar: 🎨                          # 头像（可使用单个Emoji，也可输入图片URL）
+platform: xiaohongshu               # 平台ID（必须是 content/platforms/ 下已有的slug）
+platformId: "red-creator-abc"       # 达人平台内显示的 ID/Handle
+verified: true                      # 是否为平台官方认证账号 (true/false)
+categories:                         # 所属的内容领域，可填多个（必须是 content/categories/ 下已有的slug）
+  - lifestyle
+  - ai-content
+tags:                               # 标签（用于搜索和分类过滤）
+  - AI壁纸
+  - 美学设计
+contentStyle:                       # 内容风格定位
+  - 极简视觉
+  - 爆款提示词
+monetization: e-commerce            # 变现方式（可选: brand-deals, ads, courses, e-commerce, membership, tips, mixed, unknown）
+featured: true                      # 是否推荐到首页精选 (true/false)
+followerCount: 150000               # 粉丝数（输入纯数字，前台会自动转化为 15万/150K）
+avgEngagement: 8500                 # 平均互动量（点赞/收藏/评论）
+contentFrequency: daily             # 创作频次（可选: daily, weekly, biweekly, monthly, irregular）
+growthRate: 12.5                    # 月粉增长率 %（输入数字）
+publishedAt: "2026-06-20"           # 收录日期
+updatedAt: "2026-06-20"             # 数据最后更新日期
+name:
+  zh: 灵感生成器
+  en: InspirationGen
+tagline:
+  zh: 每天分享一套超高质量的AI壁纸与提示词
+  en: Daily sharing of ultra-high quality AI wallpapers and prompts
+description:
+  zh: 这是一个详细的中文账号描述，介绍该账号的具体玩法、爆款逻辑以及值得参考的内容细节。
+  en: Detailed English description goes here.
+---
 ```
 
-## 7. 首页模块说明
+---
 
-首页被设计成目录型工作台，而不是普通营销页：
+## 3. 如何添加一个新分类领域 (Category/Niche)
 
-- 顶部赞助横条位于 `src/layouts/BaseLayout.astro`。
-- 首页搜索和统计位于 `src/pages/[lang]/index.astro`。
-- 快捷入口包括最新 AI、最多保存、最多人使用、浏览器插件、Apps 和 Discord of AI。
-- “今天”工具流来自 `getLatestTools()`。
-- 信息流中预留赞助工具卡片。
-- 右侧排行榜来自 `getRankedTools()`。
-- 右侧提示词标签用于后续扩展提示词库。
-- AI 新闻和热门指南用于 SEO 内容拓展。
-- 免费分类索引来自 `getCategoryCounts()`。
+所有领域分类存放在 `src/content/categories/` 目录下。
 
-## 8. GitHub 部署说明
+### 步骤 1：新建 Markdown 文件
+新建一个以领域命名的 `.md` 文件（如 `finance.md`）。
 
-如果部署到 Cloudflare Pages、Vercel 或 Netlify：
-
-```text
-Build command: npm run build
-Output directory: dist
+### 步骤 2：填入配置
+```yaml
+---
+slug: finance
+icon: 📈
+name:
+  zh: 财财经商业
+  en: Finance & Business
+description:
+  zh: 财经趋势、商业案例拆解以及个人搞钱理财方案分享。
+  en: Insights on economy, business case studies and personal finance.
+---
 ```
 
-如果部署到 GitHub Pages，可以使用项目中已经提供的 GitHub Actions 工作流，它会构建 Astro 并发布 `dist`。
+---
+
+## 4. 如何添加一个自媒体平台 (Platform)
+
+所有支持的平台存放在 `src/content/platforms/` 目录下。
+
+### 步骤 1：新建 Markdown 文件
+新建一个以平台命名的 `.md` 文件（如 `tiktok.md`）。
+
+### 步骤 2：填入配置
+```yaml
+---
+slug: tiktok
+icon: 🎵
+name:
+  zh: TikTok
+  en: TikTok
+description:
+  zh: 字节跳动旗下的全球短视频社交平台。
+  en: Global short-video platform by ByteDance.
+baseUrl: https://www.tiktok.com
+type: short-video                  # 平台类型（可选: short-video, video, image-text, social, knowledge）
+---
+```
+*(平台类型用于后台归类及样式定义)*

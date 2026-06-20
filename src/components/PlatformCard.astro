@@ -1,0 +1,21 @@
+---
+import { localizedPath, type Lang } from "@/lib/i18n";
+import type { Platform } from "@/lib/types";
+
+type Props = {
+  platform: Platform;
+  lang: Lang;
+  count?: number;
+};
+
+const { platform, lang, count } = Astro.props;
+---
+
+<a class="category-card platform-card" href={localizedPath(lang, `/platforms/${platform.slug}`)}>
+  <span class="category-icon">{platform.icon}</span>
+  <div>
+    <h3>{platform.name[lang]}</h3>
+    <p>{platform.description[lang]}</p>
+    {count !== undefined && <small>{count} 个账号</small>}
+  </div>
+</a>

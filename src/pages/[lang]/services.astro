@@ -1,0 +1,49 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { languages, t, type Lang } from "@/lib/i18n";
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+---
+
+<BaseLayout lang={lang} title={`${t(lang, "navServices")} - ${t(lang, "brand")}`} description={t(lang, "servicesSubtitle")}>
+  <section class="section service-detail-section">
+    <div class="container narrow-container">
+      <header class="section-head text-center">
+        <h1>{t(lang, "servicesTitle")}</h1>
+        <p class="lead">{t(lang, "servicesSubtitle")}</p>
+      </header>
+
+      <div class="services-list-vertical">
+        <div class="service-detail-card">
+          <div class="service-badge">01</div>
+          <h2>{t(lang, "serviceItem1Title")}</h2>
+          <p>{t(lang, "serviceItem1Desc")}</p>
+        </div>
+
+        <div class="service-detail-card">
+          <div class="service-badge">02</div>
+          <h2>{t(lang, "serviceItem2Title")}</h2>
+          <p>{t(lang, "serviceItem2Desc")}</p>
+        </div>
+
+        <div class="service-detail-card">
+          <div class="service-badge">03</div>
+          <h2>{t(lang, "serviceItem3Title")}</h2>
+          <p>{t(lang, "serviceItem3Desc")}</p>
+        </div>
+      </div>
+
+      <div class="cta-box text-center">
+        <h2>{lang === "zh" ? "立刻启动您的自媒体项目" : "Start Your Creator Journey Today"}</h2>
+        <p>{lang === "zh" ? "只需一步，我们将为您安排专属内容策略咨询" : "Get a dedicated content strategy session with our team."}</p>
+        <a class="button primary large" href={`/${lang}/contact`}>
+          {t(lang, "servicesCTA")}
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

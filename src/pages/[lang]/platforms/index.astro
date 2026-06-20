@@ -1,0 +1,32 @@
+---
+import PlatformCard from "@/components/PlatformCard.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getPlatforms, getPlatformCounts } from "@/lib/directory";
+import { languages, t, type Lang } from "@/lib/i18n";
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+const platforms = await getPlatforms();
+const platformCounts = await getPlatformCounts();
+---
+
+<BaseLayout lang={lang} title={`${t(lang, "navPlatforms")} - ${t(lang, "brand")}`} description={t(lang, "heroSubtitle")}>
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h1>{t(lang, "navPlatforms")}</h1>
+      </div>
+      <div class="category-grid">
+        {
+          platforms.map((platform) => {
+            const count = platformCounts.find((p) => p.platform.slug === platform.slug)?.count || 0;
+            return <PlatformCard platform={platform} lang={lang} count={count} />;
+          })
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

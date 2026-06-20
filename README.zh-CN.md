@@ -1,106 +1,52 @@
-# AI 工具目录静态站
+# 黎明岛 (Dawn Island) — 自媒体达人库与 AI 内容代运营展示平台
 
-这是一个受 Toolify 信息架构启发的 Astro + Markdown 静态 AI 工具目录项目。项目采用可替换的数据层设计：前期可以直接用本地 Markdown 内容文件运行，后期数据量增长后，可以迁移到数据库或搜索服务，而不需要重新设计页面路由和整体架构。
+黎明岛是一个基于 Astro 静态优先架构构建的互联网优质自媒体账号收录平台。同时，它也是你推广 **AI自媒体内容代运营业务** 的展示窗口。
 
-## 功能特性
+> **Slogan:** AI 分身，可能是普通人最后的机会
 
-- Astro 静态站优先架构。
-- 已内置中英双语路由：`/zh` 和 `/en`。
-- 工具和分类内容使用 Markdown 管理。
-- 首页采用接近 Toolify 的目录站信息流：赞助横条、快捷入口、今日工具流、赞助工具穿插、侧边排行、提示词、AI 新闻、指南和分类索引。
-- 包含首页、工具详情页、分类页、排行榜、最新工具页、提交页等 SEO 友好页面。
-- 数据访问统一封装在 `src/lib/directory.ts`，后期方便替换数据源。
-- 内容字段校验集中在 `src/content.config.ts`。
+---
 
-## 本地运行
+## 🚀 核心价值
 
+1. **达人灵感库**：收录各大社交平台（抖音、小红书、B站、YouTube 等）在不同领域（科技、知识、生活、AI内容）的优秀账号，提供核心数据与内容风格参考。
+2. **业务漏斗**：在账号列表与详情中穿插高转化率的 AI 代运营服务引导（Business CTA），吸引有志于做自媒体的客户进行咨询。
+3. **极速体验**：静态优先（SSG）架构，闪电般的页面加载速度，优秀的响应式和 SEO 表现。
+
+---
+
+## 📂 项目结构
+
+*   `src/content/accounts/` - 达人账号的 Markdown 数据集合。
+*   `src/content/platforms/` - 各个自媒体平台的基础数据。
+*   `src/content/categories/` - 内容细分领域的分类数据。
+*   `src/components/` - 核心复用组件（如 `AccountCard`、`BusinessCTA` 等）。
+*   `src/pages/` - 页面路由（支持中英双语）。
+*   `src/lib/directory.ts` - 数据抽象层，供前端页面统一调用。
+
+---
+
+## 🛠️ 本地开发
+
+### 1. 安装依赖
 ```bash
 npm install
+```
+
+### 2. 启动开发服务器
+```bash
 npm run dev
 ```
+打开浏览器访问 [http://localhost:4321/zh](http://localhost:4321/zh) 或 [http://localhost:4321/en](http://localhost:4321/en)。
 
-打开：
-
-- `http://localhost:4321/zh`
-- `http://localhost:4321/en`
-
-## 构建与预览
-
+### 3. 生成生产静态文件
 ```bash
 npm run build
-npm run preview
 ```
+打包文件将输出在根目录下的 `dist/` 中，可直接进行静态托管。
 
-生产静态文件会生成在 `dist` 目录。
+---
 
-## 当前架构
+## 📝 相关文档
 
-- Astro 静态页面，中英双语路由：`/zh` 和 `/en`。
-- 示例数据位于 `src/content/tools` 和 `src/content/categories`。
-- 页面代码只调用 `src/lib/directory.ts`，不直接读取底层数据。
-- 首页不是传统营销落地页，而是目录型工作台：搜索、快捷入口、工具信息流、赞助位、排行榜、提示词、新闻/指南和分类索引都在首屏及下方连续呈现。
-- 后期可以把 `directory.ts` 内部替换成 PostgreSQL、Supabase、Meilisearch、Typesense、Algolia 或 API。
-
-## 主要路由
-
-- `/zh` 和 `/en`：首页
-- `/zh/tools/[slug]` 和 `/en/tools/[slug]`：工具详情页
-- `/zh/categories/[slug]` 和 `/en/categories/[slug]`：分类页
-- `/zh/rankings` 和 `/en/rankings`：排行榜
-- `/zh/new` 和 `/en/new`：最新工具
-- `/zh/submit` 和 `/en/submit`：提交工具占位页
-
-## 添加新语言
-
-1. 打开 `src/lib/i18n.ts`。
-2. 在 `languages` 中添加新的语言代码。
-3. 在 `dictionary` 中补充对应翻译。
-4. 在每个工具和分类的 Markdown 字段中补充该语言内容。
-5. 使用 `getStaticPaths()` 的页面会自动生成新语言路由。
-
-更多迁移思路见 [ARCHITECTURE.zh-CN.md](./ARCHITECTURE.zh-CN.md)。
-
-## 内容维护
-
-添加工具：
-
-```text
-src/content/tools
-```
-
-添加分类：
-
-```text
-src/content/categories
-```
-
-每个工具建议包含本地化字段：
-
-```yaml
-name:
-  en: Example Tool
-  zh: 示例工具
-tagline:
-  en: Short one-line positioning
-  zh: 简短定位语
-description:
-  en: Longer description for detail pages.
-  zh: 详情页使用的较长描述。
-```
-
-## 部署
-
-本项目可以部署到任何静态托管平台：
-
-- Cloudflare Pages
-- Vercel
-- Netlify
-- GitHub Pages
-
-推荐构建配置：
-
-```text
-Build command: npm run build
-Output directory: dist
-Node version: 20+
-```
+- [使用与内容维护指南](./USAGE.zh-CN.md) — 了解如何添加新账号、编辑属性和日常维护。
+- [开发与架构升级指南](./UPGRADE.zh-CN.md) — 了解底层架构和向数据库（如 Supabase）迁移的方案。

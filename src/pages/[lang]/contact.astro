@@ -1,0 +1,36 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { languages, t, type Lang } from "@/lib/i18n";
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+---
+
+<BaseLayout lang={lang} title={`${t(lang, "contactTitle")} - ${t(lang, "brand")}`} description={t(lang, "contactBody")}>
+  <section class="section">
+    <div class="container narrow-container">
+      <div class="section-head text-center">
+        <h1>{t(lang, "contactTitle")}</h1>
+        <p class="lead">{t(lang, "contactBody")}</p>
+      </div>
+
+      <div class="contact-box">
+        <div class="contact-methods">
+          <div class="method-card">
+            <h3>💬 {lang === "zh" ? "在线咨询" : "Online Chat"}</h3>
+            <p>{lang === "zh" ? "添加我们业务微信，即刻进行1对1沟通：" : "Contact us on WeChat or WhatsApp directly:"}</p>
+            <strong style="font-size: 1.25rem; color: #6366f1;">WeChat ID: aoo697</strong>
+          </div>
+          <div class="method-card">
+            <h3>✉️ {lang === "zh" ? "电子邮件" : "Email"}</h3>
+            <p>{lang === "zh" ? "发送商务合作意向到我们的官方邮箱：" : "Send your business inquiries to our inbox:"}</p>
+            <strong style="font-size: 1.25rem; color: #6366f1;">aoobee@sina.com</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

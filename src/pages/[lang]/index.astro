@@ -1,8 +1,9 @@
 ---
 import CategoryCard from "@/components/CategoryCard.astro";
-import ToolCard from "@/components/ToolCard.astro";
+import AccountCard from "@/components/AccountCard.astro";
+import BusinessCTA from "@/components/BusinessCTA.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { formatNumber, getCategories, getCategoryCounts, getFeaturedTools, getLatestTools, getRankedTools } from "@/lib/directory";
+import { formatNumber, getCategories, getCategoryCounts, getFeaturedAccounts, getLatestAccounts, getRankedAccounts, getPlatforms } from "@/lib/directory";
 import { languages, localizedPath, t, type Lang } from "@/lib/i18n";
 
 export function getStaticPaths() {
@@ -10,69 +11,81 @@ export function getStaticPaths() {
 }
 
 const lang = Astro.params.lang as Lang;
-const [featuredTools, latestTools, rankedTools, categories] = await Promise.all([
-  getFeaturedTools(),
-  getLatestTools(),
-  getRankedTools(),
-  getCategories()
+const [featuredAccounts, latestAccounts, rankedAccounts, categories, platforms] = await Promise.all([
+  getFeaturedAccounts(),
+  getLatestAccounts(),
+  getRankedAccounts("followers"),
+  getCategories(),
+  getPlatforms()
 ]);
 const categoryCounts = await getCategoryCounts();
+
 const quickLinks = [
-  { label: t(lang, "quickLatest"), href: localizedPath(lang, "/new") },
-  { label: t(lang, "quickSaved"), href: localizedPath(lang, "/rankings") },
-  { label: t(lang, "quickUsed"), href: localizedPath(lang, "/rankings") },
-  { label: t(lang, "quickExtensions"), href: localizedPath(lang, "/categories/productivity") },
-  { label: t(lang, "quickApps"), href: localizedPath(lang, "/tools") },
-  { label: t(lang, "quickDiscord"), href: localizedPath(lang, "/categories/developer-tools") }
+  { label: t(lang, "quickHot"), href: localizedPath(lang, "/rankings") },
+  { label: t(lang, "quickGrowing"), href: localizedPath(lang, "/rankings") },
+  { label: t(lang, "quickNew"), href: localizedPath(lang, "/new") },
+  { label: t(lang, "quickDouyin"), href: localizedPath(lang, "/platforms/douyin") },
+  { label: t(lang, "quickXiaohongshu"), href: localizedPath(lang, "/platforms/xiaohongshu") },
+  { label: t(lang, "quickBilibili"), href: localizedPath(lang, "/platforms/bilibili") },
+  { label: t(lang, "quickYoutube"), href: localizedPath(lang, "/platforms/youtube") },
+  { label: t(lang, "quickAiCreators"), href: localizedPath(lang, "/categories/ai-content") }
 ];
+
 const newsItems =
   lang === "zh"
     ? [
-        "多模态视频模型继续成为 AI 工具增长最快的方向",
-        "企业级 AI Agent 从演示走向工作流落地",
-        "搜索引擎开始更重视结构化工具目录页面",
-        "开源模型生态推动中小团队快速搭建 AI 产品"
+        "数字人分身技术在短视频代运营中实现成本降低80%",
+        "小红书加大对AI辅助生成笔记的原创性规范治理",
+        "抖音爆款视频背后的『黄金3秒』AI蒸馏提取法",
+        "国内多名千万粉大V启动海外YouTube AI分身频道"
       ]
     : [
-        "Multimodal video models remain one of the fastest-growing AI categories",
-        "Enterprise AI agents are moving from demos into real workflows",
-        "Search engines keep rewarding structured directory pages",
-        "Open models help small teams ship AI products faster"
+        "AI digital twin lowers video production cost by 80%",
+        "Xiaohongshu updates rules for AI-assisted image and text content",
+        "AI formula to extract the 'golden 3 seconds' of viral short videos",
+        "Top Chinese creators launch overseas YouTube channels using AI voice twins"
       ];
-const promptItems =
-  lang === "zh"
-    ? ["电商商品图生成", "短视频脚本", "SEO 文章大纲", "代码审查清单", "品牌广告文案", "会议纪要整理"]
-    : ["Product photo generation", "Short video scripts", "SEO article briefs", "Code review checklist", "Brand ad copy", "Meeting summary"];
+
 const guideItems =
   lang === "zh"
-    ? ["10 个适合内容团队的 AI 写作工具", "如何挑选 AI 视频生成器", "AI 工具目录站的 SEO 页面矩阵", "从 Markdown 迁移到数据库的路线"]
-    : ["10 AI writing tools for content teams", "How to choose an AI video generator", "SEO page matrices for AI directories", "Moving from Markdown to a database"];
+    ? [
+        "10个普通人利用AI做自媒体快速变现的经典案例",
+        "如何利用声音克隆与数字人矩阵打造爆款科普号",
+        "黎明岛独家：2026自媒体账号内容策略蒸馏方法论",
+        "从零打造一个AI绘画小红书壁纸号并实现带货"
+      ]
+    : [
+        "10 classic case studies of making money with AI self-media",
+        "How to use voice cloning & digital human matrices for education",
+        "Dawn Island Exclusive: 2026 content distillation methodology",
+        "Build an AI-art Xiaohongshu wallpaper channel from zero & monetize"
+      ];
 ---
 
-<BaseLayout lang={lang} title={`${t(lang, "brand")} - ${t(lang, "heroTitle")}`} description={t(lang, "heroSubtitle")}>
+<BaseLayout lang={lang} title={`${t(lang, "brand")} - ${t(lang, "slogan")}`} description={t(lang, "heroSubtitle")}>
   <section class="hero">
     <div class="container hero-grid">
       <div>
-        <p class="eyebrow">{t(lang, "dailyUpdated")}</p>
+        <p class="eyebrow">🌅 {t(lang, "dailyUpdated")}</p>
         <h1>{t(lang, "heroTitle")}</h1>
         <p class="lead">{t(lang, "heroSubtitle")}</p>
-        <form class="search-panel" action={localizedPath(lang, "/tools")} method="get">
+        <form class="search-panel" action={localizedPath(lang, "/accounts")} method="get">
           <input name="q" type="search" placeholder={t(lang, "searchPlaceholder")} />
           <button class="button" type="submit">{t(lang, "search")}</button>
         </form>
       </div>
       <aside class="stats-card" aria-label="Directory stats">
         <div class="stat">
-          <strong>6</strong>
-          <span>{t(lang, "seedTools")}</span>
+          <strong>{latestAccounts.length}</strong>
+          <span>{t(lang, "statAccounts")}</span>
         </div>
         <div class="stat">
-          <strong>6</strong>
-          <span>{t(lang, "categories")}</span>
+          <strong>{platforms.length}</strong>
+          <span>{t(lang, "statPlatforms")}</span>
         </div>
         <div class="stat">
-          <strong>2</strong>
-          <span>{t(lang, "languagesReady")}</span>
+          <strong>{categories.length}</strong>
+          <span>{t(lang, "statNiches")}</span>
         </div>
       </aside>
     </div>
@@ -93,30 +106,28 @@ const guideItems =
         </div>
         <div class="feed-list">
           {
-            latestTools.map((tool, index) => (
+            latestAccounts.map((account, index) => (
               <>
                 {index === 2 && (
-                  <article class="sponsor-card">
-                    <span class="pill featured">{t(lang, "sponsor")}</span>
-                    <h3>ZenMux</h3>
-                    <p>{lang === "zh" ? "具备保险机制的企业级大模型聚合器，确保 AI 的质量与可靠性。" : "Enterprise LLM gateway with reliability controls for production AI teams."}</p>
-                    <div class="tag-row">
-                      <span class="pill">#AI聊天生成器</span>
-                      <span class="pill">#LLMs</span>
-                      <span class="pill">#API</span>
-                    </div>
-                  </article>
+                  <BusinessCTA lang={lang} type="home-flow" />
                 )}
                 <article class="feed-row">
-                  <span class="tool-logo">{tool.logo}</span>
+                  <span class="tool-logo">{account.avatar}</span>
                   <div>
-                    <h3><a href={localizedPath(lang, `/tools/${tool.slug}`)}>{tool.name[lang]}</a></h3>
-                    <p>{tool.description[lang]}</p>
+                    <h3>
+                      <a href={localizedPath(lang, `/accounts/${account.slug}`)}>{account.name[lang]}</a>
+                      {account.verified && <span class="verified-badge" style="color: #6366f1; margin-left: 6px;">✓</span>}
+                    </h3>
+                    <p>{account.description[lang]}</p>
                     <div class="tag-row">
-                      {tool.tags.slice(0, 5).map((tag) => <span class="pill">#{tag}</span>)}
+                      <span class="pill">{account.platformItem?.name[lang] || account.platform}</span>
+                      {account.tags.slice(0, 4).map((tag) => <span class="pill">#{tag}</span>)}
                     </div>
                   </div>
-                  <a class="button secondary" href={localizedPath(lang, `/tools/${tool.slug}`)}>{t(lang, "view")}</a>
+                  <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 8px;">
+                    <span style="font-size: 0.85rem; color: #64748b;">{formatNumber(account.followerCount, lang)} {t(lang, "followers")}</span>
+                    <a class="button secondary" href={localizedPath(lang, `/accounts/${account.slug}`)}>{t(lang, "view")}</a>
+                  </div>
                 </article>
               </>
             ))
@@ -128,20 +139,23 @@ const guideItems =
           <h2>{t(lang, "rankings")}</h2>
           <div class="mini-list">
             {
-              rankedTools.slice(0, 5).map((tool, index) => (
-                <a href={localizedPath(lang, `/tools/${tool.slug}`)}>
+              rankedAccounts.slice(0, 5).map((account, index) => (
+                <a href={localizedPath(lang, `/accounts/${account.slug}`)}>
                   <strong>#{index + 1}</strong>
-                  <span>{tool.name[lang]}</span>
-                  <small>{formatNumber(tool.monthlyVisits, lang)}</small>
+                  <span>{account.name[lang]}</span>
+                  <small>{formatNumber(account.followerCount, lang)}</small>
                 </a>
               ))
             }
           </div>
         </div>
         <div class="rail-panel">
-          <h2>{t(lang, "promptLibrary")}</h2>
-          <div class="prompt-cloud">
-            {promptItems.map((item) => <a href={localizedPath(lang, "/")}>{item}</a>)}
+          <h2>{t(lang, "navServices")}</h2>
+          <div style="font-size: 0.9rem; color: #475569; display: flex; flex-direction: column; gap: 12px;">
+            <p>{t(lang, "servicesSubtitle")}</p>
+            <a class="button primary full-width text-center" href={localizedPath(lang, "/services")}>
+              {t(lang, "servicesCTA")}
+            </a>
           </div>
         </div>
       </aside>
@@ -151,8 +165,19 @@ const guideItems =
   <section class="section">
     <div class="container">
       <div class="section-head">
+        <h2>{t(lang, "platformNav")}</h2>
+      </div>
+      <div class="category-grid">
+        {platforms.slice(0, 6).map((platform) => <CategoryCard category={platform as any} lang={lang} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
         <h2>{t(lang, "categories")}</h2>
-        <a class="button secondary" href={localizedPath(lang, "/categories")}>{t(lang, "navCategories")}</a>
+        <a class="button secondary" href={localizedPath(lang, "/categories")}>{t(lang, "more")}</a>
       </div>
       <div class="category-grid">
         {categories.slice(0, 6).map((category) => <CategoryCard category={category} lang={lang} />)}
@@ -164,10 +189,10 @@ const guideItems =
     <div class="container">
       <div class="section-head">
         <h2>{t(lang, "featured")}</h2>
-        <a class="button secondary" href={localizedPath(lang, "/tools")}>{t(lang, "allTools")}</a>
+        <a class="button secondary" href={localizedPath(lang, "/accounts")}>{t(lang, "allAccounts")}</a>
       </div>
       <div class="grid">
-        {featuredTools.map((tool) => <ToolCard tool={tool} lang={lang} />)}
+        {featuredAccounts.map((account) => <AccountCard account={account} lang={lang} />)}
       </div>
     </div>
   </section>
@@ -176,20 +201,18 @@ const guideItems =
     <div class="container seo-grid">
       <section class="seo-panel">
         <div class="section-head compact">
-          <h2>{t(lang, "aiNews")}</h2>
-          <a class="button secondary" href={localizedPath(lang, "/")}>{t(lang, "more")}</a>
+          <h2>{t(lang, "news")}</h2>
         </div>
         <ol class="link-list">
-          {newsItems.map((item) => <li><a href={localizedPath(lang, "/")}>{item}</a></li>)}
+          {newsItems.map((item) => <li><a href={localizedPath(lang, "/services")}>{item}</a></li>)}
         </ol>
       </section>
       <section class="seo-panel">
         <div class="section-head compact">
-          <h2>{t(lang, "topAiGuides")}</h2>
-          <a class="button secondary" href={localizedPath(lang, "/")}>{t(lang, "more")}</a>
+          <h2>{t(lang, "guides")}</h2>
         </div>
         <ol class="link-list">
-          {guideItems.map((item) => <li><a href={localizedPath(lang, "/")}>{item}</a></li>)}
+          {guideItems.map((item) => <li><a href={localizedPath(lang, "/services")}>{item}</a></li>)}
         </ol>
       </section>
     </div>
@@ -206,7 +229,7 @@ const guideItems =
           categoryCounts.map(({ category, count }) => (
             <a href={localizedPath(lang, `/categories/${category.slug}`)}>
               <span>{category.name[lang]}</span>
-              <strong>{count} {lang === "zh" ? "个工具" : "tools"}</strong>
+              <strong>{count} {lang === "zh" ? "个账号" : "creators"}</strong>
             </a>
           ))
         }

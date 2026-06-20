@@ -10,31 +10,34 @@ const lang = Astro.params.lang as Lang;
 ---
 
 <BaseLayout lang={lang} title={`${t(lang, "submitTitle")} - ${t(lang, "brand")}`} description={t(lang, "submitBody")}>
-  <section class="page-title">
-    <div class="container">
-      <h1>{t(lang, "submitTitle")}</h1>
-      <p class="lead">{t(lang, "submitBody")}</p>
-    </div>
-  </section>
   <section class="section">
-    <div class="container">
-      <div class="submit-panel">
-        <form class="form-grid">
-          <div class="field">
-            <label for="name">Tool name</label>
-            <input id="name" name="name" placeholder="Example AI" />
-          </div>
-          <div class="field">
-            <label for="website">Website</label>
-            <input id="website" name="website" placeholder="https://example.com" />
-          </div>
-          <div class="field">
-            <label for="description">Description</label>
-            <textarea id="description" name="description" placeholder="What does this tool do?"></textarea>
-          </div>
-          <button class="button" type="button">Submit</button>
-        </form>
+    <div class="container narrow-container">
+      <div class="section-head text-center">
+        <h1>{t(lang, "submitTitle")}</h1>
+        <p class="lead">{t(lang, "submitBody")}</p>
       </div>
+
+      <form class="submit-form" onsubmit="event.preventDefault(); alert('Submission received! Thank you.');">
+        <div class="form-group">
+          <label for="creator-name">{lang === "zh" ? "账号名称" : "Creator Name"}</label>
+          <input type="text" id="creator-name" required placeholder={lang === "zh" ? "例：灵感画手艾米" : "e.g. ArtifyVision"} />
+        </div>
+        <div class="form-group">
+          <label for="creator-url">{lang === "zh" ? "账号链接" : "Account URL"}</label>
+          <input type="url" id="creator-url" required placeholder="https://..." />
+        </div>
+        <div class="form-group">
+          <label for="creator-platform">{lang === "zh" ? "所在平台" : "Platform"}</label>
+          <input type="text" id="creator-platform" required placeholder={lang === "zh" ? "例：小红书、抖音、YouTube" : "e.g. Xiaohongshu, Douyin"} />
+        </div>
+        <div class="form-group">
+          <label for="creator-reason">{lang === "zh" ? "推荐理由" : "Why recommend this creator"}</label>
+          <textarea id="creator-reason" rows="4" placeholder={lang === "zh" ? "请简述该账号的内容特色与核心价值..." : "Briefly describe their content style and value..."}></textarea>
+        </div>
+        <button class="button primary full-width" type="submit">
+          {lang === "zh" ? "提交审核" : "Submit"}
+        </button>
+      </form>
     </div>
   </section>
 </BaseLayout>

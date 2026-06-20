@@ -1,0 +1,54 @@
+---
+import AccountCard from "@/components/AccountCard.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getAccounts } from "@/lib/directory";
+import { languages, localizedPath, t, type Lang } from "@/lib/i18n";
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+const url = Astro.url;
+const query = url.searchParams.get("q") || "";
+
+const allAccounts = await getAccounts();
+const filteredAccounts = allAccounts.filter((account) => {
+  if (!query) return true;
+  const q = query.toLowerCase();
+  return (
+    account.name[lang].toLowerCase().includes(q) ||
+    account.tagline[lang].toLowerCase().includes(q) ||
+    account.description[lang].toLowerCase().includes(q) ||
+    account.tags.some((t) => t.toLowerCase().includes(q))
+  );
+});
+---
+
+<BaseLayout lang={lang} title={`${t(lang, "allAccounts")} - ${t(lang, "brand")}`} description={t(lang, "heroSubtitle")}>
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h1>{t(lang, "allAccounts")}</h1>
+        <form class="search-panel inline-search" action={localizedPath(lang, "/accounts")} method="get">
+          <input name="q" type="search" placeholder={t(lang, "searchPlaceholder")} value={query} />
+          <button class="button" type="submit">{t(lang, "search")}</button>
+        </form>
+      </div>
+
+      {query && <p class="search-results-info">{lang === "zh" ? `找到 ${filteredAccounts.length} 个相关账号` : `Found ${filteredAccounts.length} creators`}</p>}
+
+      {
+        filteredAccounts.length > 0 ? (
+          <div class="grid">
+            {filteredAccounts.map((account) => <AccountCard account={account} lang={lang} />)}
+          </div>
+        ) : (
+          <div class="empty-state">
+            <p>{t(lang, "empty")}</p>
+          </div>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>
