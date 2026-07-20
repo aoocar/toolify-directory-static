@@ -43,6 +43,9 @@ a {
 
 /* --- Banner strip --- */
 .sponsor-strip {
+  position: sticky;
+  top: 0;
+  z-index: 21;
   border-bottom: 1px solid rgba(249, 115, 22, 0.2);
   background: linear-gradient(90deg, #fffbeb, #eef2ff);
   color: #7c2d12;
@@ -67,7 +70,7 @@ a {
 /* --- Header --- */
 .site-header {
   position: sticky;
-  top: 0;
+  top: 39px;
   z-index: 20;
   border-bottom: 1px solid rgba(226, 232, 240, 0.8);
   background: rgba(250, 250, 255, 0.9);
@@ -275,7 +278,7 @@ h1 {
 
 /* --- Quick Links --- */
 .quick-section {
-  padding: 10px 0 30px;
+  padding: 16px 0 30px;
 }
 
 .quick-links {

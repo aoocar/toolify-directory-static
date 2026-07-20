@@ -1,5 +1,6 @@
 ---
 import CategoryCard from "@/components/CategoryCard.astro";
+import PlatformCard from "@/components/PlatformCard.astro";
 import AccountCard from "@/components/AccountCard.astro";
 import BusinessCTA from "@/components/BusinessCTA.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
@@ -168,7 +169,7 @@ const guideItems =
         <h2>{t(lang, "platformNav")}</h2>
       </div>
       <div class="category-grid">
-        {platforms.slice(0, 6).map((platform) => <CategoryCard category={platform as any} lang={lang} />)}
+        {platforms.slice(0, 6).map((platform) => <PlatformCard platform={platform as any} lang={lang} />)}
       </div>
     </div>
   </section>

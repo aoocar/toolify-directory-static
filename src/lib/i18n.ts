@@ -114,6 +114,7 @@ export const dictionary = {
 
     /* misc */
     allAccounts: "All creators",
+    tags: "Tags",
     visitProfile: "Visit profile",
     contentStyle: "Content style",
     monetization: "Monetization",
@@ -227,6 +228,7 @@ export const dictionary = {
 
     /* misc */
     allAccounts: "全部达人",
+    tags: "标签",
     visitProfile: "访问主页",
     contentStyle: "内容风格",
     monetization: "变现方式",

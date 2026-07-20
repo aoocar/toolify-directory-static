@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { languages, t, type Lang } from "@/lib/i18n";
+import { languages, localizedPath, t, type Lang } from "@/lib/i18n";
 
 export function getStaticPaths() {
   return languages.map((lang) => ({ params: { lang } }));
@@ -40,7 +40,7 @@ const lang = Astro.params.lang as Lang;
       <div class="cta-box text-center">
         <h2>{lang === "zh" ? "立刻启动您的自媒体项目" : "Start Your Creator Journey Today"}</h2>
         <p>{lang === "zh" ? "只需一步，我们将为您安排专属内容策略咨询" : "Get a dedicated content strategy session with our team."}</p>
-        <a class="button primary large" href={`/${lang}/contact`}>
+        <a class="button primary large" href={localizedPath(lang, "/contact")}>
           {t(lang, "servicesCTA")}
         </a>
       </div>

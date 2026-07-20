@@ -25,6 +25,19 @@ const account = await getAccountBySlug(slug);
 if (!account) {
   return Astro.redirect(localizedPath(lang, "/404"));
 }
+
+const frequencyMap: Record<string, Record<Lang, string>> = {
+  daily: { zh: "每日更新", en: "Daily" },
+  weekly: { zh: "每周更新", en: "Weekly" },
+  biweekly: { zh: "每两周更新", en: "Biweekly" },
+};
+
+const monetizationMap: Record<string, Record<Lang, string>> = {
+  "e-commerce": { zh: "电商带货", en: "E-commerce" },
+  "brand-deals": { zh: "品牌合作", en: "Brand deals" },
+  courses: { zh: "知识付费", en: "Courses" },
+  mixed: { zh: "多元变现", en: "Mixed" },
+};
 ---
 
 <BaseLayout lang={lang} title={`${account.name[lang]} - ${t(lang, "brand")}`} description={account.tagline[lang]}>
@@ -85,11 +98,11 @@ if (!account) {
               </tr>
               <tr>
                 <td><strong>{t(lang, "frequency")}</strong></td>
-                <td>{account.contentFrequency}</td>
+                <td>{frequencyMap[account.contentFrequency]?.[lang] || account.contentFrequency}</td>
               </tr>
               <tr>
                 <td><strong>{t(lang, "monetization")}</strong></td>
-                <td><span class="pill select">{account.monetization}</span></td>
+                <td><span class="pill select">{monetizationMap[account.monetization]?.[lang] || account.monetization}</span></td>
               </tr>
             </tbody>
           </table>

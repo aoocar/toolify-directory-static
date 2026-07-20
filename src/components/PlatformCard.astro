@@ -16,6 +16,6 @@ const { platform, lang, count } = Astro.props;
   <div>
     <h3>{platform.name[lang]}</h3>
     <p>{platform.description[lang]}</p>
-    {count !== undefined && <small>{count} 个账号</small>}
+    {count !== undefined && <small>{count} {lang === "zh" ? "个账号" : "creators"}</small>}
   </div>
 </a>
