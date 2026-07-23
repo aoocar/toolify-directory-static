@@ -14,6 +14,8 @@ Inbox/            待处理入口
 Accounts/         AI 创作者（账号）知识卡
 Categories/       领域知识卡
 Platforms/        平台知识卡
+News/             行业动态（对应 src/content/news，首页「行业动态」区块）
+Guides/           创作者指南（对应 src/content/guides，首页「创作者指南」区块）
 SEO/             SEO/GEO 专题内容
 Comparisons/     对比、替代品、榜单
 Prompts/         提示词库

@@ -17,6 +17,7 @@ contentStyle:
   - 电影感
 monetization: brand-deals
 featured: true
+draft: true
 followerCount: 1200000
 avgEngagement: 85000
 contentFrequency: weekly

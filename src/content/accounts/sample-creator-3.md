@@ -16,6 +16,7 @@ contentStyle:
   - 硬核
 monetization: courses
 featured: false
+draft: true
 followerCount: 450000
 avgEngagement: 32000
 contentFrequency: biweekly

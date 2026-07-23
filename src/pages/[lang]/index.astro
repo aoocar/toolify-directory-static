@@ -4,7 +4,7 @@ import PlatformCard from "@/components/PlatformCard.astro";
 import AccountCard from "@/components/AccountCard.astro";
 import BusinessCTA from "@/components/BusinessCTA.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { formatNumber, getCategories, getCategoryCounts, getFeaturedAccounts, getLatestAccounts, getRankedAccounts, getPlatforms } from "@/lib/directory";
+import { formatNumber, getCategories, getCategoryCounts, getFeaturedAccounts, getLatestAccounts, getRankedAccounts, getPlatforms, getNews, getGuides } from "@/lib/directory";
 import { languages, localizedPath, t, type Lang } from "@/lib/i18n";
 
 export function getStaticPaths() {
@@ -32,35 +32,8 @@ const quickLinks = [
   { label: t(lang, "quickAiCreators"), href: localizedPath(lang, "/categories/ai-content") }
 ];
 
-const newsItems =
-  lang === "zh"
-    ? [
-        "数字人分身技术在短视频代运营中实现成本降低80%",
-        "小红书加大对AI辅助生成笔记的原创性规范治理",
-        "抖音爆款视频背后的『黄金3秒』AI蒸馏提取法",
-        "国内多名千万粉大V启动海外YouTube AI分身频道"
-      ]
-    : [
-        "AI digital twin lowers video production cost by 80%",
-        "Xiaohongshu updates rules for AI-assisted image and text content",
-        "AI formula to extract the 'golden 3 seconds' of viral short videos",
-        "Top Chinese creators launch overseas YouTube channels using AI voice twins"
-      ];
-
-const guideItems =
-  lang === "zh"
-    ? [
-        "10个普通人利用AI做自媒体快速变现的经典案例",
-        "如何利用声音克隆与数字人矩阵打造爆款科普号",
-        "黎明岛独家：2026自媒体账号内容策略蒸馏方法论",
-        "从零打造一个AI绘画小红书壁纸号并实现带货"
-      ]
-    : [
-        "10 classic case studies of making money with AI self-media",
-        "How to use voice cloning & digital human matrices for education",
-        "Dawn Island Exclusive: 2026 content distillation methodology",
-        "Build an AI-art Xiaohongshu wallpaper channel from zero & monetize"
-      ];
+const news = await getNews(lang);
+const guides = await getGuides(lang);
 ---
 
 <BaseLayout lang={lang} title={`${t(lang, "brand")} - ${t(lang, "slogan")}`} description={t(lang, "heroSubtitle")}>
@@ -205,7 +178,7 @@ const guideItems =
           <h2>{t(lang, "news")}</h2>
         </div>
         <ol class="link-list">
-          {newsItems.map((item) => <li><a href={localizedPath(lang, "/services")}>{item}</a></li>)}
+          {news.map((item) => <li><a href={localizedPath(lang, item.url)}>{item.title}</a></li>)}
         </ol>
       </section>
       <section class="seo-panel">
@@ -213,7 +186,7 @@ const guideItems =
           <h2>{t(lang, "guides")}</h2>
         </div>
         <ol class="link-list">
-          {guideItems.map((item) => <li><a href={localizedPath(lang, "/services")}>{item}</a></li>)}
+          {guides.map((item) => <li><a href={localizedPath(lang, item.url)}>{item.title}</a></li>)}
         </ol>
       </section>
     </div>

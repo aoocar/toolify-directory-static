@@ -67,6 +67,7 @@ export type Account = {
   contentStyle: string[];
   monetization: Monetization;
   featured: boolean;
+  draft?: boolean;
   followerCount: number;
   avgEngagement: number;
   contentFrequency: ContentFrequency;
@@ -79,3 +80,19 @@ export type Account = {
   seo?: SeoFields;
   geo?: GeoFields;
 };
+
+/* ── Feed items (homepage 行业动态 / 创作者指南) ── */
+
+export type FeedItem = {
+  slug: string;
+  title: Record<Lang, string>;
+  url: string;
+  summary?: Record<Lang, string>;
+  order: number;
+};
+
+export type NewsItem = FeedItem & {
+  date?: string;
+};
+
+export type GuideItem = FeedItem;

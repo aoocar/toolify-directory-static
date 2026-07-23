@@ -17,6 +17,7 @@ contentStyle:
   - 高级配色
 monetization: e-commerce
 featured: true
+draft: true
 followerCount: 250000
 avgEngagement: 12500
 contentFrequency: daily

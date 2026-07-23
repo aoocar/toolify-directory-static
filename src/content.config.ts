@@ -26,6 +26,26 @@ const geoSchema = z
   })
   .optional();
 
+/* ── Feed items: homepage 行业动态 / 创作者指南 (data-driven, Obsidian-managed) ── */
+
+const feedItem = z.object({
+  slug: z.string().optional(),
+  title: localizedText,
+  url: z.string(),
+  summary: localizedText.optional(),
+  order: z.number().default(0)
+});
+
+const news = defineCollection({
+  type: "content",
+  schema: feedItem.extend({ date: z.coerce.date().optional() })
+});
+
+const guides = defineCollection({
+  type: "content",
+  schema: feedItem
+});
+
 /* ── Platforms ── */
 
 const platforms = defineCollection({
@@ -79,6 +99,7 @@ const accounts = defineCollection({
       "unknown"
     ]),
     featured: z.boolean(),
+    draft: z.boolean().optional().default(false),
     followerCount: z.number(),
     avgEngagement: z.number(),
     contentFrequency: z.enum(["daily", "weekly", "biweekly", "monthly", "irregular"]),
@@ -96,5 +117,7 @@ const accounts = defineCollection({
 export const collections = {
   platforms,
   categories,
-  accounts
+  accounts,
+  news,
+  guides
 };

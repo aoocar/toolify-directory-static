@@ -1,6 +1,6 @@
 import { getCollection } from "astro:content";
 import type { Lang } from "@/lib/i18n";
-import type { Account, Category, Platform } from "@/lib/types";
+import type { Account, Category, Platform, NewsItem, GuideItem } from "@/lib/types";
 
 export type AccountWithCategories = Account & {
   categoryItems: Category[];
@@ -13,24 +13,38 @@ type Cache = {
   categories: Category[];
   accounts: Account[];
   platforms: Platform[];
+  news: NewsItem[];
+  guides: GuideItem[];
 };
 
 let _cache: Cache | null = null;
 
 async function load(): Promise<Cache> {
   if (!_cache) {
-    const [catEntries, accEntries, platEntries] = await Promise.all([
+    const [catEntries, accEntries, platEntries, newsEntries, guidesEntries] = await Promise.all([
       getCollection("categories"),
       getCollection("accounts"),
-      getCollection("platforms")
+      getCollection("platforms"),
+      getCollection("news"),
+      getCollection("guides")
     ]);
     // `slug` is a reserved field in content collections, so the canonical slug
     // comes from the entry (derived from filename or the frontmatter `slug`),
     // not necessarily from `data.slug`.
     _cache = {
       categories: catEntries.map((e) => ({ ...e.data, slug: e.data.slug ?? e.slug })),
-      accounts: accEntries.map((e) => ({ ...e.data, slug: e.data.slug ?? e.slug })),
-      platforms: platEntries.map((e) => ({ ...e.data, slug: e.data.slug ?? e.slug }))
+      accounts: accEntries
+        .map((e) => ({ ...e.data, slug: e.data.slug ?? e.slug }))
+        // Exclude draft entries from the published site (Obsidian `publish: false`
+        // equivalent). They stay in the repo as templates but are never built.
+        .filter((a) => !a.draft),
+      platforms: platEntries.map((e) => ({ ...e.data, slug: e.data.slug ?? e.slug })),
+      news: newsEntries.map((e) => ({
+        ...e.data,
+        slug: e.data.slug ?? e.slug,
+        date: e.data.date ? new Date(e.data.date).toISOString() : undefined
+      })),
+      guides: guidesEntries.map((e) => ({ ...e.data, slug: e.data.slug ?? e.slug }))
     };
   }
   return _cache;
@@ -142,6 +156,43 @@ export async function getPlatformCounts() {
     platform,
     count: accounts.filter((a) => a.platform === platform.slug).length
   }));
+}
+
+/* ── Feed items (homepage 行业动态 / 创作者指南) ── */
+
+export type ResolvedFeedItem = {
+  title: string;
+  url: string;
+  summary?: string;
+  date?: string;
+};
+
+export async function getNews(lang: Lang): Promise<ResolvedFeedItem[]> {
+  const { news } = await load();
+  return [...news]
+    .sort((a, b) => {
+      const ta = a.date ? new Date(a.date).getTime() : 0;
+      const tb = b.date ? new Date(b.date).getTime() : 0;
+      if (tb !== ta) return tb - ta;
+      return a.order - b.order;
+    })
+    .map((n) => ({
+      title: n.title[lang],
+      url: n.url,
+      summary: n.summary?.[lang],
+      date: n.date
+    }));
+}
+
+export async function getGuides(lang: Lang): Promise<ResolvedFeedItem[]> {
+  const { guides } = await load();
+  return [...guides]
+    .sort((a, b) => a.order - b.order)
+    .map((g) => ({
+      title: g.title[lang],
+      url: g.url,
+      summary: g.summary?.[lang]
+    }));
 }
 
 /* ── Formatting ── */

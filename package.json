@@ -11,6 +11,7 @@
     "vault:sync": "node scripts/sync-vault-to-site.mjs"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
     "astro": "^5.7.13",
     "js-yaml": "^4.1.1",
     "typescript": "^5.8.3"
