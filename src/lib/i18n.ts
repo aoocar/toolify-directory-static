@@ -123,6 +123,16 @@ export const dictionary = {
     verified: "Verified",
     empty: "No creators found yet.",
 
+    /* exit / redirect interstitial */
+    exitTitle: "Leaving Dawn Island",
+    exitLeaving: "You are about to leave Dawn Island and open an external website:",
+    exitWarning: "This website is not operated by Dawn Island. Please protect your personal information.",
+    exitCountdownPrefix: "Auto-redirect in",
+    exitCountdownSuffix: "seconds",
+    exitGo: "Continue",
+    exitCancel: "Cancel and go back",
+    exitInvalid: "Invalid or unsafe link — cannot redirect.",
+
     /* platform types */
     "type.short-video": "Short Video",
     "type.video": "Video",
@@ -236,6 +246,16 @@ export const dictionary = {
     growth: "月增长率",
     verified: "已认证",
     empty: "暂时没有收录。",
+
+    /* exit / redirect interstitial */
+    exitTitle: "即将离开黎明岛",
+    exitLeaving: "你即将离开黎明岛，前往站外网站：",
+    exitWarning: "该网站并非黎明岛运营，请注意保护个人信息与账号安全。",
+    exitCountdownPrefix: "将在",
+    exitCountdownSuffix: "秒后自动跳转",
+    exitGo: "立即前往",
+    exitCancel: "取消并返回",
+    exitInvalid: "链接无效或不安全，无法跳转。",
 
     /* platform types */
     "type.short-video": "短视频",

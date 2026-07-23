@@ -1,0 +1,203 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { t, type Lang, localizedPath, languages } from "@/lib/i18n";
+
+export async function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const title = t(lang, "exitTitle");
+const description = t(lang, "exitLeaving");
+const backPath = localizedPath(lang, "/");
+---
+
+<BaseLayout lang={lang} title={title} description={description}>
+  <div class="exit-page" data-back={backPath} data-lang={lang}>
+    <div class="exit-card">
+      <div class="exit-brand">{t(lang, "brand")}</div>
+      <h1 class="exit-title">{title}</h1>
+      <p class="exit-lead">{t(lang, "exitLeaving")}</p>
+      <p class="exit-host" id="exit-host">…</p>
+      <p class="exit-warning" id="exit-warning">{t(lang, "exitWarning")}</p>
+      <p class="exit-countdown" id="exit-countdown">
+        {t(lang, "exitCountdownPrefix")}
+        <span id="exit-sec">3</span>
+        {t(lang, "exitCountdownSuffix")}
+      </p>
+      <div class="exit-actions">
+        <a class="button primary" id="exit-go" href="#" rel="nofollow noopener noreferrer">{t(lang, "exitGo")}</a>
+        <a class="button ghost" href={backPath}>{t(lang, "exitCancel")}</a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .exit-page {
+    min-height: calc(100vh - 160px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+    background:
+      radial-gradient(1200px 600px at 50% -10%, rgba(249, 115, 22, 0.08), transparent),
+      radial-gradient(900px 500px at 50% 110%, rgba(99, 102, 241, 0.08), transparent);
+  }
+
+  .exit-card {
+    width: min(520px, 100%);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    padding: 36px 32px;
+    text-align: center;
+  }
+
+  .exit-brand {
+    display: inline-block;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    color: var(--brand-strong);
+    background: var(--surface-soft);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 6px 14px;
+    margin-bottom: 18px;
+  }
+
+  .exit-title {
+    font-size: 24px;
+    margin: 0 0 12px;
+    color: var(--text);
+  }
+
+  .exit-lead {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0 0 6px;
+  }
+
+  .exit-host {
+    font-weight: 700;
+    color: var(--brand-strong);
+    font-size: 16px;
+    word-break: break-all;
+    margin: 0 0 10px;
+  }
+
+  .exit-warning {
+    font-size: 13px;
+    color: var(--muted);
+    background: var(--surface-soft);
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin: 0 0 18px;
+    line-height: 1.5;
+  }
+
+  .exit-countdown {
+    font-size: 14px;
+    color: var(--text);
+    margin: 0 0 22px;
+  }
+
+  .exit-countdown #exit-sec {
+    display: inline-block;
+    min-width: 1.4em;
+    font-weight: 800;
+    color: var(--brand-strong);
+    font-size: 18px;
+  }
+
+  .exit-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .exit-actions .button {
+    min-width: 140px;
+    text-align: center;
+    border-radius: 10px;
+    padding: 12px 18px;
+    font-weight: 600;
+  }
+
+  .exit-actions .button.ghost {
+    background: var(--surface-soft);
+    color: var(--muted);
+    border: 1px solid var(--line);
+  }
+
+  .exit-actions .button.ghost:hover {
+    color: var(--text);
+    border-color: var(--brand);
+  }
+</style>
+
+<script>
+  const pageEl = document.querySelector<HTMLElement>(".exit-page");
+  const hostEl = document.getElementById("exit-host");
+  const goEl = document.getElementById("exit-go") as HTMLAnchorElement | null;
+  const secEl = document.getElementById("exit-sec");
+  const countdownEl = document.getElementById("exit-countdown");
+  const warningEl = document.getElementById("exit-warning");
+
+  const backPath = pageEl?.dataset.back || "/zh";
+  const isZh = (pageEl?.dataset.lang || "zh") === "zh";
+
+  const params = new URLSearchParams(window.location.search);
+  const to = params.get("to");
+  const SAFE = /^https?:\/\//i;
+
+  if (!to || !SAFE.test(to)) {
+    // 无效 / 不安全链接：停止倒计时，提示并返回
+    if (hostEl) hostEl.textContent = "—";
+    if (countdownEl) countdownEl.style.display = "none";
+    if (warningEl) warningEl.textContent = isZh
+      ? "链接无效或不安全，无法跳转。"
+      : "Invalid or unsafe link — cannot redirect.";
+    if (goEl) {
+      goEl.textContent = isZh ? "返回首页" : "Back to home";
+      goEl.href = backPath;
+      goEl.addEventListener("click", (e) => {
+        e.preventDefault();
+        window.location.href = backPath;
+      });
+    }
+  } else {
+    let target = to;
+    let hostname = to;
+    try {
+      const u = new URL(to);
+      target = u.href;
+      hostname = u.hostname;
+    } catch {
+      /* 保留原始值 */
+    }
+
+    if (hostEl) hostEl.textContent = hostname;
+    if (goEl) {
+      goEl.href = target;
+      goEl.addEventListener("click", () => {
+        window.location.href = target;
+      });
+    }
+
+    let s = 3;
+    if (secEl) secEl.textContent = String(s);
+    const timer = window.setInterval(() => {
+      s -= 1;
+      if (secEl) secEl.textContent = String(Math.max(s, 0));
+      if (s <= 0) {
+        window.clearInterval(timer);
+        window.location.href = target;
+      }
+    }, 1000);
+  }
+</script>

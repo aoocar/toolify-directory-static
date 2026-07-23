@@ -156,7 +156,7 @@ const metaDescription = (lang === "zh" ? account.seo?.meta_description_zh : acco
               </tr>
             </tbody>
           </table>
-          <a class="button primary full-width text-center" href={account.profileUrl} target="_blank" rel="noopener noreferrer">
+          <a class="button primary full-width text-center" href={`/${lang}/exit?to=${encodeURIComponent(account.profileUrl)}`} rel="noopener">
             {t(lang, "visitProfile")}
           </a>
         </div>
