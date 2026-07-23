@@ -1,94 +1,127 @@
-# Upgrade Guide
+# Upgrade Guide — Dawn Island (黎明岛)
 
-## Phase 1: Current Static Version
+This document is for developers. It explains the underlying architecture of the Dawn Island creator directory and how to evolve it from the current static Markdown model toward a database / dynamic model — without breaking public URLs or SEO.
 
-Use this phase while the site is small and editorially managed.
+---
 
-```text
-Data: Markdown
-Rendering: Astro static build
-Search: simple page search or Pagefind
-Hosting: Cloudflare Pages, Vercel, Netlify, GitHub Pages
-```
+## 1. Architecture & Stable Interfaces
 
-Recommended tasks:
+The site follows a **"swappable data source, stable interface"** design. Pages and components never read Markdown directly — they call async getters in `src/lib/directory.ts`. To upgrade the backend, keep these function signatures unchanged so the page layer keeps working.
 
-- Add real tools and categories.
-- Keep category slugs stable.
+### Accounts
+- `getAccounts()`
+- `getAccountBySlug(slug)`
+- `getAccountsByCategory(categorySlug)`
+- `getAccountsByPlatform(platformSlug)`
+- `getFeaturedAccounts()`
+- `getLatestAccounts(limit?)`
+- `getRankedAccounts(sortBy, limit?)` — `sortBy: "followers" | "engagement" | "growth"`
+- `getFastGrowingAccounts(limit?)`
+
+### Categories / Platforms
+- `getCategories()`, `getCategoryBySlug(slug)`, `getCategoryCounts()`
+- `getPlatforms()`, `getPlatformBySlug(slug)`, `getPlatformCounts()`
+
+### Homepage feed
+- `getNews(lang)`, `getGuides(lang)` — return `{ title, url, summary?, date? }[]`
+
+### Utilities
+- `formatNumber(value, lang)` — localized big-number formatting (万 / K)
+
+---
+
+## 2. Tech Stack
+
+- Astro 5 (`output: "static"`, `trailingSlash: "never"`)
+- TypeScript, plain `.astro` components, single `global.css`
+- Content Collections + Zod (`src/content.config.ts`)
+- `@astrojs/sitemap`
+- No frontend framework, no backend — a pure GEO/SEO static site
+
+---
+
+## 3. Routing
+
+- `/[lang]` — home
+- `/[lang]/accounts`, `/[lang]/accounts/[slug]`
+- `/[lang]/platforms`, `/[lang]/platforms/[slug]`
+- `/[lang]/categories`, `/[lang]/categories/[slug]`
+- `/[lang]/rankings`, `/[lang]/new`, `/[lang]/services`, `/[lang]/submit`, `/[lang]/contact`
+- `/` redirects to the default language (`zh`)
+
+---
+
+## 4. Upgrade Roadmap
+
+### Phase 1 — 0 to ~1,000 accounts (current): Markdown + static search
+- Keep editing Markdown; add **Pagefind** for client-side full-text search (no backend).
+- Keep category/platform slugs stable.
 - Add SEO descriptions to every category.
-- Turn the seeded AI news, guides, prompt tags, and sponsor cards into Markdown collections once they need frequent updates.
-- Add sitemap and RSS when content volume grows.
-- Add Pagefind once tool count is above 100.
+- Homepage items live in the `news` / `guides` collections (already done).
+- Sitemap + robots (done) and analytics (GA + Clarity, done) are in place.
 
-## Phase 2: Generated Data
+### Phase 2 — 1,000 to 5,000 accounts: externalized data + auto build
+- Store data in Airtable / Notion / a lightweight CMS or crawler output.
+- Generate files into `src/content/*`, **or** change the loader inside `directory.ts`.
+- Keep the `directory.ts` function names; add build-time validation.
 
-Use this phase when manual Markdown becomes too slow but static pages are still enough.
+### Phase 3 — 5,000+ accounts: database-backed
+- Use **Supabase / PostgreSQL** for dynamic metrics (follower counts, daily engagement).
+- Switch `output` to `hybrid` or `server` in `astro.config.mjs`.
+- Rewrite the getters in `directory.ts` to query the DB; pages/components stay unchanged.
 
-```text
-Data: CSV, Airtable, Notion, CMS, or crawler output
-Build step: generate JSON/Markdown
-Rendering: Astro static build
-Search: Pagefind, Meilisearch, Typesense, or Algolia
-```
+### Phase 4 — commercial features (only after the content engine works)
+- Submission workflow + approval queue (the `/submit` mailto can become an API route)
+- Sponsored placements, newsletter capture, comparison / alternative / best-of SEO pages
+  (e.g. `/zh/best-ai-writing-creators`, `/zh/alternatives/<account>`, `/zh/compare/a-vs-b`)
 
-Migration approach:
+### Phase 5 — international expansion
+- English + Chinese first, then Japanese / Spanish, then language-specific landing & category pages.
+- Keep slugs in English for SEO stability.
 
-1. Keep existing routes.
-2. Generate files into `src/content/tools`.
-3. Keep using `src/lib/directory.ts`.
-4. Add validation before build.
+---
 
-## Phase 3: Database-Backed Directory
+## 5. Content Schema Changes
 
-Use this phase when there are thousands of tools, frequent updates, submissions, paid placements, or advanced filtering.
+Schemas live in `src/content.config.ts` and are validated at build time. When adding a field:
 
-```text
-Data: PostgreSQL or Supabase
-Search: Meilisearch, Typesense, or Algolia
-Rendering: static + server/hybrid rendering
-Admin: Directus, Strapi, custom admin, or Supabase Studio
-```
+1. Extend the relevant Zod schema (`accounts` / `categories` / `platforms` / `news` / `guides`).
+2. Update the matching TypeScript types in `src/lib/types.ts`.
+3. Update `directory.ts` mapping if the field affects relations or formatting.
+4. Add UI rendering where needed.
 
-Replace the internals of:
+> **Gotcha — reserved `slug`:** `slug` is a reserved field in content collections. The loader resolves it as `e.data.slug ?? e.slug`; never assume `data.slug` is populated.
 
-```text
-src/lib/directory.ts
-```
+---
 
-Keep the function names the same:
+## 6. Data Layer Changes
 
-- `getTools()`
-- `getToolBySlug(slug)`
-- `getCategories()`
-- `getCategoryBySlug(slug)`
-- `getToolsByCategory(categorySlug)`
-- `getFeaturedTools()`
-- `getLatestTools(limit?)`
-- `getRankedTools(limit?)`
+All reads go through `directory.ts` `load()` (a cached `getCollection()` call). To migrate data sources, replace only the internals of `load()` — keep the exported getter signatures. This preserves every page and all SEO URLs.
 
-This preserves the page layer.
+---
 
-## Phase 4: Commercial Features
+## 7. SEO / GEO
 
-Add these only after the content engine is working:
+- `seo` → traditional search (keywords, titles, meta description). `meta_description_*` feeds the page `<meta name="description">`.
+- `geo` → generative engines (`answer_summary`, `facts`, `faq`), rendered on detail pages.
+- `BaseLayout.astro` auto-injects canonical + Open Graph + Twitter tags.
 
-- Tool submission workflow
-- Admin approval queue
-- Sponsored placements in the top strip, daily feed, category pages, and tool detail pages
-- Newsletter capture
-- Traffic analytics
-- Tool comparison pages
-- Alternative pages, such as `/alternatives/chatgpt`
-- Best-of SEO pages, such as `/best-ai-writing-tools`
+---
 
-## Phase 5: International Expansion
+## 8. Known Gotchas
 
-Recommended language rollout:
+- `slug` reserved field (see §5).
+- `draft: true` accounts are filtered in `load()` and therefore excluded from routes **and** the sitemap automatically.
+- Sitemap / robots require `site` in `astro.config.mjs` to be the production domain (`https://www.limingdao.com`).
 
-```text
-English + Chinese first
-Japanese or Spanish next
-Then language-specific landing/category pages
-```
+---
 
-Keep slugs in English for SEO stability unless a language-specific domain strategy is planned.
+## 9. Monitoring
+
+GA4 (`G-WJ8ZP9FSE9`) and Clarity (`kn4x488ytp`) are injected in `BaseLayout.astro` with `is:inline`. They run on every page globally.
+
+---
+
+## 10. Deploy Pipeline
+
+GitHub `main` → Vercel auto-deploy. `npm run build` → `dist`. Keep `site` correct in `astro.config.mjs` for absolute URLs and sitemap.
