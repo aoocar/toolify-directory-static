@@ -9,35 +9,36 @@ E:\Obsidian\www.limingdao.com
 ## 目录分层
 
 ```text
-Raw/              Web Clipper 和其他来源的原始资料
+Raw/              从 Web Clipper 或其他来源保存的原始资料
 Inbox/            待处理入口
-Tools/            AI 工具知识卡
-Categories/       分类知识卡
-SEO/              SEO/GEO 专题内容
-Comparisons/      对比、替代品、榜单
-Prompts/          提示词库
-Sponsors/         赞助位资料
-Templates/        Obsidian 模板
-Dashboards/       运营看板
-Logs/             ingest 日志
-00_System/        AI 工作规则和发布规则
+Accounts/         AI 创作者（账号）知识卡
+Categories/       领域知识卡
+Platforms/        平台知识卡
+SEO/             SEO/GEO 专题内容
+Comparisons/     对比、替代品、榜单
+Prompts/         提示词库
+Sponsors/        赞助位资料
+Templates/       Obsidian 模板
+Dashboards/      运营看板
+Logs/            ingest 日志
+00_System/       AI 工作规则与发布规则
 ```
 
 ## 日常流程
 
-1. 使用 Obsidian Web Clipper 把网页保存到 `Raw/web-clips`。
-2. 将值得处理的链接或文件放入 `Inbox`。
-3. 在 Claudian 中要求 AI 按 `00_System/INGEST_PROMPT.md` 处理。
-4. AI 生成或更新 `Tools/{slug}.md`。
-5. 人工检查内容、分类、价格、SEO/GEO 字段和重复情况。
-6. 确认可发布后，将工具卡改为：
+1. 用 Obsidian Web Clipper 把网页保存到 `Raw/web-clips`。
+2. 把值得处理的链接放入 `Inbox`。
+3. 在 Claudian 中按 `00_System/INGEST_PROMPT.md` 处理，生成或更新 `Accounts/{slug}.md`。
+4. 人工检查内容、领域、平台、数据指标与 `seo` / `geo` 字段、以及重复情况。
+5. 确认可发布后，把账号卡改为：
 
 ```yaml
+type: account
 status: approved
 publish: true
 ```
 
-7. 在 Astro 项目中同步并构建：
+6. 在 Astro 项目中同步并构建：
 
 ```powershell
 Set-Location D:\project\codex\toolify
@@ -47,13 +48,13 @@ npm run build
 
 ## 初始化数据
 
-已将当前站点的 6 个工具和 6 个分类导入 Obsidian：
+已把当前站点的账号 / 领域 / 平台从 `src/content` 导入 Obsidian：
 
 ```powershell
 npm run vault:seed
 ```
 
-该命令会从 `src/content` 读取当前站点数据，生成 `Tools/` 和 `Categories/` 中的知识卡。
+该命令会读取 `src/content/{accounts,categories,platforms}`，生成 Obsidian 库中的 `Accounts/`、`Categories/`、`Platforms/` 知识卡。
 
 ## 发布同步
 
@@ -63,35 +64,74 @@ npm run vault:seed
 npm run vault:sync
 ```
 
-只会发布满足以下条件的工具：
+只会发布满足条件的账号：
 
 ```yaml
-type: tool
+type: account
 status: approved
 publish: true
 ```
 
-分类满足以下条件会同步：
+领域满足以下条件会同步：
 
 ```yaml
 type: category
 publish: true
 ```
 
+平台满足以下条件会同步：
+
+```yaml
+type: platform
+publish: true
+```
+
+## 字段映射
+
+账号卡（Obsidian ↔ 站点）使用以下字段：
+
+```yaml
+type: account
+status: approved
+publish: true
+slug: example-account
+profileUrl: "https://..."
+avatar: "🤖"
+platform: xiaohongshu
+platformId: "xhs-example"
+verified: true
+categories: [ai-content]
+tags: [AI绘画]
+contentStyle: [治愈系]
+monetization: mixed
+featured: false
+followerCount: 120000
+avgEngagement: 8000
+contentFrequency: weekly
+growthRate: 12
+publishedAt: "2024-01-01"
+updatedAt: "2026-06-01"
+name: { en: ..., zh: ... }
+tagline: { en: ..., zh: ... }
+description: { en: ..., zh: ... }
+seo: { primary_keyword, secondary_keywords, search_intent, title_zh, title_en, meta_description_zh, meta_description_en }
+geo: { answer_summary_zh, answer_summary_en, facts, faq }
+```
+
 ## SEO/GEO 策略
 
-每个工具卡保留两类字段：
+每个账号卡保留两类字段：
 
 - `seo`：面向传统搜索引擎，包括关键词、标题、meta description。
-- `geo`：面向 AI 搜索和答案引擎，包括短答案、事实、FAQ。
+- `geo`：面向 AI 搜索与答案引擎，包括短答案、事实、FAQ。
 
-后续可以把 SEO/GEO 内容扩展为：
+后续可把 SEO/GEO 内容扩展为独立页面，例如：
 
 ```text
-/zh/best-ai-writing-tools
-/zh/alternatives/chatgpt
-/zh/compare/tool-a-vs-tool-b
-/zh/free-ai-video-generators
+/zh/best-ai-writing-creators
+/zh/alternatives/account-a
+/zh/compare/account-a-vs-account-b
+/zh/free-ai-video-creators
 ```
 
 ## 注意事项
@@ -99,4 +139,5 @@ publish: true
 - `Raw/` 中的文件不要改。
 - 不确定信息写 `unknown`。
 - 不要把广告宣传语当作事实。
-- 发布前先跑 `npm run build`。
+- 发布前先跑 `npm run build`（Zod 校验会拦截错误数据）。
+- `src/content/.obsidian` 已被 `.gitignore` 忽略，请勿把 vault 配置提交进仓库。

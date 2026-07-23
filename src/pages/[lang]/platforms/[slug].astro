@@ -1,27 +1,16 @@
 ---
 import AccountCard from "@/components/AccountCard.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { getAccountsByPlatform, getPlatformBySlug } from "@/lib/directory";
+import { getAccountsByPlatform, getPlatformBySlug, getPlatforms } from "@/lib/directory";
 import { languages, localizedPath, t, type Lang } from "@/lib/i18n";
 
 export async function getStaticPaths() {
-  const platforms = [
-    "douyin",
-    "xiaohongshu",
-    "bilibili",
-    "youtube",
-    "weibo",
-    "twitter-x",
-    "instagram",
-    "tiktok",
-    "kuaishou",
-    "zhihu"
-  ];
+  const platforms = await getPlatforms();
   const paths = [];
 
   for (const lang of languages) {
     for (const plat of platforms) {
-      paths.push({ params: { lang, slug: plat } });
+      paths.push({ params: { lang, slug: plat.slug } });
     }
   }
 

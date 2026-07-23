@@ -4,23 +4,37 @@ import { dateOnly, defaultVaultPath, fail, listMarkdown, readMarkdown, slugify, 
 const projectRoot = process.cwd();
 const vaultRoot = process.env.VAULT_PATH || defaultVaultPath;
 
-const vaultToolsDir = path.join(vaultRoot, "Tools");
+const vaultAccountsDir = path.join(vaultRoot, "Accounts");
 const vaultCategoriesDir = path.join(vaultRoot, "Categories");
-const siteToolsDir = path.join(projectRoot, "src", "content", "tools");
+const vaultPlatformsDir = path.join(vaultRoot, "Platforms");
+const siteAccountsDir = path.join(projectRoot, "src", "content", "accounts");
 const siteCategoriesDir = path.join(projectRoot, "src", "content", "categories");
+const sitePlatformsDir = path.join(projectRoot, "src", "content", "platforms");
 
-const validPricing = new Set(["free", "freemium", "paid", "contact"]);
-let wroteTools = 0;
+const validMonetization = new Set([
+  "brand-deals",
+  "ads",
+  "courses",
+  "e-commerce",
+  "membership",
+  "tips",
+  "mixed",
+  "unknown"
+]);
+const validFrequency = new Set(["daily", "weekly", "biweekly", "monthly", "irregular"]);
+
+let wroteAccounts = 0;
 let wroteCategories = 0;
+let wrotePlatforms = 0;
 let errors = 0;
 
-for (const filePath of listMarkdown(vaultToolsDir)) {
+for (const filePath of listMarkdown(vaultAccountsDir)) {
   const { data } = readMarkdown(filePath);
-  if (data.type !== "tool" || data.publish !== true || data.status !== "approved") continue;
+  if (data.type !== "account" || data.publish !== true || data.status !== "approved") continue;
 
   const slug = data.slug || slugify(data.name?.en || path.basename(filePath, ".md"));
   const missing = [
-    ["website", data.website],
+    ["profileUrl", data.profileUrl],
     ["name.en", data.name?.en],
     ["name.zh", data.name?.zh],
     ["tagline.en", data.tagline?.en],
@@ -37,16 +51,22 @@ for (const filePath of listMarkdown(vaultToolsDir)) {
     continue;
   }
 
-  writeMarkdown(path.join(siteToolsDir, `${slug}.md`), {
+  writeMarkdown(path.join(siteAccountsDir, `${slug}.md`), {
     slug,
-    website: data.website,
-    logo: data.logo || initials(data.name?.en || slug),
+    profileUrl: data.profileUrl,
+    avatar: data.avatar || initials(data.name?.en || slug),
+    platform: data.platform,
+    platformId: data.platformId || "",
+    verified: Boolean(data.verified),
     categories: arrayOrEmpty(data.categories),
     tags: arrayOrEmpty(data.tags),
-    pricing: validPricing.has(data.pricing) ? data.pricing : "contact",
+    contentStyle: arrayOrEmpty(data.contentStyle),
+    monetization: validMonetization.has(data.monetization) ? data.monetization : "unknown",
     featured: Boolean(data.featured),
-    monthlyVisits: Number(data.monthlyVisits ?? 0),
-    savedCount: Number(data.savedCount ?? 0),
+    followerCount: Number(data.followerCount ?? 0),
+    avgEngagement: Number(data.avgEngagement ?? 0),
+    contentFrequency: validFrequency.has(data.contentFrequency) ? data.contentFrequency : "irregular",
+    growthRate: Number(data.growthRate ?? 0),
     publishedAt: dateOnly(data.publishedAt),
     updatedAt: dateOnly(data.updatedAt),
     name: data.name,
@@ -55,7 +75,7 @@ for (const filePath of listMarkdown(vaultToolsDir)) {
     seo: data.seo,
     geo: data.geo
   });
-  wroteTools += 1;
+  wroteAccounts += 1;
 }
 
 for (const filePath of listMarkdown(vaultCategoriesDir)) {
@@ -80,7 +100,29 @@ for (const filePath of listMarkdown(vaultCategoriesDir)) {
   wroteCategories += 1;
 }
 
-console.log(`Synced ${wroteTools} tools and ${wroteCategories} categories from ${vaultRoot}`);
+for (const filePath of listMarkdown(vaultPlatformsDir)) {
+  const { data } = readMarkdown(filePath);
+  if (data.type !== "platform" || data.publish !== true) continue;
+
+  const slug = data.slug || slugify(data.name?.en || path.basename(filePath, ".md"));
+  if (!data.name?.en || !data.name?.zh || !data.description?.en || !data.description?.zh) {
+    console.error(`Skip ${filePath}: platform missing localized fields`);
+    errors += 1;
+    continue;
+  }
+
+  writeMarkdown(path.join(sitePlatformsDir, `${slug}.md`), {
+    slug,
+    icon: data.icon || "Link",
+    name: data.name,
+    description: data.description,
+    baseUrl: data.baseUrl || "",
+    type: data.type || "social"
+  });
+  wrotePlatforms += 1;
+}
+
+console.log(`Synced ${wroteAccounts} accounts, ${wroteCategories} categories and ${wrotePlatforms} platforms from ${vaultRoot}`);
 if (errors > 0) fail(`Completed with ${errors} validation issue(s).`);
 
 function arrayOrEmpty(value) {

@@ -1,16 +1,16 @@
 ---
 import AccountCard from "@/components/AccountCard.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { getAccountsByCategory, getCategoryBySlug } from "@/lib/directory";
+import { getAccountsByCategory, getCategories, getCategoryBySlug } from "@/lib/directory";
 import { languages, localizedPath, t, type Lang } from "@/lib/i18n";
 
 export async function getStaticPaths() {
-  const categories = ["tech-review", "education", "lifestyle", "ai-content", "entertainment"];
+  const categories = await getCategories();
   const paths = [];
 
   for (const lang of languages) {
     for (const cat of categories) {
-      paths.push({ params: { lang, slug: cat } });
+      paths.push({ params: { lang, slug: cat.slug } });
     }
   }
 
@@ -25,15 +25,65 @@ if (!category) {
 }
 
 const categoryAccounts = await getAccountsByCategory(slug);
+
+const geoSummary = lang === "zh" ? category.geo?.answer_summary_zh : category.geo?.answer_summary_en;
+const geoFacts = category.geo?.facts ?? [];
+const geoFaq = category.geo?.faq ?? [];
+const metaDescription = (lang === "zh" ? category.seo?.meta_description_zh : category.seo?.meta_description_en) || category.description[lang];
 ---
 
-<BaseLayout lang={lang} title={`${category.name[lang]} - ${t(lang, "brand")}`} description={category.description[lang]}>
+<BaseLayout lang={lang} title={`${category.name[lang]} - ${t(lang, "brand")}`} description={metaDescription}>
   <section class="section">
     <div class="container">
       <div class="section-head">
         <h1>{category.icon} {category.name[lang]}</h1>
         <p class="lead">{category.description[lang]}</p>
       </div>
+
+      {
+        geoSummary && (
+          <section class="detail-section">
+            <h2>{lang === "zh" ? "领域速览" : "At a glance"}</h2>
+            <p>{geoSummary}</p>
+          </section>
+        )
+      }
+
+      {
+        geoFacts.length > 0 && (
+          <section class="detail-section">
+            <h2>{lang === "zh" ? "关键事实" : "Key facts"}</h2>
+            <dl class="fact-list">
+              {geoFacts.map((fact) =>
+                Object.entries(fact).map(([key, value]) => (
+                  <div class="fact-item">
+                    <dt>{key}</dt>
+                    <dd>{value}</dd>
+                  </div>
+                ))
+              )}
+            </dl>
+          </section>
+        )
+      }
+
+      {
+        geoFaq.length > 0 && (
+          <section class="detail-section">
+            <h2>FAQ</h2>
+            <dl class="faq-list">
+              {geoFaq.map((item) =>
+                Object.entries(item).map(([question, answer]) => (
+                  <div class="faq-item">
+                    <dt>{question}</dt>
+                    <dd>{answer}</dd>
+                  </div>
+                ))
+              )}
+            </dl>
+          </section>
+        )
+      }
 
       {
         categoryAccounts.length > 0 ? (

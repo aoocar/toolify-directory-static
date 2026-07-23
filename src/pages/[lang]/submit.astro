@@ -17,7 +17,7 @@ const lang = Astro.params.lang as Lang;
         <p class="lead">{t(lang, "submitBody")}</p>
       </div>
 
-      <form class="submit-form" onsubmit="event.preventDefault(); alert('Submission received! Thank you.');">
+      <form class="submit-form" id="submit-form">
         <div class="form-group">
           <label for="creator-name">{lang === "zh" ? "账号名称" : "Creator Name"}</label>
           <input type="text" id="creator-name" required placeholder={lang === "zh" ? "例：灵感画手艾米" : "e.g. ArtifyVision"} />
@@ -37,7 +37,28 @@ const lang = Astro.params.lang as Lang;
         <button class="button primary full-width" type="submit">
           {lang === "zh" ? "提交审核" : "Submit"}
         </button>
+        <p class="submit-hint">
+          {lang === "zh"
+            ? "提交后会打开你的邮件客户端，内容将发送至 aoobee@sina.com。如需接入服务端接口，可改为 hybrid rendering + API。"
+            : "Submitting opens your mail client and sends to aoobee@sina.com. For a server endpoint, switch to hybrid rendering + API."}
+        </p>
       </form>
+
+      <script>
+        const form = document.getElementById("submit-form");
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const name = document.getElementById("creator-name").value.trim();
+          const url = document.getElementById("creator-url").value.trim();
+          const platform = document.getElementById("creator-platform").value.trim();
+          const reason = document.getElementById("creator-reason").value.trim();
+          const subject = encodeURIComponent("创作者推荐：" + name);
+          const body = encodeURIComponent(
+            "账号名称：" + name + "\n账号链接：" + url + "\n所在平台：" + platform + "\n推荐理由：" + reason
+          );
+          window.location.href = "mailto:aoobee@sina.com?subject=" + subject + "&body=" + body;
+        });
+      </script>
     </div>
   </section>
 </BaseLayout>

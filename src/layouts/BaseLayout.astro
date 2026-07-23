@@ -9,6 +9,9 @@ type Props = {
 };
 
 const { lang, title, description } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
+const ogLocale = lang === "zh" ? "zh_CN" : "en_US";
+const siteName = t(lang, "brand");
 const navItems = [
   { href: localizedPath(lang, "/accounts"), label: t(lang, "navAccounts") },
   { href: localizedPath(lang, "/platforms"), label: t(lang, "navPlatforms") },
@@ -30,6 +33,16 @@ const currentPath = Astro.url.pathname.replace(/^\/(en|zh)/, "") || "/";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL.href} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL.href} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
     <title>{title}</title>
   </head>
   <body>

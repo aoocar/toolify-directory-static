@@ -38,9 +38,14 @@ const monetizationMap: Record<string, Record<Lang, string>> = {
   courses: { zh: "知识付费", en: "Courses" },
   mixed: { zh: "多元变现", en: "Mixed" },
 };
+
+const geoSummary = lang === "zh" ? account.geo?.answer_summary_zh : account.geo?.answer_summary_en;
+const geoFacts = account.geo?.facts ?? [];
+const geoFaq = account.geo?.faq ?? [];
+const metaDescription = (lang === "zh" ? account.seo?.meta_description_zh : account.seo?.meta_description_en) || account.tagline[lang];
 ---
 
-<BaseLayout lang={lang} title={`${account.name[lang]} - ${t(lang, "brand")}`} description={account.tagline[lang]}>
+<BaseLayout lang={lang} title={`${account.name[lang]} - ${t(lang, "brand")}`} description={metaDescription}>
   <article class="detail-page section">
     <div class="container detail-grid">
       <div class="detail-main">
@@ -73,6 +78,51 @@ const monetizationMap: Record<string, Record<Lang, string>> = {
             {account.tags.map((tag) => <span class="pill">#{tag}</span>)}
           </div>
         </section>
+
+        {
+          geoSummary && (
+            <section class="detail-section">
+              <h2>{lang === "zh" ? "一句话速览" : "At a glance"}</h2>
+              <p>{geoSummary}</p>
+            </section>
+          )
+        }
+
+        {
+          geoFacts.length > 0 && (
+            <section class="detail-section">
+              <h2>{lang === "zh" ? "关键事实" : "Key facts"}</h2>
+              <dl class="fact-list">
+                {geoFacts.map((fact) =>
+                  Object.entries(fact).map(([key, value]) => (
+                    <div class="fact-item">
+                      <dt>{key}</dt>
+                      <dd>{value}</dd>
+                    </div>
+                  ))
+                )}
+              </dl>
+            </section>
+          )
+        }
+
+        {
+          geoFaq.length > 0 && (
+            <section class="detail-section">
+              <h2>FAQ</h2>
+              <dl class="faq-list">
+                {geoFaq.map((item) =>
+                  Object.entries(item).map(([question, answer]) => (
+                    <div class="faq-item">
+                      <dt>{question}</dt>
+                      <dd>{answer}</dd>
+                    </div>
+                  ))
+                )}
+              </dl>
+            </section>
+          )
+        }
 
         <section class="detail-section highlight-cta-section">
           <BusinessCTA lang={lang} type="detail" />

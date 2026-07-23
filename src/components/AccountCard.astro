@@ -10,9 +10,9 @@ type Props = {
 const { account, lang } = Astro.props;
 ---
 
-<article class="tool-card">
+<article class="account-card">
   <div class="card-header">
-    <span class="tool-logo">{account.avatar}</span>
+    <span class="account-logo">{account.avatar}</span>
     <div>
       <h3>
         <a href={localizedPath(lang, `/accounts/${account.slug}`)}>

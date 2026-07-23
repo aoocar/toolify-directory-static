@@ -5,65 +5,73 @@ const projectRoot = process.cwd();
 const vaultRoot = process.env.VAULT_PATH || defaultVaultPath;
 const today = dateOnly();
 
-const siteToolsDir = path.join(projectRoot, "src", "content", "tools");
+const siteAccountsDir = path.join(projectRoot, "src", "content", "accounts");
 const siteCategoriesDir = path.join(projectRoot, "src", "content", "categories");
-const vaultToolsDir = path.join(vaultRoot, "Tools");
+const sitePlatformsDir = path.join(projectRoot, "src", "content", "platforms");
+const vaultAccountsDir = path.join(vaultRoot, "Accounts");
 const vaultCategoriesDir = path.join(vaultRoot, "Categories");
+const vaultPlatformsDir = path.join(vaultRoot, "Platforms");
 
-let toolCount = 0;
+let accountCount = 0;
 let categoryCount = 0;
+let platformCount = 0;
 
-for (const filePath of listMarkdown(siteToolsDir)) {
+function defaultSeo(name, tags) {
+  return {
+    primary_keyword: `${name?.en ?? ""} AI creator`,
+    secondary_keywords: tags ?? [],
+    search_intent: "informational",
+    title_zh: `${name?.zh ?? name?.en ?? ""} - AI 创作者介绍`,
+    title_en: `${name?.en ?? ""} - AI Creator Directory`,
+    meta_description_zh: "",
+    meta_description_en: ""
+  };
+}
+
+function defaultGeo(description) {
+  return {
+    answer_summary_zh: description?.zh ?? "",
+    answer_summary_en: description?.en ?? "",
+    facts: [],
+    faq: []
+  };
+}
+
+for (const filePath of listMarkdown(siteAccountsDir)) {
   const { data } = readMarkdown(filePath);
   const slug = data.slug || slugify(data.name?.en || path.basename(filePath, ".md"));
   writeMarkdown(
-    path.join(vaultToolsDir, `${slug}.md`),
+    path.join(vaultAccountsDir, `${slug}.md`),
     {
-      type: "tool",
+      type: "account",
       status: "approved",
       publish: true,
       slug,
-      name: data.name,
-      website: data.website,
-      source_url: data.website,
-      captured_at: today,
-      last_checked_at: today,
-      logo: data.logo,
+      profileUrl: data.profileUrl,
+      avatar: data.avatar ?? "",
+      platform: data.platform,
+      platformId: data.platformId ?? "",
+      verified: Boolean(data.verified),
       categories: data.categories ?? [],
       tags: data.tags ?? [],
-      pricing: data.pricing ?? "unknown",
+      contentStyle: data.contentStyle ?? [],
+      monetization: data.monetization ?? "unknown",
       featured: Boolean(data.featured),
-      monthlyVisits: Number(data.monthlyVisits ?? 0),
-      savedCount: Number(data.savedCount ?? 0),
+      followerCount: Number(data.followerCount ?? 0),
+      avgEngagement: Number(data.avgEngagement ?? 0),
+      contentFrequency: data.contentFrequency ?? "irregular",
+      growthRate: Number(data.growthRate ?? 0),
       publishedAt: dateOnly(data.publishedAt),
       updatedAt: dateOnly(data.updatedAt),
-      language_support: ["en", "zh"],
-      target_users: [],
-      quality_score: 3,
-      seo_score: 2,
-      geo_score: 2,
-      duplicate_of: "",
+      name: data.name,
       tagline: data.tagline,
       description: data.description,
-      seo: data.seo ?? {
-        primary_keyword: `${data.name?.en ?? slug} AI tool`,
-        secondary_keywords: data.tags ?? [],
-        search_intent: "informational",
-        title_zh: `${data.name?.zh ?? data.name?.en ?? slug} - AI 工具介绍`,
-        title_en: `${data.name?.en ?? slug} - AI Tool Directory`,
-        meta_description_zh: data.description?.zh ?? "",
-        meta_description_en: data.description?.en ?? ""
-      },
-      geo: data.geo ?? {
-        answer_summary_zh: data.description?.zh ?? "",
-        answer_summary_en: data.description?.en ?? "",
-        facts: [{ pricing: data.pricing ?? "unknown" }],
-        faq: []
-      }
+      seo: data.seo ?? defaultSeo(data.name, data.tags),
+      geo: data.geo ?? defaultGeo(data.description)
     },
-    "## 一句话定位\n\n## 核心功能\n\n## 适合人群\n\n## 使用场景\n\n## SEO/GEO 备注\n"
+    "## 一句话定位\n\n## 核心内容\n\n## 适合人群\n\n## 使用场景\n\n## SEO/GEO 备注\n"
   );
-  toolCount += 1;
+  accountCount += 1;
 }
 
 for (const filePath of listMarkdown(siteCategoriesDir)) {
@@ -80,7 +88,7 @@ for (const filePath of listMarkdown(siteCategoriesDir)) {
       name: data.name,
       description: data.description,
       seo: data.seo ?? {
-        primary_keyword: `${data.name?.en ?? slug} AI tools`,
+        primary_keyword: `${data.name?.en ?? slug} AI creators`,
         secondary_keywords: []
       },
       geo: data.geo ?? {
@@ -93,4 +101,25 @@ for (const filePath of listMarkdown(siteCategoriesDir)) {
   categoryCount += 1;
 }
 
-console.log(`Seeded ${toolCount} tools and ${categoryCount} categories into ${vaultRoot}`);
+for (const filePath of listMarkdown(sitePlatformsDir)) {
+  const { data } = readMarkdown(filePath);
+  const slug = data.slug || slugify(data.name?.en || path.basename(filePath, ".md"));
+  writeMarkdown(
+    path.join(vaultPlatformsDir, `${slug}.md`),
+    {
+      type: "platform",
+      status: "active",
+      publish: true,
+      slug,
+      icon: data.icon ?? "",
+      name: data.name,
+      description: data.description,
+      baseUrl: data.baseUrl ?? "",
+      type: data.type ?? "social"
+    },
+    "## 平台定义\n\n## 收录标准\n\n## SEO/GEO 备注\n"
+  );
+  platformCount += 1;
+}
+
+console.log(`Seeded ${accountCount} accounts, ${categoryCount} categories and ${platformCount} platforms into ${vaultRoot}`);
