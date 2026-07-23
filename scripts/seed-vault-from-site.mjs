@@ -8,13 +8,19 @@ const today = dateOnly();
 const siteAccountsDir = path.join(projectRoot, "src", "content", "accounts");
 const siteCategoriesDir = path.join(projectRoot, "src", "content", "categories");
 const sitePlatformsDir = path.join(projectRoot, "src", "content", "platforms");
+const siteNewsDir = path.join(projectRoot, "src", "content", "news");
+const siteGuidesDir = path.join(projectRoot, "src", "content", "guides");
 const vaultAccountsDir = path.join(vaultRoot, "Accounts");
 const vaultCategoriesDir = path.join(vaultRoot, "Categories");
 const vaultPlatformsDir = path.join(vaultRoot, "Platforms");
+const vaultNewsDir = path.join(vaultRoot, "News");
+const vaultGuidesDir = path.join(vaultRoot, "Guides");
 
 let accountCount = 0;
 let categoryCount = 0;
 let platformCount = 0;
+let newsCount = 0;
+let guidesCount = 0;
 
 function defaultSeo(name, tags) {
   return {
@@ -122,4 +128,47 @@ for (const filePath of listMarkdown(sitePlatformsDir)) {
   platformCount += 1;
 }
 
-console.log(`Seeded ${accountCount} accounts, ${categoryCount} categories and ${platformCount} platforms into ${vaultRoot}`);
+for (const filePath of listMarkdown(siteNewsDir)) {
+  const { data } = readMarkdown(filePath);
+  const slug = data.slug || slugify(data.title?.en || path.basename(filePath, ".md"));
+  writeMarkdown(
+    path.join(vaultNewsDir, `${slug}.md`),
+    {
+      type: "news",
+      status: "active",
+      publish: true,
+      slug,
+      title: data.title,
+      url: data.url,
+      summary: data.summary ?? {},
+      order: Number(data.order ?? 0),
+      date: data.date ? dateOnly(data.date) : today
+    },
+    "## 动态摘要\n\n## SEO/GEO 备注\n"
+  );
+  newsCount += 1;
+}
+
+for (const filePath of listMarkdown(siteGuidesDir)) {
+  const { data } = readMarkdown(filePath);
+  const slug = data.slug || slugify(data.title?.en || path.basename(filePath, ".md"));
+  writeMarkdown(
+    path.join(vaultGuidesDir, `${slug}.md`),
+    {
+      type: "guide",
+      status: "active",
+      publish: true,
+      slug,
+      title: data.title,
+      url: data.url,
+      summary: data.summary ?? {},
+      order: Number(data.order ?? 0)
+    },
+    "## 指南摘要\n\n## SEO/GEO 备注\n"
+  );
+  guidesCount += 1;
+}
+
+console.log(
+  `Seeded ${accountCount} accounts, ${categoryCount} categories, ${platformCount} platforms, ${newsCount} news and ${guidesCount} guides into ${vaultRoot}`
+);

@@ -56,7 +56,7 @@ npm run build
 npm run vault:seed
 ```
 
-该命令会读取 `src/content/{accounts,categories,platforms}`，生成 Obsidian 库中的 `Accounts/`、`Categories/`、`Platforms/` 知识卡。
+该命令会读取 `src/content/{accounts,categories,platforms,news,guides}`，生成 Obsidian 库中的 `Accounts/`、`Categories/`、`Platforms/`、`News/`、`Guides/` 知识卡。
 
 ## 发布同步
 
@@ -85,6 +85,20 @@ publish: true
 
 ```yaml
 type: platform
+publish: true
+```
+
+行业动态（首页「行业动态」区块）满足以下条件会同步：
+
+```yaml
+type: news
+publish: true
+```
+
+创作者指南（首页「创作者指南」区块）满足以下条件会同步：
+
+```yaml
+type: guide
 publish: true
 ```
 
@@ -119,6 +133,35 @@ description: { en: ..., zh: ... }
 seo: { primary_keyword, secondary_keywords, search_intent, title_zh, title_en, meta_description_zh, meta_description_en }
 geo: { answer_summary_zh, answer_summary_en, facts, faq }
 ```
+
+行业动态卡（`type: news`，首页「行业动态」区块）字段：
+
+```yaml
+type: news
+status: active
+publish: true
+slug: ai-content-largest
+title: { en: "...", zh: "..." }   # 必填，作为首页链接文案
+url: "/categories/ai-content"      # 必填，点击后跳转的真实页面（指向站内真实路由）
+summary: { en: "...", zh: "..." }  # 可选摘要
+order: 1                           # 排序，越小越靠前
+date: "2026-07-20"                 # 可选发布日期
+```
+
+创作者指南卡（`type: guide`，首页「创作者指南」区块）字段：
+
+```yaml
+type: guide
+status: active
+publish: true
+slug: ten-ways-start
+title: { en: "...", zh: "..." }   # 必填，作为首页链接文案
+url: "/categories"                # 必填，点击后跳转的真实页面
+summary: { en: "...", zh: "..." } # 可选摘要
+order: 1                           # 排序，越小越靠前
+```
+
+> 内容维护约定：news/guides 的条目由 AI 批量生成草稿、人工在 Obsidian 中审核与维护真实文案；`url` 必须指向站内真实存在的页面（不要指向营销页或虚构内容），以保证 GEO/SEO 可信度。
 
 ## SEO/GEO 策略
 

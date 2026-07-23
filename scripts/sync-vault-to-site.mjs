@@ -3,13 +3,18 @@ import { dateOnly, defaultVaultPath, fail, listMarkdown, readMarkdown, slugify, 
 
 const projectRoot = process.cwd();
 const vaultRoot = process.env.VAULT_PATH || defaultVaultPath;
+const today = dateOnly();
 
 const vaultAccountsDir = path.join(vaultRoot, "Accounts");
 const vaultCategoriesDir = path.join(vaultRoot, "Categories");
 const vaultPlatformsDir = path.join(vaultRoot, "Platforms");
+const vaultNewsDir = path.join(vaultRoot, "News");
+const vaultGuidesDir = path.join(vaultRoot, "Guides");
 const siteAccountsDir = path.join(projectRoot, "src", "content", "accounts");
 const siteCategoriesDir = path.join(projectRoot, "src", "content", "categories");
 const sitePlatformsDir = path.join(projectRoot, "src", "content", "platforms");
+const siteNewsDir = path.join(projectRoot, "src", "content", "news");
+const siteGuidesDir = path.join(projectRoot, "src", "content", "guides");
 
 const validMonetization = new Set([
   "brand-deals",
@@ -26,6 +31,8 @@ const validFrequency = new Set(["daily", "weekly", "biweekly", "monthly", "irreg
 let wroteAccounts = 0;
 let wroteCategories = 0;
 let wrotePlatforms = 0;
+let wroteNews = 0;
+let wroteGuides = 0;
 let errors = 0;
 
 for (const filePath of listMarkdown(vaultAccountsDir)) {
@@ -122,7 +129,68 @@ for (const filePath of listMarkdown(vaultPlatformsDir)) {
   wrotePlatforms += 1;
 }
 
-console.log(`Synced ${wroteAccounts} accounts, ${wroteCategories} categories and ${wrotePlatforms} platforms from ${vaultRoot}`);
+for (const filePath of listMarkdown(vaultNewsDir)) {
+  const { data } = readMarkdown(filePath);
+  if (data.type !== "news" || data.publish !== true) continue;
+
+  const slug = data.slug || slugify(data.title?.en || path.basename(filePath, ".md"));
+  const missing = [
+    ["title.en", data.title?.en],
+    ["title.zh", data.title?.zh],
+    ["url", data.url]
+  ]
+    .filter(([, value]) => !value)
+    .map(([key]) => key);
+
+  if (missing.length > 0) {
+    console.error(`Skip ${filePath}: missing ${missing.join(", ")}`);
+    errors += 1;
+    continue;
+  }
+
+  writeMarkdown(path.join(siteNewsDir, `${slug}.md`), {
+    slug,
+    title: data.title,
+    url: data.url,
+    summary: data.summary,
+    order: Number(data.order ?? 0),
+    date: data.date ? dateOnly(data.date) : today
+  });
+  wroteNews += 1;
+}
+
+for (const filePath of listMarkdown(vaultGuidesDir)) {
+  const { data } = readMarkdown(filePath);
+  if (data.type !== "guide" || data.publish !== true) continue;
+
+  const slug = data.slug || slugify(data.title?.en || path.basename(filePath, ".md"));
+  const missing = [
+    ["title.en", data.title?.en],
+    ["title.zh", data.title?.zh],
+    ["url", data.url]
+  ]
+    .filter(([, value]) => !value)
+    .map(([key]) => key);
+
+  if (missing.length > 0) {
+    console.error(`Skip ${filePath}: missing ${missing.join(", ")}`);
+    errors += 1;
+    continue;
+  }
+
+  writeMarkdown(path.join(siteGuidesDir, `${slug}.md`), {
+    slug,
+    title: data.title,
+    url: data.url,
+    summary: data.summary,
+    order: Number(data.order ?? 0)
+  });
+  wroteGuides += 1;
+}
+
+console.log(
+  `Synced ${wroteAccounts} accounts, ${wroteCategories} categories, ${wrotePlatforms} platforms, ${wroteNews} news and ${wroteGuides} guides from ${vaultRoot}`
+);
 if (errors > 0) fail(`Completed with ${errors} validation issue(s).`);
 
 function arrayOrEmpty(value) {
