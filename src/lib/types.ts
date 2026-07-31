@@ -68,12 +68,13 @@ export type Account = {
   monetization: Monetization;
   featured: boolean;
   draft?: boolean;
-  followerCount: number;
-  avgEngagement: number;
-  contentFrequency: ContentFrequency;
-  growthRate: number;
-  publishedAt: string;
-  updatedAt: string;
+  // metrics optional (2026-07-31): do not fabricate unverifiable figures
+  followerCount?: number;
+  avgEngagement?: number;
+  contentFrequency?: ContentFrequency;
+  growthRate?: number;
+  publishedAt?: string;
+  updatedAt?: string;
   name: Record<Lang, string>;
   tagline: Record<Lang, string>;
   description: Record<Lang, string>;

@@ -144,11 +144,11 @@ const metaDescription = (lang === "zh" ? account.seo?.meta_description_zh : acco
               </tr>
               <tr>
                 <td><strong>{t(lang, "growth")}</strong></td>
-                <td>+{account.growthRate}%</td>
+                <td>{account.growthRate !== undefined ? `+${account.growthRate}%` : "—"}</td>
               </tr>
               <tr>
                 <td><strong>{t(lang, "frequency")}</strong></td>
-                <td>{frequencyMap[account.contentFrequency]?.[lang] || account.contentFrequency}</td>
+                <td>{frequencyMap[account.contentFrequency]?.[lang] || account.contentFrequency || "—"}</td>
               </tr>
               <tr>
                 <td><strong>{t(lang, "monetization")}</strong></td>

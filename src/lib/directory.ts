@@ -96,7 +96,8 @@ export async function getFeaturedAccounts() {
 export async function getLatestAccounts(limit?: number) {
   const { accounts } = await load();
   const sorted = [...accounts].sort(
-    (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+    (a, b) =>
+      new Date(b.updatedAt ?? 0).getTime() - new Date(a.updatedAt ?? 0).getTime()
   );
   return Promise.all((limit ? sorted.slice(0, limit) : sorted).map(withRelations));
 }
@@ -107,9 +108,11 @@ export async function getRankedAccounts(
 ) {
   const { accounts } = await load();
   const sorted = [...accounts].sort((a, b) => {
-    if (sortBy === "engagement") return b.avgEngagement - a.avgEngagement;
-    if (sortBy === "growth") return b.growthRate - a.growthRate;
-    return b.followerCount - a.followerCount;
+    if (sortBy === "engagement")
+      return (b.avgEngagement ?? -Infinity) - (a.avgEngagement ?? -Infinity);
+    if (sortBy === "growth")
+      return (b.growthRate ?? -Infinity) - (a.growthRate ?? -Infinity);
+    return (b.followerCount ?? -Infinity) - (a.followerCount ?? -Infinity);
   });
   return Promise.all((limit ? sorted.slice(0, limit) : sorted).map(withRelations));
 }
@@ -197,7 +200,8 @@ export async function getGuides(lang: Lang): Promise<ResolvedFeedItem[]> {
 
 /* ── Formatting ── */
 
-export function formatNumber(value: number, lang: Lang) {
+export function formatNumber(value: number | undefined, lang: Lang) {
+  if (value === undefined || value === null) return "—";
   if (lang === "zh") {
     if (value >= 100_000_000) return `${(value / 100_000_000).toFixed(1)}亿`;
     if (value >= 10_000) return `${(value / 10_000).toFixed(1)}万`;

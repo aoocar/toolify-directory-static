@@ -100,12 +100,16 @@ const accounts = defineCollection({
     ]),
     featured: z.boolean(),
     draft: z.boolean().optional().default(false),
-    followerCount: z.number(),
-    avgEngagement: z.number(),
-    contentFrequency: z.enum(["daily", "weekly", "biweekly", "monthly", "irregular"]),
-    growthRate: z.number(),
-    publishedAt: z.coerce.date(),
-    updatedAt: z.coerce.date(),
+    // metrics made optional on 2026-07-31: do NOT fabricate follower/engagement
+    // figures for real accounts we cannot verify — leave blank instead.
+    followerCount: z.number().optional(),
+    avgEngagement: z.number().optional(),
+    contentFrequency: z
+      .enum(["daily", "weekly", "biweekly", "monthly", "irregular"])
+      .optional(),
+    growthRate: z.number().optional(),
+    publishedAt: z.coerce.date().optional(),
+    updatedAt: z.coerce.date().optional(),
     name: localizedText,
     tagline: localizedText,
     description: localizedText,
