@@ -1,0 +1,125 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { languages, t, type Lang } from "@/lib/i18n";
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+
+type Section = { heading: string; body: string };
+
+const zh: { updated: string; sections: Section[] } = {
+  updated: "最后更新：2026 年 7 月",
+  sections: [
+    {
+      heading: "1. 我们收集的信息",
+      body: `本站使用 Google Analytics 4（GA4）与 Microsoft Clarity 了解访客如何使用本网站，包括页面浏览、点击、设备类型与大致地理位置等。这些数据以匿名或聚合形式收集，用于改进内容与服务体验。<br/><br/>当你通过「推荐账号」提交创作者信息时，你提供的资料（如名称、主页链接）会发送至我们的联系邮箱 <a href="mailto:aoobee@sina.com">aoobee@sina.com</a>，用于审核与收录。`
+    },
+    {
+      heading: "2. Cookie 与追踪技术",
+      body: `GA4 与 Clarity 会使用 Cookie 或类似技术记录访问行为。你可以通过浏览器的隐私设置拒绝或清除 Cookie；即使如此，本站的大部分内容仍可正常浏览。`
+    },
+    {
+      heading: "3. 外部链接与中转页",
+      body: `本站通过知乎式中转提示页（<code>/exit</code>）跳转到第三方平台（如 YouTube、Bilibili、抖音等）。一旦离开黎明岛，第三方网站由其运营方独立管理，拥有各自的隐私政策，本站不对它们的内容、数据实践或安全性负责。`
+    },
+    {
+      heading: "4. AI 辅助内容",
+      body: `本站收录的账号资料、行业动态与指南由人工结合 AI 工具整理，旨在为你提供灵感与参考，不构成任何专业、财务或法律建议。`
+    },
+    {
+      heading: "5. 数据留存与你的权利",
+      body: `我们仅在必要期限内保留你提交的信息。你有权随时请求查看、更正或删除与你相关的个人信息，以及撤回此前提交的推荐内容。请通过 <a href="mailto:aoobee@sina.com">aoobee@sina.com</a> 与我们联系。`
+    },
+    {
+      heading: "6. 联系我们",
+      body: `如对本隐私政策有任何疑问，或希望行使上述权利，请发送邮件至 <a href="mailto:aoobee@sina.com">aoobee@sina.com</a>。`
+    }
+  ]
+};
+
+const en: { updated: string; sections: Section[] } = {
+  updated: "Last updated: July 2026",
+  sections: [
+    {
+      heading: "1. Information We Collect",
+      body: `We use Google Analytics 4 (GA4) and Microsoft Clarity to understand how visitors use this site, including page views, clicks, device type, and approximate location. This data is collected anonymously or in aggregate to improve our content and experience.<br/><br/>When you submit a creator recommendation via the "Recommend" form, the information you provide (such as name and profile link) is sent to our contact inbox at <a href="mailto:aoobee@sina.com">aoobee@sina.com</a> for review and inclusion.`
+    },
+    {
+      heading: "2. Cookies & Tracking",
+      body: `GA4 and Clarity use cookies or similar technologies to record visit behavior. You can refuse or clear cookies through your browser's privacy settings; most of the site remains usable without them.`
+    },
+    {
+      heading: "3. External Links & Interstitial",
+      body: `This site redirects to third-party platforms (e.g. YouTube, Bilibili, Douyin) through a Zhihu-style interstitial page (<code>/exit</code>). Once you leave Dawn Island, those sites are operated independently with their own privacy policies; we are not responsible for their content, data practices, or security.`
+    },
+    {
+      heading: "4. AI-Assisted Content",
+      body: `Creator profiles, industry news, and guides on this site are compiled by humans with the help of AI tools. They are provided for inspiration and reference only and do not constitute professional, financial, or legal advice.`
+    },
+    {
+      heading: "5. Data Retention & Your Rights",
+      body: `We retain submitted information only as long as necessary. You may request to access, correct, or delete your personal information, or withdraw a previously submitted recommendation, at any time by emailing <a href="mailto:aoobee@sina.com">aoobee@sina.com</a>.`
+    },
+    {
+      heading: "6. Contact Us",
+      body: `If you have any questions about this policy or wish to exercise your rights, please email <a href="mailto:aoobee@sina.com">aoobee@sina.com</a>.`
+    }
+  ]
+};
+
+const content = lang === "zh" ? zh : en;
+---
+
+<BaseLayout lang={lang} title={`${t(lang, "privacyTitle")} - ${t(lang, "brand")}`} description={t(lang, "privacyDesc")}>
+  <section class="section">
+    <div class="container narrow-container">
+      <div class="section-head text-center">
+        <h1>{t(lang, "privacyTitle")}</h1>
+        <p class="lead">{content.updated}</p>
+      </div>
+      <div class="privacy-prose">
+        {content.sections.map((sec) => (
+          <section class="privacy-section">
+            <h2>{sec.heading}</h2>
+            <p set:html={sec.body} />
+          </section>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .privacy-prose {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .privacy-section {
+    margin-bottom: 28px;
+  }
+  .privacy-section h2 {
+    font-size: 1.25rem;
+    margin: 0 0 10px;
+    color: var(--text);
+  }
+  .privacy-section p {
+    color: var(--muted);
+    line-height: 1.8;
+    font-size: 0.98rem;
+    margin: 0;
+  }
+  .privacy-section a {
+    color: var(--brand-strong);
+    text-decoration: underline;
+  }
+  .privacy-section code {
+    background: var(--surface-soft);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 1px 6px;
+    font-size: 0.9em;
+  }
+</style>

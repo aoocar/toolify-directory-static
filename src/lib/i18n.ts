@@ -99,6 +99,10 @@ export const dictionary = {
     contactTitle: "Contact Us",
     contactBody: "Reach out for business inquiries, partnerships, or creator recommendations.",
 
+    /* privacy */
+    privacyTitle: "Privacy Policy",
+    privacyDesc: "How Dawn Island collects, uses, and protects your information — analytics, external links, and AI-assisted content.",
+
     /* business CTA */
     ctaTitle: "Want to build an account like these?",
     ctaBody:
@@ -223,6 +227,10 @@ export const dictionary = {
     /* contact */
     contactTitle: "联系我们",
     contactBody: "商务合作、达人推荐或其他咨询，欢迎联系。",
+
+    /* privacy */
+    privacyTitle: "隐私政策",
+    privacyDesc: "黎明岛如何收集、使用与保护你的信息，包括数据分析、外部链接与 AI 辅助内容说明。",
 
     /* business CTA */
     ctaTitle: "想打造像他们一样的自媒体账号？",
