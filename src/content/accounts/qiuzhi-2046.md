@@ -1,0 +1,34 @@
+---
+slug: qiuzhi-2046
+profileUrl: "https://space.bilibili.com/385670211/"
+avatar: "📺"
+platform: bilibili
+platformId: "385670211"
+verified: true
+categories:
+  - ai-content
+tags:
+  - AI工具评测
+  - AI实战
+  - 行业观察
+  - 创意
+contentStyle:
+  - 工具横评
+  - 实战教学
+  - 热点跟进
+monetization: mixed
+featured: true
+followerCount: 1049000
+contentFrequency: weekly
+publishedAt: "2024-01-01"
+updatedAt: "2026-07-31"
+name:
+  en: Qiuzhi 2046
+  zh: 秋芝2046
+tagline:
+  en: Former PM making AI tools actually usable for ordinary people
+  zh: 前产品经理，让普通人真正用好 AI
+description:
+  en: Qiuzhi (real name Qiu Zhi) is a former product manager who pivoted to AI content creation. On Bilibili her account '秋芝2046' shares AI tool reviews, hands-on tutorials and industry observations; she directed and hosted Bilibili's first AI Spring Festival Gala in 2026. Her DeepSeek explainer hit the site-wide top 10.
+  zh: 秋芝（本名秋芝）是前产品经理转型的 AI 内容创作者。她在 B 站的「秋芝2046」分享 AI 工具评测、实战教学与行业观察，并担任 2026 年 B 站首届 AI 春晚总导演兼主持人。其 DeepSeek 全面解读视频曾登上 B 站全站排行前十。
+---
