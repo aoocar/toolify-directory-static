@@ -2,7 +2,9 @@
 import { getCollection } from "astro:content";
 import AccountCard from "@/components/AccountCard.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import JsonLd from "@/components/JsonLd.astro";
 import { getAccountBySlug, getCategoryBySlug, getRelatedGuides } from "@/lib/directory";
+import { faqJsonLd } from "@/lib/jsonld";
 import { localizedPath, t, type Lang } from "@/lib/i18n";
 
 export async function getStaticPaths() {
@@ -34,6 +36,7 @@ const mentioned = (
 const geoSummary = lang === "zh" ? guide.geo?.answer_summary_zh : guide.geo?.answer_summary_en;
 const geoFacts = guide.geo?.facts ?? [];
 const geoFaq = guide.geo?.faq ?? [];
+const faqLd = faqJsonLd(geoFaq, lang);
 
 const pageTitle =
   (lang === "zh" ? guide.seo?.title_zh : guide.seo?.title_en) ||
@@ -50,6 +53,7 @@ const updated = dateFmt(guide.updated);
 ---
 
 <BaseLayout lang={lang} title={pageTitle} description={metaDescription}>
+  <JsonLd data={faqLd} />
   <section class="section">
     <div class="container guide-container">
       <nav class="guide-crumbs" aria-label="Breadcrumb">

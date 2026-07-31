@@ -1,7 +1,9 @@
 ---
 import AccountCard from "@/components/AccountCard.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import JsonLd from "@/components/JsonLd.astro";
 import { getAccountsByCategory, getCategories, getCategoryBySlug } from "@/lib/directory";
+import { faqJsonLd } from "@/lib/jsonld";
 import { languages, localizedPath, t, type Lang } from "@/lib/i18n";
 
 export async function getStaticPaths() {
@@ -29,10 +31,15 @@ const categoryAccounts = await getAccountsByCategory(slug);
 const geoSummary = lang === "zh" ? category.geo?.answer_summary_zh : category.geo?.answer_summary_en;
 const geoFacts = category.geo?.facts ?? [];
 const geoFaq = category.geo?.faq ?? [];
+const faqLd = faqJsonLd(geoFaq, lang);
 const metaDescription = (lang === "zh" ? category.seo?.meta_description_zh : category.seo?.meta_description_en) || category.description[lang];
+const pageTitle =
+  (lang === "zh" ? category.seo?.title_zh : category.seo?.title_en) ||
+  `${category.name[lang]} - ${t(lang, "brand")}`;
 ---
 
-<BaseLayout lang={lang} title={`${category.name[lang]} - ${t(lang, "brand")}`} description={metaDescription}>
+<BaseLayout lang={lang} title={pageTitle} description={metaDescription}>
+  <JsonLd data={faqLd} />
   <section class="section">
     <div class="container">
       <div class="section-head">

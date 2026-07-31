@@ -1,7 +1,9 @@
 ---
 import BusinessCTA from "@/components/BusinessCTA.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import JsonLd from "@/components/JsonLd.astro";
 import { formatNumber, getAccountBySlug, getAccounts } from "@/lib/directory";
+import { faqJsonLd } from "@/lib/jsonld";
 import { languages, localizedPath, t, type Lang } from "@/lib/i18n";
 
 export async function getStaticPaths() {
@@ -42,10 +44,15 @@ const monetizationMap: Record<string, Record<Lang, string>> = {
 const geoSummary = lang === "zh" ? account.geo?.answer_summary_zh : account.geo?.answer_summary_en;
 const geoFacts = account.geo?.facts ?? [];
 const geoFaq = account.geo?.faq ?? [];
+const faqLd = faqJsonLd(geoFaq, lang);
 const metaDescription = (lang === "zh" ? account.seo?.meta_description_zh : account.seo?.meta_description_en) || account.tagline[lang];
+const pageTitle =
+  (lang === "zh" ? account.seo?.title_zh : account.seo?.title_en) ||
+  `${account.name[lang]} - ${t(lang, "brand")}`;
 ---
 
-<BaseLayout lang={lang} title={`${account.name[lang]} - ${t(lang, "brand")}`} description={metaDescription}>
+<BaseLayout lang={lang} title={pageTitle} description={metaDescription}>
+  <JsonLd data={faqLd} />
   <article class="detail-page section">
     <div class="container detail-grid">
       <div class="detail-main">

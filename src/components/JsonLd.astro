@@ -1,0 +1,13 @@
+---
+interface Props {
+  data: Record<string, unknown> | null | undefined;
+}
+const { data } = Astro.props;
+// Inject raw JSON-LD. Using a Fragment + set:html bypasses Astro's <script>
+// bundler entirely, so the structured-data block reaches the browser verbatim.
+const html = data
+  ? `<script type="application/ld+json">${JSON.stringify(data)}</script>`
+  : "";
+---
+
+{html && <Fragment set:html={html} />}
