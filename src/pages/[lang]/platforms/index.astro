@@ -1,8 +1,10 @@
 ---
 import PlatformCard from "@/components/PlatformCard.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import JsonLd from "@/components/JsonLd.astro";
 import { getPlatforms, getPlatformCounts } from "@/lib/directory";
-import { languages, t, type Lang } from "@/lib/i18n";
+import { breadcrumbJsonLd, type Crumb } from "@/lib/jsonld";
+import { languages, localizedPath, t, type Lang } from "@/lib/i18n";
 
 export function getStaticPaths() {
   return languages.map((lang) => ({ params: { lang } }));
@@ -11,9 +13,21 @@ export function getStaticPaths() {
 const lang = Astro.params.lang as Lang;
 const platforms = await getPlatforms();
 const platformCounts = await getPlatformCounts();
+
+// BreadcrumbList: Home > Platforms.
+const siteBase = Astro.site ?? Astro.url;
+const pageUrl = new URL(Astro.url.pathname, siteBase).href;
+const breadcrumbLd = breadcrumbJsonLd({
+  lang,
+  items: [
+    { name: t(lang, "brand"), url: new URL(localizedPath(lang, "/"), siteBase).href },
+    { name: t(lang, "navPlatforms"), url: pageUrl }
+  ] satisfies Crumb[]
+});
 ---
 
 <BaseLayout lang={lang} title={`${t(lang, "navPlatforms")} - ${t(lang, "brand")}`} description={t(lang, "heroSubtitle")}>
+  <JsonLd data={breadcrumbLd} />
   <section class="section">
     <div class="container">
       <div class="section-head">

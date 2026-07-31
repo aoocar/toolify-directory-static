@@ -171,3 +171,29 @@ export function websiteJsonLd(opts: {
     inLanguage: opts.lang === "zh" ? "zh-CN" : "en"
   };
 }
+
+/** A single breadcrumb entry: a human label and its absolute URL. */
+export type Crumb = { name: string; url: string };
+
+/**
+ * schema.org BreadcrumbList. Returns null when there are fewer than two
+ * levels (a breadcrumb needs at least Home + current to be meaningful), so
+ * callers can pass the result directly and skip rendering when empty. URLs
+ * must be absolute — pages build them with `new URL(localizedPath(...), site)`.
+ */
+export function breadcrumbJsonLd(opts: {
+  items: Crumb[];
+  lang: Lang;
+}): Record<string, unknown> | null {
+  if (!opts.items || opts.items.length < 2) return null;
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: opts.items.map((it, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: it.name,
+      item: it.url
+    }))
+  };
+}

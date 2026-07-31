@@ -4,7 +4,7 @@ import AccountCard from "@/components/AccountCard.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import JsonLd from "@/components/JsonLd.astro";
 import { getAccountBySlug, getCategoryBySlug, getRelatedGuides } from "@/lib/directory";
-import { articleJsonLd } from "@/lib/jsonld";
+import { articleJsonLd, breadcrumbJsonLd, type Crumb } from "@/lib/jsonld";
 import { localizedPath, t, type Lang } from "@/lib/i18n";
 
 export async function getStaticPaths() {
@@ -61,10 +61,31 @@ const articleLd = articleJsonLd({
   lang,
   faq: geoFaq
 });
+
+// BreadcrumbList: Home > Creator Guides > [category] > guide title.
+const siteBase = Astro.site ?? Astro.url;
+const breadcrumbLd = breadcrumbJsonLd({
+  lang,
+  items: ((): Crumb[] => {
+    const crumbs: Crumb[] = [
+      { name: t(lang, "brand"), url: new URL(localizedPath(lang, "/"), siteBase).href },
+      { name: t(lang, "guidesTitle"), url: new URL(localizedPath(lang, "/guides"), siteBase).href }
+    ];
+    if (category) {
+      crumbs.push({
+        name: `${category.icon} ${category.name[lang]}`,
+        url: new URL(localizedPath(lang, `/categories/${category.slug}`), siteBase).href
+      });
+    }
+    crumbs.push({ name: guide.title[lang], url: pageUrl });
+    return crumbs;
+  })()
+});
 ---
 
 <BaseLayout lang={lang} title={pageTitle} description={metaDescription}>
   <JsonLd data={articleLd} />
+  <JsonLd data={breadcrumbLd} />
   <section class="section">
     <div class="container guide-container">
       <nav class="guide-crumbs" aria-label="Breadcrumb">

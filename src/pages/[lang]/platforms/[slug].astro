@@ -1,7 +1,9 @@
 ---
 import AccountCard from "@/components/AccountCard.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import JsonLd from "@/components/JsonLd.astro";
 import { getAccountsByPlatform, getPlatformBySlug, getPlatforms } from "@/lib/directory";
+import { breadcrumbJsonLd, type Crumb } from "@/lib/jsonld";
 import { languages, localizedPath, t, type Lang } from "@/lib/i18n";
 
 export async function getStaticPaths() {
@@ -25,9 +27,22 @@ if (!platform) {
 }
 
 const platformAccounts = await getAccountsByPlatform(slug);
+
+// BreadcrumbList: Home > Browse by Platform > platform name.
+const siteBase = Astro.site ?? Astro.url;
+const pageUrl = new URL(Astro.url.pathname, siteBase).href;
+const breadcrumbLd = breadcrumbJsonLd({
+  lang,
+  items: [
+    { name: t(lang, "brand"), url: new URL(localizedPath(lang, "/"), siteBase).href },
+    { name: t(lang, "platformNav"), url: new URL(localizedPath(lang, "/platforms"), siteBase).href },
+    { name: `${platform.icon} ${platform.name[lang]}`, url: pageUrl }
+  ] satisfies Crumb[]
+});
 ---
 
 <BaseLayout lang={lang} title={`${platform.name[lang]} - ${t(lang, "brand")}`} description={platform.description[lang]}>
+  <JsonLd data={breadcrumbLd} />
   <section class="section">
     <div class="container">
       <div class="section-head">
