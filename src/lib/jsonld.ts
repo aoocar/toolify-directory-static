@@ -34,3 +34,59 @@ export function faqJsonLd(
     mainEntity: questions
   };
 }
+
+/**
+ * schema.org Article block for guide detail pages. Emitted alongside the
+ * standalone FAQPage (the guide page already renders that) — an Article with
+ * headline / dates / author helps GEO and rich-result eligibility without
+ * duplicating the Q&A graph.
+ */
+export function articleJsonLd(opts: {
+  title: string;
+  description: string;
+  datePublished?: string;
+  dateModified?: string;
+  url: string;
+  brand: string;
+  lang: Lang;
+}): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: opts.title,
+    description: opts.description,
+    inLanguage: opts.lang === "zh" ? "zh-CN" : "en",
+    datePublished: opts.datePublished,
+    dateModified: opts.dateModified || opts.datePublished,
+    author: { "@type": "Organization", name: opts.brand },
+    publisher: {
+      "@type": "Organization",
+      name: opts.brand,
+      url: "https://www.limingdao.com"
+    },
+    mainEntityOfPage: { "@type": "WebPage", "@id": opts.url }
+  };
+}
+
+/**
+ * schema.org Person block for account detail pages. `sameAs` points at the
+ * creator's external profile so AI crawlers can tie the directory entry to the
+ * real person/channel — a direct GEO signal.
+ */
+export function personJsonLd(opts: {
+  name: string;
+  description: string;
+  url: string;
+  brand: string;
+  profileUrl?: string;
+}): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: opts.name,
+    description: opts.description,
+    url: opts.url,
+    mainEntityOfPage: { "@type": "WebPage", "@id": opts.url },
+    ...(opts.profileUrl ? { sameAs: [opts.profileUrl] } : {})
+  };
+}

@@ -242,6 +242,19 @@ export async function getRelatedGuides(lang: Lang, category: string | undefined,
   return articles.filter((g) => g.category === category && g.slug !== excludeSlug);
 }
 
+/** Guides that mention a given account slug — reverse cross-link for account pages. */
+export async function getGuidesMentioningAccount(accountSlug: string, lang: Lang): Promise<GuideArticle[]> {
+  const { guides } = await load();
+  return [...guides]
+    .filter((g) => g.kind === "article" && g.lang === lang && (g.accounts ?? []).includes(accountSlug))
+    .sort((a, b) => {
+      const ta = a.date ? new Date(a.date).getTime() : 0;
+      const tb = b.date ? new Date(b.date).getTime() : 0;
+      if (tb !== ta) return tb - ta;
+      return a.order - b.order;
+    });
+}
+
 /* ── Formatting ── */
 
 export function formatNumber(value: number | undefined, lang: Lang) {

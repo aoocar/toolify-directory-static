@@ -2,7 +2,7 @@
 import AccountCard from "@/components/AccountCard.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import JsonLd from "@/components/JsonLd.astro";
-import { getAccountsByCategory, getCategories, getCategoryBySlug } from "@/lib/directory";
+import { getAccountsByCategory, getCategories, getCategoryBySlug, getRelatedGuides } from "@/lib/directory";
 import { faqJsonLd } from "@/lib/jsonld";
 import { languages, localizedPath, t, type Lang } from "@/lib/i18n";
 
@@ -27,6 +27,8 @@ if (!category) {
 }
 
 const categoryAccounts = await getAccountsByCategory(slug);
+// Cross-link: guides covering this niche.
+const categoryGuides = await getRelatedGuides(lang, slug, "");
 
 const geoSummary = lang === "zh" ? category.geo?.answer_summary_zh : category.geo?.answer_summary_en;
 const geoFacts = category.geo?.facts ?? [];
@@ -101,6 +103,21 @@ const pageTitle =
           <div class="empty-state">
             <p>{t(lang, "empty")}</p>
           </div>
+        )
+      }
+
+      {
+        categoryGuides.length > 0 && (
+          <section class="detail-section">
+            <h2>{t(lang, "guidesInCategory")}</h2>
+            <ol class="link-list">
+              {categoryGuides.map((item) => (
+                <li>
+                  <a href={localizedPath(lang, `/guides/${item.slug}`)}>{item.title[lang]}</a>
+                </li>
+              ))}
+            </ol>
+          </section>
         )
       }
     </div>

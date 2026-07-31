@@ -4,7 +4,7 @@ import AccountCard from "@/components/AccountCard.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import JsonLd from "@/components/JsonLd.astro";
 import { getAccountBySlug, getCategoryBySlug, getRelatedGuides } from "@/lib/directory";
-import { faqJsonLd } from "@/lib/jsonld";
+import { faqJsonLd, articleJsonLd } from "@/lib/jsonld";
 import { localizedPath, t, type Lang } from "@/lib/i18n";
 
 export async function getStaticPaths() {
@@ -50,10 +50,22 @@ const dateFmt = (value: Date | undefined) =>
   value ? new Date(value).toISOString().slice(0, 10) : undefined;
 const published = dateFmt(guide.date);
 const updated = dateFmt(guide.updated);
+
+const pageUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
+const articleLd = articleJsonLd({
+  title: pageTitle,
+  description: metaDescription,
+  datePublished: published,
+  dateModified: updated || published,
+  url: pageUrl,
+  brand: t(lang, "brand"),
+  lang
+});
 ---
 
 <BaseLayout lang={lang} title={pageTitle} description={metaDescription}>
   <JsonLd data={faqLd} />
+  <JsonLd data={articleLd} />
   <section class="section">
     <div class="container guide-container">
       <nav class="guide-crumbs" aria-label="Breadcrumb">

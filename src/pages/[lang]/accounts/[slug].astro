@@ -2,8 +2,8 @@
 import BusinessCTA from "@/components/BusinessCTA.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import JsonLd from "@/components/JsonLd.astro";
-import { formatNumber, getAccountBySlug, getAccounts } from "@/lib/directory";
-import { faqJsonLd } from "@/lib/jsonld";
+import { formatNumber, getAccountBySlug, getAccounts, getGuidesMentioningAccount } from "@/lib/directory";
+import { faqJsonLd, personJsonLd } from "@/lib/jsonld";
 import { languages, localizedPath, t, type Lang } from "@/lib/i18n";
 
 export async function getStaticPaths() {
@@ -49,10 +49,22 @@ const metaDescription = (lang === "zh" ? account.seo?.meta_description_zh : acco
 const pageTitle =
   (lang === "zh" ? account.seo?.title_zh : account.seo?.title_en) ||
   `${account.name[lang]} - ${t(lang, "brand")}`;
+
+// Reverse cross-link: guides that name this account.
+const guidesForAccount = await getGuidesMentioningAccount(slug, lang);
+const pageUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
+const personLd = personJsonLd({
+  name: account.name[lang],
+  description: metaDescription,
+  url: pageUrl,
+  brand: t(lang, "brand"),
+  profileUrl: account.profileUrl
+});
 ---
 
 <BaseLayout lang={lang} title={pageTitle} description={metaDescription}>
   <JsonLd data={faqLd} />
+  <JsonLd data={personLd} />
   <article class="detail-page section">
     <div class="container detail-grid">
       <div class="detail-main">
@@ -127,6 +139,21 @@ const pageTitle =
                   ))
                 )}
               </dl>
+            </section>
+          )
+        }
+
+        {
+          guidesForAccount.length > 0 && (
+            <section class="detail-section">
+              <h2>{t(lang, "guidesForAccount")}</h2>
+              <ol class="link-list">
+                {guidesForAccount.map((item) => (
+                  <li>
+                    <a href={localizedPath(lang, `/guides/${item.slug}`)}>{item.title[lang]}</a>
+                  </li>
+                ))}
+              </ol>
             </section>
           )
         }

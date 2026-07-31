@@ -119,6 +119,8 @@ export const dictionary = {
     guideRelated: "More guides in this niche",
     guideBack: "Back to all guides",
     guideBrowseNiche: "Browse the full niche",
+    guidesForAccount: "Guides featuring this creator",
+    guidesInCategory: "Guides in this niche",
 
     /* business CTA */
     ctaTitle: "Want to build an account like these?",
@@ -127,7 +129,7 @@ export const dictionary = {
     ctaButton: "Learn More",
 
     /* footer */
-    footerTagline: "Discover creators. Get inspired. Launch with AI.",
+    footerTagline: "Discover quality creators across every niche — find the accounts worth following.",
     footerAbout: "About",
     footerServices: "Services",
     footerContact: "Contact",
@@ -164,7 +166,7 @@ export const dictionary = {
   zh: {
     /* brand */
     brand: "黎明岛",
-    slogan: "全领域优质创作者导航站",
+    slogan: "全领域优质创作者导航",
     sloganShort: "全领域创作者导航",
 
     /* nav */
@@ -265,6 +267,8 @@ export const dictionary = {
     guideRelated: "该领域的其他指南",
     guideBack: "返回全部指南",
     guideBrowseNiche: "浏览该领域全部账号",
+    guidesForAccount: "收录该创作者的指南",
+    guidesInCategory: "该领域的创作者指南",
 
     /* business CTA */
     ctaTitle: "想打造像他们一样的自媒体账号？",
@@ -272,7 +276,7 @@ export const dictionary = {
     ctaButton: "了解详情",
 
     /* footer */
-    footerTagline: "发现创作者，获取灵感，用 AI 启动。",
+    footerTagline: "发现全领域优质创作者，找到值得关注的账号。",
     footerAbout: "关于",
     footerServices: "服务",
     footerContact: "联系",
