@@ -1,0 +1,88 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getCategories, getGuideArticles } from "@/lib/directory";
+import { languages, localizedPath, t, type Lang } from "@/lib/i18n";
+
+export async function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const articles = await getGuideArticles(lang);
+const categories = await getCategories();
+
+// Group guides by niche, preserving the category order defined in content.
+const groups = categories
+  .map((category) => ({
+    category,
+    items: articles.filter((a) => a.category === category.slug)
+  }))
+  .filter((group) => group.items.length > 0);
+
+const ungrouped = articles.filter((a) => !a.category || !categories.some((c) => c.slug === a.category));
+---
+
+<BaseLayout lang={lang} title={`${t(lang, "guidesTitle")} - ${t(lang, "brand")}`} description={t(lang, "guidesDesc")}>
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h1>{t(lang, "guidesTitle")}</h1>
+          <p class="lead">{t(lang, "guidesDesc")}</p>
+        </div>
+      </div>
+
+      <p class="guide-disclaimer">{t(lang, "guidesIntro")}</p>
+
+      {
+        articles.length === 0 && (
+          <div class="empty-state">
+            <p>{t(lang, "guidesEmpty")}</p>
+          </div>
+        )
+      }
+
+      {
+        groups.map((group) => (
+          <section class="guide-group">
+            <div class="guide-group-head">
+              <h2>
+                {group.category.icon} {group.category.name[lang]}
+              </h2>
+              <a href={localizedPath(lang, `/categories/${group.category.slug}`)}>
+                {t(lang, "guideBrowseNiche")} →
+              </a>
+            </div>
+            <div class="guide-grid">
+              {group.items.map((item) => (
+                <a class="guide-card" href={localizedPath(lang, `/guides/${item.slug}`)}>
+                  <h3>{item.title[lang]}</h3>
+                  {item.summary?.[lang] && <p>{item.summary[lang]}</p>}
+                  {item.date && <span class="guide-card-date">{new Date(item.date).toISOString().slice(0, 10)}</span>}
+                </a>
+              ))}
+            </div>
+          </section>
+        ))
+      }
+
+      {
+        ungrouped.length > 0 && (
+          <section class="guide-group">
+            <div class="guide-group-head">
+              <h2>{t(lang, "guidesAll")}</h2>
+            </div>
+            <div class="guide-grid">
+              {ungrouped.map((item) => (
+                <a class="guide-card" href={localizedPath(lang, `/guides/${item.slug}`)}>
+                  <h3>{item.title[lang]}</h3>
+                  {item.summary?.[lang] && <p>{item.summary[lang]}</p>}
+                </a>
+              ))}
+            </div>
+          </section>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>

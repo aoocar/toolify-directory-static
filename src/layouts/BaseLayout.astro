@@ -1,5 +1,6 @@
 ---
 import "@/styles/global.css";
+import "@/styles/guides.css";
 import { languages, localizedPath, t, type Lang } from "@/lib/i18n";
 
 type Props = {
@@ -16,6 +17,7 @@ const navItems = [
   { href: localizedPath(lang, "/accounts"), label: t(lang, "navAccounts") },
   { href: localizedPath(lang, "/platforms"), label: t(lang, "navPlatforms") },
   { href: localizedPath(lang, "/categories"), label: t(lang, "navCategories") },
+  { href: localizedPath(lang, "/guides"), label: t(lang, "navGuides") },
   { href: localizedPath(lang, "/rankings"), label: t(lang, "navRankings") },
   { href: localizedPath(lang, "/new"), label: t(lang, "navNew") },
   { href: localizedPath(lang, "/services"), label: t(lang, "navServices") },

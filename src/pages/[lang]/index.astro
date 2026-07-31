@@ -33,7 +33,8 @@ const quickLinks = [
 ];
 
 const news = await getNews(lang);
-const guides = await getGuides(lang);
+// keep the homepage panel short — the full archive lives at /[lang]/guides
+const guides = await getGuides(lang, 6);
 ---
 
 <BaseLayout lang={lang} title={`${t(lang, "brand")} - ${t(lang, "slogan")}`} description={t(lang, "heroSubtitle")}>
@@ -184,6 +185,7 @@ const guides = await getGuides(lang);
       <section class="seo-panel">
         <div class="section-head compact">
           <h2>{t(lang, "guides")}</h2>
+          <a class="section-more" href={localizedPath(lang, "/guides")}>{t(lang, "guidesAll")} →</a>
         </div>
         <ol class="link-list">
           {guides.map((item) => <li><a href={localizedPath(lang, item.url)}>{item.title}</a></li>)}

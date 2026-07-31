@@ -41,9 +41,33 @@ const news = defineCollection({
   schema: feedItem.extend({ date: z.coerce.date().optional() })
 });
 
+// Guides serve two roles:
+//   * kind: "link"    — legacy homepage shortcuts pointing at existing pages.
+//                       They only carry a title + url and render no body.
+//   * kind: "article" — original long-form guides that live under
+//                       guides/<lang>/<slug>.md and render their Markdown body
+//                       at /[lang]/guides/<slug>. One file per language, both
+//                       sharing the same `slug` so the language switcher lines up.
 const guides = defineCollection({
   type: "content",
-  schema: feedItem
+  schema: feedItem.extend({
+    url: z.string().optional(),
+    kind: z.enum(["link", "article"]).default("link"),
+    // `slug` is reserved: the loader uses it as the collection-wide unique id,
+    // so the zh/en pair of one article cannot share it. Article guides declare
+    // `guideId` instead — that is what becomes the public URL segment, and it
+    // is intentionally identical across languages so the switcher lines up.
+    guideId: z.string().optional(),
+    lang: z.enum(["en", "zh"]).optional(),
+    category: z.string().optional(),
+    date: z.coerce.date().optional(),
+    updated: z.coerce.date().optional(),
+    // slugs of accounts already in the directory that this guide links to;
+    // never list a creator we have not actually indexed.
+    accounts: z.array(z.string()).optional(),
+    seo: seoSchema,
+    geo: geoSchema
+  })
 });
 
 /* ── Platforms ── */

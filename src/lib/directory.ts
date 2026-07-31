@@ -44,7 +44,15 @@ async function load(): Promise<Cache> {
         slug: e.data.slug ?? e.slug,
         date: e.data.date ? new Date(e.data.date).toISOString() : undefined
       })),
-      guides: guidesEntries.map((e) => ({ ...e.data, slug: e.data.slug ?? e.slug }))
+      guides: guidesEntries.map((e) => ({
+        ...e.data,
+        // Article guides live in guides/<lang>/ and share one `guideId` across
+        // languages — that is the public URL segment. Legacy link entries sit
+        // at the collection root and still use `slug`.
+        slug: e.data.guideId ?? e.data.slug ?? e.slug,
+        date: e.data.date ? new Date(e.data.date).toISOString() : undefined,
+        updated: e.data.updated ? new Date(e.data.updated).toISOString() : undefined
+      }))
     };
   }
   return _cache;
@@ -187,15 +195,51 @@ export async function getNews(lang: Lang): Promise<ResolvedFeedItem[]> {
     }));
 }
 
-export async function getGuides(lang: Lang): Promise<ResolvedFeedItem[]> {
+/**
+ * Homepage "creator guides" list. Article guides exist once per language, so
+ * only the entry matching the current language is kept — otherwise every guide
+ * would appear twice. Legacy link entries have no `lang` and always show.
+ */
+export async function getGuides(lang: Lang, limit?: number): Promise<ResolvedFeedItem[]> {
   const { guides } = await load();
-  return [...guides]
-    .sort((a, b) => a.order - b.order)
+  const items = [...guides]
+    .filter((g) => g.kind !== "article" || g.lang === lang)
+    .sort((a, b) => {
+      // newest articles first, then legacy links by their manual order
+      const ta = a.date ? new Date(a.date).getTime() : 0;
+      const tb = b.date ? new Date(b.date).getTime() : 0;
+      if (tb !== ta) return tb - ta;
+      return a.order - b.order;
+    })
     .map((g) => ({
       title: g.title[lang],
-      url: g.url,
-      summary: g.summary?.[lang]
+      url: g.url ?? `/guides/${g.slug}`,
+      summary: g.summary?.[lang],
+      date: g.date
     }));
+  return limit ? items.slice(0, limit) : items;
+}
+
+export type GuideArticle = GuideItem & { category?: string };
+
+/** Original long-form guides for the given language, newest first. */
+export async function getGuideArticles(lang: Lang): Promise<GuideArticle[]> {
+  const { guides } = await load();
+  return [...guides]
+    .filter((g) => g.kind === "article" && g.lang === lang)
+    .sort((a, b) => {
+      const ta = a.date ? new Date(a.date).getTime() : 0;
+      const tb = b.date ? new Date(b.date).getTime() : 0;
+      if (tb !== ta) return tb - ta;
+      return a.order - b.order;
+    });
+}
+
+/** Other guides covering the same niche, used for cross-linking. */
+export async function getRelatedGuides(lang: Lang, category: string | undefined, excludeSlug: string) {
+  if (!category) return [];
+  const articles = await getGuideArticles(lang);
+  return articles.filter((g) => g.category === category && g.slug !== excludeSlug);
 }
 
 /* ── Formatting ── */

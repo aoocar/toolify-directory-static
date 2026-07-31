@@ -1,0 +1,163 @@
+---
+import { getCollection } from "astro:content";
+import AccountCard from "@/components/AccountCard.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getAccountBySlug, getCategoryBySlug, getRelatedGuides } from "@/lib/directory";
+import { localizedPath, t, type Lang } from "@/lib/i18n";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("guides");
+  return entries
+    .filter((entry) => entry.data.kind === "article" && entry.data.lang && entry.data.guideId)
+    .map((entry) => ({
+      params: { lang: entry.data.lang as Lang, slug: entry.data.guideId as string },
+      props: { entry }
+    }));
+}
+
+const { lang } = Astro.params as { lang: Lang; slug: string };
+const { entry } = Astro.props;
+const guide = entry.data;
+const slug = guide.guideId as string;
+
+const { Content } = await entry.render();
+
+const category = guide.category ? await getCategoryBySlug(guide.category) : undefined;
+const related = await getRelatedGuides(lang, guide.category, slug);
+
+// Only render creators that actually exist in the directory — a guide must
+// never name an account we have not indexed.
+const mentioned = (
+  await Promise.all((guide.accounts ?? []).map((s) => getAccountBySlug(s)))
+).filter(Boolean);
+
+const geoSummary = lang === "zh" ? guide.geo?.answer_summary_zh : guide.geo?.answer_summary_en;
+const geoFacts = guide.geo?.facts ?? [];
+const geoFaq = guide.geo?.faq ?? [];
+
+const pageTitle =
+  (lang === "zh" ? guide.seo?.title_zh : guide.seo?.title_en) ||
+  `${guide.title[lang]} - ${t(lang, "brand")}`;
+const metaDescription =
+  (lang === "zh" ? guide.seo?.meta_description_zh : guide.seo?.meta_description_en) ||
+  guide.summary?.[lang] ||
+  t(lang, "guidesDesc");
+
+const dateFmt = (value: Date | undefined) =>
+  value ? new Date(value).toISOString().slice(0, 10) : undefined;
+const published = dateFmt(guide.date);
+const updated = dateFmt(guide.updated);
+---
+
+<BaseLayout lang={lang} title={pageTitle} description={metaDescription}>
+  <section class="section">
+    <div class="container guide-container">
+      <nav class="guide-crumbs" aria-label="Breadcrumb">
+        <a href={localizedPath(lang, "/guides")}>{t(lang, "guidesTitle")}</a>
+        {category && <span aria-hidden="true">/</span>}
+        {
+          category && (
+            <a href={localizedPath(lang, `/categories/${category.slug}`)}>
+              {category.icon} {category.name[lang]}
+            </a>
+          )
+        }
+      </nav>
+
+      <header class="guide-head">
+        <h1>{guide.title[lang]}</h1>
+        {guide.summary?.[lang] && <p class="lead">{guide.summary[lang]}</p>}
+        <p class="guide-meta">
+          {published && <span>{t(lang, "guidePublished")} {published}</span>}
+          {updated && updated !== published && <span>{t(lang, "guideUpdated")} {updated}</span>}
+        </p>
+      </header>
+
+      {
+        geoSummary && (
+          <section class="detail-section guide-summary">
+            <h2>{lang === "zh" ? "一句话结论" : "The short answer"}</h2>
+            <p>{geoSummary}</p>
+          </section>
+        )
+      }
+
+      <article class="guide-body">
+        <Content />
+      </article>
+
+      {
+        mentioned.length > 0 && (
+          <section class="detail-section">
+            <h2>{t(lang, "guideMentioned")}</h2>
+            <div class="grid">
+              {mentioned.map((account) => <AccountCard account={account!} lang={lang} />)}
+            </div>
+          </section>
+        )
+      }
+
+      {
+        geoFacts.length > 0 && (
+          <section class="detail-section">
+            <h2>{lang === "zh" ? "关键事实" : "Key facts"}</h2>
+            <dl class="fact-list">
+              {geoFacts.map((fact) =>
+                Object.entries(fact).map(([key, value]) => (
+                  <div class="fact-item">
+                    <dt>{key}</dt>
+                    <dd>{value}</dd>
+                  </div>
+                ))
+              )}
+            </dl>
+          </section>
+        )
+      }
+
+      {
+        geoFaq.length > 0 && (
+          <section class="detail-section">
+            <h2>FAQ</h2>
+            <dl class="faq-list">
+              {geoFaq.map((item) =>
+                Object.entries(item).map(([question, answer]) => (
+                  <div class="faq-item">
+                    <dt>{question}</dt>
+                    <dd>{answer}</dd>
+                  </div>
+                ))
+              )}
+            </dl>
+          </section>
+        )
+      }
+
+      {
+        related.length > 0 && (
+          <section class="detail-section">
+            <h2>{t(lang, "guideRelated")}</h2>
+            <ol class="link-list">
+              {related.map((item) => (
+                <li>
+                  <a href={localizedPath(lang, `/guides/${item.slug}`)}>{item.title[lang]}</a>
+                </li>
+              ))}
+            </ol>
+          </section>
+        )
+      }
+
+      <div class="guide-footer-links">
+        <a href={localizedPath(lang, "/guides")}>← {t(lang, "guideBack")}</a>
+        {
+          category && (
+            <a href={localizedPath(lang, `/categories/${category.slug}`)}>
+              {t(lang, "guideBrowseNiche")} →
+            </a>
+          )
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

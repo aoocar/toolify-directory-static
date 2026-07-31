@@ -96,4 +96,17 @@ export type NewsItem = FeedItem & {
   date?: string;
 };
 
-export type GuideItem = FeedItem;
+/* Guides are either legacy homepage shortcuts (kind: "link") or original
+   long-form articles (kind: "article") stored one file per language. */
+export type GuideItem = Omit<FeedItem, "url"> & {
+  url?: string;
+  kind: "link" | "article";
+  guideId?: string;
+  lang?: Lang;
+  category?: string;
+  date?: string;
+  updated?: string;
+  accounts?: string[];
+  seo?: SeoFields;
+  geo?: GeoFields;
+};

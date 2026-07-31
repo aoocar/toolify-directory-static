@@ -26,6 +26,7 @@ export const dictionary = {
     navCategories: "Niches",
     navRankings: "Rankings",
     navNew: "New",
+    navGuides: "Guides",
     navServices: "Services",
     navSubmit: "Recommend",
     navTransfer: "Transfer Station",
@@ -103,6 +104,22 @@ export const dictionary = {
     privacyTitle: "Privacy Policy",
     privacyDesc: "How Dawn Island collects, uses, and protects your information — analytics, external links, and AI-assisted content.",
 
+    /* guides */
+    guidesTitle: "Creator Guides",
+    guidesDesc:
+      "Practical guides on picking creators to follow and avoiding costly mistakes — across renovation, home appliances, office, education, senior living, and AI.",
+    guidesIntro:
+      "Every account named in these guides is already indexed on Dawn Island, and each name links back to its profile page. We do not quote follower counts we cannot verify.",
+    guidesAll: "All guides",
+    guidesEmpty: "No guides published yet.",
+    guideUpdated: "Updated",
+    guidePublished: "Published",
+    guideNiche: "Niche",
+    guideMentioned: "Creators mentioned in this guide",
+    guideRelated: "More guides in this niche",
+    guideBack: "Back to all guides",
+    guideBrowseNiche: "Browse the full niche",
+
     /* business CTA */
     ctaTitle: "Want to build an account like these?",
     ctaBody:
@@ -156,6 +173,7 @@ export const dictionary = {
     navCategories: "领域",
     navRankings: "排行榜",
     navNew: "最新收录",
+    navGuides: "指南",
     navServices: "服务",
     navSubmit: "推荐账号",
     navTransfer: "中转站",
@@ -231,6 +249,22 @@ export const dictionary = {
     /* privacy */
     privacyTitle: "隐私政策",
     privacyDesc: "黎明岛如何收集、使用与保护你的信息，包括数据分析、外部链接与 AI 辅助内容说明。",
+
+    /* guides */
+    guidesTitle: "创作者指南",
+    guidesDesc:
+      "覆盖装修、家电、办公、教育、银发生活与 AI 六大领域的实用指南：该关注谁，以及怎么避开常见的坑。",
+    guidesIntro:
+      "指南中提到的每一个账号都已收录在黎明岛，点击名字可直接查看该账号的详情页。我们不引用无法核实的粉丝数据。",
+    guidesAll: "全部指南",
+    guidesEmpty: "暂时还没有发布指南。",
+    guideUpdated: "更新于",
+    guidePublished: "发布于",
+    guideNiche: "所属领域",
+    guideMentioned: "本文提到的创作者",
+    guideRelated: "该领域的其他指南",
+    guideBack: "返回全部指南",
+    guideBrowseNiche: "浏览该领域全部账号",
 
     /* business CTA */
     ctaTitle: "想打造像他们一样的自媒体账号？",
