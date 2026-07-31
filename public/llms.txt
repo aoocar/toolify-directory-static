@@ -1,0 +1,34 @@
+# 黎明岛 (Dawn Island)
+
+黎明岛是一个全领域优质自媒体创作者导航目录，按 AI、教育、装修、家电、办公、银发生活等领域精选互联网优质账号，帮助读者发现灵感、学习内容策略。站点采用中文 / 英文双语呈现，所有账号均来自真实公开平台档案，不虚构粉丝数与排名。
+
+## 内容领域 (Categories)
+- AI 人工智能: https://www.limingdao.com/zh/categories/ai-content
+- 教育: https://www.limingdao.com/zh/categories/education
+- 装修: https://www.limingdao.com/zh/categories/renovation
+- 家电: https://www.limingdao.com/zh/categories/home-appliances
+- 办公: https://www.limingdao.com/zh/categories/office
+- 银发生活: https://www.limingdao.com/zh/categories/senior
+
+## 创作者指南 (Guides)
+- AI 学习领域值得关注的 10 位创作者: https://www.limingdao.com/zh/guides/ai-content-creators-to-follow
+- AI 系统学习路线: https://www.limingdao.com/zh/guides/ai-learning-path
+- 装修类值得关注的账号: https://www.limingdao.com/zh/guides/renovation-creators-to-follow
+- 装修避坑指南: https://www.limingdao.com/zh/guides/renovation-pitfalls
+- 家电值得关注的账号: https://www.limingdao.com/zh/guides/home-appliances-creators-to-follow
+- 家电选购避坑指南: https://www.limingdao.com/zh/guides/home-appliances-buying-guide
+- 办公类值得关注的账号: https://www.limingdao.com/zh/guides/office-creators-to-follow
+- 办公技能学习路线: https://www.limingdao.com/zh/guides/office-learning-path
+- 教育类值得关注的账号: https://www.limingdao.com/zh/guides/education-creators-to-follow
+- 教育学习路线: https://www.limingdao.com/zh/guides/education-learning-path
+- 银发生活值得关注的账号: https://www.limingdao.com/zh/guides/senior-creators-to-follow
+- 银发内容主题: https://www.limingdao.com/zh/guides/senior-content-themes
+
+英文版 (English): https://www.limingdao.com/en
+
+## 收录规模
+- 330+ 创作者账号（zh + en 双语）
+- 6 大内容领域
+- 12 篇原创指南
+
+本站定位为 SEO / GEO 用途的创作者导航目录，内容以 Markdown 为单一事实源，定期更新。

@@ -12,6 +12,16 @@ type Props = {
 const { lang, title, description } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 const ogLocale = lang === "zh" ? "zh_CN" : "en_US";
+// hreflang alternates: swap the leading /zh|/en segment. Skip the /exit interstitial.
+const showHreflang = !canonicalURL.pathname.includes("/exit");
+const altFor = (l: Lang) => {
+  const parts = canonicalURL.pathname.split("/");
+  parts[1] = l;
+  return new URL(parts.join("/") || "/", canonicalURL.origin).href;
+};
+const hrefZh = altFor("zh");
+const hrefEn = altFor("en");
+const ogImage = new URL("/og-default.png", Astro.site ?? Astro.url).href;
 const siteName = t(lang, "brand");
 const navItems = [
   { href: localizedPath(lang, "/accounts"), label: t(lang, "navAccounts") },
@@ -36,13 +46,21 @@ const currentPath = Astro.url.pathname.replace(/^\/(en|zh)/, "") || "/";
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL.href} />
+    {showHreflang && <link rel="alternate" hreflang="zh" href={hrefZh} />}
+    {showHreflang && <link rel="alternate" hreflang="en" href={hrefEn} />}
+    {showHreflang && <link rel="alternate" hreflang="x-default" href={hrefZh} />}
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={siteName} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL.href} />
     <meta property="og:locale" content={ogLocale} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${siteName} — ${t(lang, "slogan")}`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImage} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <title>{title}</title>

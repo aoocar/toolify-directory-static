@@ -153,30 +153,21 @@ export function collectionPageJsonLd(opts: {
 }
 
 /**
- * schema.org WebSite for the homepage, with a SearchAction so search engines
- * can surface an on-site search box. The target points at the directory's real
- * search endpoint (/[lang]/accounts?q=), which already filters by name,
- * tagline, description and tags.
+ * schema.org WebSite for the homepage. The SearchAction was intentionally
+ * dropped: the directory is a static site with no client-side filtering, so the
+ * declared search endpoint could not actually answer queries — keeping a
+ * non-functional SearchAction would be a false structured-data claim.
  */
 export function websiteJsonLd(opts: {
   name: string;
   lang: Lang;
   url: string;
-  searchUrlTemplate: string;
 }): Record<string, unknown> {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: opts.name,
     url: opts.url,
-    inLanguage: opts.lang === "zh" ? "zh-CN" : "en",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: opts.searchUrlTemplate
-      },
-      "query-input": "required name=search_term_string"
-    }
+    inLanguage: opts.lang === "zh" ? "zh-CN" : "en"
   };
 }
