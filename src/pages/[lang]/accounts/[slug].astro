@@ -2,7 +2,7 @@
 import BusinessCTA from "@/components/BusinessCTA.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import JsonLd from "@/components/JsonLd.astro";
-import { formatNumber, getAccountBySlug, getAccounts, getGuidesMentioningAccount } from "@/lib/directory";
+import { formatNumber, getAccountBySlug, getAccounts, getCategories, getGuidesMentioningAccount } from "@/lib/directory";
 import { faqJsonLd, personJsonLd } from "@/lib/jsonld";
 import { languages, localizedPath, t, type Lang } from "@/lib/i18n";
 
@@ -53,12 +53,26 @@ const pageTitle =
 // Reverse cross-link: guides that name this account.
 const guidesForAccount = await getGuidesMentioningAccount(slug, lang);
 const pageUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
+
+// Topical authority for the Person graph: the account's niches (category
+// names) + tags, deduped. jobTitle is a truthful generic — every entry in the
+// directory is a content creator, so we avoid fabricating per-person titles.
+const allCategories = await getCategories();
+const catName = (slug: string) =>
+  allCategories.find((c) => c.slug === slug)?.name[lang] || "";
+const knowsAbout = Array.from(
+  new Set([...account.categories.map(catName).filter(Boolean), ...account.tags])
+);
+const jobTitle = lang === "zh" ? "内容创作者" : "Content Creator";
+
 const personLd = personJsonLd({
   name: account.name[lang],
   description: metaDescription,
   url: pageUrl,
   brand: t(lang, "brand"),
-  profileUrl: account.profileUrl
+  profileUrl: account.profileUrl,
+  knowsAbout,
+  jobTitle
 });
 ---
 

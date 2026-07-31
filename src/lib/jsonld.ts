@@ -88,7 +88,8 @@ export function articleJsonLd(opts: {
 /**
  * schema.org Person for account detail pages. `sameAs` points at the
  * creator's external profile so AI crawlers can tie the directory entry to the
- * real person/channel — a direct GEO signal.
+ * real person/channel — a direct GEO signal. `knowsAbout` (topics the creator
+ * covers) and `jobTitle` add topical authority that AI citations can use.
  */
 export function personJsonLd(opts: {
   name: string;
@@ -96,16 +97,27 @@ export function personJsonLd(opts: {
   url: string;
   brand: string;
   profileUrl?: string;
+  knowsAbout?: string[];
+  jobTitle?: string;
 }): Record<string, unknown> {
-  return {
+  const person: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "Person",
     name: opts.name,
     description: opts.description,
     url: opts.url,
-    mainEntityOfPage: { "@type": "WebPage", "@id": opts.url },
-    ...(opts.profileUrl ? { sameAs: [opts.profileUrl] } : {})
+    mainEntityOfPage: { "@type": "WebPage", "@id": opts.url }
   };
+  if (opts.knowsAbout && opts.knowsAbout.length > 0) {
+    person.knowsAbout = opts.knowsAbout;
+  }
+  if (opts.jobTitle) {
+    person.jobTitle = opts.jobTitle;
+  }
+  if (opts.profileUrl) {
+    person.sameAs = [opts.profileUrl];
+  }
+  return person;
 }
 
 /**
@@ -136,6 +148,35 @@ export function collectionPageJsonLd(opts: {
         name: it.name,
         url: it.url
       }))
+    }
+  };
+}
+
+/**
+ * schema.org WebSite for the homepage, with a SearchAction so search engines
+ * can surface an on-site search box. The target points at the directory's real
+ * search endpoint (/[lang]/accounts?q=), which already filters by name,
+ * tagline, description and tags.
+ */
+export function websiteJsonLd(opts: {
+  name: string;
+  lang: Lang;
+  url: string;
+  searchUrlTemplate: string;
+}): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: opts.name,
+    url: opts.url,
+    inLanguage: opts.lang === "zh" ? "zh-CN" : "en",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: opts.searchUrlTemplate
+      },
+      "query-input": "required name=search_term_string"
     }
   };
 }

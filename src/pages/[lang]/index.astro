@@ -4,7 +4,9 @@ import PlatformCard from "@/components/PlatformCard.astro";
 import AccountCard from "@/components/AccountCard.astro";
 import BusinessCTA from "@/components/BusinessCTA.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import JsonLd from "@/components/JsonLd.astro";
 import { formatNumber, getCategories, getCategoryCounts, getFeaturedAccounts, getLatestAccounts, getRankedAccounts, getPlatforms, getNews, getGuides } from "@/lib/directory";
+import { websiteJsonLd } from "@/lib/jsonld";
 import { languages, localizedPath, t, type Lang } from "@/lib/i18n";
 
 export function getStaticPaths() {
@@ -35,9 +37,21 @@ const quickLinks = [
 const news = await getNews(lang);
 // keep the homepage panel short — the full archive lives at /[lang]/guides
 const guides = await getGuides(lang, 6);
+
+// WebSite + SearchAction structured data for the homepage. The search target
+// mirrors the real on-site search endpoint (/[lang]/accounts?q=) that filters
+// by name / tagline / description / tags.
+const siteBase = Astro.site ?? Astro.url;
+const websiteLd = websiteJsonLd({
+  name: `${t(lang, "brand")} · ${t(lang, "slogan")}`,
+  lang,
+  url: new URL(localizedPath(lang, "/"), siteBase).href,
+  searchUrlTemplate: `${new URL(localizedPath(lang, "/accounts"), siteBase).href}?q={search_term_string}`
+});
 ---
 
 <BaseLayout lang={lang} title={`${t(lang, "brand")} - ${t(lang, "slogan")}`} description={t(lang, "heroSubtitle")}>
+  <JsonLd data={websiteLd} />
   <section class="hero">
     <div class="container hero-grid">
       <div>
