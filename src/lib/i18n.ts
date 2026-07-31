@@ -17,8 +17,8 @@ export const dictionary = {
   en: {
     /* brand */
     brand: "Dawn Island",
-    slogan: "AI Avatars — Perhaps the Last Opportunity for Ordinary People",
-    sloganShort: "AI Avatars for Everyone",
+    slogan: "Quality creator directory across every niche",
+    sloganShort: "Creators across every niche",
 
     /* nav */
     navAccounts: "Creators",
@@ -32,9 +32,9 @@ export const dictionary = {
     navDirectory: "Nav Station",
 
     /* hero */
-    heroTitle: "Discover Top Creators, Inspire Your AI Content",
+    heroTitle: "Discover quality creators across every niche",
     heroSubtitle:
-      "A curated directory of outstanding social-media creators. Find inspiration, learn strategies, and launch your own AI-powered content brand.",
+      "From AI and education to renovation, home appliances, office, and senior living — Dawn Island curates quality social-media creators by niche to spark your inspiration and strategy.",
     searchPlaceholder: "Search creators, niches, or platforms…",
     search: "Search",
     dailyUpdated: "Updated regularly",
@@ -147,8 +147,8 @@ export const dictionary = {
   zh: {
     /* brand */
     brand: "黎明岛",
-    slogan: "AI 分身，可能是普通人最后的机会",
-    sloganShort: "AI 分身，人人可及",
+    slogan: "全领域优质创作者导航站",
+    sloganShort: "全领域创作者导航",
 
     /* nav */
     navAccounts: "达人库",
@@ -162,9 +162,9 @@ export const dictionary = {
     navDirectory: "导航站",
 
     /* hero */
-    heroTitle: "发现优质创作者，获取 AI 内容灵感",
+    heroTitle: "发现全领域优质创作者，获取内容灵感",
     heroSubtitle:
-      "精选互联网优质自媒体账号目录。发现灵感、学习策略，用 AI 启动你的内容品牌。",
+      "从 AI、教育到装修、家电、办公与银发生活，黎明岛按领域精选互联网优质自媒体账号，帮你发现灵感、学习策略。",
     searchPlaceholder: "搜索创作者、领域或平台…",
     search: "搜索",
     dailyUpdated: "持续更新",
