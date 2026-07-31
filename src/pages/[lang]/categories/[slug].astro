@@ -3,7 +3,7 @@ import AccountCard from "@/components/AccountCard.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import JsonLd from "@/components/JsonLd.astro";
 import { getAccountsByCategory, getCategories, getCategoryBySlug, getRelatedGuides } from "@/lib/directory";
-import { faqJsonLd } from "@/lib/jsonld";
+import { faqJsonLd, collectionPageJsonLd } from "@/lib/jsonld";
 import { languages, localizedPath, t, type Lang } from "@/lib/i18n";
 
 export async function getStaticPaths() {
@@ -38,9 +38,23 @@ const metaDescription = (lang === "zh" ? category.seo?.meta_description_zh : cat
 const pageTitle =
   (lang === "zh" ? category.seo?.title_zh : category.seo?.title_en) ||
   `${category.name[lang]} - ${t(lang, "brand")}`;
+
+// CollectionPage structured data: the page is a curated list of creators.
+const pageUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
+const collectionLd = collectionPageJsonLd({
+  name: category.name[lang],
+  description: metaDescription,
+  url: pageUrl,
+  lang,
+  items: categoryAccounts.map((a) => ({
+    name: a.name[lang],
+    url: new URL(localizedPath(lang, `/accounts/${a.slug}`), Astro.site ?? Astro.url).href
+  }))
+});
 ---
 
 <BaseLayout lang={lang} title={pageTitle} description={metaDescription}>
+  <JsonLd data={collectionLd} />
   <JsonLd data={faqLd} />
   <section class="section">
     <div class="container">

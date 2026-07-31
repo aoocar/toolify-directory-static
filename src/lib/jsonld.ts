@@ -1,19 +1,13 @@
 import type { Lang } from "@/lib/i18n";
 import type { GeoFields } from "@/lib/types";
 
-/**
- * Build a schema.org FAQPage object from a guide / account / category geo.faq
- * list. Each faq entry is a single-key record { question: answer }.
- * Returns null when there are no usable Q&A pairs so callers can skip rendering
- * (emitting an empty FAQPage is invalid and would hurt, not help, GEO).
- */
-export function faqJsonLd(
+/** Build the list of schema.org Question objects from a geo.faq entry set. */
+function buildFaqQuestions(
   faq: GeoFields["faq"],
   lang: Lang
-): Record<string, unknown> | null {
-  if (!faq || faq.length === 0) return null;
-
-  const questions = faq
+): Record<string, unknown>[] {
+  if (!faq || faq.length === 0) return [];
+  return faq
     .map((item) => Object.entries(item)[0])
     .filter((pair): pair is [string, string] => Array.isArray(pair))
     .map(([question, answer]) => ({
@@ -24,7 +18,18 @@ export function faqJsonLd(
         text: answer
       }
     }));
+}
 
+/**
+ * Standalone schema.org FAQPage. Returns null when there are no usable Q&A
+ * pairs so callers can skip rendering (an empty FAQPage is invalid and would
+ * hurt, not help, GEO).
+ */
+export function faqJsonLd(
+  faq: GeoFields["faq"],
+  lang: Lang
+): Record<string, unknown> | null {
+  const questions = buildFaqQuestions(faq, lang);
   if (questions.length === 0) return null;
 
   return {
@@ -36,10 +41,10 @@ export function faqJsonLd(
 }
 
 /**
- * schema.org Article block for guide detail pages. Emitted alongside the
- * standalone FAQPage (the guide page already renders that) — an Article with
- * headline / dates / author helps GEO and rich-result eligibility without
- * duplicating the Q&A graph.
+ * schema.org Article for guide detail pages. When a `faq` is supplied, the
+ * FAQPage graph is embedded as the Article's `mainEntity` — the recommended
+ * single-block pattern for guides that answer questions, so the page emits one
+ * Article graph instead of a separate FAQPage + Article.
  */
 export function articleJsonLd(opts: {
   title: string;
@@ -49,8 +54,9 @@ export function articleJsonLd(opts: {
   url: string;
   brand: string;
   lang: Lang;
+  faq?: GeoFields["faq"];
 }): Record<string, unknown> {
-  return {
+  const article: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: opts.title,
@@ -66,10 +72,21 @@ export function articleJsonLd(opts: {
     },
     mainEntityOfPage: { "@type": "WebPage", "@id": opts.url }
   };
+
+  const questions = buildFaqQuestions(opts.faq ?? [], opts.lang);
+  if (questions.length > 0) {
+    article.mainEntity = {
+      "@type": "FAQPage",
+      inLanguage: opts.lang === "zh" ? "zh-CN" : "en",
+      mainEntity: questions
+    };
+  }
+
+  return article;
 }
 
 /**
- * schema.org Person block for account detail pages. `sameAs` points at the
+ * schema.org Person for account detail pages. `sameAs` points at the
  * creator's external profile so AI crawlers can tie the directory entry to the
  * real person/channel — a direct GEO signal.
  */
@@ -88,5 +105,37 @@ export function personJsonLd(opts: {
     url: opts.url,
     mainEntityOfPage: { "@type": "WebPage", "@id": opts.url },
     ...(opts.profileUrl ? { sameAs: [opts.profileUrl] } : {})
+  };
+}
+
+/**
+ * schema.org CollectionPage for category detail pages. `mainEntity` is an
+ * ItemList of the accounts listed on the page, helping crawlers understand the
+ * page as a curated collection rather than a loose list.
+ */
+export function collectionPageJsonLd(opts: {
+  name: string;
+  description: string;
+  url: string;
+  lang: Lang;
+  items: { name: string; url: string }[];
+}): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: opts.name,
+    description: opts.description,
+    url: opts.url,
+    inLanguage: opts.lang === "zh" ? "zh-CN" : "en",
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: opts.items.length,
+      itemListElement: opts.items.map((it, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: it.name,
+        url: it.url
+      }))
+    }
   };
 }
