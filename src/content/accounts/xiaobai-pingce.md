@@ -1,9 +1,9 @@
 ---
 slug: xiaobai-pingce
-profileUrl: https://search.bilibili.com/upuser?keyword=%E5%B0%8F%E7%99%BD%E6%B5%8B%E8%AF%84
+profileUrl: https://space.bilibili.com/8969156/
 avatar: 🔧
 platform: bilibili
-platformId: 小白测评
+platformId: '8969156'
 verified: true
 categories:
   - home-appliances

@@ -1,9 +1,9 @@
 ---
 slug: zhidian-xiaochunge
-profileUrl: https://search.bilibili.com/upuser?keyword=%E7%9F%A5%E7%94%B5%E6%99%93%E6%98%A5%E5%93%A5
+profileUrl: https://space.bilibili.com/67991584/
 avatar: 📡
 platform: bilibili
-platformId: 知电晓春哥
+platformId: '67991584'
 verified: true
 categories:
   - home-appliances

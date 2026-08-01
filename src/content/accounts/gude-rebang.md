@@ -1,9 +1,9 @@
 ---
 slug: gude-rebang
-profileUrl: https://search.bilibili.com/upuser?keyword=%E9%A1%BE%E5%BE%97%E7%86%B1%E6%A6%9C
+profileUrl: https://space.bilibili.com/500924033/
 avatar: ❄️
 platform: bilibili
-platformId: 顾得热榜
+platformId: '500924033'
 verified: true
 categories:
   - home-appliances

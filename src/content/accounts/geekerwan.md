@@ -1,9 +1,9 @@
 ---
 slug: geekerwan
-profileUrl: https://search.bilibili.com/upuser?keyword=Geekerwan
+profileUrl: https://space.bilibili.com/25876945/
 avatar: ⚙️
 platform: bilibili
-platformId: Geekerwan
+platformId: '25876945'
 verified: true
 categories:
   - home-appliances

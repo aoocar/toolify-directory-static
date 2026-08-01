@@ -1,9 +1,9 @@
 ---
 slug: aifou-keji
-profileUrl: https://search.bilibili.com/upuser?keyword=%E7%88%B1%E5%90%A6%E7%A7%91%E6%8A%80
+profileUrl: https://space.bilibili.com/7458285/
 avatar: 🛰️
 platform: bilibili
-platformId: 爱否科技
+platformId: '7458285'
 verified: true
 categories:
   - home-appliances

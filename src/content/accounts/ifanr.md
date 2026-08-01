@@ -1,9 +1,9 @@
 ---
 slug: ifanr
-profileUrl: https://search.bilibili.com/upuser?keyword=%E7%88%B1%E8%8C%83%E5%84%BF
+profileUrl: https://space.bilibili.com/12351332/
 avatar: 📱
 platform: bilibili
-platformId: 爱范儿
+platformId: '12351332'
 verified: true
 categories:
   - home-appliances
