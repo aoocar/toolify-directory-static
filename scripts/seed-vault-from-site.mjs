@@ -1,5 +1,5 @@
 import path from "node:path";
-import { dateOnly, defaultVaultPath, listMarkdown, readMarkdown, slugify, writeMarkdown } from "./content-utils.mjs";
+import { dateOnly, defaultVaultPath, listMarkdown, pickValidSummary, readMarkdown, slugify, writeMarkdown } from "./content-utils.mjs";
 
 const projectRoot = process.cwd();
 const vaultRoot = process.env.VAULT_PATH || defaultVaultPath;
@@ -142,7 +142,7 @@ for (const filePath of listMarkdown(siteNewsDir)) {
       slug,
       title: data.title,
       url: data.url,
-      summary: data.summary ?? {},
+      summary: pickValidSummary(data.summary),
       order: Number(data.order ?? 0),
       date: data.date ? dateOnly(data.date) : today
     },
@@ -163,7 +163,7 @@ for (const filePath of listMarkdown(siteGuidesDir)) {
       slug,
       title: data.title,
       url: data.url,
-      summary: data.summary ?? {},
+      summary: pickValidSummary(data.summary),
       order: Number(data.order ?? 0)
     },
     "## 指南摘要\n\n## SEO/GEO 备注\n"

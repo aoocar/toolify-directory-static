@@ -58,6 +58,19 @@ export function fail(message) {
   process.exitCode = 1;
 }
 
+// Returns the summary object only when it is a valid localizedText (has both
+// truthy `en` and `zh`); otherwise `undefined`. This keeps vault:seed /
+// vault:sync from ever emitting `summary: {}` or `summary: null`, which would
+// fail the content schema's `summary.en: Required` check and break the build.
+// `writeMarkdown` → `cleanForYaml` drops `undefined` values, so an invalid
+// summary simply omits the key (matching the schema's `.optional()`).
+export function pickValidSummary(summary) {
+  if (summary && typeof summary === "object" && summary.en && summary.zh) {
+    return summary;
+  }
+  return undefined;
+}
+
 function cleanForYaml(value) {
   if (value instanceof Date) return dateOnly(value);
   if (Array.isArray(value)) return value.map(cleanForYaml);
