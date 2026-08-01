@@ -271,3 +271,43 @@ npm run preview      # 预览构建产物
 npm run vault:seed   # 将 src/content 导入 Obsidian 库（一次性）
 npm run vault:sync   # 将已审核的知识卡发布回 src/content
 ```
+
+---
+
+## 17. 内容增改删标准流程（Obsidian 为唯一真源）
+
+> **重要**：日常运营以 **Obsidian 库为真源**，**不要直接手改 `src/content`**
+> （除非你明确不使用 Obsidian）。直接改仓库会让库与站点漂移，下次 `vault:sync`
+> 可能覆盖你的改动。具体库管理见 `OBSIDIAN_WORKFLOW.zh-CN.md`，AI 操作纪律见 `AI_OPERATIONS.zh-CN.md`。
+
+### 新增
+
+1. 在 Obsidian 库对应文件夹（`Accounts` / `Categories` / `Platforms` / `News` / `Guides`）用模板新建卡。
+2. 填控制字段 `type` + `publish: true`（账号另加 `status: approved`）+ 全部业务字段（样例见 §4–§9）。
+3. 跑 `npm run vault:sync` 写回 `src/content`。
+4. 跑 `npm run build` 验证（Zod 拦截错误数据）。
+5. `git push` → Vercel 部署。
+
+### 修改
+
+改库中对应卡 → 重跑 `vault:sync` + `npm run build` + `git push`。
+
+### 删除 / 下线
+
+- **软下线**：卡 `publish: false` → `vault:sync` 后从站点移除（URL 404、sitemap 剔除），卡仍留库可恢复。
+- **硬删除**：删卡 → 重 `vault:sync`（站点对应 `.md` 被移除）。删除前确认无其它指南 `accounts:` 引用它。
+
+### 质检清单（发布前必查）
+
+- [ ] `platform` / `categories` 的值是 `src/content/{platforms,categories}` **已存在**的 slug（否则静默丢失归类，且不报错）。
+- [ ] 不编造粉丝 / 互动 / 增长率——查不到**留空**。
+- [ ] `name` / `tagline` / `description` 中英双语齐全。
+- [ ] `news` / `guides` 的 `url` 指向**站内真实路由**。
+- [ ] `npm run build` 无 Zod 报错。
+- [ ] `git status` 无意外文件。
+
+### 红线
+
+- 账号指标**严禁虚构**（schema 已设为 optional，留空即可）。
+- 指南 `accounts:` **只列已收录账号**。
+- 不改已发布实体的 `slug`（会断 URL / SEO / sitemap / 内链）。
