@@ -36,7 +36,7 @@ let wroteGuides = 0;
 let errors = 0;
 
 for (const filePath of listMarkdown(vaultAccountsDir)) {
-  const { data } = readMarkdown(filePath);
+  const { data, body } = readMarkdown(filePath);
   if (data.type !== "account" || data.publish !== true || data.status !== "approved") continue;
 
   const slug = data.slug || slugify(data.name?.en || path.basename(filePath, ".md"));
@@ -81,7 +81,7 @@ for (const filePath of listMarkdown(vaultAccountsDir)) {
     description: data.description,
     seo: data.seo,
     geo: data.geo
-  });
+  }, body);
   wroteAccounts += 1;
 }
 

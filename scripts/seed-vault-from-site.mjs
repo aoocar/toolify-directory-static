@@ -38,8 +38,10 @@ function defaultGeo(description) {
   return {
     answer_summary_zh: description?.zh ?? "",
     answer_summary_en: description?.en ?? "",
-    facts: [],
-    faq: []
+    facts_zh: [],
+    facts_en: [],
+    faq_zh: [],
+    faq_en: []
   };
 }
 
@@ -75,7 +77,7 @@ for (const filePath of listMarkdown(siteAccountsDir)) {
       seo: data.seo ?? defaultSeo(data.name, data.tags),
       geo: data.geo ?? defaultGeo(data.description)
     },
-    "## 一句话定位\n\n## 核心内容\n\n## 适合人群\n\n## 使用场景\n\n## SEO/GEO 备注\n"
+    ""
   );
   accountCount += 1;
 }

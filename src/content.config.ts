@@ -22,7 +22,11 @@ const geoSchema = z
     answer_summary_zh: z.string().optional(),
     answer_summary_en: z.string().optional(),
     facts: z.array(z.record(z.string())).optional(),
-    faq: z.array(z.record(z.string())).optional()
+    facts_zh: z.array(z.record(z.string())).optional(),
+    facts_en: z.array(z.record(z.string())).optional(),
+    faq: z.array(z.record(z.string())).optional(),
+    faq_zh: z.array(z.record(z.string())).optional(),
+    faq_en: z.array(z.record(z.string())).optional()
   })
   .optional();
 

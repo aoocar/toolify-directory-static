@@ -1,4 +1,9 @@
 ---
+import { getCollection } from "astro:content";
+import { unified } from "unified";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+import rehypeStringify from "rehype-stringify";
 import BusinessCTA from "@/components/BusinessCTA.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import JsonLd from "@/components/JsonLd.astro";
@@ -28,6 +33,42 @@ if (!account) {
   return Astro.redirect(localizedPath(lang, "/404"));
 }
 
+// Render the account's bilingual Markdown body (populated by vault sync after de-thinning).
+// The body uses `<!-- zh -->` / `<!-- en -->` markers; we extract only the active language
+// segment (at the raw-markdown level) so the English page never shows Chinese (and vice versa),
+// then render that segment with the same remark/rehype pipeline Astro ships (already in node_modules).
+function extractLangMarkdown(md: string, activeLang: Lang): string {
+  const zhMarker = "<!-- zh -->";
+  const enMarker = "<!-- en -->";
+  const hasZh = md.includes(zhMarker);
+  const hasEn = md.includes(enMarker);
+  if (!hasZh && !hasEn) return md.trim(); // legacy single-language body
+  if (activeLang === "zh") {
+    const start = hasZh ? md.indexOf(zhMarker) + zhMarker.length : 0;
+    const end = hasEn ? md.indexOf(enMarker) : md.length;
+    return md.slice(start, end).trim();
+  }
+  if (!hasEn) return ""; // no English segment → English page shows no body
+  const start = md.indexOf(enMarker) + enMarker.length;
+  return md.slice(start).trim();
+}
+
+let bodyHtml: string | null = null;
+const accountEntry = (await getCollection("accounts")).find(
+  (e) => (e.data.slug ?? e.slug) === slug
+);
+if (accountEntry?.body?.trim()) {
+  const langMd = extractLangMarkdown(accountEntry.body, lang);
+  if (langMd) {
+    const processed = await unified()
+      .use(remarkParse)
+      .use(remarkRehype)
+      .use(rehypeStringify)
+      .process(langMd);
+    bodyHtml = String(processed);
+  }
+}
+
 const frequencyMap: Record<string, Record<Lang, string>> = {
   daily: { zh: "每日更新", en: "Daily" },
   weekly: { zh: "每周更新", en: "Weekly" },
@@ -42,8 +83,10 @@ const monetizationMap: Record<string, Record<Lang, string>> = {
 };
 
 const geoSummary = lang === "zh" ? account.geo?.answer_summary_zh : account.geo?.answer_summary_en;
-const geoFacts = account.geo?.facts ?? [];
-const geoFaq = account.geo?.faq ?? [];
+const geoFacts =
+  (lang === "zh" ? (account.geo?.facts_zh ?? account.geo?.facts) : account.geo?.facts_en) ?? [];
+const geoFaq =
+  (lang === "zh" ? (account.geo?.faq_zh ?? account.geo?.faq) : account.geo?.faq_en) ?? [];
 const faqLd = faqJsonLd(geoFaq, lang);
 const metaDescription = (lang === "zh" ? account.seo?.meta_description_zh : account.seo?.meta_description_en) || account.tagline[lang];
 const pageTitle =
@@ -120,6 +163,15 @@ const breadcrumbLd = breadcrumbJsonLd({
           <h2>{lang === "zh" ? "账号简介" : "About"}</h2>
           <p>{account.description[lang]}</p>
         </section>
+
+        {
+          bodyHtml && (
+            <section class="detail-section">
+              <h2>{lang === "zh" ? "详细档案" : "Full profile"}</h2>
+              <div class="account-body" set:html={bodyHtml} />
+            </section>
+          )
+        }
 
         <section class="detail-section">
           <h2>{t(lang, "contentStyle")}</h2>

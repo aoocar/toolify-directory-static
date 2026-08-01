@@ -1,9 +1,9 @@
 ---
 slug: he-tongxue
-profileUrl: "https://space.bilibili.com/he-tongxue"
-avatar: "📱"
+profileUrl: https://space.bilibili.com/he-tongxue
+avatar: 📱
 platform: bilibili
-platformId: "bili-hetongxue"
+platformId: bili-hetongxue
 verified: true
 categories:
   - tech-review
@@ -22,15 +22,97 @@ followerCount: 12000000
 avgEngagement: 800000
 contentFrequency: monthly
 growthRate: 3.5
-publishedAt: "2019-01-01"
-updatedAt: "2026-06-25"
+publishedAt: '2019-01-01'
+updatedAt: '2026-06-25'
 name:
   en: He Tongxue
   zh: 何同学
 tagline:
-  en: China's #1 tech creator, 12M+ Bilibili followers, viral AI experiments
+  en: China's
   zh: B 站科技区顶流，1200 万+ 粉丝，爆款 AI 实验
 description:
-  en: "He Shijie (何同学), aka He Tongxue, is Bilibili's most influential tech creator with 12M+ followers. Known for creative tech experiments and high-production reviews that go viral across China. In 2024-2025, he has been exploring AI tools, AI-generated content, and their real-world applications with his signature creative approach."
-  zh: "何世杰（何同学），B 站最具影响力的科技创作者，1200 万+ 粉丝。以创意科技实验和高制作水准的评测闻名全网。2024-2025 年持续探索 AI 工具、AI 生成内容及其实际应用，保持标志性的创意风格。"
+  en: >-
+    He Shijie (何同学), aka He Tongxue, is Bilibili's most influential tech creator with 12M+
+    followers. Known for creative tech experiments and high-production reviews that go viral across
+    China. In 2024-2025, he has been exploring AI tools, AI-generated content, and their real-world
+    applications with his signature creative approach.
+  zh: >-
+    何世杰（何同学），B 站最具影响力的科技创作者，1200 万+ 粉丝。以创意科技实验和高制作水准的评测闻名全网。2024-2025 年持续探索 AI 工具、AI
+    生成内容及其实际应用，保持标志性的创意风格。
+seo:
+  primary_keyword: He Tongxue AI creator
+  secondary_keywords:
+    - 科技评测
+    - AI实验
+    - 创意科技
+  search_intent: informational
+  title_zh: 何同学 - AI 创作者介绍
+  title_en: He Tongxue - AI Creator Directory
+  meta_description_zh: ''
+  meta_description_en: ''
+geo:
+  answer_summary_zh: >-
+    何世杰（何同学），B 站最具影响力的科技创作者，1200 万+ 粉丝。以创意科技实验和高制作水准的评测闻名全网。2024-2025 年持续探索 AI 工具、AI
+    生成内容及其实际应用，保持标志性的创意风格。
+  answer_summary_en: >-
+    He Shijie (何同学), aka He Tongxue, is Bilibili's most influential tech creator with 12M+
+    followers. Known for creative tech experiments and high-production reviews that go viral across
+    China. In 2024-2025, he has been exploring AI tools, AI-generated content, and their real-world
+    applications with his signature creative approach.
+  facts_zh:
+    - 平台: B站（Bilibili）
+    - 领域: 科技数码、AI 人工智能
+    - 粉丝量: 约1200万
+    - 内容方向: 科技评测、AI实验、创意科技
+  facts_en:
+    - Platform: Bilibili
+    - Niche: Tech & Digital, AI & Artificial Intelligence
+    - Followers: ~12M
+  faq_zh:
+    - 这个账号主要讲什么？: B 站科技区顶流，1200 万+ 粉丝，爆款 AI 实验
+    - 适合谁关注？: 对科技数码、AI 人工智能感兴趣、希望系统了解并上手实践的读者。
+    - 在哪里能看到？: B站（Bilibili）（主页见本页外链）。
+    - 粉丝规模？: 约1200万（公开可查，仅供参考）。
+  faq_en:
+    - What does this account cover?: China's
+    - Who is it for?: >-
+        Readers interested in Tech & Digital, AI & Artificial Intelligence who want a structured,
+        hands-on path.
+    - Where to watch?: Bilibili.
+    - How big is the audience?: ~12M (publicly reported, for reference).
 ---
+<!-- zh -->
+## 他是谁
+何同学 是B站（Bilibili）上的科技数码、AI 人工智能创作者。B 站科技区顶流，1200 万+ 粉丝，爆款 AI 实验
+
+## 内容特点
+内容以创意实验、高制作、病毒式传播为主，覆盖科技评测、AI实验、创意科技等方向，侧重把复杂主题讲清楚、可上手。
+
+## 适合谁看
+适合对科技数码、AI 人工智能感兴趣、希望系统了解并实践应用的读者，从入门到进阶都能找到对应内容。
+
+## 从哪里开始
+建议在B站（Bilibili）关注何同学，从最新或热门内容切入，逐步建立对该领域的认知。
+
+## 常见问题
+**主要发布平台？** B站（Bilibili）。
+**内容适合零基础吗？** 多数内容兼顾入门与进阶，建议从基础系列开始。
+**粉丝规模？** 约1200万（公开可查，仅供参考）。
+
+<!-- en -->
+## Who is this
+He Tongxue on Bilibili. China's
+
+## What the content is like
+The content is clear and hands-on, covering the Tech & Digital, AI & Artificial Intelligence space with actionable explainers and real examples.
+
+## Who it is for
+Readers interested in Tech & Digital, AI & Artificial Intelligence who want a structured, hands-on learning path — from beginner basics to deeper practice.
+
+## Where to start
+Follow He Tongxue on Bilibili, begin with the latest or most popular posts, and build up your understanding step by step.
+
+## FAQ
+**Main platform?** Bilibili.
+**Beginner-friendly?** Most content serves both starters and advanced learners; begin with the foundational series.
+**Audience size?** ~12M (publicly reported, for reference).
