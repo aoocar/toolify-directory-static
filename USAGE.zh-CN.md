@@ -202,26 +202,11 @@ date: "2026-07-20"                   # 可选发布日期
 
 ---
 
-## 10. Obsidian 运营工作流
+## 10. 内容真源与编辑方式
 
-站点内容由 Obsidian 库维护，库路径：
+`src/content/` 是站点数据的**唯一真源**，Astro 构建期直接读取它。可用任意 Markdown 编辑器维护，也可用 Obsidian 直接打开 `D:\project\codex\toolify\src\content` 这个文件夹，当作「带 UI 的数据库管理界面」（图谱视图、反链、搜索等）。详见 `OBSIDIAN_WORKFLOW.zh-CN.md`。
 
-```text
-E:\Obsidian\www.limingdao.com
-```
-
-- **初始化导入（一次性）：** `npm run vault:seed` —— 把 `src/content/{accounts,categories,platforms,news,guides}` 导入 Obsidian 库，生成 `Accounts/`、`Categories/`、`Platforms/`、`News/`、`Guides/` 知识卡。
-- **发布同步：** `npm run vault:sync` —— 仅发布满足以下条件的卡片：
-
-  | 类型 | 同步条件 |
-  |------|----------|
-  | account | `type: account`、`status: approved`、`publish: true` |
-  | category | `type: category`、`publish: true` |
-  | platform | `type: platform`、`publish: true` |
-  | news | `type: news`、`publish: true` |
-  | guide | `type: guide`、`publish: true` |
-
-同步后执行 `npm run build`。Zod 校验会在错误数据上线前拦截。
+日常流程：直接编辑 `src/content` 下的 `.md` → `npm run build`（Zod 校验拦截错误数据）→ 推送部署。已无 `vault:seed` / `vault:sync` 步骤。
 
 ---
 
@@ -268,34 +253,32 @@ E:\Obsidian\www.limingdao.com
 npm run dev          # 本地开发（热更新）
 npm run build        # 生产静态构建 → dist/
 npm run preview      # 预览构建产物
-npm run vault:seed   # 将 src/content 导入 Obsidian 库（一次性）
-npm run vault:sync   # 将已审核的知识卡发布回 src/content
 ```
 
 ---
 
-## 17. 内容增改删标准流程（Obsidian 为唯一真源）
+## 17. 内容增改删标准流程（src/content 即唯一真源）
 
-> **重要**：日常运营以 **Obsidian 库为真源**，**不要直接手改 `src/content`**
-> （除非你明确不使用 Obsidian）。直接改仓库会让库与站点漂移，下次 `vault:sync`
-> 可能覆盖你的改动。具体库管理见 `OBSIDIAN_WORKFLOW.zh-CN.md`，AI 操作纪律见 `AI_OPERATIONS.zh-CN.md`。
+> **说明**：自 2026-08-01 起，站点数据的唯一真源就是 `src/content/` 下的 Markdown。
+> 可直接用任意编辑器（含 Obsidian 打开该文件夹）增改；`src/content` 里有什么，构建就上什么。
+> 用 Obsidian 时，把它当作「带 UI 的 Markdown 文件夹」即可，没有额外的库 → 站点同步层。
+> AI 操作纪律见 `AI_OPERATIONS.zh-CN.md`。
 
 ### 新增
 
-1. 在 Obsidian 库对应文件夹（`Accounts` / `Categories` / `Platforms` / `News` / `Guides`）用模板新建卡。
-2. 填控制字段 `type` + `publish: true`（账号另加 `status: approved`）+ 全部业务字段（样例见 §4–§9）。
-3. 跑 `npm run vault:sync` 写回 `src/content`。
-4. 跑 `npm run build` 验证（Zod 拦截错误数据）。
-5. `git push` → Vercel 部署。
+1. 在 `src/content/{accounts,categories,platforms,news,guides}` 对应子目录直接新建 `.md`。
+2. 填全业务字段（样例见 §4–§9）；账号如需暂不上线，可加 `draft: true`（其余集合「有文件即上线」）。
+3. 跑 `npm run build` 验证（Zod 拦截错误数据）。
+4. `git push` → Vercel 部署。
 
 ### 修改
 
-改库中对应卡 → 重跑 `vault:sync` + `npm run build` + `git push`。
+改对应 `.md` → `npm run build` + `git push`。
 
 ### 删除 / 下线
 
-- **软下线**：卡 `publish: false` → `vault:sync` 后从站点移除（URL 404、sitemap 剔除），卡仍留库可恢复。
-- **硬删除**：删卡 → 重 `vault:sync`（站点对应 `.md` 被移除）。删除前确认无其它指南 `accounts:` 引用它。
+- **软下线（仅账号）**：账号 `.md` 加 `draft: true` → 构建后从站点移除（URL 404、sitemap 剔除），文件保留可恢复。
+- **硬删除**：直接删 `.md` 文件（删除前确认无其它指南 `accounts:` 引用它）。其余集合无草稿概念，删文件即从站点移除。
 
 ### 质检清单（发布前必查）
 

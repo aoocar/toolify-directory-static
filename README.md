@@ -25,7 +25,7 @@ src/
     types.ts            Account / Category / Platform 类型
   pages/[lang]/        各语言页面
   styles/global.css
-scripts/               Obsidian 库 ↔ 站点 同步脚本
+scripts/               dethin-accounts.py（账号去薄化正文生成器）
 ```
 
 ## 运行
@@ -122,14 +122,11 @@ description:
 
 > 注意：`slug`、`platform`、`categories` 会参与关联与路由，请确保 `platform` 与 `categories` 对应 `platforms/`、`categories/` 中已存在的 slug。
 
-## Obsidian 内容工作流
+## 内容管理（src/content 即唯一真源）
 
-内容由 Obsidian 库（`E:\Obsidian\www.limingdao.com`）驱动，详见 `OBSIDIAN_WORKFLOW.zh-CN.md`。常用命令：
+`src/content/` 是站点数据的**唯一真源**，Astro 构建期直接读取它。可以用任意 Markdown 编辑器维护，也可用 Obsidian 直接打开 `D:\project\codex\toolify\src\content` 这个文件夹作为「带 UI 的数据库管理界面」（图谱视图、反链、搜索等）。详见 `OBSIDIAN_WORKFLOW.zh-CN.md`。
 
-```bash
-npm run vault:seed   # 把 src/content 的账号/领域/平台同步到 Obsidian 库（初始化用）
-npm run vault:sync   # 把 Obsidian 库里已 approved 的内容同步回 src/content
-```
+日常增改流程：直接编辑 `src/content` 下的 `.md` → `npm run build`（Zod 校验拦截错误数据）→ 推送部署。无 `vault:seed` / `vault:sync` 步骤。
 
 ## 多语言扩展
 

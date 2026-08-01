@@ -1,97 +1,77 @@
-# 架构说明
+# 架构
 
 ## 目标
 
-这个项目从 Astro + Markdown 静态目录站开始，同时预留后期升级到数据库和搜索服务的路径。
+本项目以静态 Astro + Markdown 目录起步，并为将来更大规模的数据库 / 搜索架构预留清晰路径。
 
-核心原则是：页面路由和组件尽量稳定，数据来源可以替换。
+## 稳定契约
 
-## 稳定接口
-
-建议长期保持这些约定不变。
-
-路由结构：
-
-- `/:lang`
-- `/:lang/tools`
-- `/:lang/tools/:slug`
-- `/:lang/categories`
-- `/:lang/categories/:slug`
-- `/:lang/rankings`
-- `/:lang/new`
-- `/:lang/submit`
-
-数据访问函数位于 `src/lib/directory.ts`：
-
-- `getTools()`
-- `getToolBySlug(slug)`
-- `getCategories()`
-- `getCategoryBySlug(slug)`
-- `getToolsByCategory(categorySlug)`
-- `getFeaturedTools()`
-- `getLatestTools(limit?)`
-- `getRankedTools(limit?)`
-
-共享类型位于：
-
-```text
-src/lib/types.ts
-```
-
-语言配置位于：
-
-```text
-src/lib/i18n.ts
-```
+- URL 形态：
+  - `/:lang`
+  - `/:lang/accounts`
+  - `/:lang/accounts/:slug`
+  - `/:lang/categories`
+  - `/:lang/categories/:slug`
+  - `/:lang/platforms`
+  - `/:lang/platforms/:slug`
+  - `/:lang/rankings`
+  - `/:lang/new`
+  - `/:lang/submit`
+  - `/:lang/services`
+  - `/:lang/contact`
+- 公共数据 API（`src/lib/directory.ts`）：
+  - `getAccounts()` / `getAccountBySlug(slug)`
+  - `getAccountsByCategory(categorySlug)` / `getAccountsByPlatform(platformSlug)`
+  - `getFeaturedAccounts()` / `getLatestAccounts(limit?)`
+  - `getRankedAccounts(sortBy?, limit?)`（`followers` / `engagement` / `growth`）/ `getFastGrowingAccounts(limit?)`
+  - `getCategories()` / `getCategoryBySlug(slug)` / `getCategoryCounts()`
+  - `getPlatforms()` / `getPlatformBySlug(slug)` / `getPlatformCounts()`
+- 共享类型：`src/lib/types.ts`
+- 语言列表与词典：`src/lib/i18n.ts`
 
 ## 当前数据源
 
-Markdown 文件：
+`src/content/` 是站点数据的**唯一真源**（2026-08-01 起已移除独立的 Obsidian vault 与 `vault:seed` / `vault:sync` 同步层；可用任意 Markdown 编辑器，或把 Obsidian 打开该文件夹作「数据库管理界面」，直接编辑即上线，无库→站点同步层）。
 
-```text
-src/content/tools/*.md
-src/content/categories/*.md
-```
+Markdown 文件，由 Astro Content Collections 加载并在构建期用 `src/content.config.ts` 的 Zod schema 校验：
 
-目前主要使用 Markdown frontmatter 存储结构化数据。后续可以在正文区域增加长评测、教程或 SEO 内容。
+- `src/content/accounts/*.md`
+- `src/content/categories/*.md`
+- `src/content/platforms/*.md`
+
+每个 Markdown 目前以 frontmatter 为主；正文可用于长文评测或 SEO 描述。
+
+## 数据加载
+
+`src/lib/directory.ts` 通过 `astro:content` 的 `getCollection()` 加载三个集合，并用 `withRelations()` 把账号关联到其领域与平台。所有 frontmatter 在构建时被 Zod 校验，字段缺失或类型错误会在 `astro build` 时直接报错。
 
 ## 首页组成
 
-首页刻意采用高信息密度的目录站结构，而不是普通营销落地页：
+首页有意采用密集的目录式布局，而非营销落地页：
 
-- 顶部赞助横条：`src/layouts/BaseLayout.astro`
-- 首页搜索和统计：`src/pages/[lang]/index.astro`
-- 快捷入口：`quickLinks`
-- 今日工具流：`getLatestTools()`
-- 信息流赞助卡片：当前是静态占位，后续可接广告系统
-- 右侧排行榜：`getRankedTools()`
-- 提示词标签云：当前是静态种子数据，后续可接提示词库
-- AI 新闻和热门指南：当前是静态种子列表，后续可升级为内容集合
-- 分类索引：`getCategoryCounts()`
+- 赞助条：`src/layouts/BaseLayout.astro`
+- Hero 搜索与统计：`src/pages/[lang]/index.astro`
+- 快捷导航：`quickLinks`
+- 今日推荐：`getLatestAccounts()`
+- 信息流中的赞助插入：静态占位卡片 `BusinessCTA`
+- 排行榜侧栏：`getRankedAccounts()`
+- 平台导航：静态取前 6 个平台
+- 领域索引：`getCategoryCounts()`
+- 行业动态 / 创作者指南：首页编辑型静态列表（后续可改为内容集合或取自账号的 `geo` 字段）
+- 精选达人：`getFeaturedAccounts()`
 
-当项目增长后，新闻、指南、提示词和赞助位建议独立成内容集合或数据库表。
+## 迁移路径
 
-## 迁移路线
+当目录规模增长时，替换 `src/lib/directory.ts` 的内部实现：
 
-### 100-1,000 个工具
+1. 100–1,000 个账号：保持 Markdown，加 Pagefind 做静态搜索。
+2. 1,000–5,000 个账号：把数据导出为生成式 JSON，保留 Astro 静态页，加构建缓存。
+3. 5,000+ 个账号：迁移到 PostgreSQL / Supabase，搜索用 Meilisearch / Typesense / Algolia，保持路由与页面组件不变。
+4. 动态操作：推荐表单、赞助位、分析、审核后台改为 API 驱动模块；公开列表页可保持静态或采用混合渲染（hybrid rendering）。
 
-继续使用 Markdown。可以添加 Pagefind 做静态搜索。
+## 多语言扩展
 
-### 1,000-5,000 个工具
-
-把工具数据迁移到自动生成的 JSON 或 Markdown。Astro 仍然负责静态页面生成，并增加构建缓存。
-
-### 5,000+ 个工具
-
-把数据迁移到 PostgreSQL 或 Supabase。搜索使用 Meilisearch、Typesense 或 Algolia。页面路由和组件保持不变。
-
-### 动态操作
-
-工具提交、赞助位、数据统计、后台审核等功能应该逐步变成 API 驱动模块。公开列表页仍然可以保持静态或混合渲染。
-
-## 添加新语言
-
-1. 在 `src/lib/i18n.ts` 的 `languages` 中添加语言代码。
-2. 在 `dictionary` 中补充界面文案。
-3. 在 Markdown frontmatter 的 `name`、`tagline`、`description` 等字段中补充新语言。
+1. 在 `src/lib/i18n.ts` 的 `languages` 增加语言代码。
+2. 在 `dictionary` 增加对应词条。
+3. 在 `src/content` 的 Markdown 增加对应语言的 `name` / `tagline` / `description`。
 4. 现有动态路由会自动生成新语言页面。

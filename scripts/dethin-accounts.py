@@ -3,7 +3,7 @@
 # 仅基于 frontmatter 真实字段扩写双语正文 + 双语 facts/faq，绝不编造数字。
 import re, glob, os, sys
 
-VAULT = "E:/Obsidian/www.limingdao.com/Accounts"
+VAULT = "src/content/accounts"
 CAT_DIR = "src/content/categories"
 TODO = ".tmp_lists/todo_featured.txt"   # 待处理 featured（Batch 2 阶段）
 ALL_ACCOUNTS = ".tmp_lists/all_accounts.txt"  # 全部账号（铺开阶段）

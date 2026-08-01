@@ -6,9 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
-    "vault:seed": "node scripts/seed-vault-from-site.mjs",
-    "vault:sync": "node scripts/sync-vault-to-site.mjs"
+    "preview": "astro preview"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

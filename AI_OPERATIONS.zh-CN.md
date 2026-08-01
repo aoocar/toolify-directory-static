@@ -44,29 +44,21 @@ AI 是**执行搭档，不是自主决策者**。所有「改文件 / 发布 / �
 
 ## 3. 内容模型与真源
 
-- **真源 = Obsidian 库** `E:\Obsidian\www.limingdao.com`
-  （`Accounts/` `Categories/` `Platforms/` `News/` `Guides/`）。
-- `npm run vault:sync`：把 `publish: true` 的卡写回 `src/content/*`。
-- `npm run vault:seed`：一次性把 `src/content` 导入库（已有内容引导）。
+- **真源 = `src/content/` 目录下的 Markdown**（自 2026-08-01 起，已移除 Obsidian 库 ↔ 站点的 `vault:seed` / `vault:sync` 同步层）。
+- 可直接用任意编辑器维护，也可把 Obsidian 打开 `D:\project\codex\toolify\src\content` 当作「带 UI 的数据库管理界面」；两者都只是编辑 `src/content`，没有库 → 站点同步层。
 - 站点数据层唯一入口是 `src/lib/directory.ts` 的 getter 函数；页面 / 组件**不直接读 Markdown**。
 
 ---
 
-## 4. Obsidian 卡的控制字段（AI 生成卡时必须带）
+## 4. 发布控制（直接编辑 src/content）
 
-同步脚本按这些字段决定是否发布；写入站点时**会被剥离**（站点 schema 无这些字段）：
+自 2026-08-01 起已无 `vault:sync` 的 `type/status/publish` 控制字段——那些字段是旧同步层的概念，站点 schema 里不存在。发布与否改为：
 
-| 类型 | 发布条件 |
-|---|---|
-| account | `type: account` + `status: approved` + `publish: true` |
-| category | `type: category` + `publish: true` |
-| platform | `type: platform` + `publish: true` |
-| news | `type: news` + `publish: true` |
-| guide | `type: guide` + `publish: true` |
+- **账号（accounts）**：默认上线；加 `draft: true` 即暂不上线（`directory.ts` 的 `load()` 会过滤，`draft` 账号不进路由、不进 sitemap）。
+- **领域 / 平台 / 动态 / 指南（categories / platforms / news / guides）**：「有文件即上线」——`src/content` 里存在该 `.md` 构建就生成页面，删除文件即下线。
 
 各卡的业务字段（必填 / 可选）见 `USAGE.zh-CN.md` §4–§9 与各集合 schema
-（`src/content.config.ts`）。**AI 生成卡时务必填满必填项**，否则 `vault:sync`
-会跳过该卡并报警（不会静默发布残缺数据）。
+（`src/content.config.ts`）。**AI 生成 / 改动 `.md` 时务必填满必填项**，否则 `npm run build` 的 Zod 校验会直接报错拦截。
 
 ---
 
@@ -126,8 +118,6 @@ npm run build
 npm run dev          # 本地开发（热更新）→ http://localhost:4321/zh
 npm run build        # 生产静态构建 → dist/（先 mv dist 规避 §6 钩子）
 npm run preview      # 预览构建产物
-npm run vault:seed   # src/content → Obsidian 库（一次性引导）
-npm run vault:sync   # Obsidian 已发布卡 → src/content
 
 # 推送（Windows wincred，见 §5）
 git -c credential.helper= -c credential.helper=wincred push origin main

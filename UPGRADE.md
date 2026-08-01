@@ -125,3 +125,11 @@ GA4 (`G-WJ8ZP9FSE9`) and Clarity (`kn4x488ytp`) are injected in `BaseLayout.astr
 ## 10. Deploy Pipeline
 
 GitHub `main` → Vercel auto-deploy. `npm run build` → `dist`. Keep `site` correct in `astro.config.mjs` for absolute URLs and sitemap.
+
+---
+
+## 11. Content Source & Editing (Operations)
+
+`src/content/` is the **single source of truth** — Astro reads it directly at build time. Edit it with any Markdown editor, or open the folder `D:\project\codex\toolify\src\content` directly in Obsidian as a UI-backed database manager. There is **no** `vault:seed` / `vault:sync` step (the Obsidian↔site sync layer was removed on 2026-08-01).
+
+Daily flow: edit `.md` files under `src/content` → `npm run build` (Zod blocks malformed data) → push to deploy.

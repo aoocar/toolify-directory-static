@@ -127,12 +127,11 @@ GitHub `main` → Vercel 自动部署。`npm run build` → `dist`。保持 `ast
 
 ---
 
-## 10. Obsidian 同步（运营侧）
+## 10. 内容真源与编辑（运营侧）
 
-内容由 Obsidian 库（`E:\Obsidian\www.limingdao.com`）维护：
-- `npm run vault:seed`：一次性把 `src/content/{accounts,categories,platforms,news,guides}` 导入库。
-- `npm run vault:sync`：仅发布满足 `publish: true` 等条件的知识卡回到 `src/content`。
-- 同步后 `npm run build`，Zod 校验拦截错误数据。
+`src/content/` 是站点数据的**唯一真源**，Astro 构建期直接读取。可用任意 Markdown 编辑器维护，也可用 Obsidian 直接打开 `D:\project\codex\toolify\src\content` 这个文件夹作为「带 UI 的数据库管理界面」（图谱视图、反链、搜索等）。详见 `OBSIDIAN_WORKFLOW.zh-CN.md`。
+
+日常流程：直接编辑 `src/content` 下的 `.md` → `npm run build`（Zod 校验拦截错误数据）→ 推送部署。已无 `vault:seed` / `vault:sync` 同步层。
 
 ---
 
@@ -142,7 +141,7 @@ GitHub `main` → Vercel 自动部署。`npm run build` → `dist`。保持 `ast
 
 | 量级 | 主要瓶颈 | 升级动作 | 动前端？ |
 |------|----------|----------|----------|
-| **0–1,000**（当前阶段） | 无 | Markdown + Obsidian + 静态构建，保持现状即可。 | 否 |
+| **0–1,000**（当前阶段） | 无 | Markdown + 静态构建（编辑器任选，含 Obsidian 打开 `src/content`），保持现状即可。 | 否 |
 | **~1,000–5,000** | 人工编辑吞吐（非构建速度） | 数据源外置：Airtable / Notion / 轻量 CMS / 爬虫输出，生成 `src/content/*`，或改写 `directory.ts` 加载逻辑；可接入 Pagefind 做客户端全文检索。 | 否（接口不变） |
 | **5,000+** | 需日更粉丝数 / 实时指标、构建变慢 | Supabase / PostgreSQL 存储动态数据；Astro 改 hybrid / SSR；`directory.ts` 函数改查库。 | 否（页面 / 组件不变） |
 | **商业化** | 提交 / 赞助 / 对比页 | `/submit` 的 mailto 改 API 路由；加赞助位与 `best-` / `alternatives-` / `compare-` SEO 页面。 | 局部 |
@@ -153,4 +152,4 @@ GitHub `main` → Vercel 自动部署。`npm run build` → `dist`。保持 `ast
 2. **人工编辑速度跟不上收录需求**——瓶颈在 throughput，而非构建。
 3. **需要每日自动刷新**粉丝数等动态指标（Markdown 手动维护做不到）。
 
-> 注：只要账号量在数千级以内，当前 Markdown + Obsidian 方案完全够用，无需提前工程化。过早引入数据库反而增加维护成本。
+> 注：只要账号量在数千级以内，当前 Markdown 方案完全够用，无需提前工程化。过早引入数据库反而增加维护成本。

@@ -32,7 +32,7 @@
 
 项目速记（与手册一致，红线优先）：
 - 性质：纯 GEO/SEO 用途的**双语(zh/en)静态站**，Astro 5 + Content Collections + Zod，GitHub→Vercel 部署，**无交互功能**（用户硬性约束）。
-- 内容真源 = Obsidian 库 `E:\Obsidian\www.limingdao.com`；站点 `src/content/*` 由 `npm run vault:sync` 生成，日常不要直接手改 src/content（会漂移）。
+- 内容真源 = 项目内 `src/content/`（即站点构建输入）；用 Obsidian 打开该文件夹作数据库管理界面，直接编辑即上线，**无 vault 根目录、无 vault:seed/vault:sync 单向依赖**（2026-08-01 移除 sync 层）。
 - 红线（不可擅自）：① 不编造粉丝/互动/增长/排名数据（查不到就留空）；② 不改已发布实体的 slug；③ 不私自 push 生产；④ Cloudflare 后台「托管 robots.txt」开关必须保持关闭（误开会覆盖仓库版、重新屏蔽 AI 爬虫、断 GEO）；⑤ AI 任何改/生成/删文件前走三步法（提方案→等我看→等我确认）。
 - 推送命令：`git -c credential.helper= -c credential.helper=wincred push origin main`（Windows wincred）。
 - 当前 GEO 状态：已打通（AI 爬虫全放行 + llms.txt HTTP200 + 四类结构化数据 + 全站 hreflang + og:image）。
@@ -45,7 +45,7 @@
 
 ## 1. 总原则（所有接手方遵守）
 
-- **真源 = Obsidian 库** `E:\Obsidian\www.limingdao.com`，站点 `src/content/*` 由同步脚本生成，**不要直接长期手改 `src/content`**（会漂移）。
+- **真源 = `src/content/`**（即 Astro 构建输入）。用 Obsidian 打开该文件夹作编辑器/数据库管理界面即可，**直接编辑即上线**，无独立 vault 根目录、无同步脚本（2026-08-01 移除 sync 层）。
 - **不编造数据**：粉丝数 / 互动 / 增长率 / 排名——查不到就**留空**（schema 已设为 optional）。
 - **不破坏 URL 与 SEO**：已发布实体的 `slug` 不改；`astro.config.mjs` 的 `site` 与路由结构不动；robots.txt 不得重新屏蔽 AI 爬虫（见 §8.4）。
 - **AI 是执行搭档，不是自主决策者**：见 §7 三步法。
@@ -118,7 +118,7 @@ Node.js 18+（托管 22/24 亦可）。`.workbuddy` 为项目数据目录，**�
 | `news` | `src/content/news` | 首页「行业动态」区块 | `type: news` |
 | `guides` | `src/content/guides` | 首页「创作者指南」区块 + 12 篇 GEO 长文 | `type: guide`（`link` 型）/ `article` 型长文直接落盘 |
 
-> **指南的两种形态（关键）**：经 `vault:sync` 生成的是 `kind: link` 快捷链接（仅 `title`+`url`）；12 篇 GEO 长文（`article` 型，含 `guideId`/`lang`/`category`/`accounts`/`seo`/`geo`）**直接在 `src/content/guides/{zh,en}/` 维护，不走 Obsidian 同步**。
+> **指南的两种形态（关键）**：`link` 型（`kind: link`，仅 `title`+`url`）直接落在 `src/content/guides/<slug>.md`；12 篇 GEO 长文（`article` 型，含 `guideId`/`lang`/`category`/`accounts`/`seo`/`geo`）**直接在 `src/content/guides/{zh,en}/` 维护**。二者都直接落在 `src/content/`，不走任何同步脚本。
 
 字段样例（账号/分类/平台/news/guide）详见源文档 `USAGE.zh-CN.md` §4–§9 与 `src/content.config.ts`，本手册不再重复贴全量样例。
 
@@ -126,21 +126,20 @@ Node.js 18+（托管 22/24 亦可）。`.workbuddy` 为项目数据目录，**�
 
 ## 6. 内容运营标准流程（人工 / AI 运营）
 
-> **真源是 Obsidian 库**，日常不要直接手改 `src/content`。
+> **真源就是 `src/content/`**，直接在此编辑（可用 Obsidian 打开该文件夹）；编辑即上线，无同步步骤。
 
 ### 6.1 新增
-1. Obsidian 对应文件夹（`Accounts`/`Categories`/`Platforms`/`News`/`Guides`）用模板建卡。
-2. 填控制字段 `type` + `publish: true`（账号另加 `status: approved`）+ 全部业务字段（样例见 §5 与源文档）。
-3. `npm run vault:sync` 写回 `src/content`。
-4. `npm run build` 验证（Zod 拦截错误）。
-5. `git push` → Vercel 部署。
+1. 在 `src/content/` 对应子目录（`accounts`/`categories`/`platforms`/`news`/`guides`）新建 `<slug>.md`。
+2. 填业务字段（样例见 §5 与 `USAGE.zh-CN.md`）；账号可用 `draft: true` 暂不上线。
+3. `npm run build` 验证（Zod 拦截错误）。
+4. `git push` → Vercel 部署。
 
 ### 6.2 修改
-改库中卡 → 重跑 `vault:sync` + `npm run build` + `git push`。
+改 `src/content/` 中对应文件 → `npm run build` + `git push`。
 
 ### 6.3 删除 / 下线
-- **软下线**：`publish: false` → `vault:sync` 后站点移除（URL 404、sitemap 剔除），卡留库可恢复。
-- **硬删除**：删卡 → 重 `vault:sync`（站点 `.md` 被移除）。删除前确认无其它指南 `accounts:` 引用它。
+- **软下线**：账号设 `draft: true`（加载时被过滤，不进 sitemap/构建）；其余集合直接删除或移走该 `.md`（URL 404、sitemap 自动剔除）。
+- **硬删除**：直接删除对应 `.md`。删除前确认无其它指南 `accounts:` 引用它。
 
 ### 6.4 发布前质检清单（必查）
 - [ ] `platform` / `categories` 的值是 `src/content/{platforms,categories}` **已存在**的 slug（否则静默丢失归类且**不报错**）。
@@ -177,15 +176,11 @@ Node.js 18+（托管 22/24 亦可）。`.workbuddy` 为项目数据目录，**�
 | 不私自 push 生产 | 仅按 §9.3 方式、你确认发布后 |
 | 不擅自删除 | 删除前列出受影响文件等你确认 |
 
-### 7.3 Obsidian 卡控制字段（AI 生成卡必须带）
-同步脚本按这些字段决定是否发布；写入站点时**被剥离**（站点 schema 无此字段）：
-
-| 类型 | 发布条件 |
-|------|---------|
-| account | `type: account` + `status: approved` + `publish: true` |
-| category / platform / news / guide | `type: <对应>` + `publish: true` |
-
-> 同步脚本**仅对 account 校验 `status: approved`**；其余类型只需 `publish: true`。AI 生成卡务必填满必填项，否则 sync 跳过并报警（不静默发布残缺数据）。
+### 7.3 发布控制（直接编辑 src/content）
+无 vault/sync 后，**文件存在于 `src/content/` 即上线**（当前选择「有什么上什么」，无草稿闸门）：
+- **账号**：可用 `draft: true` 暂不上线（`directory.ts` 加载时过滤，不进 sitemap/路由）。
+- **分类/平台/news/guides**：文件存在即发布；下线即删除或移走该 `.md`。
+- 旧 sync 层的 `type` / `status` / `publish` 控制字段现已无意义，直接写 `src/content` 时不需填写（留着也无害）。
 
 ### 7.4 记忆与记录
 - 落盘后追加 `.workbuddy/memory/YYYY-MM-DD.md`（项目日志）。
@@ -194,27 +189,32 @@ Node.js 18+（托管 22/24 亦可）。`.workbuddy` 为项目数据目录，**�
 
 ---
 
-## 8. Obsidian 库管理教程（把库当内容数据库）
+## 8. 用 Obsidian 管理 src/content（数据库管理界面）
 
-库路径：`E:\Obsidian\www.limingdao.com`。目录分层：`Raw/`(原始资料,勿改) · `Inbox/`(待处理) · `Accounts/` · `Categories/` · `Platforms/` · `News/` · `Guides/` · `SEO/` · `Comparisons/` · `Prompts/` · `Sponsors/` · `Templates/` · `Dashboards/` · `Logs/` · `00_System/`(发布规则,含 `INGEST_PROMPT.md`)。
+用 Obsidian `Open folder as vault` 打开项目内的 `D:\project\codex\toolify\src\content`，即把该文件夹当「数据库管理界面」。各子目录（`accounts`/`categories`/`platforms`/`news`/`guides`）就是表，每个 `.md` 是一张卡。无 `Raw/Inbox/00_System` 等库内目录——直接在 `src/content` 下编辑即可。
 
-### 8.1 日常流水线（入库）
-`Raw/` → `Inbox/` → Claudian 按 `00_System/INGEST_PROMPT.md` 处理 → 生成/更新 `Accounts/{slug}.md` → 人工 QA（领域/平台/指标/seo/geo/重复）→ 置 `publish: true` → `npm run vault:sync`。
+### 8.1 日常流程（直接编辑即上线）
+1. 在 `src/content/` 对应子目录新建 / 编辑 `.md`（frontmatter + 正文）。
+2. `npm run build` 验证（Zod 拦截错误）。
+3. `git push` → Vercel 部署。
+无 seed / sync 步骤；Astro 构建时直接读取 `src/content/`。
 
-### 8.2 各类型卡 Properties 对照（控制字段库侧，sync 时剥离）
+### 8.2 各类型卡字段对照（发布控制）
 
-| 类型 | 控制字段 | 必填业务字段 | 可选业务字段 |
+| 类型 | 发布控制 | 必填业务字段 | 可选业务字段 |
 |------|---------|-------------|-------------|
-| account | `type:account`+`status:approved`+`publish:true` | `slug`,`profileUrl`,`name{en,zh}`,`tagline{en,zh}`,`description{en,zh}` | `avatar`,`platform`,`platformId`,`verified`,`categories[]`,`tags[]`,`contentStyle[]`,`monetization`,`featured`,`followerCount`,`avgEngagement`,`contentFrequency`,`growthRate`,`publishedAt`,`updatedAt`,`seo`,`geo` |
-| category | `type:category`+`publish:true` | `slug`,`name{en,zh}`,`description{en,zh}` | `icon`,`seo`,`geo` |
-| platform | `type:platform`+`publish:true` | `slug`,`name{en,zh}`,`description{en,zh}` | `icon`,`baseUrl`,`type` |
-| news | `type:news`+`publish:true` | `slug`,`title{en,zh}`,`url` | `summary{en,zh}`,`order`,`date` |
-| guide | `type:guide`+`publish:true` | `slug`,`title{en,zh}`,`url` | `summary{en,zh}`,`order` |
+| account | `draft: true` 即暂不上线（默认 `false` 上线）；其余集合无草稿概念，有文件即上线 | `slug`,`profileUrl`,`name{en,zh}`,`tagline{en,zh}`,`description{en,zh}` | `avatar`,`platform`,`platformId`,`verified`,`categories[]`,`tags[]`,`contentStyle[]`,`monetization`,`featured`,`followerCount`,`avgEngagement`,`contentFrequency`,`growthRate`,`publishedAt`,`updatedAt`,`seo`,`geo` |
+| category | 无（有文件即上线） | `slug`,`name{en,zh}`,`description{en,zh}` | `icon`,`seo`,`geo` |
+| platform | 无（有文件即上线）；`type` 为内容形态分类（short-video/video/image-text/social/knowledge），非发布闸门 | `slug`,`name{en,zh}`,`description{en,zh}` | `icon`,`baseUrl`,`type` |
+| news | 无（有文件即上线） | `slug`,`title{en,zh}`,`url` | `summary{en,zh}`,`order`,`date` |
+| guide | 无（有文件即上线）；`kind: link\|article` 区分清单型 / 长文型 | `slug`,`title{en,zh}`,`url` | `summary{en,zh}`,`order` |
 
-### 8.3 模板 / 发布闸门 / 去重
-- **Templates**：在 `Templates/` 放 5 类卡模板（含全部控制+必填字段），新建即套用，保证不漏 `publish`、账号不漏 `status: approved`。
-- **发布闸门**：`publish: false` = 留库不发布（草稿/待审）；账号另需 `status: approved`。软下线改 `publish:false` 重 sync 即可。
-- **去重/slug**：同步以 `slug` 为唯一键，缺省用 `slugify(name.en)` 推导；同 slug 两卡互相覆盖，新增前先搜索库确认无重名。
+> 旧 vault/sync 层的 `type`(集合判别)/`status`/`publish` 控制字段已不存在：站点 schema 无这些字段，直接写 `src/content` 时不需填写（留着也无害）。账号软下线用 `draft: true`，其余集合删文件即下线。
+
+### 8.3 模板 / 去重 / 下线
+- **Templates**：在 Obsidian `Templates/` 放 5 类卡模板（含全部必填业务字段），新建即套用，保证不漏字段。
+- **去重 / slug**：以 `slug` 为唯一键，缺省用 `slugify(name.en)` 推导；同 slug 两卡互相覆盖，新增前先搜索确认无重名。
+- **下线方式**：账号软下线 → 该卡 `draft: true` 后重新 `build`；其余集合（category/platform/news/guide）无草稿概念，**直接删除对应 `.md` 文件**即下线。无 `publish` 闸门、无 sync 步骤。
 
 ### 8.4 ⚠️ GEO 关键约束：Cloudflare 不得重新托管 robots.txt（极重要）
 线上 `robots.txt` 必须放行 AI 爬虫（GPTBot/ClaudeBot/Google-Extended/CCBot/Bytespider/Applebot/PerplexityBot/Bingbot），否则 GEO 不成立。
@@ -222,11 +222,9 @@ Node.js 18+（托管 22/24 亦可）。`.workbuddy` 为项目数据目录，**�
 - **交接红线**：**任何人/任何会话都不得在 Cloudflare 后台重新打开「托管 robots.txt」**，否则会覆盖仓库版、重新屏蔽 AI 爬虫，GEO 抓取断链。如误开，仓库版不会生效，需立即关闭。
 - 仓库 `public/robots.txt` 已是正确兜底；如需改爬虫策略，改仓库文件并 push，而非在 Cloudflare 开托管。
 
-### 8.5 双向同步说明
-- `vault:seed`：**站点 → 库**，一次性引导（把 `src/content` 导入库）。
-- `vault:sync`：**库 → 站点**，日常发布。
-- 二者**非持续双向**；直接改 `src/content` 库不会反向更新——**以库为唯一真源**。
-- `src/content/.obsidian` 已被 `.gitignore` 忽略，勿提交库配置。
+### 8.5 关于同步
+- 已无 `vault:seed` / `vault:sync`：2026-08-01 移除整套 vault↔site 同步层。`src/content/` 即唯一真源，编辑即生效。
+- 若把 `src/content` 当 vault 打开，Obsidian 会在其中生成 `.obsidian/`，已被 `.gitignore` 忽略，无需提交、无需处理。
 
 ---
 
@@ -274,7 +272,7 @@ git -c credential.helper= -c credential.helper=wincred push origin main
 
 | 量级 | 主要瓶颈 | 升级动作 | 动前端？ |
 |------|----------|----------|----------|
-| **0–1,000**（当前） | 无 | Markdown + Obsidian + 静态构建，保持现状。可接 Pagefind 客户端检索 | 否 |
+| **0–1,000**（当前） | 无 | `src/content` Markdown + 静态构建，保持现状。可接 Pagefind 客户端检索 | 否 |
 | **~1,000–5,000** | 人工编辑吞吐（非构建速度） | 数据源外置：Airtable/Notion/轻量 CMS/爬虫输出生成 `src/content/*`，或改写 `directory.ts` 加载逻辑；接 Pagefind | 否（接口不变） |
 | **5,000+** | 需日更粉丝数/实时指标、构建变慢 | Supabase/PostgreSQL 存动态数据；Astro 改 hybrid/SSR；`directory.ts` 函数改查库 | 否（页面/组件不变） |
 | **商业化** | 提交/赞助/对比页 | `/submit` mailto 改 API 路由；加赞助位与 `best-`/`alternatives-`/`compare-` SEO 页 | 局部 |
@@ -303,13 +301,13 @@ git -c credential.helper= -c credential.helper=wincred push origin main
 
 **环境接手**
 - [ ] `npm install` 成功；`npm run dev` 能起 `http://localhost:4321/zh`
-- [ ] Obsidian 库 `E:\Obsidian\www.limingdao.com` 可访问；`npm run vault:sync` 能跑
+- [ ] `src/content/` 可直接编辑（Obsidian 打开该文件夹作界面，或任意编辑器）；`npm run build` 能跑
 - [ ] GitHub `main` 推送凭据可用（wincred，见 §9.3）
 - [ ] Vercel 项目归属与部署权限确认
 
 **内容接手**
-- [ ] 理解真源=Obsidian、库→站点单向同步
-- [ ] 掌握 5 类卡字段表与发布闸门（§8.2–8.3）
+- [ ] 理解真源=`src/content/`、直接编辑即上线（无 vault/sync）
+- [ ] 掌握 5 类卡字段表与发布控制（§8.2–8.3）
 - [ ] 记住指南两种形态（§5）、账号指标不虚构（§6.5）
 
 **AI 接手**
@@ -335,8 +333,7 @@ git -c credential.helper= -c credential.helper=wincred push origin main
 npm run dev          # 本地开发（热更新）→ http://localhost:4321/zh
 npm run build        # 生产静态构建 → dist/（先 mv dist 规避沙箱钩子，见 §9.2）
 npm run preview      # 预览构建产物
-npm run vault:seed   # src/content → Obsidian 库（一次性引导）
-npm run vault:sync   # Obsidian 已发布卡 → src/content
+# 无 vault:seed / vault:sync：src/content 即真源，直接编辑后 npm run build
 
 # 推送（Windows wincred，见 §9.3）
 git -c credential.helper= -c credential.helper=wincred push origin main
@@ -393,7 +390,7 @@ curl -s https://www.limingdao.com/zh | grep -oE 'hreflang=|og:image|application/
 - **单一数据层 `src/lib/directory.ts`**：页面/组件绝不直接读 Markdown，全部经 getter 函数。这是整套系统最值钱的设计——**扩容只换数据源、不动前端、不破 URL/SEO**。
 - **Content Collections + Zod**：构建期校验拦截脏数据，是质量闸门。
 - **Astro static 输出**：零运行时、零后端、部署简单（GitHub→Vercel），契合「纯 GEO/SEO 静态站」定位。
-- **Obsidian 为唯一真源 + `vault:sync`**：内容运营与代码解耦，非技术运营者也能维护。
+- **`src/content` 为唯一真源（Obsidian 仅作编辑器）**：内容运营与代码解耦，非技术运营者也能维护（用 Obsidian 打开 `src/content` 文件夹即可）。
 
 **风险点（需治理）**
 1. **无预发环境 / 无 CI**：`push main` 即上生产。建议加 Vercel Preview 部署或分支保护。
@@ -407,7 +404,7 @@ curl -s https://www.limingdao.com/zh | grep -oE 'hreflang=|og:image|application/
 **现状**：166 账号×2、10 分类、11 平台、13 指南（含 12 篇 GEO 长文）。量级处于「0–1,000」阶段，当前 Markdown+Obsidian 方案绰绰有余（详见 §11 扩容阈值）。
 
 **方向建议**
-- **短期（保持）**：坚守「不编造数据」红线；持续用 Obsidian 模板增账号；把指南两种形态约定执行到位。
+- **短期（保持）**：坚守「不编造数据」红线；在 `src/content/` 直接增改账号（可用 Obsidian 打开该文件夹作界面）；把指南两种形态约定执行到位。
 - **中期（增长）**：① 扩指南广度（每个分类≥2 篇，逐步向长尾领域延伸，这是最强 GEO 资产）；② 账号量逼近 1,000 时接入 Pagefind 客户端检索；③ 关注 GA4/Clarity 中「AI 引荐」流量，验证 GEO 实际成效。
 - **长期（规模化）**：按 §11 阈值——1k–5k 外置数据源（Airtable/Notion/爬虫），5k+ 迁 Supabase+SSR。**永远只换 `directory.ts` 背后的数据源**，接口签名不变。
 

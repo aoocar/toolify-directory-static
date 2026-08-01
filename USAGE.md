@@ -202,22 +202,11 @@ Every `account` and `category` supports optional `seo` and `geo`:
 
 ---
 
-## 10. Obsidian Workflow
+## 10. Content Source & Editing
 
-The site is maintained from an Obsidian vault at `E:\Obsidian\www.limingdao.com`.
+`src/content/` is the **single source of truth** — Astro reads it directly at build time. You can edit it with any Markdown editor, or open the folder `D:\project\codex\toolify\src\content` directly in Obsidian as a "UI-backed database manager" (graph view, backlinks, search). See `OBSIDIAN_WORKFLOW.zh-CN.md`.
 
-- **Seed (one-time):** `npm run vault:seed` — imports `src/content/{accounts,categories,platforms,news,guides}` into the vault as knowledge cards.
-- **Sync back:** `npm run vault:sync` — publishes vault cards whose frontmatter matches the publish rules:
-
-  | Type | Publish when |
-  |------|--------------|
-  | account | `type: account`, `status: approved`, `publish: true` |
-  | category | `type: category`, `publish: true` |
-  | platform | `type: platform`, `publish: true` |
-  | news | `type: news`, `publish: true` |
-  | guide | `type: guide`, `publish: true` |
-
-Then `npm run build`. Zod validation blocks malformed data before it ships.
+Daily workflow: edit `.md` files under `src/content` → `npm run build` (Zod blocks malformed data) → push to deploy. There is **no** `vault:seed` / `vault:sync` step.
 
 ---
 
@@ -264,6 +253,4 @@ The `/zh` and `/en` home pages render, in order: hero search + stats, quick link
 npm run dev          # local dev (hot reload)
 npm run build        # production static build → dist/
 npm run preview      # preview the build
-npm run vault:seed   # import src/content → Obsidian vault (one-time)
-npm run vault:sync   # publish approved vault cards → src/content
 ```
