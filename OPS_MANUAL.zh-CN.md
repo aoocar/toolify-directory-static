@@ -22,6 +22,25 @@
 | **AI 自动化运营** | §7 全部 · §8 库管理 · §6 质检清单 · §9 推送 | 批量生成/维护内容、安全同步推送 |
 | **技术开发 / 升级** | §3 架构与接口 · §5 内容模型 · §10 扩容路线 · §9 部署 · §11 故障排查 | 改架构、换数据源、不破坏 URL/SEO |
 
+### 0.1 新会话启动提示词（开新会话时整段粘贴）
+
+> 无论是新 AI 会话、人工接手还是技术升级，开新会话时把下面这段**整段粘贴**给 AI，可让它立即进入安全操作状态。它已指向本手册并内置红线速记；把 `[在此写本次任务]` 替换为当次需求即可。在 WorkBuddy 内新开会话时，项目记忆会自动注入（仅摘要），正式交接仍以本手册为准；若换用其它无自动记忆的 AI 工具，本段 + 让其自读 `OPS_MANUAL.zh-CN.md` 即为完整上下文。
+
+```
+你正在接手「黎明岛 / Dawn Island」(https://www.limingdao.com) 项目的后续运维。
+第一步：完整阅读仓库根目录的 `OPS_MANUAL.zh-CN.md`（总运维交接手册），按 §0 的「按接手方使用表」定位你该读哪些章节。
+
+项目速记（与手册一致，红线优先）：
+- 性质：纯 GEO/SEO 用途的**双语(zh/en)静态站**，Astro 5 + Content Collections + Zod，GitHub→Vercel 部署，**无交互功能**（用户硬性约束）。
+- 内容真源 = Obsidian 库 `E:\Obsidian\www.limingdao.com`；站点 `src/content/*` 由 `npm run vault:sync` 生成，日常不要直接手改 src/content（会漂移）。
+- 红线（不可擅自）：① 不编造粉丝/互动/增长/排名数据（查不到就留空）；② 不改已发布实体的 slug；③ 不私自 push 生产；④ Cloudflare 后台「托管 robots.txt」开关必须保持关闭（误开会覆盖仓库版、重新屏蔽 AI 爬虫、断 GEO）；⑤ AI 任何改/生成/删文件前走三步法（提方案→等我看→等我确认）。
+- 推送命令：`git -c credential.helper= -c credential.helper=wincred push origin main`（Windows wincred）。
+- 当前 GEO 状态：已打通（AI 爬虫全放行 + llms.txt HTTP200 + 四类结构化数据 + 全站 hreflang + og:image）。
+- 本地 `npm run build` 可能报 EXIT=1（沙箱 safe-delete 钩子误报），看 Astro 的 `✓ Completed` 判定成功，Vercel 不受影响。
+
+我的具体需求是：[在此写本次任务]
+```
+
 ---
 
 ## 1. 总原则（所有接手方遵守）
