@@ -64,7 +64,7 @@ A professor at China University of Political Science and Law who explains crimin
 
 A former physics teacher known for "explaining the deepest principle in the plainest words" — physics, math, economics, social phenomena, everything. The entry-level creator for general science.
 
-**Who it suits**: anyone wanting a cross-disciplinary general视野 and the principles behind everyday phenomena.
+**Who it suits**: anyone wanting a cross-disciplinary general perspective and the principles behind everyday phenomena.
 **How to use it**: treat it as a general dictionary. When you hit an unexplained phenomenon (why leap years, what is quantum), search his coverage first.
 
 ### [CAS Physics](/en/accounts/cas-physics)
@@ -126,7 +126,7 @@ Known for series like "hardcore fierce people", telling historical figures and e
 
 Deeper, evidence-based history with high information density — for those who want to dig.
 
-**Who it suits**: readers unsatisfied with stories who want stricter梳理.
+**Who it suits**: readers unsatisfied with stories who want stricter synthesis.
 **How to use it**: after a basic thread exists, use his depth as supplement and correction.
 
 ## How to judge whether a science account is trustworthy

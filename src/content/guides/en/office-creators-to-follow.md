@@ -102,7 +102,7 @@ Covers Word, Excel, and PPT workplace tips with a fast pace and clear scenarios.
 
 ### [Duidui Bangong](/en/accounts/duidui-bangong)
 
-Approaches efficiency from a "debunk the套路" angle, often dismantling inefficient habits — good for anyone wanting to change how they work.
+Approaches efficiency from a "debunk the playbook" angle, often dismantling inefficient habits — good for anyone wanting to change how they work.
 
 ### [Houge Bangong](/en/accounts/houge-bangong)
 

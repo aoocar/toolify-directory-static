@@ -10,6 +10,8 @@ const { lang } = Astro.params as { lang: Lang };
 const title = t(lang, "exitTitle");
 const description = t(lang, "exitLeaving");
 const backPath = localizedPath(lang, "/");
+const exitInvalid = t(lang, "exitInvalid");
+const exitBackHome = t(lang, "exitBackHome");
 ---
 
 <BaseLayout lang={lang} title={title} description={description}>
@@ -140,7 +142,7 @@ const backPath = localizedPath(lang, "/");
   }
 </style>
 
-<script>
+<script is:inline define:vars={{ exitInvalid, exitBackHome }}>
   const pageEl = document.querySelector<HTMLElement>(".exit-page");
   const hostEl = document.getElementById("exit-host");
   const goEl = document.getElementById("exit-go") as HTMLAnchorElement | null;
@@ -149,21 +151,18 @@ const backPath = localizedPath(lang, "/");
   const warningEl = document.getElementById("exit-warning");
 
   const backPath = pageEl?.dataset.back || "/zh";
-  const isZh = (pageEl?.dataset.lang || "zh") === "zh";
 
   const params = new URLSearchParams(window.location.search);
   const to = params.get("to");
   const SAFE = /^https?:\/\//i;
 
   if (!to || !SAFE.test(to)) {
-    // 无效 / 不安全链接：停止倒计时，提示并返回
+    // Invalid / unsafe link: stop the countdown, show a notice and return.
     if (hostEl) hostEl.textContent = "—";
     if (countdownEl) countdownEl.style.display = "none";
-    if (warningEl) warningEl.textContent = isZh
-      ? "链接无效或不安全，无法跳转。"
-      : "Invalid or unsafe link — cannot redirect.";
+    if (warningEl) warningEl.textContent = exitInvalid;
     if (goEl) {
-      goEl.textContent = isZh ? "返回首页" : "Back to home";
+      goEl.textContent = exitBackHome;
       goEl.href = backPath;
       goEl.addEventListener("click", (e) => {
         e.preventDefault();
@@ -178,7 +177,7 @@ const backPath = localizedPath(lang, "/");
       target = u.href;
       hostname = u.hostname;
     } catch {
-      /* 保留原始值 */
+      /* keep original value */
     }
 
     if (hostEl) hostEl.textContent = hostname;

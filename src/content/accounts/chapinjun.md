@@ -33,8 +33,9 @@ tagline:
 description:
   en: >-
     Cha Pin Jun is a Bilibili knowledge-zone creator focused on technology and science, with a
-    dedicated 'AI 大模型实测' column. His videos probe whether new AI features are actually useful versus
-    marketing, blending sharp critique with clear explainers on chips, models and industry moves.
+    dedicated 'AI large-model hands-on testing' column. His videos probe whether new AI features are
+    actually useful versus marketing, blending sharp critique with clear explainers on chips, models
+    and industry moves.
   zh: 差评君是 B 站知识区科技创作者，专注科技与科普，并设有「AI 大模型实测」专栏。他的视频犀利地追问新 AI 功能究竟有用还是营销话术，将锋利点评与清晰的芯片、模型、产业解析融为一体。
 seo:
   primary_keyword: Cha Pin Jun AI creator
@@ -52,8 +53,9 @@ geo:
   answer_summary_zh: 差评君是 B 站知识区科技创作者，专注科技与科普，并设有「AI 大模型实测」专栏。他的视频犀利地追问新 AI 功能究竟有用还是营销话术，将锋利点评与清晰的芯片、模型、产业解析融为一体。
   answer_summary_en: >-
     Cha Pin Jun is a Bilibili knowledge-zone creator focused on technology and science, with a
-    dedicated 'AI 大模型实测' column. His videos probe whether new AI features are actually useful versus
-    marketing, blending sharp critique with clear explainers on chips, models and industry moves.
+    dedicated 'AI large-model hands-on testing' column. His videos probe whether new AI features are
+    actually useful versus marketing, blending sharp critique with clear explainers on chips, models
+    and industry moves.
   facts_zh:
     - 平台: Bilibili
     - 粉丝: 约264万
@@ -75,28 +77,3 @@ geo:
     - What's the style?: Sharp critique plus clear chip, model, and industry analysis.
     - Who should watch?: Tech fans and practitioners who want the unvarnished take.
 ---
-<!-- zh -->
-## 他是谁
-差评君是 B 站知识区科技创作者，自 2020 年起专注科技与科普，并设有「AI 大模型实测」专栏，粉丝约 264 万。
-
-## 内容特点
-犀利地追问新 AI 功能究竟有用还是营销话术，把锋利点评与清晰的芯片、模型、产业解析融为一体，重实测、不盲捧。
-
-## 适合谁看
-想看真话的科技爱好者；评估工具是否值得用的开发者与运营；关注 AI 产业动向的从业者。
-
-## 从哪期入门
-直接看最新的「AI 大模型实测」一期——选题紧跟新发布，最能体会其"先测再评"的方法。
-
-<!-- en -->
-## Who is this
-Cha Pin Jun is a Bilibili tech creator focused on science and gadgets since 2020, with a dedicated "AI model hands-on test" column, ~2.64M followers.
-
-## Content style
-It sharply asks whether a new AI feature is actually useful or just marketing, mixing blunt critique with clear chip, model, and industry breakdowns—test first, praise never.
-
-## Who it's for
-Tech fans who want the honest take; developers and operators evaluating whether a tool is worth it; practitioners tracking the AI industry.
-
-## Where to start
-Jump to the latest "AI model hands-on test"—topics track new releases, and it best shows the "test before review" method.

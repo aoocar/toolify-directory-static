@@ -33,7 +33,7 @@ tagline:
 description:
   en: >-
     Qiuzhi (real name Qiu Zhi) is a former product manager who pivoted to AI content creation. On
-    Bilibili her account '秋芝2046' shares AI tool reviews, hands-on tutorials and industry
+    Bilibili her account 'Qiuzhi 2046' shares AI tool reviews, hands-on tutorials and industry
     observations; she directed and hosted Bilibili's first AI Spring Festival Gala in 2026. Her
     DeepSeek explainer hit the site-wide top 10.
   zh: >-
@@ -57,7 +57,7 @@ geo:
     DeepSeek 全面解读视频曾登上 B 站全站排行前十。
   answer_summary_en: >-
     Qiuzhi (real name Qiu Zhi) is a former product manager who pivoted to AI content creation. On
-    Bilibili her account '秋芝2046' shares AI tool reviews, hands-on tutorials and industry
+    Bilibili her account 'Qiuzhi 2046' shares AI tool reviews, hands-on tutorials and industry
     observations; she directed and hosted Bilibili's first AI Spring Festival Gala in 2026. Her
     DeepSeek explainer hit the site-wide top 10.
   facts_zh:
@@ -80,38 +80,3 @@ geo:
     - Where to watch?: Bilibili.
     - How big is the audience?: ~1.05M (publicly reported, for reference).
 ---
-<!-- zh -->
-## 他是谁
-秋芝2046 是B站（Bilibili）上的AI 人工智能创作者。前产品经理，让普通人真正用好 AI
-
-## 内容特点
-内容以工具横评、实战教学、热点跟进为主，覆盖AI工具评测、AI实战、行业观察等方向，侧重把复杂主题讲清楚、可上手。
-
-## 适合谁看
-适合对AI 人工智能感兴趣、希望系统了解并实践应用的读者，从入门到进阶都能找到对应内容。
-
-## 从哪里开始
-建议在B站（Bilibili）关注秋芝2046，从最新或热门内容切入，逐步建立对该领域的认知。
-
-## 常见问题
-**主要发布平台？** B站（Bilibili）。
-**内容适合零基础吗？** 多数内容兼顾入门与进阶，建议从基础系列开始。
-**粉丝规模？** 约104.9万（公开可查，仅供参考）。
-
-<!-- en -->
-## Who is this
-Qiuzhi 2046 on Bilibili. Former PM making AI tools actually usable for ordinary people
-
-## What the content is like
-The content is clear and hands-on, covering the AI & Artificial Intelligence space with actionable explainers and real examples.
-
-## Who it is for
-Readers interested in AI & Artificial Intelligence who want a structured, hands-on learning path — from beginner basics to deeper practice.
-
-## Where to start
-Follow Qiuzhi 2046 on Bilibili, begin with the latest or most popular posts, and build up your understanding step by step.
-
-## FAQ
-**Main platform?** Bilibili.
-**Beginner-friendly?** Most content serves both starters and advanced learners; begin with the foundational series.
-**Audience size?** ~1.05M (publicly reported, for reference).

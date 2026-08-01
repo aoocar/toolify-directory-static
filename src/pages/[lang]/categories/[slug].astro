@@ -31,8 +31,13 @@ const categoryAccounts = await getAccountsByCategory(slug);
 const categoryGuides = await getRelatedGuides(lang, slug, "");
 
 const geoSummary = lang === "zh" ? category.geo?.answer_summary_zh : category.geo?.answer_summary_en;
-const geoFacts = category.geo?.facts ?? [];
-const geoFaq = category.geo?.faq ?? [];
+// Bilingual facts/faq: prefer the explicit _en / _zh variants, falling back to
+// the legacy single-language `facts`/`faq` (Chinese) so the English page never
+// renders Chinese (mirrors the account detail page logic).
+const geoFacts =
+  (lang === "zh" ? (category.geo?.facts_zh ?? category.geo?.facts) : category.geo?.facts_en) ?? [];
+const geoFaq =
+  (lang === "zh" ? (category.geo?.faq_zh ?? category.geo?.faq) : category.geo?.faq_en) ?? [];
 const faqLd = faqJsonLd(geoFaq, lang);
 const metaDescription = (lang === "zh" ? category.seo?.meta_description_zh : category.seo?.meta_description_en) || category.description[lang];
 const pageTitle =

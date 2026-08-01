@@ -8,6 +8,8 @@ type Props = {
 };
 
 const { account, lang } = Astro.props;
+const isAscii = (s: string) => /^[\u0000-\u007f]*$/.test(s);
+const displayTags = lang === "en" ? account.tags.filter(isAscii).slice(0, 3) : account.tags.slice(0, 3);
 ---
 
 <article class="account-card">
@@ -35,7 +37,7 @@ const { account, lang } = Astro.props;
     </div>
   </div>
   <div class="tag-row">
-    {account.tags.slice(0, 3).map((tag) => <span class="pill">#{tag}</span>)}
+    {displayTags.map((tag) => <span class="pill">#{tag}</span>)}
   </div>
   <div class="card-actions">
     <a class="button secondary full-width" href={localizedPath(lang, `/accounts/${account.slug}`)}>

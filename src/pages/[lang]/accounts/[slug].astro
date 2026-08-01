@@ -53,6 +53,13 @@ function extractLangMarkdown(md: string, activeLang: Lang): string {
   return md.slice(start).trim();
 }
 
+// Safe-filter (v1): on English pages, only keep ASCII/English tags & content
+// style so the page carries zero Chinese in these data fields. No translation
+// needed — Chinese-only values are simply omitted (en pages lose a few tags).
+const isAscii = (s: string) => /^[\u0000-\u007f]*$/.test(s);
+const displayTags = lang === "en" ? account.tags.filter(isAscii) : account.tags;
+const displayStyle = lang === "en" ? account.contentStyle.filter(isAscii) : account.contentStyle;
+
 let bodyHtml: string | null = null;
 const accountEntry = (await getCollection("accounts")).find(
   (e) => (e.data.slug ?? e.slug) === slug
@@ -104,7 +111,7 @@ const allCategories = await getCategories();
 const catName = (slug: string) =>
   allCategories.find((c) => c.slug === slug)?.name[lang] || "";
 const knowsAbout = Array.from(
-  new Set([...account.categories.map(catName).filter(Boolean), ...account.tags])
+  new Set([...account.categories.map(catName).filter(Boolean), ...(lang === "en" ? account.tags.filter(isAscii) : account.tags)])
 );
 const jobTitle = lang === "zh" ? "内容创作者" : "Content Creator";
 
@@ -173,19 +180,23 @@ const breadcrumbLd = breadcrumbJsonLd({
           )
         }
 
-        <section class="detail-section">
-          <h2>{t(lang, "contentStyle")}</h2>
-          <div class="tag-row">
-            {account.contentStyle.map((style) => <span class="pill">#{style}</span>)}
-          </div>
-        </section>
+        {displayStyle.length > 0 && (
+          <section class="detail-section">
+            <h2>{t(lang, "contentStyle")}</h2>
+            <div class="tag-row">
+              {displayStyle.map((style) => <span class="pill">#{style}</span>)}
+            </div>
+          </section>
+        )}
 
-        <section class="detail-section">
-          <h2>{t(lang, "tags")}</h2>
-          <div class="tag-row">
-            {account.tags.map((tag) => <span class="pill">#{tag}</span>)}
-          </div>
-        </section>
+        {displayTags.length > 0 && (
+          <section class="detail-section">
+            <h2>{t(lang, "tags")}</h2>
+            <div class="tag-row">
+              {displayTags.map((tag) => <span class="pill">#{tag}</span>)}
+            </div>
+          </section>
+        )}
 
         {
           geoSummary && (

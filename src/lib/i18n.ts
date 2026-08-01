@@ -95,6 +95,11 @@ export const dictionary = {
     submitTitle: "Recommend a Creator",
     submitBody:
       "Know an outstanding creator we should feature? Submit their profile and we'll review it for inclusion.",
+    submitSubj: "Creator recommendation: ",
+    submitName: "Account name: ",
+    submitUrl: "Account URL: ",
+    submitPlat: "Platform: ",
+    submitReason: "Reason: ",
 
     /* contact */
     contactTitle: "Contact Us",
@@ -155,6 +160,7 @@ export const dictionary = {
     exitGo: "Continue",
     exitCancel: "Cancel and go back",
     exitInvalid: "Invalid or unsafe link — cannot redirect.",
+    exitBackHome: "Back to home",
 
     /* platform types */
     "type.short-video": "Short Video",
@@ -243,6 +249,11 @@ export const dictionary = {
     /* submit */
     submitTitle: "推荐优质账号",
     submitBody: "发现了值得收录的优质创作者？提交账号信息，我们审核后会尽快收录。",
+    submitSubj: "创作者推荐：",
+    submitName: "账号名称：",
+    submitUrl: "账号链接：",
+    submitPlat: "所在平台：",
+    submitReason: "推荐理由：",
 
     /* contact */
     contactTitle: "联系我们",
@@ -302,6 +313,7 @@ export const dictionary = {
     exitGo: "立即前往",
     exitCancel: "取消并返回",
     exitInvalid: "链接无效或不安全，无法跳转。",
+    exitBackHome: "返回首页",
 
     /* platform types */
     "type.short-video": "短视频",

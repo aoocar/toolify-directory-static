@@ -7,6 +7,11 @@ export function getStaticPaths() {
 }
 
 const lang = Astro.params.lang as Lang;
+const submitSubj = t(lang, "submitSubj");
+const submitName = t(lang, "submitName");
+const submitUrl = t(lang, "submitUrl");
+const submitPlat = t(lang, "submitPlat");
+const submitReason = t(lang, "submitReason");
 ---
 
 <BaseLayout lang={lang} title={`${t(lang, "submitTitle")} - ${t(lang, "brand")}`} description={t(lang, "submitBody")}>
@@ -44,7 +49,7 @@ const lang = Astro.params.lang as Lang;
         </p>
       </form>
 
-      <script>
+      <script is:inline define:vars={{ submitSubj, submitName, submitUrl, submitPlat, submitReason }}>
         const form = document.getElementById("submit-form");
         form.addEventListener("submit", (e) => {
           e.preventDefault();
@@ -52,9 +57,9 @@ const lang = Astro.params.lang as Lang;
           const url = document.getElementById("creator-url").value.trim();
           const platform = document.getElementById("creator-platform").value.trim();
           const reason = document.getElementById("creator-reason").value.trim();
-          const subject = encodeURIComponent("创作者推荐：" + name);
+          const subject = encodeURIComponent(submitSubj + name);
           const body = encodeURIComponent(
-            "账号名称：" + name + "\n账号链接：" + url + "\n所在平台：" + platform + "\n推荐理由：" + reason
+            submitName + name + "\n" + submitUrl + url + "\n" + submitPlat + platform + "\n" + submitReason + reason
           );
           window.location.href = "mailto:aoobee@sina.com?subject=" + subject + "&body=" + body;
         });

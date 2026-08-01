@@ -14,6 +14,7 @@ export function getStaticPaths() {
 }
 
 const lang = Astro.params.lang as Lang;
+const isAscii = (s: string) => /^[\u0000-\u007f]*$/.test(s);
 const [featuredAccounts, latestAccounts, rankedAccounts, categories, platforms] = await Promise.all([
   getFeaturedAccounts(),
   getLatestAccounts(),
@@ -108,7 +109,7 @@ const websiteLd = websiteJsonLd({
                     <p>{account.description[lang]}</p>
                     <div class="tag-row">
                       <span class="pill">{account.platformItem?.name[lang] || account.platform}</span>
-                      {account.tags.slice(0, 4).map((tag) => <span class="pill">#{tag}</span>)}
+                      {account.tags.filter((tag) => lang === "en" ? isAscii(tag) : true).slice(0, 4).map((tag) => <span class="pill">#{tag}</span>)}
                     </div>
                   </div>
                   <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 8px;">

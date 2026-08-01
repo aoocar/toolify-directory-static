@@ -32,10 +32,10 @@ tagline:
   zh: 拆解网络热门 AI，教普通人识破 AI 骗局
 description:
   en: >-
-    Dong Wei (Git Yuanbao) is a Bilibili creator famous for his '网络热门 AI 鉴定' series, debunking
-    overhyped or fraudulent AI content and teaching ordinary users — especially the elderly — how to
-    recognize deepfakes, voice clones and GEO grey-markets. He builds open tools to help the
-    'left-behind' use AI safely.
+    Dong Wei (Git Yuanbao) is a Bilibili creator famous for his 'viral AI fact-check' series,
+    debunking overhyped or fraudulent AI content and teaching ordinary users — especially the
+    elderly — how to recognize deepfakes, voice clones and GEO grey-markets. He builds open tools to
+    help the 'left-behind' use AI safely.
   zh: >-
     董纬（Git 源宝）以「网络热门 AI 鉴定」系列闻名，拆解被过度炒作或带有欺诈性质的 AI 内容，教普通人——尤其是老年人——识别换脸、声音克隆与 GEO
     灰产。他还开发开源工具，帮助「慢下来的人」安全地用上 AI。
@@ -56,10 +56,10 @@ geo:
     董纬（Git 源宝）以「网络热门 AI 鉴定」系列闻名，拆解被过度炒作或带有欺诈性质的 AI 内容，教普通人——尤其是老年人——识别换脸、声音克隆与 GEO
     灰产。他还开发开源工具，帮助「慢下来的人」安全地用上 AI。
   answer_summary_en: >-
-    Dong Wei (Git Yuanbao) is a Bilibili creator famous for his '网络热门 AI 鉴定' series, debunking
-    overhyped or fraudulent AI content and teaching ordinary users — especially the elderly — how to
-    recognize deepfakes, voice clones and GEO grey-markets. He builds open tools to help the
-    'left-behind' use AI safely.
+    Dong Wei (Git Yuanbao) is a Bilibili creator famous for his 'viral AI fact-check' series,
+    debunking overhyped or fraudulent AI content and teaching ordinary users — especially the
+    elderly — how to recognize deepfakes, voice clones and GEO grey-markets. He builds open tools to
+    help the 'left-behind' use AI safely.
   facts_zh:
     - 平台: B站（Bilibili）
     - 领域: AI 人工智能
@@ -80,38 +80,3 @@ geo:
     - Where to watch?: Bilibili.
     - How big is the audience?: ~1.02M (publicly reported, for reference).
 ---
-<!-- zh -->
-## 他是谁
-Git源宝 是B站（Bilibili）上的AI 人工智能创作者。拆解网络热门 AI，教普通人识破 AI 骗局
-
-## 内容特点
-内容以热点鉴定、技术拆解、公益导向为主，覆盖AI鉴定、反诈科普、大模型测评等方向，侧重把复杂主题讲清楚、可上手。
-
-## 适合谁看
-适合对AI 人工智能感兴趣、希望系统了解并实践应用的读者，从入门到进阶都能找到对应内容。
-
-## 从哪里开始
-建议在B站（Bilibili）关注Git源宝，从最新或热门内容切入，逐步建立对该领域的认知。
-
-## 常见问题
-**主要发布平台？** B站（Bilibili）。
-**内容适合零基础吗？** 多数内容兼顾入门与进阶，建议从基础系列开始。
-**粉丝规模？** 约102万（公开可查，仅供参考）。
-
-<!-- en -->
-## Who is this
-Git Yuanbao on Bilibili. Exposing AI scams and teaching people to spot fake AI
-
-## What the content is like
-The content is clear and hands-on, covering the AI & Artificial Intelligence space with actionable explainers and real examples.
-
-## Who it is for
-Readers interested in AI & Artificial Intelligence who want a structured, hands-on learning path — from beginner basics to deeper practice.
-
-## Where to start
-Follow Git Yuanbao on Bilibili, begin with the latest or most popular posts, and build up your understanding step by step.
-
-## FAQ
-**Main platform?** Bilibili.
-**Beginner-friendly?** Most content serves both starters and advanced learners; begin with the foundational series.
-**Audience size?** ~1.02M (publicly reported, for reference).

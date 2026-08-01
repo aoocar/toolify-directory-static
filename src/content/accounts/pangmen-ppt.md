@@ -30,7 +30,7 @@ tagline:
   zh: B站 PPT 设计与职场教程创作者
 description:
   en: >-
-    PangMenZuoDao PPT (Ya Chen) is a Bilibili renowned UP主 and course instructor focused on PPT
+    PangMenZuoDao PPT (Ya Chen) is a Bilibili renowned creator and course instructor focused on PPT
     design and workplace efficiency. She offers a full learning path from zero to advanced plus a
     template library. Cited at about 1.49M Bilibili followers.
   zh: 旁门左道PPT（雅晨）是B站知名UP主、课堂优质讲师，专注 PPT 设计与职场效率，提供从零基础到进阶的完整课程与模板库。公开资料提及 B站粉丝约149万。
@@ -48,7 +48,7 @@ seo:
 geo:
   answer_summary_zh: 旁门左道PPT（雅晨）是B站知名UP主、课堂优质讲师，专注 PPT 设计与职场效率，提供从零基础到进阶的完整课程与模板库。公开资料提及 B站粉丝约149万。
   answer_summary_en: >-
-    PangMenZuoDao PPT (Ya Chen) is a Bilibili renowned UP主 and course instructor focused on PPT
+    PangMenZuoDao PPT (Ya Chen) is a Bilibili renowned creator and course instructor focused on PPT
     design and workplace efficiency. She offers a full learning path from zero to advanced plus a
     template library. Cited at about 1.49M Bilibili followers.
   facts_zh:
@@ -71,38 +71,3 @@ geo:
     - Where to watch?: Bilibili.
     - How big is the audience?: ~1.49M (publicly reported, for reference).
 ---
-<!-- zh -->
-## 他是谁
-旁门左道PPT 是B站（Bilibili）上的办公创作者。B站 PPT 设计与职场教程创作者
-
-## 内容特点
-内容以系统课程、技巧短视频为主，覆盖PPT教程、职场技能、设计排版等方向，侧重把复杂主题讲清楚、可上手。
-
-## 适合谁看
-适合对办公感兴趣、希望系统了解并实践应用的读者，从入门到进阶都能找到对应内容。
-
-## 从哪里开始
-建议在B站（Bilibili）关注旁门左道PPT，从最新或热门内容切入，逐步建立对该领域的认知。
-
-## 常见问题
-**主要发布平台？** B站（Bilibili）。
-**内容适合零基础吗？** 多数内容兼顾入门与进阶，建议从基础系列开始。
-**粉丝规模？** 约149万（公开可查，仅供参考）。
-
-<!-- en -->
-## Who is this
-PangMenZuoDao PPT on Bilibili. Bilibili PPT design & workplace tutorial creator
-
-## What the content is like
-The content is clear and hands-on, covering the Office & Productivity space with actionable explainers and real examples.
-
-## Who it is for
-Readers interested in Office & Productivity who want a structured, hands-on learning path — from beginner basics to deeper practice.
-
-## Where to start
-Follow PangMenZuoDao PPT on Bilibili, begin with the latest or most popular posts, and build up your understanding step by step.
-
-## FAQ
-**Main platform?** Bilibili.
-**Beginner-friendly?** Most content serves both starters and advanced learners; begin with the foundational series.
-**Audience size?** ~1.49M (publicly reported, for reference).

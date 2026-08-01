@@ -33,10 +33,10 @@ tagline:
   zh: 清华出身的机器学习「白板推导」系列
 description:
   en: >-
-    shuhuai008 is a Bilibili educator known for the '机器学习-白板推导系列', deriving ML algorithms from
-    scratch on a whiteboard with rigorous, step-by-step math. The Tsinghua-linked creator's
-    framework-first approach is a favorite for learners who want to truly understand the theory, not
-    just use the tools.
+    shuhuai008 is a Bilibili educator known for the 'Machine Learning Whiteboard Derivation series',
+    deriving ML algorithms from scratch on a whiteboard with rigorous, step-by-step math. The
+    Tsinghua-linked creator's framework-first approach is a favorite for learners who want to truly
+    understand the theory, not just use the tools.
   zh: >-
     shuhuai008
     以「机器学习-白板推导系列」闻名，在白板上从零推导机器学习算法的数学过程，严谨且循序渐进。这位清华背景的创作者采用「先框架、再拆解」的方式，深受想真正搞懂理论而非只会调包的学习者喜爱。
@@ -57,10 +57,10 @@ geo:
     shuhuai008
     以「机器学习-白板推导系列」闻名，在白板上从零推导机器学习算法的数学过程，严谨且循序渐进。这位清华背景的创作者采用「先框架、再拆解」的方式，深受想真正搞懂理论而非只会调包的学习者喜爱。
   answer_summary_en: >-
-    shuhuai008 is a Bilibili educator known for the '机器学习-白板推导系列', deriving ML algorithms from
-    scratch on a whiteboard with rigorous, step-by-step math. The Tsinghua-linked creator's
-    framework-first approach is a favorite for learners who want to truly understand the theory, not
-    just use the tools.
+    shuhuai008 is a Bilibili educator known for the 'Machine Learning Whiteboard Derivation series',
+    deriving ML algorithms from scratch on a whiteboard with rigorous, step-by-step math. The
+    Tsinghua-linked creator's framework-first approach is a favorite for learners who want to truly
+    understand the theory, not just use the tools.
   facts_zh:
     - 平台: B站（Bilibili）
     - 领域: AI 人工智能、教育
@@ -83,38 +83,3 @@ geo:
     - Where to watch?: Bilibili.
     - How big is the audience?: ~160K (publicly reported, for reference).
 ---
-<!-- zh -->
-## 他是谁
-Shuhuai008 是B站（Bilibili）上的AI 人工智能、教育创作者。清华出身的机器学习「白板推导」系列
-
-## 内容特点
-内容以板书推导、系统框架、严谨为主，覆盖机器学习、白板推导、数学等方向，侧重把复杂主题讲清楚、可上手。
-
-## 适合谁看
-适合对AI 人工智能、教育感兴趣、希望系统了解并实践应用的读者，从入门到进阶都能找到对应内容。
-
-## 从哪里开始
-建议在B站（Bilibili）关注Shuhuai008，从最新或热门内容切入，逐步建立对该领域的认知。
-
-## 常见问题
-**主要发布平台？** B站（Bilibili）。
-**内容适合零基础吗？** 多数内容兼顾入门与进阶，建议从基础系列开始。
-**粉丝规模？** 约16万（公开可查，仅供参考）。
-
-<!-- en -->
-## Who is this
-shuhuai008 on Bilibili. Whiteboard derivations of machine-learning math from Tsinghua
-
-## What the content is like
-The content is clear and hands-on, covering the AI & Artificial Intelligence, Education space with actionable explainers and real examples.
-
-## Who it is for
-Readers interested in AI & Artificial Intelligence, Education who want a structured, hands-on learning path — from beginner basics to deeper practice.
-
-## Where to start
-Follow shuhuai008 on Bilibili, begin with the latest or most popular posts, and build up your understanding step by step.
-
-## FAQ
-**Main platform?** Bilibili.
-**Beginner-friendly?** Most content serves both starters and advanced learners; begin with the foundational series.
-**Audience size?** ~160K (publicly reported, for reference).
