@@ -330,4 +330,83 @@ curl -s https://www.limingdao.com/zh | grep -oE 'hreflang=|og:image|application/
 
 ---
 
+## 15. SEO/GEO 与运维架构分析检查报告（2026-08-01 实测快照）
+
+> 本报告为 2026-08-01 对生产站 https://www.limingdao.com 的实抓分析快照（方法：直接 curl 生产环境 + 解析 HTML 头/结构化数据 + 架构代码复核）。后续若有重大变更应重跑审计并更新本节；运维例行检查见 §13「GEO 状态确认」。
+
+### 15.1 线上实抓体检（事实层）
+
+| 维度 | 实测结果 |
+|------|----------|
+| Sitemap 规模 | **415 URL**（zh 207 + en 207 + 根页），单 `sitemap-0.xml`，双语完全对称、无孤儿路由 |
+| 首页 SEO | title=`黎明岛 - 全领域优质创作者导航`；canonical 绝对化正确；hreflang=`zh`/`en`/`x-default`(→zh) 齐全；og:image=`og-default.png`；twitter=`summary_large_image` |
+| 结构化数据 | 首页 `WebSite`；账号 `Person`+`BreadcrumbList`；分类 `CollectionPage`+`FAQPage`+`BreadcrumbList`；指南 `Article`(内嵌FAQ)+`BreadcrumbList`；平台 `BreadcrumbList` |
+| GEO 抓取 | robots.txt **8 个 AI 爬虫全 Allow**（GPTBot/ClaudeBot/Google-Extended/CCBot/Bytespider/Applebot/PerplexityBot/Bingbot），Cloudflare 托管残留=0 |
+| llms.txt | HTTP 200 |
+| og 图 | HTTP 200，1200×630 PNG |
+| 内链密度 | 首页唯一 `/zh` 内链 **198 条**；账号页含「收录该创作者的指南」反向内链 |
+
+**结论**：hreflang / og:image / 移除假 SearchAction / llms.txt / 放行 AI 爬虫 / BreadcrumbList 全部在线上持续生效，状态稳定。
+
+### 15.2 SEO/GEO 整体评估
+
+**强项（行业上游）**
+1. **结构化数据最完整**：四类页面 + 面包屑，AI 可直接消费 `Person`/`Article`/`FAQPage`/`CollectionPage`。
+2. **GEO 抓取通路已打通**：AI 爬虫全放行 + `llms.txt` 直连摄取，是被 ChatGPT/Claude/Gemini 引用的前提已满足。
+3. **内容天然问答化**：指南「一句话结论 / The short answer」+ 速览 + FAQ，利于被引用。
+4. **双语与 hreflang 闭环**：x-default 兜底，避免语言版本被误判重复。
+5. **实体互链密度高**：账号↔指南↔分类三向闭环，利于权重传递与实体图谱。
+
+**待优化（按优先级）**
+
+| 优先级 | 项 | 影响 |
+|--------|----|------|
+| P2 | 平台页仅 `BreadcrumbList`，无 `CollectionPage`/`WebSite` 级实体标记 | 平台页 GEO 权重偏低（平台页信息薄，收益有限） |
+| P2 | og:image 全站同一张品牌图 | 账号/指南/分类用专属分享图，社交卡片更精准（需权衡生成成本） |
+| P3 | 无真实站内搜索过滤 | 静态站硬约束，当前可接受 |
+| P3 | 指南覆盖仅 6 个领域各 2 篇 | GEO 资产广度可随内容增长扩展 |
+
+> 总体：SEO/GEO **已处于可交付、可被引用的健康态**，剩余项均为「锦上添花」，非阻塞。
+
+### 15.3 技术架构分析
+
+**架构评价：稳健、低耦合、可演进**
+- **单一数据层 `src/lib/directory.ts`**：页面/组件绝不直接读 Markdown，全部经 getter 函数。这是整套系统最值钱的设计——**扩容只换数据源、不动前端、不破 URL/SEO**。
+- **Content Collections + Zod**：构建期校验拦截脏数据，是质量闸门。
+- **Astro static 输出**：零运行时、零后端、部署简单（GitHub→Vercel），契合「纯 GEO/SEO 静态站」定位。
+- **Obsidian 为唯一真源 + `vault:sync`**：内容运营与代码解耦，非技术运营者也能维护。
+
+**风险点（需治理）**
+1. **无预发环境 / 无 CI**：`push main` 即上生产。建议加 Vercel Preview 部署或分支保护。
+2. **无自动化测试**：仅靠 `npm run build` 的 Zod 校验。可补少量构建期断言（如死链检测）。
+3. **Cloudflare 边缘覆盖风险**：`robots.txt` 曾被托管覆盖（已修复并写入 §8.4 红线）。属「配置漂移」类风险，靠纪律约束。
+4. **本地构建钩子噪声**：`genie-safe-delete` 误报 EXIT=1，需靠「看 ✓Completed 判定」规避误判。
+5. **依赖锁版本**：`package-lock` 应随仓库提交，避免 Vercel 用不同版本构建。
+
+### 15.4 运维方向分析
+
+**现状**：166 账号×2、10 分类、11 平台、13 指南（含 12 篇 GEO 长文）。量级处于「0–1,000」阶段，当前 Markdown+Obsidian 方案绰绰有余（详见 §11 扩容阈值）。
+
+**方向建议**
+- **短期（保持）**：坚守「不编造数据」红线；持续用 Obsidian 模板增账号；把指南两种形态约定执行到位。
+- **中期（增长）**：① 扩指南广度（每个分类≥2 篇，逐步向长尾领域延伸，这是最强 GEO 资产）；② 账号量逼近 1,000 时接入 Pagefind 客户端检索；③ 关注 GA4/Clarity 中「AI 引荐」流量，验证 GEO 实际成效。
+- **长期（规模化）**：按 §11 阈值——1k–5k 外置数据源（Airtable/Notion/爬虫），5k+ 迁 Supabase+SSR。**永远只换 `directory.ts` 背后的数据源**，接口签名不变。
+
+**治理要点**
+- 交接纪律已固化于本手册（§0 接手方表 + §13 检查清单 + §8.4 Cloudflare 红线）。
+- 建议每次发版后跑一次同类实抓审计，监控 hreflang / 结构化数据 / robots 三项「GEO 生命线」不回退。
+
+### 15.5 综合结论与行动清单
+
+**结论**：站点 SEO/GEO 基础扎实、结构化数据达上游、AI 抓取通路已打通；技术架构低耦合可演进；运维体系有手册兜底。整体**已具备被搜索引擎与 AI 回答引擎稳定收录、引用的条件**，无需紧急修复。
+
+**建议行动（按需，非紧急）**
+1. 加 Vercel Preview 部署 / 分支保护，降低「直推生产」风险。
+2. 指南广度随内容增长扩展（最强 GEO 杠杆）。
+3. 账号量近 1,000 时评估 Pagefind 检索。
+4. 定期（如每月）跑一次本审计，盯死 hreflang / 结构化数据 / robots 三项不回退。
+5. 平台页若想提权，可补 `CollectionPage` 级标记（低优先级）。
+
+---
+
 > **文档维护约定**：本手册为交接总入口，与四份源文档（`USAGE.zh-CN.md`/`OBSIDIAN_WORKFLOW.zh-CN.md`/`AI_OPERATIONS.zh-CN.md`/`UPGRADE.zh-CN.md`）共存。重大变更（架构升级、GEO 策略调整、robots/Cloudflare 约束变动）须同步更新本手册对应章节与项目记忆 `.workbuddy/memory/YYYY-MM-DD.md`。
