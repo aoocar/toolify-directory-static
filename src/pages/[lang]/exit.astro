@@ -12,6 +12,9 @@ const description = t(lang, "exitLeaving");
 const backPath = localizedPath(lang, "/");
 const exitInvalid = t(lang, "exitInvalid");
 const exitBackHome = t(lang, "exitBackHome");
+const rawTo = Astro.url.searchParams.get("to");
+const isSafeTarget = !!rawTo && /^https?:\/\//i.test(rawTo);
+const fallbackTarget = isSafeTarget ? rawTo : null;
 ---
 
 <BaseLayout lang={lang} title={title} description={description}>
@@ -31,6 +34,14 @@ const exitBackHome = t(lang, "exitBackHome");
         <a class="button primary" id="exit-go" href="#" rel="nofollow noopener noreferrer">{t(lang, "exitGo")}</a>
         <a class="button ghost" href={backPath}>{t(lang, "exitCancel")}</a>
       </div>
+      <noscript>
+        <style>.exit-actions{display:none!important}</style>
+        <p class="exit-countdown" style="margin-top:8px">
+          {fallbackTarget
+            ? <a class="button primary" href={fallbackTarget} rel="nofollow noopener noreferrer">{t(lang, "exitGo")}</a>
+            : <a class="button ghost" href={backPath}>{t(lang, "exitBackHome")}</a>}
+        </p>
+      </noscript>
     </div>
   </div>
 </BaseLayout>
@@ -143,9 +154,9 @@ const exitBackHome = t(lang, "exitBackHome");
 </style>
 
 <script is:inline define:vars={{ exitInvalid, exitBackHome }}>
-  const pageEl = document.querySelector<HTMLElement>(".exit-page");
+  const pageEl = document.querySelector(".exit-page");
   const hostEl = document.getElementById("exit-host");
-  const goEl = document.getElementById("exit-go") as HTMLAnchorElement | null;
+  const goEl = document.getElementById("exit-go");
   const secEl = document.getElementById("exit-sec");
   const countdownEl = document.getElementById("exit-countdown");
   const warningEl = document.getElementById("exit-warning");
