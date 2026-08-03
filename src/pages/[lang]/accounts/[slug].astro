@@ -30,7 +30,7 @@ const { lang, slug } = Astro.params as { lang: Lang; slug: string };
 const account = await getAccountBySlug(slug);
 
 if (!account) {
-  return Astro.redirect(localizedPath(lang, "/404"));
+  return Astro.redirect("/404");
 }
 
 // Render the account's bilingual Markdown body (populated by vault sync after de-thinning).
@@ -96,9 +96,6 @@ const geoFaq =
   (lang === "zh" ? (account.geo?.faq_zh ?? account.geo?.faq) : account.geo?.faq_en) ?? [];
 const faqLd = faqJsonLd(geoFaq, lang);
 const metaDescription = (lang === "zh" ? account.seo?.meta_description_zh : account.seo?.meta_description_en) || account.tagline[lang];
-const pageTitle =
-  (lang === "zh" ? account.seo?.title_zh : account.seo?.title_en) ||
-  `${account.name[lang]} - ${t(lang, "brand")}`;
 
 // Reverse cross-link: guides that name this account.
 const guidesForAccount = await getGuidesMentioningAccount(slug, lang);
@@ -114,6 +111,20 @@ const knowsAbout = Array.from(
   new Set([...account.categories.map(catName).filter(Boolean), ...(lang === "en" ? account.tags.filter(isAscii) : account.tags)])
 );
 const jobTitle = lang === "zh" ? "内容创作者" : "Content Creator";
+
+// Page <title>: editorial overrides (seo.title_*) win; otherwise build a
+// domain-ized default that injects the primary niche for relevance/CTR.
+// e.g. zh: "3Blue1Brown - 数学教育创作者 | 黎明岛"
+//      en: "3Blue1Brown - Mathematics Creator | Dawn Island"
+const primaryCatSlug = account.categories[0];
+const primaryCatName = primaryCatSlug ? catName(primaryCatSlug) : "";
+const defaultTitle = primaryCatName
+  ? (lang === "zh"
+      ? `${account.name[lang]} - ${primaryCatName}创作者 | ${t(lang, "brand")}`
+      : `${account.name[lang]} - ${primaryCatName} Creator | ${t(lang, "brand")}`)
+  : `${account.name[lang]} - ${t(lang, "brand")}`;
+const pageTitle =
+  (lang === "zh" ? account.seo?.title_zh : account.seo?.title_en) || defaultTitle;
 
 const personLd = personJsonLd({
   name: account.name[lang],

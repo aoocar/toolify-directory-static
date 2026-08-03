@@ -39,13 +39,15 @@ const news = await getNews(lang);
 // keep the homepage panel short — the full archive lives at /[lang]/guides
 const guides = await getGuides(lang, 6);
 
-// WebSite structured data for the homepage (no SearchAction — the site is
-// static and the search endpoint cannot actually filter client-side).
+// WebSite structured data for the homepage. The SearchAction points at the
+// accounts list, which ships a progressive-enhancement client-side filter, so
+// `/accounts?q=` is a real, working search endpoint.
 const siteBase = Astro.site ?? Astro.url;
 const websiteLd = websiteJsonLd({
   name: `${t(lang, "brand")} · ${t(lang, "slogan")}`,
   lang,
-  url: new URL(localizedPath(lang, "/"), siteBase).href
+  url: new URL(localizedPath(lang, "/"), siteBase).href,
+  searchUrl: new URL(localizedPath(lang, "/accounts"), siteBase).href + "?q={search_term_string}"
 });
 ---
 

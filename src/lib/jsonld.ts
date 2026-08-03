@@ -153,23 +153,33 @@ export function collectionPageJsonLd(opts: {
 }
 
 /**
- * schema.org WebSite for the homepage. The SearchAction was intentionally
- * dropped: the directory is a static site with no client-side filtering, so the
- * declared search endpoint could not actually answer queries — keeping a
- * non-functional SearchAction would be a false structured-data claim.
+ * schema.org WebSite for the homepage. A SearchAction is included when a
+ * `searchUrl` is supplied. The accounts page now ships a progressive-enhancement
+ * client-side filter, so the declared search endpoint (`/accounts?q=`) actually
+ * answers queries at runtime — making the SearchAction a truthful claim that
+ * also helps Google surface a Sitelinks Search Box (a GEO/SEO gain).
  */
 export function websiteJsonLd(opts: {
   name: string;
   lang: Lang;
   url: string;
+  searchUrl?: string;
 }): Record<string, unknown> {
-  return {
+  const site: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: opts.name,
     url: opts.url,
     inLanguage: opts.lang === "zh" ? "zh-CN" : "en"
   };
+  if (opts.searchUrl) {
+    site.potentialAction = {
+      "@type": "SearchAction",
+      target: opts.searchUrl,
+      "query-input": "required name=search_term_string"
+    };
+  }
+  return site;
 }
 
 /** A single breadcrumb entry: a human label and its absolute URL. */

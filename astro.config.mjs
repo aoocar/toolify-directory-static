@@ -12,7 +12,10 @@ export default defineConfig({
       changefreq: "weekly",
       priority: 0.7,
       // keep the external-link interstitial (/exit) out of the sitemap
-      filter: (page) => !page.includes("/exit")
+      filter: (page) => !page.includes("/exit"),
+      // emit a truthful build-time lastmod on every URL so crawlers can
+      // schedule recrawls more efficiently (spread preserves hreflang links)
+      serialize: (item) => ({ ...item, lastmod: new Date() })
     })
   ]
 });

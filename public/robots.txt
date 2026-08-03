@@ -1,12 +1,11 @@
 User-agent: *
 Allow: /
 
-# Content signals: allow search indexing and AI grounding/reference; no model training.
-User-agent: *
-Content-Signal: search=yes, ai-train=no, use=reference
-Allow: /
-
-# Explicitly allow the major AI answer-engine crawlers (GEO / generative-engine optimization).
+# Explicitly allow the major AI answer-engine crawlers (GEO / generative-engine
+# optimization). The wildcard block above already permits them; these lines
+# document intent. NOTE: Google-Extended and GPTBot also power model training,
+# so this site is discoverable for AI grounding AND trainable. To block training
+# later, add `Disallow: /` under the relevant User-agent (Google-Extended, GPTBot, CCBot…).
 User-agent: GPTBot
 Allow: /
 

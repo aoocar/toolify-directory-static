@@ -5,14 +5,15 @@ import { formatNumber, type AccountWithCategories } from "@/lib/directory";
 type Props = {
   account: AccountWithCategories;
   lang: Lang;
+  searchText?: string;
 };
 
-const { account, lang } = Astro.props;
+const { account, lang, searchText } = Astro.props;
 const isAscii = (s: string) => /^[\u0000-\u007f]*$/.test(s);
 const displayTags = lang === "en" ? account.tags.filter(isAscii).slice(0, 3) : account.tags.slice(0, 3);
 ---
 
-<article class="account-card">
+<article class="account-card" {...(searchText ? { "data-search": searchText } : {})}>
   <div class="card-header">
     <span class="account-logo">{account.avatar}</span>
     <div>
