@@ -11,13 +11,15 @@ const title = t(lang, "exitTitle");
 const description = t(lang, "exitLeaving");
 const backPath = localizedPath(lang, "/");
 const exitInvalid = t(lang, "exitInvalid");
+// Interstitial redirect page: never meant to rank, keep crawlers out.
+const isNoindex = true;
 const exitBackHome = t(lang, "exitBackHome");
 const rawTo = Astro.url.searchParams.get("to");
 const isSafeTarget = !!rawTo && /^https?:\/\//i.test(rawTo);
 const fallbackTarget = isSafeTarget ? rawTo : null;
 ---
 
-<BaseLayout lang={lang} title={title} description={description}>
+<BaseLayout lang={lang} title={title} description={description} noindex={isNoindex}>
   <div class="exit-page" data-back={backPath} data-lang={lang}>
     <div class="exit-card">
       <div class="exit-brand">{t(lang, "brand")}</div>
