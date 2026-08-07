@@ -8,6 +8,7 @@ verified: true
 categories:
   - ai-content
   - tech-review
+  - market-insights
 tags:
   - AI商业化
   - AI应用
@@ -43,8 +44,8 @@ seo:
     - AI应用
     - 商业洞察
   search_intent: informational
-  title_zh: 程前AI - AI 创作者介绍
-  title_en: Cheng Qian AI - AI Creator Directory
+  title_zh: 程前AI - AI 商业化案例拆解 | 黎明岛
+  title_en: Cheng Qian AI - AI Commercialization Case Studies | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

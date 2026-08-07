@@ -301,7 +301,7 @@ const breadcrumbLd = breadcrumbJsonLd({
               </tr>
             </tbody>
           </table>
-          <a class="button primary full-width text-center" href={`/${lang}/exit?to=${encodeURIComponent(account.profileUrl)}`} rel="noopener">
+          <a class="button primary full-width text-center" href={`/${lang}/exit?to=${encodeURIComponent(account.profileUrl)}`} rel="noopener" data-ga-event="exit_click" data-ga-category="outbound" data-ga-label={account.slug} data-ga-value={account.profileUrl}>
             {t(lang, "visitProfile")}
           </a>
         </div>

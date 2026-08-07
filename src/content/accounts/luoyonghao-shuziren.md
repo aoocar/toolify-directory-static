@@ -8,6 +8,8 @@ verified: true
 categories:
   - ai-content
   - tech-review
+  - marketing-seo
+  - streaming
 tags:
   - AI数字人
   - 直播带货
@@ -43,8 +45,8 @@ seo:
     - 直播带货
     - 商业应用
   search_intent: informational
-  title_zh: 罗永浩数字人 - AI 创作者介绍
-  title_en: Luo Yonghao Digital Human - AI Creator Directory
+  title_zh: 罗永浩数字人 - AI 数字人直播带货 | 黎明岛
+  title_en: Luo Yonghao Digital Human - AI Digital Human Livestream Commerce | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

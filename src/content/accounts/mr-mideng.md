@@ -46,8 +46,8 @@ seo:
     - 建材拆解
     - 消费科普
   search_intent: informational
-  title_zh: Mr迷瞪 - AI 创作者介绍
-  title_en: Mr Mideng - AI Creator Directory
+  title_zh: Mr迷瞪 - 装修与家电硬核测评 | 黎明岛
+  title_en: Mr Mideng - Renovation & Appliance Reviews | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

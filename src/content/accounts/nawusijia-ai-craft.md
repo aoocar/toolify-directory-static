@@ -7,6 +7,7 @@ platformId: bili-nawusijia
 verified: true
 categories:
   - ai-content
+  - image-generation
 tags:
   - AI绘画
   - Midjourney
@@ -47,8 +48,8 @@ seo:
     - Stable Diffusion
     - 提示词
   search_intent: informational
-  title_zh: 娜乌斯嘉AICraft - AI 创作者介绍
-  title_en: Nawusijia AICraft - AI Creator Directory
+  title_zh: 娜乌斯嘉AICraft - AI 绘画作品与提示词 | 黎明岛
+  title_en: Nawusijia AICraft - AI Art & Prompt Tips | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

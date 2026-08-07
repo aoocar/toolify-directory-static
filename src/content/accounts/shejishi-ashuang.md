@@ -45,8 +45,8 @@ seo:
     - 选购攻略
     - 家居知识
   search_intent: informational
-  title_zh: 设计师阿爽 - AI 创作者介绍
-  title_en: Designer Ashuan - AI Creator Directory
+  title_zh: 设计师阿爽 - 家居装修设计 | 黎明岛
+  title_en: Designer Ashuan - Home Renovation Design | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

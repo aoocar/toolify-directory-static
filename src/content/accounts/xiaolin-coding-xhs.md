@@ -44,8 +44,8 @@ seo:
     - Copilot
     - 编程教学
   search_intent: informational
-  title_zh: 小林Coding - AI 创作者介绍
-  title_en: Xiao Lin Coding (XHS) - AI Creator Directory
+  title_zh: 小林Coding - AI 编程教学（小红书） | 黎明岛
+  title_en: Xiao Lin Coding (XHS) - AI Coding Teaching (XHS) | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

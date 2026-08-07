@@ -45,8 +45,8 @@ seo:
     - 不老
     - 生活态度
   search_intent: informational
-  title_zh: 王德顺 - AI 创作者介绍
-  title_en: Wang Deshun - AI Creator Directory
+  title_zh: 王德顺 - 90岁健身与走秀 | 黎明岛
+  title_en: Wang Deshun - 90-Year-Old Fitness & Runway | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

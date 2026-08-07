@@ -8,6 +8,7 @@ verified: false
 categories:
   - entertainment
   - ai-content
+  - streaming
 tags:
   - AI短剧
   - 脑洞
@@ -43,8 +44,8 @@ seo:
     - 脑洞
     - 创意剧情
   search_intent: informational
-  title_zh: 泽的脑洞剧情 - AI 创作者介绍
-  title_en: Ze's Brainstorm Stories - AI Creator Directory
+  title_zh: 泽的脑洞剧情 - 创意 AI 短剧反转 | 黎明岛
+  title_en: Ze's Brainstorm Stories - Creative AI Drama Twists | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

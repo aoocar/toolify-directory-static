@@ -7,6 +7,7 @@ platformId: dy-moyan-ai
 verified: false
 categories:
   - ai-content
+  - image-generation
 tags:
   - AI写真
   - AI摄影
@@ -42,8 +43,8 @@ seo:
     - AI摄影
     - 人像
   search_intent: informational
-  title_zh: 墨颜AI摄影 - AI 创作者介绍
-  title_en: Mo Yan AI Photography - AI Creator Directory
+  title_zh: 墨颜AI摄影 - AI 人像写真创作 | 黎明岛
+  title_en: Mo Yan AI Photography - AI Portrait Art | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

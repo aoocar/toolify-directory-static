@@ -42,8 +42,8 @@ seo:
     - 时政科普
     - 知识区
   search_intent: informational
-  title_zh: 回到2049 - AI 创作者介绍
-  title_en: Back to 2049 - AI Creator Directory
+  title_zh: 回到2049 - 硬核科技与未来评论 | 黎明岛
+  title_en: Back to 2049 - Hardcore Future Tech Commentary | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

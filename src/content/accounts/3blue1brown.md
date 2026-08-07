@@ -48,8 +48,8 @@ seo:
     - 线性代数
     - AI原理
   search_intent: informational
-  title_zh: 3Blue1Brown - AI 创作者介绍
-  title_en: 3Blue1Brown - AI Creator Directory
+  title_zh: 3Blue1Brown - 数学可视化科普创作者 | 黎明岛
+  title_en: 3Blue1Brown - Mathematics Visualization Creator | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

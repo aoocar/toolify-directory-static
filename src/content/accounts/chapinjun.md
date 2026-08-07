@@ -7,6 +7,7 @@ platformId: '19319172'
 verified: true
 categories:
   - ai-content
+  - marketing-seo
 tags:
   - 科技评测
   - AI大模型实测
@@ -45,8 +46,8 @@ seo:
     - 硬核科普
     - 产业解析
   search_intent: informational
-  title_zh: 差评君 - AI 创作者介绍
-  title_en: Cha Pin Jun - AI Creator Directory
+  title_zh: 差评君 - AI 大模型实测与科技评测 | 黎明岛
+  title_en: Cha Pin Jun - AI Model Testing & Tech Reviews | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

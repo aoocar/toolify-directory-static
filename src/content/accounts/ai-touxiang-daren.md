@@ -7,6 +7,7 @@ platformId: xhs-ai-touxiang
 verified: false
 categories:
   - ai-content
+  - image-generation
 tags:
   - AI头像
   - AI写真
@@ -42,8 +43,8 @@ seo:
     - AI写真
     - 个人形象
   search_intent: informational
-  title_zh: AI头像达人 - AI 创作者介绍
-  title_en: AI Avatar Master - AI Creator Directory
+  title_zh: AI头像达人 - AI 头像与写真艺术 | 黎明岛
+  title_en: AI Avatar Master - AI Avatars & Artistic Portraits | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

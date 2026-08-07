@@ -45,8 +45,8 @@ seo:
     - 银发科学家
     - 知识区
   search_intent: informational
-  title_zh: 汪品先院士 - AI 创作者介绍
-  title_en: Wang Pinxian (Academician) - AI Creator Directory
+  title_zh: 汪品先院士 - 深海海洋科普 | 黎明岛
+  title_en: Wang Pinxian (Academician) - Ocean Science by Academician | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

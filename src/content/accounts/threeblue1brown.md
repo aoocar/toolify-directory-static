@@ -44,8 +44,8 @@ seo:
     - 线性代数
     - 知识区
   search_intent: informational
-  title_zh: 3Blue1Brown - AI 创作者介绍
-  title_en: 3Blue1Brown - AI Creator Directory
+  title_zh: 3Blue1Brown - 数学动画科普频道 | 黎明岛
+  title_en: 3Blue1Brown - Animated Mathematics Education | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

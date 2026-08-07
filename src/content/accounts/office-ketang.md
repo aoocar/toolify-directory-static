@@ -41,8 +41,8 @@ seo:
     - 条件格式
     - VLOOKUP
   search_intent: informational
-  title_zh: Office課堂 - AI 创作者介绍
-  title_en: Office Classroom - AI Creator Directory
+  title_zh: Office課堂 - Excel 办公教程 | 黎明岛
+  title_en: Office Classroom - Excel-Focused Office Tutorials | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

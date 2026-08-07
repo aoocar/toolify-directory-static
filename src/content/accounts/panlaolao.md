@@ -44,8 +44,8 @@ seo:
     - 乡村振兴
     - 三农
   search_intent: informational
-  title_zh: 潘姥姥 - AI 创作者介绍
-  title_en: Grandma Pan (Pan Qicui) - AI Creator Directory
+  title_zh: 潘姥姥 - 农村美食与乡愁味道 | 黎明岛
+  title_en: Grandma Pan (Pan Qicui) - Rural Home Cooking & Nostalgia | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

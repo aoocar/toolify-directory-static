@@ -40,8 +40,8 @@ seo:
     - 函数
     - 数据处理
   search_intent: informational
-  title_zh: Excel操作技巧 - AI 创作者介绍
-  title_en: Excel Operation Tips - AI Creator Directory
+  title_zh: Excel操作技巧 - Excel 函数与数据处理 | 黎明岛
+  title_en: Excel Operation Tips - Excel Functions & Data Processing | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

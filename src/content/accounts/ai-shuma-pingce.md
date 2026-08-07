@@ -43,8 +43,8 @@ seo:
     - 产品评测
     - AI手机
   search_intent: informational
-  title_zh: AI数码评测 - AI 创作者介绍
-  title_en: AI Digital Review - AI Creator Directory
+  title_zh: AI数码评测 - AI 数码产品与智能设备评测 | 黎明岛
+  title_en: AI Digital Review - AI Devices & Smart Gadget Reviews | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

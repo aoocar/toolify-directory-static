@@ -48,8 +48,8 @@ seo:
     - 机器学习
     - 深度学习
   search_intent: informational
-  title_zh: 李永乐老师 - AI 创作者介绍
-  title_en: Mr. Li Yongle - AI Creator Directory
+  title_zh: 李永乐老师 - AI与机器学习科普UP主 | 黎明岛
+  title_en: Mr. Li Yongle - AI & Machine Learning Popularizer | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

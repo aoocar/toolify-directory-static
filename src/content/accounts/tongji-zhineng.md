@@ -45,8 +45,8 @@ seo:
     - DeepSeek
     - 豆包
   search_intent: informational
-  title_zh: AI科普站 - AI 创作者介绍
-  title_en: AI Science Hub - AI Creator Directory
+  title_zh: AI科普站 - 每日 AI 突破科普 | 黎明岛
+  title_en: AI Science Hub - Daily AI Breakthrough Science | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

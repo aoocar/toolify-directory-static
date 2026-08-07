@@ -8,6 +8,7 @@ verified: false
 categories:
   - entertainment
   - ai-content
+  - video-generation
 tags:
   - AI短剧
   - 科幻
@@ -43,8 +44,8 @@ seo:
     - 科幻
     - AI视觉
   search_intent: informational
-  title_zh: 银海漫游指南 - AI 创作者介绍
-  title_en: Silver Sea Voyage Guide - AI Creator Directory
+  title_zh: 银海漫游指南 - 科幻 AI 短剧 | 黎明岛
+  title_en: Silver Sea Voyage Guide - Sci-Fi AI Drama Series | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

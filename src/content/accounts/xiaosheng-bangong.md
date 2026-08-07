@@ -43,8 +43,8 @@ seo:
     - PPT
     - 文员技巧
   search_intent: informational
-  title_zh: 小圣办公 - AI 创作者介绍
-  title_en: Little Sage Office - AI Creator Directory
+  title_zh: 小圣办公 - 实用办公技巧 | 黎明岛
+  title_en: Little Sage Office - Practical Office Tips | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

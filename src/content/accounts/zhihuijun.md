@@ -48,8 +48,8 @@ seo:
     - AI芯片
     - 开源
   search_intent: informational
-  title_zh: 稚晖君 - AI 创作者介绍
-  title_en: Zhihui Jun - AI Creator Directory
+  title_zh: 稚晖君 - 机器人硬件工程师UP主 | 黎明岛
+  title_en: Zhihui Jun - Robotics & Hardware Engineering | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

@@ -47,8 +47,8 @@ seo:
     - AI产品
     - 实验
   search_intent: informational
-  title_zh: 老师好我叫何同学 - AI 创作者介绍
-  title_en: Mr. He (Hesheng) - AI Creator Directory
+  title_zh: 老师好我叫何同学 - 数码科技与创意短片 | 黎明岛
+  title_en: Mr. He (Hesheng) - Digital Tech & Creative Shorts | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

@@ -42,8 +42,8 @@ seo:
     - AIGC
     - 人文
   search_intent: informational
-  title_zh: 山北记 - AI 创作者介绍
-  title_en: Shan Bei Ji - AI Creator Directory
+  title_zh: 山北记 - AIGC 人文叙事 | 黎明岛
+  title_en: Shan Bei Ji - Humanistic AIGC Narratives | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

@@ -41,8 +41,8 @@ seo:
     - 无广评测
     - 高性价比
   search_intent: informational
-  title_zh: 顾得热榜 - AI 创作者介绍
-  title_en: GuDe Hot List - AI Creator Directory
+  title_zh: 顾得热榜 - 家电数码无广深度测评 | 黎明岛
+  title_en: GuDe Hot List - Ad-Free Deep Tech Reviews | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

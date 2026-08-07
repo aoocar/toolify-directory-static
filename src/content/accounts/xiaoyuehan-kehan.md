@@ -44,8 +44,8 @@ seo:
     - 硬核狠人
     - 知识区
   search_intent: informational
-  title_zh: 小约翰可汗 - AI 创作者介绍
-  title_en: Little John Khan - AI Creator Directory
+  title_zh: 小约翰可汗 - 世界史奇葩小国 | 黎明岛
+  title_en: Little John Khan - World History Oddities | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

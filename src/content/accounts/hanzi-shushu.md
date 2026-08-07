@@ -44,8 +44,8 @@ seo:
     - 文化
     - 知识区
   search_intent: informational
-  title_zh: 汉字叔叔教识字 - AI 创作者介绍
-  title_en: Uncle Hanzi (Richard Sears) - AI Creator Directory
+  title_zh: 汉字叔叔教识字 - 汉字字源与甲骨文科普 | 黎明岛
+  title_en: Uncle Hanzi (Richard Sears) - Chinese Character Origins & Oracle Bone | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

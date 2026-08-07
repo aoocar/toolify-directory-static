@@ -41,8 +41,8 @@ seo:
     - 职场技能
     - 设计排版
   search_intent: informational
-  title_zh: 旁门左道PPT - AI 创作者介绍
-  title_en: PangMenZuoDao PPT - AI Creator Directory
+  title_zh: 旁门左道PPT - PPT 设计与职场教程 | 黎明岛
+  title_en: PangMenZuoDao PPT - PPT Design & Career Skills | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

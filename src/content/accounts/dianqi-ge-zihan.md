@@ -44,8 +44,8 @@ seo:
     - 冰箱
     - 选购指南
   search_intent: informational
-  title_zh: 电器哥梓涵 - AI 创作者介绍
-  title_en: Electric Brother Zi Han - AI Creator Directory
+  title_zh: 电器哥梓涵 - 家电评测与选购推荐 | 黎明岛
+  title_en: Electric Brother Zi Han - Home Appliance Reviews & Picks | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

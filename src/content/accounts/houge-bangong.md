@@ -7,6 +7,7 @@ platformId: 猴哥讲办公
 verified: true
 categories:
   - office
+  - productivity
 tags:
   - 职场办公
   - 办公技巧
@@ -41,8 +42,8 @@ seo:
     - 办公技巧
     - 效率
   search_intent: informational
-  title_zh: 猴哥讲办公 - AI 创作者介绍
-  title_en: Brother Hou Office - AI Creator Directory
+  title_zh: 猴哥讲办公 - 职场办公技能 | 黎明岛
+  title_en: Brother Hou Office - Workplace Skills | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

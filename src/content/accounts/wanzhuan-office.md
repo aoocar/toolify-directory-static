@@ -7,6 +7,7 @@ platformId: 玩轉office
 verified: true
 categories:
   - office
+  - productivity
 tags:
   - Word
   - Excel
@@ -41,8 +42,8 @@ seo:
     - Excel
     - 效率
   search_intent: informational
-  title_zh: 玩轉office - AI 创作者介绍
-  title_en: Play With Office - AI Creator Directory
+  title_zh: 玩轉office - 效率办公技巧 | 黎明岛
+  title_en: Play With Office - Work Smarter Office Tips | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

@@ -44,8 +44,8 @@ seo:
     - 趣味实验
     - 知识区
   search_intent: informational
-  title_zh: 毕导THU - AI 创作者介绍
-  title_en: Bi Dao (THU) - AI Creator Directory
+  title_zh: 毕导THU - 清华脑洞科普怪才 | 黎明岛
+  title_en: Bi Dao (THU) - Creative Science Popularization | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

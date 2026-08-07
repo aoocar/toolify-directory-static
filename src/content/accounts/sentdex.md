@@ -8,6 +8,7 @@ verified: true
 categories:
   - education
   - ai-content
+  - developer-tools
 tags:
   - Python
   - 机器学习
@@ -47,8 +48,8 @@ seo:
     - AI编程
     - 教程
   search_intent: informational
-  title_zh: Sentdex - AI 创作者介绍
-  title_en: Sentdex - AI Creator Directory
+  title_zh: Sentdex - Python 与机器学习教程 | 黎明岛
+  title_en: Sentdex - Python & Machine Learning Tutorials | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

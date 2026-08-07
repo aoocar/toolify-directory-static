@@ -8,6 +8,7 @@ verified: false
 categories:
   - tech-review
   - ai-content
+  - productivity
 tags:
   - AI工具
   - 效率工具
@@ -46,8 +47,8 @@ seo:
     - 网站推荐
     - 实用技巧
   search_intent: informational
-  title_zh: AI工具集 - AI 创作者介绍
-  title_en: AI Toolbox - AI Creator Directory
+  title_zh: AI工具集 - AI 工具与网站精选评测 | 黎明岛
+  title_en: AI Toolbox - Curated AI Tools & Website Reviews | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

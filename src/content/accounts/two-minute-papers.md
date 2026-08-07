@@ -45,8 +45,8 @@ seo:
     - 研究解读
     - 计算机图形
   search_intent: informational
-  title_zh: 两分钟论文 - AI 创作者介绍
-  title_en: Two Minute Papers - AI Creator Directory
+  title_zh: 两分钟论文 - 激情 AI 论文解读 | 黎明岛
+  title_en: Two Minute Papers - Passionate AI Paper Reviews | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

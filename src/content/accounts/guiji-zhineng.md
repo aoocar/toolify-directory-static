@@ -8,6 +8,7 @@ verified: true
 categories:
   - ai-content
   - tech-review
+  - streaming
 tags:
   - AI数字人
   - 直播带货
@@ -49,8 +50,8 @@ seo:
     - 数字分身
     - 企业服务
   search_intent: informational
-  title_zh: 硅基智能 - AI 创作者介绍
-  title_en: Silicon Intelligence - AI Creator Directory
+  title_zh: 硅基智能 - AI 数字人与直播电商 | 黎明岛
+  title_en: Silicon Intelligence - AI Digital Human & Livestream Commerce | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

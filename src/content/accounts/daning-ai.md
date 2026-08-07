@@ -8,6 +8,7 @@ verified: false
 categories:
   - ai-content
   - entertainment
+  - video-generation
 tags:
   - AI创作
   - AIGC
@@ -43,8 +44,8 @@ seo:
     - AIGC
     - AI视频
   search_intent: informational
-  title_zh: 大宁是我 - AI 创作者介绍
-  title_en: Da Ning - AI Creator Directory
+  title_zh: 大宁是我 - AIGC 短片创作者 | 黎明岛
+  title_en: Da Ning - AIGC Short Film Creator | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

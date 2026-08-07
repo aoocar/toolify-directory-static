@@ -8,6 +8,7 @@ verified: true
 categories:
   - ai-content
   - tech-review
+  - video-generation
 tags:
   - AI工具
   - AI音乐
@@ -45,8 +46,8 @@ seo:
     - AI视频
     - 行业观察
   search_intent: informational
-  title_zh: AI旋风 - AI 创作者介绍
-  title_en: AI Vortex (Bilibili) - AI Creator Directory
+  title_zh: AI旋风 - 全平台 AI 工具与创意实验 | 黎明岛
+  title_en: AI Vortex (Bilibili) - AI Tools & Creative Experiments | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

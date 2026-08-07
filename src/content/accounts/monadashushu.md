@@ -44,8 +44,8 @@ seo:
     - 情感
     - 银发
   search_intent: informational
-  title_zh: 末那大叔 - AI 创作者介绍
-  title_en: Mona's Uncle & North Sea Grandpa - AI Creator Directory
+  title_zh: 末那大叔 - 带着爷爷看世界的仪式感 | 黎明岛
+  title_en: Mona's Uncle & North Sea Grandpa - Elegant Life with Grandpa | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

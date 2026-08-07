@@ -44,8 +44,8 @@ seo:
     - 官方号
     - 知识区
   search_intent: informational
-  title_zh: 中科院物理所 - AI 创作者介绍
-  title_en: Institute of Physics, CAS - AI Creator Directory
+  title_zh: 中科院物理所 - 中科院官方物理科普 | 黎明岛
+  title_en: Institute of Physics, CAS - Official Physics Science | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

@@ -8,6 +8,7 @@ verified: true
 categories:
   - tech-review
   - ai-content
+  - productivity
 tags:
   - AI工具测评
   - AI教程
@@ -43,8 +44,8 @@ seo:
     - AI教程
     - 效率工具
   search_intent: informational
-  title_zh: 硅基研究室 - AI 创作者介绍
-  title_en: Silicon Lab - AI Creator Directory
+  title_zh: 硅基研究室 - AI 工具测评与使用教程 | 黎明岛
+  title_en: Silicon Lab - AI Tool Reviews & Tutorials | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

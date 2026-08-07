@@ -8,6 +8,7 @@ verified: false
 categories:
   - ai-content
   - lifestyle
+  - image-generation
 tags:
   - AI宠物
   - AI写真
@@ -43,8 +44,8 @@ seo:
     - AI写真
     - 创意摄影
   search_intent: informational
-  title_zh: 我的AI奶牛猫 - AI 创作者介绍
-  title_en: My AI Cow Cat - AI Creator Directory
+  title_zh: 我的AI奶牛猫 - AI 宠物写真创作 | 黎明岛
+  title_en: My AI Cow Cat - AI Pet Portrait Art | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

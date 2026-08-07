@@ -43,8 +43,8 @@ seo:
     - 人工智能
     - 入门指南
   search_intent: informational
-  title_zh: AI科普播浪园 - AI 创作者介绍
-  title_en: AI Science Popularization - AI Creator Directory
+  title_zh: AI科普播浪园 - AI 入门科普指南 | 黎明岛
+  title_en: AI Science Popularization - Beginner-Friendly AI Guides | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

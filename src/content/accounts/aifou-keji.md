@@ -40,8 +40,8 @@ seo:
     - 观点解读
     - 智能家电
   search_intent: informational
-  title_zh: 爱否科技 - AI 创作者介绍
-  title_en: iFou Tech - AI Creator Directory
+  title_zh: 爱否科技 - 数码评测与观点解读 | 黎明岛
+  title_en: iFou Tech - Digital Reviews & Opinions | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

@@ -43,8 +43,8 @@ seo:
     - 技术解读
     - 深入浅出
   search_intent: informational
-  title_zh: 图灵的猫 - AI 创作者介绍
-  title_en: Turing's Cat - AI Creator Directory
+  title_zh: 图灵的猫 - AI 科技深入浅出解读 | 黎明岛
+  title_en: Turing's Cat - Accessible AI Tech Explainers | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

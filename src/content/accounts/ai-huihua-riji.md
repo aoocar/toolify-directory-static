@@ -7,6 +7,7 @@ platformId: xhs-ai-huihua
 verified: false
 categories:
   - ai-content
+  - image-generation
 tags:
   - AI绘画
   - Stable Diffusion
@@ -42,8 +43,8 @@ seo:
     - Stable Diffusion
     - 教程
   search_intent: informational
-  title_zh: AI绘画日记 - AI 创作者介绍
-  title_en: AI Art Diary - AI Creator Directory
+  title_zh: AI绘画日记 - Stable Diffusion 教程与绘画记录 | 黎明岛
+  title_en: AI Art Diary - Stable Diffusion Tutorials & Art Journey | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

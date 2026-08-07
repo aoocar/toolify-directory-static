@@ -40,8 +40,8 @@ seo:
     - 短技巧
     - 职场
   search_intent: informational
-  title_zh: 经本正一 - AI 创作者介绍
-  title_en: JingBenZhengYi - AI Creator Directory
+  title_zh: 经本正一 - 精短 PPT 技巧 | 黎明岛
+  title_en: JingBenZhengYi - Short & Sharp PPT Tips | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

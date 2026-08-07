@@ -44,8 +44,8 @@ seo:
     - 仪式感
     - 银发
   search_intent: informational
-  title_zh: 北海爷爷 - AI 创作者介绍
-  title_en: North Sea Grandpa (Yang Beihai) - AI Creator Directory
+  title_zh: 北海爷爷 - 精致生活方式与仪式感 | 黎明岛
+  title_en: North Sea Grandpa (Yang Beihai) - Elegant Lifestyle & Rituals | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

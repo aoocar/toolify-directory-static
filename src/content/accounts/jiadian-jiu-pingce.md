@@ -41,8 +41,8 @@ seo:
     - 家居评测
     - 硬核干货
   search_intent: informational
-  title_zh: 家电家居评测 - AI 创作者介绍
-  title_en: Home Appliance Review - AI Creator Directory
+  title_zh: 家电家居评测 - 家电选购硬核指南 | 黎明岛
+  title_en: Home Appliance Review - Home Appliance Buying Guides | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

@@ -42,8 +42,8 @@ seo:
     - AI产品
     - 科技评测
   search_intent: informational
-  title_zh: 差评 - AI 创作者介绍
-  title_en: Cha Ping - AI Creator Directory
+  title_zh: 差评 - 科技新闻与 AI 产品点评 | 黎明岛
+  title_en: Cha Ping - Tech News & AI Product Commentary | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

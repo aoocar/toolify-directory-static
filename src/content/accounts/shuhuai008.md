@@ -48,8 +48,8 @@ seo:
     - 数学
     - 清华
   search_intent: informational
-  title_zh: Shuhuai008 - AI 创作者介绍
-  title_en: shuhuai008 - AI Creator Directory
+  title_zh: Shuhuai008 - 机器学习白板推导 | 黎明岛
+  title_en: shuhuai008 - ML Whiteboard Derivations | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

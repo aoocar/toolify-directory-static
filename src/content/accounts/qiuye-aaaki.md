@@ -8,6 +8,7 @@ verified: true
 categories:
   - ai-content
   - education
+  - image-generation
 tags:
   - AI绘画
   - Stable Diffusion
@@ -48,8 +49,8 @@ seo:
     - LoRA
     - 模型训练
   search_intent: informational
-  title_zh: 秋葉aaaki - AI 创作者介绍
-  title_en: Qiuye aaaki - AI Creator Directory
+  title_zh: 秋葉aaaki - Stable Diffusion 推广第一人 | 黎明岛
+  title_en: Qiuye aaaki - Pioneer of Stable Diffusion in China | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

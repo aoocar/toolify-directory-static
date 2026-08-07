@@ -8,6 +8,7 @@ verified: false
 categories:
   - entertainment
   - ai-content
+  - streaming
 tags:
   - AI短剧
   - 奇闻异事
@@ -48,8 +49,8 @@ seo:
     - AI具象化
     - 悬疑
   search_intent: informational
-  title_zh: HelloAI讲故事 - AI 创作者介绍
-  title_en: HelloAI Stories - AI Creator Directory
+  title_zh: HelloAI讲故事 - AI 奇闻异事可视化叙事 | 黎明岛
+  title_en: HelloAI Stories - AI-Powered Story Visualization | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

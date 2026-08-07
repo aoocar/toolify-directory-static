@@ -8,6 +8,7 @@ verified: true
 categories:
   - ai-content
   - entertainment
+  - video-generation
 tags:
   - AI视频
   - AI动画
@@ -45,8 +46,8 @@ seo:
     - Sora
     - 可灵
   search_intent: informational
-  title_zh: 彭弘Milo - AI 创作者介绍
-  title_en: Peng Hong Milo - AI Creator Directory
+  title_zh: 彭弘Milo - AI 动画与视频创作 | 黎明岛
+  title_en: Peng Hong Milo - AI Animation & Video Creation | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

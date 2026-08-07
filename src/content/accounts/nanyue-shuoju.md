@@ -8,6 +8,7 @@ verified: false
 categories:
   - entertainment
   - ai-content
+  - streaming
 tags:
   - AI短剧
   - 剧情
@@ -43,8 +44,8 @@ seo:
     - 剧情
     - AI生成
   search_intent: informational
-  title_zh: 南月说剧 - AI 创作者介绍
-  title_en: Nan Yue Drama Talk - AI Creator Directory
+  title_zh: 南月说剧 - AI 剧情日更连载 | 黎明岛
+  title_en: Nan Yue Drama Talk - AI Drama Daily Series | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

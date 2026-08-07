@@ -8,6 +8,7 @@ verified: true
 categories:
   - ai-content
   - education
+  - developer-tools
 tags:
   - Python
   - 机器学习
@@ -48,8 +49,8 @@ seo:
     - 数据处理
     - 教程
   search_intent: informational
-  title_zh: 莫烦Python - AI 创作者介绍
-  title_en: Morvan Zhou (Mofan Python) - AI Creator Directory
+  title_zh: 莫烦Python - Python与机器学习教程UP主 | 黎明岛
+  title_en: Morvan Python - Python & Machine Learning Tutorials | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

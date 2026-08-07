@@ -45,8 +45,8 @@ seo:
     - AI艺术
     - 生成艺术
   search_intent: informational
-  title_zh: The Coding Train - AI 创作者介绍
-  title_en: The Coding Train - AI Creator Directory
+  title_zh: The Coding Train - 创意编程与 AI 艺术 | 黎明岛
+  title_en: The Coding Train - Creative Coding & AI Art | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

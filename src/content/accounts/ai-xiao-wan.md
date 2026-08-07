@@ -8,6 +8,7 @@ verified: true
 categories:
   - entertainment
   - ai-content
+  - streaming
 tags:
   - AI短剧
   - 数字人
@@ -46,8 +47,8 @@ seo:
     - 数字人
     - 日更
   search_intent: informational
-  title_zh: AI小晚 - AI 创作者介绍
-  title_en: AI Xiaowan - AI Creator Directory
+  title_zh: AI小晚 - 日更 AI 短剧创作者 | 黎明岛
+  title_en: AI Xiaowan - Daily AI Drama Creator | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

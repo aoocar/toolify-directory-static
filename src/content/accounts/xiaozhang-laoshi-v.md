@@ -41,8 +41,8 @@ seo:
     - 扫地机器人
     - 实测分享
   search_intent: informational
-  title_zh: 小張老師V - AI 创作者介绍
-  title_en: Teacher Zhang V - AI Creator Directory
+  title_zh: 小張老師V - 家居家电实测分享 | 黎明岛
+  title_en: Teacher Zhang V - Home Tech Testing | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

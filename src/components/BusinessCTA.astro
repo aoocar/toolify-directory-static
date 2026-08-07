@@ -14,7 +14,7 @@ const { lang, type = "home-flow" } = Astro.props;
   <h3>{t(lang, "ctaTitle")}</h3>
   <p>{t(lang, "ctaBody")}</p>
   <div class="cta-actions">
-    <a class="button primary" href={localizedPath(lang, "/services")}>
+    <a class="button primary" href={localizedPath(lang, "/services")} data-ga-event="business_cta_click" data-ga-category="conversion" data-ga-label={t(lang, "ctaButton")}>
       {t(lang, "ctaButton")}
     </a>
   </div>

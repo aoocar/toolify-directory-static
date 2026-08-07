@@ -43,8 +43,8 @@ seo:
     - AI创作
     - 生活记录
   search_intent: informational
-  title_zh: 豆芽日记 - AI 创作者介绍
-  title_en: Doudou Diary - AI Creator Directory
+  title_zh: 豆芽日记 - AI 创意工具日常记录 | 黎明岛
+  title_en: Doudou Diary - AI-Enhanced Daily Life | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

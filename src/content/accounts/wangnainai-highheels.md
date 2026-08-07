@@ -45,8 +45,8 @@ seo:
     - 穿搭
     - 生活方式
   search_intent: informational
-  title_zh: 只穿高跟鞋的汪奶奶 - AI 创作者介绍
-  title_en: Grandma Wang in High Heels - AI Creator Directory
+  title_zh: 只穿高跟鞋的汪奶奶 - 80岁时尚生活 | 黎明岛
+  title_en: Grandma Wang in High Heels - Fashion at 80 | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

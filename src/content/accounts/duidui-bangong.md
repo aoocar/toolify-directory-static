@@ -40,8 +40,8 @@ seo:
     - 职场
     - 效率
   search_intent: informational
-  title_zh: 怼怼办公技巧 - AI 创作者介绍
-  title_en: Duidui Office - AI Creator Directory
+  title_zh: 怼怼办公技巧 - 直给式办公技能 | 黎明岛
+  title_en: Duidui Office - Direct Office Skills Tips | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

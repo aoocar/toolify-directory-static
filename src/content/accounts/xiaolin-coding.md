@@ -8,6 +8,7 @@ verified: true
 categories:
   - education
   - ai-content
+  - developer-tools
 tags:
   - AI编程
   - 编程教学
@@ -45,8 +46,8 @@ seo:
     - Python
     - AI应用开发
   search_intent: informational
-  title_zh: 小林Coding - AI 创作者介绍
-  title_en: Xiao Lin Coding - AI Creator Directory
+  title_zh: 小林Coding - AI 编程项目实战 | 黎明岛
+  title_en: Xiao Lin Coding - AI Programming Projects | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

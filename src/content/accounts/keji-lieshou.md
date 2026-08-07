@@ -43,8 +43,8 @@ seo:
     - AI硬件
     - 数码产品
   search_intent: informational
-  title_zh: 科技猎手 - AI 创作者介绍
-  title_en: Tech Hunter - AI Creator Directory
+  title_zh: 科技猎手 - 科技评测与 AI 硬件分析 | 黎明岛
+  title_en: Tech Hunter - Tech Reviews & AI Hardware Analysis | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

@@ -44,8 +44,8 @@ seo:
     - 国际关系
     - 知识区
   search_intent: informational
-  title_zh: 历史调研室 - AI 创作者介绍
-  title_en: History Research Office - AI Creator Directory
+  title_zh: 历史调研室 - 近现代史动态地图科普 | 黎明岛
+  title_en: History Research Office - Modern History with Dynamic Maps | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

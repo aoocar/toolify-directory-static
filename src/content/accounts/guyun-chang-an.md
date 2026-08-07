@@ -43,8 +43,8 @@ seo:
     - AI复活
     - 历史文化
   search_intent: informational
-  title_zh: 古韵长安 - AI 创作者介绍
-  title_en: Ancient Chang'an - AI Creator Directory
+  title_zh: 古韵长安 - AI 复活历史与文旅 | 黎明岛
+  title_en: Ancient Chang'an - AI Reviving History & Culture | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

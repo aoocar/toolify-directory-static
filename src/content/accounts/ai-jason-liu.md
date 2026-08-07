@@ -8,6 +8,7 @@ verified: false
 categories:
   - ai-content
   - education
+  - ai-writing
 tags:
   - AI商业
   - AI变现
@@ -43,8 +44,8 @@ seo:
     - AI变现
     - AI副业
   search_intent: informational
-  title_zh: AI 商业智库 - AI 创作者介绍
-  title_en: AI Business Hub - AI Creator Directory
+  title_zh: AI 商业智库 - AI 变现与创作者商业应用 | 黎明岛
+  title_en: AI Business Hub - AI Monetization for Creators | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

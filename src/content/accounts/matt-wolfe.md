@@ -8,6 +8,7 @@ verified: true
 categories:
   - ai-content
   - tech-review
+  - market-insights
 tags:
   - AI工具
   - AI新闻
@@ -43,8 +44,8 @@ seo:
     - AI新闻
     - AI创业
   search_intent: informational
-  title_zh: Matt Wolfe - AI 创作者介绍
-  title_en: Matt Wolfe - AI Creator Directory
+  title_zh: Matt Wolfe - 每日 AI 新闻与工具评测 | 黎明岛
+  title_en: Matt Wolfe - Daily AI News & Tool Reviews | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

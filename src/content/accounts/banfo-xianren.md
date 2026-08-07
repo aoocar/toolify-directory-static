@@ -7,6 +7,7 @@ platformId: xhs-banfo
 verified: true
 categories:
   - ai-content
+  - market-insights
 tags:
   - AI行业分析
   - 科技评论
@@ -42,8 +43,8 @@ seo:
     - 科技评论
     - 深度观点
   search_intent: informational
-  title_zh: 半佛仙人 - AI 创作者介绍
-  title_en: Ban Fo Xian Ren - AI Creator Directory
+  title_zh: 半佛仙人 - AI 行业分析与科技评论 | 黎明岛
+  title_en: Ban Fo Xian Ren - AI Industry Analysis & Tech Commentary | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

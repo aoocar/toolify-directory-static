@@ -41,8 +41,8 @@ seo:
     - 避坑指南
     - 冷知识
   search_intent: informational
-  title_zh: 老炮鑒貨 - AI 创作者介绍
-  title_en: Lao Pao Jian Huo - AI Creator Directory
+  title_zh: 老炮鑒貨 - 家电科普与避坑指南 | 黎明岛
+  title_en: Lao Pao Jian Huo - Home Appliance Pitfall Guide | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

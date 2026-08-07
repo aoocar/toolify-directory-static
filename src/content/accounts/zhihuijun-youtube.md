@@ -43,8 +43,8 @@ seo:
     - AI硬件
     - 开源
   search_intent: informational
-  title_zh: 稚晖君 - AI 创作者介绍
-  title_en: Zhihui Jun (YouTube) - AI Creator Directory
+  title_zh: 稚晖君 - AI 机器人天才工程师 | 黎明岛
+  title_en: Zhihui Jun (YouTube) - AI Robotics Engineer | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

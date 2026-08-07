@@ -47,8 +47,8 @@ seo:
     - 纳米AI搜索
     - 创业者IP
   search_intent: informational
-  title_zh: 红衣大叔周鸿祎 - AI 创作者介绍
-  title_en: Zhou Hongyi (Red Coat Uncle) - AI Creator Directory
+  title_zh: 红衣大叔周鸿祎 - 360创始人 AI 观察 | 黎明岛
+  title_en: Zhou Hongyi (Red Coat Uncle) - 360 Founder on AI | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

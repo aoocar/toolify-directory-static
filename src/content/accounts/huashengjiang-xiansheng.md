@@ -45,8 +45,8 @@ seo:
     - AI工具
     - 教程
   search_intent: informational
-  title_zh: 花生酱先生 - AI 创作者介绍
-  title_en: Mr. Peanut Butter - AI Creator Directory
+  title_zh: 花生酱先生 - AI 绘画教程与工具测评 | 黎明岛
+  title_en: Mr. Peanut Butter - AI Art Tutorials & Tool Reviews | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

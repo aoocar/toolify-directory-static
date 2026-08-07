@@ -43,8 +43,8 @@ seo:
     - AI姐姐
     - AI互动
   search_intent: informational
-  title_zh: 啊佳佳思密达 - AI 创作者介绍
-  title_en: Ajiajia - AI Creator Directory
+  title_zh: 啊佳佳思密达 - AI 角色与「AI姐姐」互动 | 黎明岛
+  title_en: Ajiajia - AI Character Creator | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

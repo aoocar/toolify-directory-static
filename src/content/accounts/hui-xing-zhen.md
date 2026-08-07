@@ -43,8 +43,8 @@ seo:
     - 科技
     - 深度分析
   search_intent: informational
-  title_zh: 回形针PaperClip - AI 创作者介绍
-  title_en: PaperClip - AI Creator Directory
+  title_zh: 回形针PaperClip - 深度科技动画科普 | 黎明岛
+  title_en: PaperClip - In-Depth Animated Science | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

@@ -45,8 +45,8 @@ seo:
     - 论文精读
     - PyTorch
   search_intent: informational
-  title_zh: 跟李沐学AI - AI 创作者介绍
-  title_en: Mu Li (YouTube) - AI Creator Directory
+  title_zh: 跟李沐学AI - 双语深度学习教程（YouTube） | 黎明岛
+  title_en: Mu Li (YouTube) - Bilingual DL Tutorials (YouTube) | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

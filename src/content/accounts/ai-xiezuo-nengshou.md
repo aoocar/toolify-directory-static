@@ -7,6 +7,7 @@ platformId: xhs-ai-xiezuo
 verified: false
 categories:
   - ai-content
+  - ai-writing
 tags:
   - AI写作
   - ChatGPT
@@ -42,8 +43,8 @@ seo:
     - ChatGPT
     - 内容创作
   search_intent: informational
-  title_zh: AI写作能手 - AI 创作者介绍
-  title_en: AI Writing Pro - AI Creator Directory
+  title_zh: AI写作能手 - AI 辅助写作与内容创作 | 黎明岛
+  title_en: AI Writing Pro - AI-Assisted Writing for Creators | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

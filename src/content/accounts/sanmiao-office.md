@@ -45,8 +45,8 @@ seo:
     - PPT
     - 快捷键
   search_intent: informational
-  title_zh: 三秒-office - AI 创作者介绍
-  title_en: Three-Second Office - AI Creator Directory
+  title_zh: 三秒-office - 一分钟办公技巧 | 黎明岛
+  title_en: Three-Second Office - Minute-Long Office Tips | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

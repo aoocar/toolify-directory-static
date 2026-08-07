@@ -44,8 +44,8 @@ seo:
     - 软装搭配
     - 避坑
   search_intent: informational
-  title_zh: wuli-设计姐 - AI 创作者介绍
-  title_en: wuli-Shejijie - AI Creator Directory
+  title_zh: wuli-设计姐 - 装修干货与软装搭配 | 黎明岛
+  title_en: wuli-Shejijie - Renovation & Soft Decor Tips | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

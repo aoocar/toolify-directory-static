@@ -8,6 +8,7 @@ verified: false
 categories:
   - ai-content
   - tech-review
+  - video-generation
 tags:
   - AI工具
   - AI音乐
@@ -48,8 +49,8 @@ seo:
     - AI视频
     - 普通人机遇
   search_intent: informational
-  title_zh: AI旋风 - AI 创作者介绍
-  title_en: AI Vortex - AI Creator Directory
+  title_zh: AI旋风 - 最新 AI 工具分享与创作实验 | 黎明岛
+  title_en: AI Vortex - Sharing Latest AI Tools & Experiments | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

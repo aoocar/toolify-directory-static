@@ -47,8 +47,8 @@ seo:
     - AI辩论
     - 深度访谈
   search_intent: informational
-  title_zh: 老蒋巨靠谱 - AI 创作者介绍
-  title_en: Lao Jiang Ju Kepao - AI Creator Directory
+  title_zh: 老蒋巨靠谱 - 深度科技与社会评论 | 黎明岛
+  title_en: Lao Jiang Ju Kepao - Deep Tech & Society Commentary | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

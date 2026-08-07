@@ -7,6 +7,7 @@ platformId: xhs-ai-shijue
 verified: false
 categories:
   - ai-content
+  - video-generation
 tags:
   - AI视觉
   - ComfyUI
@@ -41,8 +42,8 @@ seo:
     - ComfyUI
     - AI视频
   search_intent: informational
-  title_zh: AI视觉创作者 - AI 创作者介绍
-  title_en: AI Visual Creator - AI Creator Directory
+  title_zh: AI视觉创作者 - ComfyUI 工作流与视频生成 | 黎明岛
+  title_en: AI Visual Creator - ComfyUI Workflows & Video Generation | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

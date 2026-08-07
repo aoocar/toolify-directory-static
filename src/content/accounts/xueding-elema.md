@@ -44,8 +44,8 @@ seo:
     - 美食
     - 知识区
   search_intent: informational
-  title_zh: 薛定饿了么 - AI 创作者介绍
-  title_en: Xueding Elema - AI Creator Directory
+  title_zh: 薛定饿了么 - 物理科普创意动画 | 黎明岛
+  title_en: Xueding Elema - Creative Physics Science | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

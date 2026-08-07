@@ -42,8 +42,8 @@ seo:
     - AI创作
     - 创意实验
   search_intent: informational
-  title_zh: AI音乐工坊 - AI 创作者介绍
-  title_en: AI Music Studio - AI Creator Directory
+  title_zh: AI音乐工坊 - AI 生成音乐与创意实验 | 黎明岛
+  title_en: AI Music Studio - AI Music Generation & Experiments | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

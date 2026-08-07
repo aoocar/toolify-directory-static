@@ -43,8 +43,8 @@ seo:
     - AI绘画
     - AI设计
   search_intent: informational
-  title_zh: Nico AI Art - AI 创作者介绍
-  title_en: Nico AI Art - AI Creator Directory
+  title_zh: Nico AI Art - Midjourney 与 AI 绘画教程 | 黎明岛
+  title_en: Nico AI Art - Midjourney Tutorials for Designers | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

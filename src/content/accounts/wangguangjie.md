@@ -45,8 +45,8 @@ seo:
     - 退休教师
     - 知识直播
   search_intent: informational
-  title_zh: 王广杰 - AI 创作者介绍
-  title_en: Wang Guangjie - AI Creator Directory
+  title_zh: 王广杰 - 82岁教师直播教电工 | 黎明岛
+  title_en: Wang Guangjie - Retired Teacher Teaching Electronics | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

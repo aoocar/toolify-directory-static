@@ -27,7 +27,7 @@ const lang = Astro.params.lang as Lang;
           <div class="method-card">
             <h3>✉️ {lang === "zh" ? "电子邮件" : "Email"}</h3>
             <p>{lang === "zh" ? "发送商务合作意向到我们的官方邮箱：" : "Send your business inquiries to our inbox:"}</p>
-            <strong style="font-size: 1.25rem; color: #6366f1;">aoobee@sina.com</strong>
+            <strong style="font-size: 1.25rem; color: #6366f1;"><a href="mailto:aoobee@sina.com" data-ga-event="contact_method_click" data-ga-category="conversion" data-ga-label="email" data-ga-value="aoobee@sina.com">aoobee@sina.com</a></strong>
           </div>
         </div>
       </div>

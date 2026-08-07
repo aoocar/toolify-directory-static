@@ -44,8 +44,8 @@ seo:
     - 数码3C
     - 横评
   search_intent: informational
-  title_zh: 凰家评测 - AI 创作者介绍
-  title_en: iFeng Tech Review - AI Creator Directory
+  title_zh: 凰家评测 - 硬核科技与家电评测 | 黎明岛
+  title_en: iFeng Tech Review - Hardcore Tech & Home Appliance Reviews | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:
