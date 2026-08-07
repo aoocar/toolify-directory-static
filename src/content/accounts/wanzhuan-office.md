@@ -7,6 +7,7 @@ platformId: 玩轉office
 verified: true
 categories:
   - office
+  - productivity
 tags:
   - Word
   - Excel

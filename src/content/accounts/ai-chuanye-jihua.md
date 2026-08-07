@@ -7,6 +7,7 @@ platformId: xhs-ai-chuanye
 verified: false
 categories:
   - ai-content
+  - marketing-seo
 tags:
   - AI创业
   - AI副业

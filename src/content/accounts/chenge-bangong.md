@@ -7,6 +7,7 @@ platformId: 辰哥办公技巧
 verified: true
 categories:
   - office
+  - productivity
 tags:
   - 办公技巧
   - Excel

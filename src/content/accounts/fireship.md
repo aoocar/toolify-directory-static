@@ -8,6 +8,7 @@ verified: true
 categories:
   - tech-review
   - ai-content
+  - developer-tools
 tags:
   - AI编程
   - 开发者

@@ -7,6 +7,7 @@ platformId: '385670211'
 verified: true
 categories:
   - ai-content
+  - ai-writing
 tags:
   - AI工具评测
   - AI实战

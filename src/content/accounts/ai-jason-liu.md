@@ -8,6 +8,7 @@ verified: false
 categories:
   - ai-content
   - education
+  - ai-writing
 tags:
   - AI商业
   - AI变现

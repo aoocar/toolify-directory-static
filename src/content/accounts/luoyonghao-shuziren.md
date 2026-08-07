@@ -8,6 +8,8 @@ verified: true
 categories:
   - ai-content
   - tech-review
+  - marketing-seo
+  - streaming
 tags:
   - AI数字人
   - 直播带货

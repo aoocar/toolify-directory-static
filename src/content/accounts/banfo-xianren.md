@@ -7,6 +7,7 @@ platformId: xhs-banfo
 verified: true
 categories:
   - ai-content
+  - market-insights
 tags:
   - AI行业分析
   - 科技评论

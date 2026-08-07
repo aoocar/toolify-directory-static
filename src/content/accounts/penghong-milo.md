@@ -8,6 +8,7 @@ verified: true
 categories:
   - ai-content
   - entertainment
+  - video-generation
 tags:
   - AI视频
   - AI动画

@@ -8,6 +8,7 @@ verified: true
 categories:
   - ai-content
   - education
+  - image-generation
 tags:
   - AI绘画
   - Stable Diffusion

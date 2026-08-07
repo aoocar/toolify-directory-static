@@ -8,6 +8,7 @@ verified: true
 categories:
   - education
   - ai-content
+  - market-insights
 tags:
   - AI前沿
   - 大模型

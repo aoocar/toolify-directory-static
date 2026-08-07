@@ -8,6 +8,7 @@ verified: true
 categories:
   - tech-review
   - ai-content
+  - video-generation
 tags:
   - 视频制作
   - AI视频
@@ -48,8 +49,8 @@ seo:
     - Sora
     - 可灵
   search_intent: informational
-  title_zh: 影视飓风 - AI 创作者介绍
-  title_en: Film Storm - AI Creator Directory
+  title_zh: 影视飓风 - 视频制作与AI影像创作者 | 黎明岛
+  title_en: Film Storm - Video Production & AI Imaging | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

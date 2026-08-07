@@ -8,6 +8,7 @@ verified: true
 categories:
   - entertainment
   - ai-content
+  - streaming
 tags:
   - AI短剧
   - 数字人

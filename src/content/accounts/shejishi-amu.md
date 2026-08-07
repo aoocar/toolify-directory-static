@@ -7,6 +7,7 @@ platformId: xhs-amu
 verified: false
 categories:
   - ai-content
+  - image-generation
 tags:
   - AI设计
   - 设计工具

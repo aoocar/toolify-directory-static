@@ -7,6 +7,7 @@ platformId: '486989780'
 verified: true
 categories:
   - ai-content
+  - productivity
 tags:
   - AI工具
   - 效率利器

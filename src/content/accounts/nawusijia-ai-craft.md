@@ -7,6 +7,7 @@ platformId: bili-nawusijia
 verified: true
 categories:
   - ai-content
+  - image-generation
 tags:
   - AI绘画
   - Midjourney

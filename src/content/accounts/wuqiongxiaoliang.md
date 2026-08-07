@@ -44,8 +44,8 @@ seo:
     - 网络热门生物
     - 知识区
   search_intent: informational
-  title_zh: 无穷小亮的科普日常 - AI 创作者介绍
-  title_en: Zhang Chenliang - AI Creator Directory
+  title_zh: 无穷小亮 - 博物科普与生物鉴定UP主 | 黎明岛
+  title_en: Zhang Chenliang - Natural History & Biology Educator | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

@@ -46,8 +46,8 @@ seo:
     - AI实验
     - 创意科技
   search_intent: informational
-  title_zh: 何同学 - AI 创作者介绍
-  title_en: He Tongxue - AI Creator Directory
+  title_zh: 何同学 - 科技评测与创意实验UP主 | 黎明岛
+  title_en: He Tongxue - Tech Reviews & Creative Experiments | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

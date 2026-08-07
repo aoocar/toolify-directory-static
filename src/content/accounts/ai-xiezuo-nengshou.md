@@ -7,6 +7,7 @@ platformId: xhs-ai-xiezuo
 verified: false
 categories:
   - ai-content
+  - ai-writing
 tags:
   - AI写作
   - ChatGPT

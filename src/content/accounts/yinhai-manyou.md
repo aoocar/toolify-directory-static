@@ -8,6 +8,7 @@ verified: false
 categories:
   - entertainment
   - ai-content
+  - video-generation
 tags:
   - AI短剧
   - 科幻

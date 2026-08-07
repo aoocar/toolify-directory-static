@@ -7,6 +7,7 @@ platformId: xhs-huaye
 verified: false
 categories:
   - ai-content
+  - ai-writing
 tags:
   - AI创作
   - AI副业

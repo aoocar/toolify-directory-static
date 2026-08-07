@@ -8,6 +8,7 @@ verified: false
 categories:
   - tech-review
   - ai-content
+  - productivity
 tags:
   - AI工具
   - 效率工具

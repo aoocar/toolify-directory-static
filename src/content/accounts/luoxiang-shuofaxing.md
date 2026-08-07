@@ -44,8 +44,8 @@ seo:
     - 普法
     - 知识区
   search_intent: informational
-  title_zh: 罗翔说刑法 - AI 创作者介绍
-  title_en: Luoxiang on Criminal Law - AI Creator Directory
+  title_zh: 罗翔说刑法 - 法学普法UP主 | 黎明岛
+  title_en: Luoxiang on Criminal Law - Legal Education Creator | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

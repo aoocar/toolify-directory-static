@@ -8,6 +8,7 @@ verified: true
 categories:
   - ai-content
   - tech-review
+  - market-insights
 tags:
   - AI工具
   - AI新闻

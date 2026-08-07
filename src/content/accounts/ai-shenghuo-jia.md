@@ -8,6 +8,7 @@ verified: false
 categories:
   - ai-content
   - lifestyle
+  - productivity
 tags:
   - AI生活
   - 效率提升

@@ -7,6 +7,7 @@ platformId: '37663924'
 verified: true
 categories:
   - education
+  - marketing-seo
 tags:
   - 商业科普
   - 金融理财

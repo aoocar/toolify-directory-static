@@ -8,6 +8,7 @@ verified: true
 categories:
   - education
   - ai-content
+  - developer-tools
 tags:
   - AI编程
   - 编程教学

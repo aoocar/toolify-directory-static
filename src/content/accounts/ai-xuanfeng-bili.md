@@ -8,6 +8,7 @@ verified: true
 categories:
   - ai-content
   - tech-review
+  - video-generation
 tags:
   - AI工具
   - AI音乐

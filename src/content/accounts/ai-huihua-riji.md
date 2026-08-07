@@ -7,6 +7,7 @@ platformId: xhs-ai-huihua
 verified: false
 categories:
   - ai-content
+  - image-generation
 tags:
   - AI绘画
   - Stable Diffusion

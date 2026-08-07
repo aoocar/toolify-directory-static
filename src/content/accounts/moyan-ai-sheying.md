@@ -7,6 +7,7 @@ platformId: dy-moyan-ai
 verified: false
 categories:
   - ai-content
+  - image-generation
 tags:
   - AI写真
   - AI摄影

@@ -8,6 +8,7 @@ verified: false
 categories:
   - entertainment
   - ai-content
+  - streaming
 tags:
   - AI短剧
   - 奇幻

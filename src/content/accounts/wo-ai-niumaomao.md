@@ -8,6 +8,7 @@ verified: false
 categories:
   - ai-content
   - lifestyle
+  - image-generation
 tags:
   - AI宠物
   - AI写真

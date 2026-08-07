@@ -8,6 +8,7 @@ verified: true
 categories:
   - tech-review
   - ai-content
+  - productivity
 tags:
   - AI工具测评
   - AI教程

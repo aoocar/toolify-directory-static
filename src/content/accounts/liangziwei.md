@@ -8,6 +8,7 @@ verified: true
 categories:
   - education
   - ai-content
+  - market-insights
 tags:
   - AI资讯
   - 前沿技术

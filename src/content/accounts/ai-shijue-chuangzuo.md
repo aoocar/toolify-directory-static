@@ -7,6 +7,7 @@ platformId: xhs-ai-shijue
 verified: false
 categories:
   - ai-content
+  - video-generation
 tags:
   - AI视觉
   - ComfyUI

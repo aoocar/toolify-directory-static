@@ -71,7 +71,32 @@ const currentPath = Astro.url.pathname.replace(/^\/(en|zh)/, "") || "/";
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-WJ8ZP9FSE9');
+      // Attach campaign (UTM) params so every pageview carries the original
+      // acquisition source through the site (organic/direct/paid/social…).
+      // gtag sends the full query string by default; we just make the values
+      // explicit and read the first-hit UTM so attribution survives navigation.
+      (function () {
+        try {
+          var params = new URLSearchParams(window.location.search);
+          var urlParams = {};
+          ['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function (k) {
+            var v = params.get(k);
+            if (v) urlParams[k] = v;
+          });
+          var sessionUtm = sessionStorage.getItem('lmdao_utm');
+          var firstHit = sessionUtm ? JSON.parse(sessionUtm) : urlParams;
+          if (Object.keys(firstHit).length && !sessionUtm) {
+            try { sessionStorage.setItem('lmdao_utm', JSON.stringify(firstHit)); } catch (e) {}
+          }
+          if (Object.keys(firstHit).length) {
+            gtag('config', 'G-WJ8ZP9FSE9', { page_path: window.location.pathname, ...firstHit });
+          } else {
+            gtag('config', 'G-WJ8ZP9FSE9', { page_path: window.location.pathname });
+          }
+        } catch (e) {
+          gtag('config', 'G-WJ8ZP9FSE9');
+        }
+      })();
     </script>
 
     <!-- Microsoft Clarity -->
@@ -91,7 +116,7 @@ const currentPath = Astro.url.pathname.replace(/^\/(en|zh)/, "") || "/";
     <div class="sponsor-strip">
       <div class="container sponsor-strip-inner">
         <span>🔥 {t(lang, "slogan")}</span>
-        <a href={localizedPath(lang, "/services")} class="banner-cta-link">
+        <a href={localizedPath(lang, "/services")} class="banner-cta-link" data-ga-event="business_cta_click" data-ga-category="conversion" data-ga-label="banner">
           {lang === "zh" ? "了解 AI 代运营服务 →" : "Learn AI Management Services →"}
         </a>
       </div>
@@ -137,5 +162,27 @@ const currentPath = Astro.url.pathname.replace(/^\/(en|zh)/, "") || "/";
         </div>
       </div>
     </footer>
+    <!-- GA4 conversion events: delegated click tracking.
+         Links opt in via data-ga-event (+ optional data-ga-* attrs).
+         b/contact links carry UTM-ish params for cross-tool attribution. -->
+    <script is:inline>
+      (function () {
+        function ga(name, params) {
+          try { if (window.gtag) window.gtag('event', name, params || {}); } catch (e) {}
+        }
+        document.addEventListener('click', function (e) {
+          var el = e.target && e.target.closest ? e.target.closest('[data-ga-event]') : null;
+          if (!el) return;
+          var name = el.getAttribute('data-ga-event');
+          if (!name) return;
+          var params = { event_category: el.getAttribute('data-ga-category') || 'engagement' };
+          ['label','value'].forEach(function (k) {
+            var v = el.getAttribute('data-ga-' + k);
+            if (v) params[k] = v;
+          });
+          ga(name, params);
+        });
+      })();
+    </script>
   </body>
 </html>

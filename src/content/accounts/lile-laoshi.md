@@ -45,8 +45,8 @@ seo:
     - 物理
     - 机器学习
   search_intent: informational
-  title_zh: 李永乐老师 - AI 创作者介绍
-  title_en: Teacher Li Yongle - AI Creator Directory
+  title_zh: 李永乐老师 - 数学物理与AI科普UP主 | 黎明岛
+  title_en: Teacher Li Yongle - Math, Physics & AI Popularizer | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

@@ -8,6 +8,7 @@ verified: false
 categories:
   - ai-content
   - education
+  - developer-tools
 tags:
   - AI编程
   - Claude

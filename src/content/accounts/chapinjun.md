@@ -7,6 +7,7 @@ platformId: '19319172'
 verified: true
 categories:
   - ai-content
+  - marketing-seo
 tags:
   - 科技评测
   - AI大模型实测

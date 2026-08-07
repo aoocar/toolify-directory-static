@@ -7,6 +7,7 @@ platformId: xhs-ai-bianxian
 verified: false
 categories:
   - ai-content
+  - ai-writing
 tags:
   - AI变现
   - AI副业

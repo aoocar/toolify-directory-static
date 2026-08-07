@@ -7,6 +7,7 @@ platformId: WPS大老板
 verified: true
 categories:
   - office
+  - productivity
 tags:
   - WPS
   - 办公软件

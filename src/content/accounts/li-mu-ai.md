@@ -8,6 +8,7 @@ verified: true
 categories:
   - education
   - ai-content
+  - developer-tools
 tags:
   - 深度学习
   - 论文精读

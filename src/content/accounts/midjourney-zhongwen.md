@@ -7,6 +7,7 @@ platformId: xhs-mj-cn
 verified: false
 categories:
   - ai-content
+  - image-generation
 tags:
   - Midjourney
   - AI绘画

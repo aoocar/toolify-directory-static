@@ -8,6 +8,7 @@ verified: true
 categories:
   - ai-content
   - tech-review
+  - marketing-seo
 tags:
   - AI商业化
   - 行业分析

@@ -7,6 +7,7 @@ platformId: xhs-ai-touxiang
 verified: false
 categories:
   - ai-content
+  - image-generation
 tags:
   - AI头像
   - AI写真

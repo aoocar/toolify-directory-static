@@ -8,6 +8,7 @@ verified: true
 categories:
   - education
   - ai-content
+  - developer-tools
 tags:
   - Python
   - 机器学习
