@@ -1,0 +1,22 @@
+main:
+  push:
+    - name: sync-to-github
+      imports:
+        - https://cnb.cool/aoobee/aoobee-secrets/-/blob/main/limingdao-cnb-sync.yml
+      stages:
+        - name: sync
+          script: |
+            set -e
+            SRC_HEAD=$(git rev-parse HEAD)
+            echo "SRC_HEAD=$SRC_HEAD"
+            GH_URL="https://x-access-token:${GITHUB_TOKEN}@github.com/aoocar/toolify-directory-static.git"
+            echo "== push CNB main -> GitHub main =="
+            git push "$GH_URL" main:main
+            DST_HEAD=$(git ls-remote "$GH_URL" refs/heads/main | cut -f1)
+            echo "DST_HEAD=$DST_HEAD"
+            if [ "$SRC_HEAD" = "$DST_HEAD" ]; then
+              echo "SYNC_OK: CNB main 已同步到 GitHub main"
+            else
+              echo "SYNC_WARN: push 完成但 SHA 不一致，请检查"
+              exit 1
+            fi
