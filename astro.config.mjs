@@ -70,6 +70,13 @@ async function resolveLastmod(urlStr) {
     return data.updated || data.date;
   }
 
+  // Static, hand-maintained pages (contact/services/privacy/submit/new/rankings…)
+  // have no content-driven update time — leave them without a lastmod so
+  // crawlers don't treat them as freshly-changed every build.
+  if (["contact", "services", "privacy", "submit", "new", "rankings"].includes(first)) {
+    return undefined;
+  }
+
   // Aggregate pages (home, category, platform, list pages) → the most recent
   // real content change among the accounts they surface.
   const metas = await getAccountsMeta();
