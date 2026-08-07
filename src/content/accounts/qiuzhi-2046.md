@@ -48,8 +48,8 @@ seo:
     - 行业观察
     - 创意
   search_intent: informational
-  title_zh: 秋芝2046 - AI 创作者介绍
-  title_en: Qiuzhi 2046 - AI Creator Directory
+  title_zh: 秋芝2046 - 普通人 AI 实战指南 | 黎明岛
+  title_en: Qiuzhi 2046 - Practical AI for Everyone | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

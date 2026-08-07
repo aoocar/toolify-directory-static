@@ -45,8 +45,8 @@ seo:
     - 生活记录
     - 银发
   search_intent: informational
-  title_zh: 韩纳百川 - AI 创作者介绍
-  title_en: Han Na Bai Chuan (Grandpa Han) - AI Creator Directory
+  title_zh: 韩纳百川 - 银发风采生活记录 | 黎明岛
+  title_en: Han Na Bai Chuan (Grandpa Han) - Silver-Hair Lifestyle Vlog | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

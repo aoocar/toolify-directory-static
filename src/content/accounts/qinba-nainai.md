@@ -45,8 +45,8 @@ seo:
     - 祖孙
     - 三农
   search_intent: informational
-  title_zh: 秦巴奶奶 灭霸爷爷 - AI 创作者介绍
-  title_en: Qinba Grandma & Thanos Grandpa - AI Creator Directory
+  title_zh: 秦巴奶奶 灭霸爷爷 - 山村美食与祖孙生活 | 黎明岛
+  title_en: Qinba Grandma & Thanos Grandpa - Rural Food & Grandparent Life | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

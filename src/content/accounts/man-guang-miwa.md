@@ -42,8 +42,8 @@ seo:
     - 好物推荐
     - 实测测评
   search_intent: informational
-  title_zh: 慢逛米娃家 - AI 创作者介绍
-  title_en: Slow Stroll Miwa Home - AI Creator Directory
+  title_zh: 慢逛米娃家 - 家居家电好物实测 | 黎明岛
+  title_en: Slow Stroll Miwa Home - Home Goods & Appliance Testing | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

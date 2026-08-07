@@ -42,8 +42,8 @@ seo:
     - AI新闻
     - AI赚钱
   search_intent: informational
-  title_zh: The AI Advantage - AI 创作者介绍
-  title_en: The AI Advantage - AI Creator Directory
+  title_zh: The AI Advantage - 每日 AI 新闻与工具评测 | 黎明岛
+  title_en: The AI Advantage - Daily AI News & Tool Reviews | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

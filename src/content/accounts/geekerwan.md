@@ -41,8 +41,8 @@ seo:
     - 芯片拆解
     - 智能家电
   search_intent: informational
-  title_zh: 极客湾Geekerwan - AI 创作者介绍
-  title_en: Geekerwan - AI Creator Directory
+  title_zh: 极客湾Geekerwan - 硬核数码拆解评测 | 黎明岛
+  title_en: Geekerwan - Hardcore Digital Teardown Reviews | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

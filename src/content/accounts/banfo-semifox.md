@@ -45,8 +45,8 @@ seo:
     - 互联网
     - 知识区
   search_intent: informational
-  title_zh: 硬核的半佛仙人 - AI 创作者介绍
-  title_en: Hardcore Semi-Fox Immortal - AI Creator Directory
+  title_zh: 硬核的半佛仙人 - 商业金融硬核科普UP主 | 黎明岛
+  title_en: Hardcore Semi-Fox Immortal - Business & Finance Explainer | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

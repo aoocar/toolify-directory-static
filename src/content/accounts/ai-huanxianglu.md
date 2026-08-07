@@ -44,8 +44,8 @@ seo:
     - 奇幻
     - AI生成
   search_intent: informational
-  title_zh: AI幻想录 - AI 创作者介绍
-  title_en: AI Fantasy Records - AI Creator Directory
+  title_zh: AI幻想录 - AI 奇幻短剧连载 | 黎明岛
+  title_en: AI Fantasy Records - AI-Generated Fantasy Series | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

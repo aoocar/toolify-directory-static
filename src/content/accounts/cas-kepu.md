@@ -44,8 +44,8 @@ seo:
     - 官方号
     - 知识区
   search_intent: informational
-  title_zh: 中科院科普博览 - AI 创作者介绍
-  title_en: CAS Science Popularization - AI Creator Directory
+  title_zh: 中科院科普博览 - 中科院权威多学科科普 | 黎明岛
+  title_en: CAS Science Popularization - Authoritative Multi-Discipline Science | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

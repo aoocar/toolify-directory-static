@@ -44,8 +44,8 @@ seo:
     - 零基础
     - 中老年
   search_intent: informational
-  title_zh: 糖豆舞蹈 - AI 创作者介绍
-  title_en: Tangdou Dance - AI Creator Directory
+  title_zh: 糖豆舞蹈 - 零基础广场舞教学 | 黎明岛
+  title_en: Tangdou Dance - Beginner Square Dance Lessons | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

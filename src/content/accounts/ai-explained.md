@@ -43,8 +43,8 @@ seo:
     - 大模型
     - AI研究
   search_intent: informational
-  title_zh: AI Explained - AI 创作者介绍
-  title_en: AI Explained - AI Creator Directory
+  title_zh: AI Explained - AI 前沿突破深度解析 | 黎明岛
+  title_en: AI Explained - In-Depth AI Breakthrough Analysis | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

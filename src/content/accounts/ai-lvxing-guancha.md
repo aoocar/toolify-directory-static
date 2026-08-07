@@ -43,8 +43,8 @@ seo:
     - 文旅
     - AI生成
   search_intent: informational
-  title_zh: AI旅行观察室 - AI 创作者介绍
-  title_en: AI Travel Observer - AI Creator Directory
+  title_zh: AI旅行观察室 - AI 增强旅行与目的地艺术视角 | 黎明岛
+  title_en: AI Travel Observer - AI-Enhanced Travel Visuals | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

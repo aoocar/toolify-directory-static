@@ -44,8 +44,8 @@ seo:
     - 党史
     - 知识区
   search_intent: informational
-  title_zh: 思维实验室 - AI 创作者介绍
-  title_en: Thinking Laboratory - AI Creator Directory
+  title_zh: 思维实验室 - 高密度科学历史科普 | 黎明岛
+  title_en: Thinking Laboratory - Dense Science & History | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

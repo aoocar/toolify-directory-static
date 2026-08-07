@@ -45,8 +45,8 @@ seo:
     - 硬核科普
     - 选购指南
   search_intent: informational
-  title_zh: 大狸子切切里 - AI 创作者介绍
-  title_en: Da Li Zi (Qieqie Li) - AI Creator Directory
+  title_zh: 大狸子切切里 - 知名科技与数码评测UP主 | 黎明岛
+  title_en: Da Li Zi (Qieqie Li) - Popular Tech UP on Bilibili | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

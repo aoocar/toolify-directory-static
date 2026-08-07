@@ -41,8 +41,8 @@ seo:
     - 免费教程
     - 计算机二级
   search_intent: informational
-  title_zh: oeasy - AI 创作者介绍
-  title_en: oeasy - AI Creator Directory
+  title_zh: oeasy - 免费 Office 与计算机教程 | 黎明岛
+  title_en: oeasy - Free Office & Computer Tutorials | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

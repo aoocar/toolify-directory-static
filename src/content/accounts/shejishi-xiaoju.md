@@ -44,8 +44,8 @@ seo:
     - 老破小爆改
     - 收纳
   search_intent: informational
-  title_zh: 设计师小桔 - AI 创作者介绍
-  title_en: Designer Xiaoju - AI Creator Directory
+  title_zh: 设计师小桔 - 小户型老房爆改 | 黎明岛
+  title_en: Designer Xiaoju - Small Space Makeovers | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

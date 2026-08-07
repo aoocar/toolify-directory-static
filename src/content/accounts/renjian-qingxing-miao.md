@@ -43,8 +43,8 @@ seo:
     - 猫娘
     - AI互动
   search_intent: informational
-  title_zh: 人间清醒的喵 - AI 创作者介绍
-  title_en: Awake Cat - AI Creator Directory
+  title_zh: 人间清醒的喵 - AI 猫娘角色互动 | 黎明岛
+  title_en: Awake Cat - AI Catgirl Character Content | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

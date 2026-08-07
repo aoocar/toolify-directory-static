@@ -41,8 +41,8 @@ seo:
     - 智能家电
     - 新品速递
   search_intent: informational
-  title_zh: 爱范儿 - AI 创作者介绍
-  title_en: iFanr - AI Creator Directory
+  title_zh: 爱范儿 - 智能家电与数字生活媒体 | 黎明岛
+  title_en: iFanr - Digital Life & Smart Home Media | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

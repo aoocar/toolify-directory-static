@@ -43,8 +43,8 @@ seo:
     - AI创业
     - AI自动化
   search_intent: informational
-  title_zh: Nate From The Future - AI 创作者介绍
-  title_en: Nate From The Future - AI Creator Directory
+  title_zh: Nate From The Future - AI 工具与自动化教程 | 黎明岛
+  title_en: Nate From The Future - AI Tools & Automation | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

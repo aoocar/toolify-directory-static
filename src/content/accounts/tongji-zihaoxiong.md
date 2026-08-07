@@ -48,8 +48,8 @@ seo:
     - 大模型
     - 机器人
   search_intent: informational
-  title_zh: 同济子豪兄 - AI 创作者介绍
-  title_en: Tommy Zihao (Tongji) - AI Creator Directory
+  title_zh: 同济子豪兄 - AI 论文精读与视觉科普 | 黎明岛
+  title_en: Tommy Zihao (Tongji) - AI Paper Reading & Computer Vision | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

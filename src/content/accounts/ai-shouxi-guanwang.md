@@ -44,8 +44,8 @@ seo:
     - 行业动态
     - 产品评测
   search_intent: informational
-  title_zh: AI科技评论 - AI 创作者介绍
-  title_en: AI Tech Review - AI Creator Directory
+  title_zh: AI科技评论 - AI 行业动态与产品评测 | 黎明岛
+  title_en: AI Tech Review - AI Industry News & Product Reviews | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

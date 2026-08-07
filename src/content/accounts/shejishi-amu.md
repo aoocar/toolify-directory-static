@@ -42,8 +42,8 @@ seo:
     - 设计工具
     - 创意设计
   search_intent: informational
-  title_zh: 设计师阿沐 - AI 创作者介绍
-  title_en: Designer Amu - AI Creator Directory
+  title_zh: 设计师阿沐 - AI 辅助设计创作与灵感 | 黎明岛
+  title_en: Designer Amu - AI-Assisted Design & Inspiration | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

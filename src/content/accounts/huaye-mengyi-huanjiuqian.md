@@ -43,8 +43,8 @@ seo:
     - AI副业
     - 变现
   search_intent: informational
-  title_zh: 花爷梦呓换酒钱 - AI 创作者介绍
-  title_en: Hua Ye - AI Creator Directory
+  title_zh: 花爷梦呓换酒钱 - AI 创作与副业变现 | 黎明岛
+  title_en: Hua Ye - AI Creation & Side Income | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

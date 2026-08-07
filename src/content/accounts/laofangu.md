@@ -44,8 +44,8 @@ seo:
     - 退休名厨
     - 美食
   search_intent: informational
-  title_zh: 老饭骨 - AI 创作者介绍
-  title_en: Lao Fan Gu (Old Rice Bones) - AI Creator Directory
+  title_zh: 老饭骨 - 国宴大师家常菜教学 | 黎明岛
+  title_en: Lao Fan Gu (Old Rice Bones) - State Banquet Chefs Teach Home Cooking | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

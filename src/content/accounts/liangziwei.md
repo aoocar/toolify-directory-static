@@ -44,8 +44,8 @@ seo:
     - 前沿技术
     - 行业动态
   search_intent: informational
-  title_zh: 量子位 - AI 创作者介绍
-  title_en: QbitAI - AI Creator Directory
+  title_zh: 量子位 - AI 行业资讯与前沿报道 | 黎明岛
+  title_en: QbitAI - AI Industry News & Frontier Tech | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

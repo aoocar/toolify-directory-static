@@ -44,8 +44,8 @@ seo:
     - 居住美学
     - RoomTour
   search_intent: informational
-  title_zh: 小艾大叔 - AI 创作者介绍
-  title_en: Xiaoai Dashu (Uncle Ai) - AI Creator Directory
+  title_zh: 小艾大叔 - 亿元豪宅探访 | 黎明岛
+  title_en: Xiaoai Dashu (Uncle Ai) - Luxury Mansion Tours | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

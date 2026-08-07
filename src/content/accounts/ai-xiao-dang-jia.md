@@ -48,8 +48,8 @@ seo:
     - 工作流
     - Stable Diffusion
   search_intent: informational
-  title_zh: AI小当家 - AI 创作者介绍
-  title_en: AI Master - AI Creator Directory
+  title_zh: AI小当家 - ComfyUI 工作流 AI 绘画教程 | 黎明岛
+  title_en: AI Master - ComfyUI AI Art Workflow Tutorials | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

@@ -42,8 +42,8 @@ seo:
     - 办公软件
     - 技巧
   search_intent: informational
-  title_zh: WPS大老板 - AI 创作者介绍
-  title_en: WPS Big Boss - AI Creator Directory
+  title_zh: WPS大老板 - WPS 办公软件技巧 | 黎明岛
+  title_en: WPS Big Boss - WPS & Office Software Tips | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

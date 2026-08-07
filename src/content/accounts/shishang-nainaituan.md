@@ -44,8 +44,8 @@ seo:
     - 中老年模特
     - 生活方式
   search_intent: informational
-  title_zh: 时尚奶奶团 - AI 创作者介绍
-  title_en: Fashion Grannies - AI Creator Directory
+  title_zh: 时尚奶奶团 - 银发时尚旗袍走秀 | 黎明岛
+  title_en: Fashion Grannies - Silver Fashion & Qipao Runway | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

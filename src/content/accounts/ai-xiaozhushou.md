@@ -45,8 +45,8 @@ seo:
     - AI教程
     - DeepSeek
   search_intent: informational
-  title_zh: AI小助手 - AI 创作者介绍
-  title_en: AI Assistant - AI Creator Directory
+  title_zh: AI小助手 - B站最大 AI 教程频道 | 黎明岛
+  title_en: AI Assistant - Top Bilibili AI Tutorial Channel | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

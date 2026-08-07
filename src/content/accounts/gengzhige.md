@@ -45,8 +45,8 @@ seo:
     - 论文
     - 科普
   search_intent: informational
-  title_zh: 耿直哥 - AI 创作者介绍
-  title_en: Gengzhi Ge - AI Creator Directory
+  title_zh: 耿直哥 - AI 博士科普大模型与论文 | 黎明岛
+  title_en: Gengzhi Ge - AI PhD Explains LLMs & Papers | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

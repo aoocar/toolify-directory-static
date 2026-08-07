@@ -49,8 +49,8 @@ seo:
     - 行业分析
     - AI科普
   search_intent: informational
-  title_zh: AI进化论-花生 - AI 创作者介绍
-  title_en: AI Evolution - Peanut - AI Creator Directory
+  title_zh: AI进化论-花生 - AI 行业深度分析与前沿追踪 | 黎明岛
+  title_en: AI Evolution - Peanut - AI Industry Deep Analysis | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

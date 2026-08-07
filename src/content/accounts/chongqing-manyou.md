@@ -43,8 +43,8 @@ seo:
     - 赛博朋克
     - 城市美学
   search_intent: informational
-  title_zh: 重庆漫游日记 - AI 创作者介绍
-  title_en: Chongqing Wanderer Diary - AI Creator Directory
+  title_zh: 重庆漫游日记 - AI 赛博都市视觉 | 黎明岛
+  title_en: Chongqing Wanderer Diary - AI Cyberpunk City Visuals | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

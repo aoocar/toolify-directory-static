@@ -44,8 +44,8 @@ seo:
     - 传统手艺
     - 乡村
   search_intent: informational
-  title_zh: 阿木爷爷 - AI 创作者介绍
-  title_en: Grandpa Amu (Wang Dewen) - AI Creator Directory
+  title_zh: 阿木爷爷 - 榫卯木工技艺与匠心 | 黎明岛
+  title_en: Grandpa Amu (Wang Dewen) - Mortise & Tenon Woodworking | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

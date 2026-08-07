@@ -42,8 +42,8 @@ seo:
     - 办公制表
     - 函数
   search_intent: informational
-  title_zh: 冰冰jie电脑入门办公制表 - AI 创作者介绍
-  title_en: Bingbing Jie PC Basics - AI Creator Directory
+  title_zh: 冰冰jie电脑入门办公制表 - 零基础电脑与办公制表 | 黎明岛
+  title_en: Bingbing Jie PC Basics - PC Basics & Office Skills | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

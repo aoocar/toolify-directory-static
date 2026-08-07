@@ -45,8 +45,8 @@ seo:
     - 清洁家电
     - 实验室评测
   search_intent: informational
-  title_zh: 知电晓春哥 - AI 创作者介绍
-  title_en: ZhiDian XiaoChunGe - AI Creator Directory
+  title_zh: 知电晓春哥 - 家电影音实验室评测 | 黎明岛
+  title_en: ZhiDian XiaoChunGe - Home Theater Lab Reviews | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

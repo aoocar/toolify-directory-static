@@ -43,8 +43,8 @@ seo:
     - AI绘画
     - 提示词
   search_intent: informational
-  title_zh: Midjourney中文社区 - AI 创作者介绍
-  title_en: Midjourney CN Community - AI Creator Directory
+  title_zh: Midjourney中文社区 - AI 绘画作品与提示词技巧 | 黎明岛
+  title_en: Midjourney CN Community - AI Art & Prompt Tips | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

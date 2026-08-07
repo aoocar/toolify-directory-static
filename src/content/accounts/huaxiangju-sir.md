@@ -43,8 +43,8 @@ seo:
     - 创意组合
     - AI生成
   search_intent: informational
-  title_zh: 幻想居Sir - AI 创作者介绍
-  title_en: Fantasy House Sir - AI Creator Directory
+  title_zh: 幻想居Sir - AIGC 创意视觉组合 | 黎明岛
+  title_en: Fantasy House Sir - Creative AIGC Visual Mashups | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

@@ -45,8 +45,8 @@ seo:
     - ChatGPT
     - Midjourney
   search_intent: informational
-  title_zh: Niila - AI 创作者介绍
-  title_en: Niila - AI Creator Directory
+  title_zh: Niila - 中文 AI 工具教程 | 黎明岛
+  title_en: Niila - Chinese AI Tool Tutorials | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

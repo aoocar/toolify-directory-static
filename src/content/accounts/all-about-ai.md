@@ -45,8 +45,8 @@ seo:
     - AI自动化
     - 提示词工程
   search_intent: informational
-  title_zh: All About AI - AI 创作者介绍
-  title_en: All About AI - AI Creator Directory
+  title_zh: All About AI - 商业自动化与创意工作流教程 | 黎明岛
+  title_en: All About AI - Practical AI Automation Tutorials | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

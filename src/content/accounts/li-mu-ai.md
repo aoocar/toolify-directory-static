@@ -49,8 +49,8 @@ seo:
     - PyTorch
     - 动手学深度学习
   search_intent: informational
-  title_zh: 跟李沐学AI - AI 创作者介绍
-  title_en: Mu Li - AI Creator Directory
+  title_zh: 跟李沐学AI - 论文精读与深度学习教学 | 黎明岛
+  title_en: Mu Li - AI Paper Deep-Dive & DL Teaching | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

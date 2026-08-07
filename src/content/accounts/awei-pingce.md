@@ -41,8 +41,8 @@ seo:
     - 辟谣揭秘
     - 数码家电
   search_intent: informational
-  title_zh: 阿伟测评 - AI 创作者介绍
-  title_en: Awei Review - AI Creator Directory
+  title_zh: 阿伟测评 - 消费品深度测评 | 黎明岛
+  title_en: Awei Review - Consumer Product Deep Reviews | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

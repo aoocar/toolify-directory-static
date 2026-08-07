@@ -48,8 +48,8 @@ seo:
     - 声音克隆
     - AI动画
   search_intent: informational
-  title_zh: GenJi是真想教会你 - AI 创作者介绍
-  title_en: GenJi (Li Genji) - AI Creator Directory
+  title_zh: GenJi是真想教会你 - AI 应用教学金牌教练 | 黎明岛
+  title_en: GenJi (Li Genji) - AI Application Teaching | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

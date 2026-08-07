@@ -46,8 +46,8 @@ seo:
     - Cursor
     - AI Agent
   search_intent: informational
-  title_zh: AI Jason - AI 创作者介绍
-  title_en: AI Jason - AI Creator Directory
+  title_zh: AI Jason - AI 编程与 Agent 开发教程 | 黎明岛
+  title_en: AI Jason - AI Coding & Agent Development Tutorials | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

@@ -45,8 +45,8 @@ seo:
     - 深度学习
     - 研究解读
   search_intent: informational
-  title_zh: Yannic Kilcher - AI 创作者介绍
-  title_en: Yannic Kilcher - AI Creator Directory
+  title_zh: Yannic Kilcher - AI 论文深度解读 | 黎明岛
+  title_en: Yannic Kilcher - In-Depth AI Paper Analysis | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

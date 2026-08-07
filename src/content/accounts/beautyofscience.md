@@ -44,8 +44,8 @@ seo:
     - 科学之美
     - 知识区
   search_intent: informational
-  title_zh: 美丽科学BOS - AI 创作者介绍
-  title_en: Beauty of Science (BOS) - AI Creator Directory
+  title_zh: 美丽科学BOS - 4K显微影像化学科普 | 黎明岛
+  title_en: Beauty of Science (BOS) - 4K Chemistry Visualization | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

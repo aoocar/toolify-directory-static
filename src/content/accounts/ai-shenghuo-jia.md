@@ -44,8 +44,8 @@ seo:
     - 效率提升
     - AI工具
   search_intent: informational
-  title_zh: AI生活家 - AI 创作者介绍
-  title_en: AI Lifestyle - AI Creator Directory
+  title_zh: AI生活家 - AI 提升生活效率与品质 | 黎明岛
+  title_en: AI Lifestyle - Use AI to Improve Daily Life | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

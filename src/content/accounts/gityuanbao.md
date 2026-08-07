@@ -47,8 +47,8 @@ seo:
     - 大模型测评
     - GEO
   search_intent: informational
-  title_zh: Git源宝 - AI 创作者介绍
-  title_en: Git Yuanbao - AI Creator Directory
+  title_zh: Git源宝 - AI 鉴定与反诈科普 | 黎明岛
+  title_en: Git Yuanbao - AI Scam Detection & Analysis | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

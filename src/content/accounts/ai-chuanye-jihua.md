@@ -43,8 +43,8 @@ seo:
     - AI副业
     - 商业模式
   search_intent: informational
-  title_zh: AI创业计划 - AI 创作者介绍
-  title_en: AI Startup Plan - AI Creator Directory
+  title_zh: AI创业计划 - AI 创业策略与商业模式 | 黎明岛
+  title_en: AI Startup Plan - AI Startup Strategy & Business Models | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

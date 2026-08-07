@@ -44,8 +44,8 @@ seo:
     - 疾病防治
     - 银发
   search_intent: informational
-  title_zh: 北京卫视养生堂 - AI 创作者介绍
-  title_en: BTV Health Hall (Yang Sheng Tang) - AI Creator Directory
+  title_zh: 北京卫视养生堂 - 健康养生科普节目 | 黎明岛
+  title_en: BTV Health Hall (Yang Sheng Tang) - Health & Wellness Science | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

@@ -41,8 +41,8 @@ seo:
     - Excel
     - PPT
   search_intent: informational
-  title_zh: 辰哥办公技巧 - AI 创作者介绍
-  title_en: Brother Chen Office - AI Creator Directory
+  title_zh: 辰哥办公技巧 - 高效办公实用技巧 | 黎明岛
+  title_en: Brother Chen Office - Practical Office Tips | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

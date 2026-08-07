@@ -43,8 +43,8 @@ seo:
     - AI副业
     - AI工具实操
   search_intent: informational
-  title_zh: AI变现研习社 - AI 创作者介绍
-  title_en: AI Monetization Lab - AI Creator Directory
+  title_zh: AI变现研习社 - AI 副业与变现实操教程 | 黎明岛
+  title_en: AI Monetization Lab - AI Side Hustle & Monetization Tutorials | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

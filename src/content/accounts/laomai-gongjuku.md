@@ -48,8 +48,8 @@ seo:
     - 前沿追踪
     - 评测
   search_intent: informational
-  title_zh: 老麦的工具库 - AI 创作者介绍
-  title_en: Lao Mai's Tool Library - AI Creator Directory
+  title_zh: 老麦的工具库 - 最新 AI 工具与效率神器追踪 | 黎明岛
+  title_en: Lao Mai's Tool Library - Tracking Latest AI Tools & Boosters | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

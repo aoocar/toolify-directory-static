@@ -45,8 +45,8 @@ seo:
     - Excel
     - 办公教育
   search_intent: informational
-  title_zh: 秋叶PPT - AI 创作者介绍
-  title_en: Qiuye PPT - AI Creator Directory
+  title_zh: 秋叶PPT - 办公技能教育品牌 | 黎明岛
+  title_en: Qiuye PPT - Office Skills Education Brand | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

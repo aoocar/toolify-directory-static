@@ -41,8 +41,8 @@ seo:
     - 智能家电
     - 家电评测
   search_intent: informational
-  title_zh: 虎妈家电小屋 - AI 创作者介绍
-  title_en: Huma Home Tech - AI Creator Directory
+  title_zh: 虎妈家电小屋 - 数码家电开箱体验 | 黎明岛
+  title_en: Huma Home Tech - Digital & Smart Appliance Unboxing | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

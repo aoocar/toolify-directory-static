@@ -43,8 +43,8 @@ seo:
     - 魔法
     - 奇幻
   search_intent: informational
-  title_zh: AI小魔女 - AI 创作者介绍
-  title_en: AI Little Witch - AI Creator Directory
+  title_zh: AI小魔女 - 魔法主题 AI 短剧 | 黎明岛
+  title_en: AI Little Witch - Magical AI Short Dramas | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

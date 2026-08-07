@@ -44,8 +44,8 @@ seo:
     - 行业分析
     - AI应用
   search_intent: informational
-  title_zh: 程前AI - AI 创作者介绍
-  title_en: Cheng Qian AI (XHS) - AI Creator Directory
+  title_zh: 程前AI - AI 商业化洞察（小红书） | 黎明岛
+  title_en: Cheng Qian AI (XHS) - AI Business Insights (XHS) | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

@@ -43,8 +43,8 @@ seo:
     - AI教程
     - 中文AI
   search_intent: informational
-  title_zh: AI探索者 - AI 创作者介绍
-  title_en: AI Explorer - AI Creator Directory
+  title_zh: AI探索者 - 中文 AI 工具教程频道 | 黎明岛
+  title_en: AI Explorer - Chinese AI Tool Tutorials on YouTube | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

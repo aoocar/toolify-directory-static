@@ -45,8 +45,8 @@ seo:
     - 水电验收
     - 全屋定制
   search_intent: informational
-  title_zh: 住范儿老杨 - AI 创作者介绍
-  title_en: Zhufaner Lao Yang - AI Creator Directory
+  title_zh: 住范儿老杨 - 装修工地实战经验 | 黎明岛
+  title_en: Zhufaner Lao Yang - Renovation Field Experience | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

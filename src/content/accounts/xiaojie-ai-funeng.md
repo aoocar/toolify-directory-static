@@ -45,8 +45,8 @@ seo:
     - 智能二创
     - 工作流
   search_intent: informational
-  title_zh: 小杰AI赋能官 - AI 创作者介绍
-  title_en: Xiao Jie AI Empowerment - AI Creator Directory
+  title_zh: 小杰AI赋能官 - AI 工作流与智能二创 | 黎明岛
+  title_en: Xiao Jie AI Empowerment - AI Workflows & Smart Remix | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

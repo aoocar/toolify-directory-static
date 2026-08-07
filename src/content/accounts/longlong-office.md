@@ -41,8 +41,8 @@ seo:
     - 从入门到精通
     - 计算机二级
   search_intent: informational
-  title_zh: office教程-龙龙老师 - AI 创作者介绍
-  title_en: Teacher Long Long - AI Creator Directory
+  title_zh: office教程-龙龙老师 - Office 从入门到精通 | 黎明岛
+  title_en: Teacher Long Long - Office Tutorials Masterclass | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

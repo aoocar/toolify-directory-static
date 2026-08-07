@@ -47,8 +47,8 @@ seo:
     - AI公司
     - 趣味实验
   search_intent: informational
-  title_zh: 林亦LYi - AI 创作者介绍
-  title_en: Lin Yi LYi - AI Creator Directory
+  title_zh: 林亦LYi - 用 AI 创业与项目实战 | 黎明岛
+  title_en: Lin Yi LYi - AI Projects & Startups | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

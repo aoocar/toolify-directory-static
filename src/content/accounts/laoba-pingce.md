@@ -46,8 +46,8 @@ seo:
     - 消费科普
     - 避坑
   search_intent: informational
-  title_zh: 老爸评测 - AI 创作者介绍
-  title_en: DaddyLab - AI Creator Directory
+  title_zh: 老爸评测 - 消费品安全评测科普 | 黎明岛
+  title_en: DaddyLab - Independent Product Safety Reviews | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:

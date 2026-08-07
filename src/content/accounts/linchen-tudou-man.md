@@ -47,8 +47,8 @@ seo:
     - 品牌短片
     - 商业化
   search_intent: informational
-  title_zh: 林晨（土豆人） - AI 创作者介绍
-  title_en: Lin Chen (Tudou Man) - AI Creator Directory
+  title_zh: 林晨（土豆人） - AIGC 人文短片叙事 | 黎明岛
+  title_en: Lin Chen (Tudou Man) - AIGC Humanistic Short Films | Dawn Island
   meta_description_zh: ''
   meta_description_en: ''
 geo:
