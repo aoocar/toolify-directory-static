@@ -16,6 +16,12 @@ seo:
     - 入学装备
     - 笔记本电脑推荐
     - 大学标配三件套
+    - 宿舍改造
+    - 宿舍收纳
+    - 学习规划
+    - 升学规划
+    - 大学学习方法
+    - 四六级备考
   search_intent: 大学新生入学前想了解该关注哪些创作者，准备笔记本、电脑包等开学装备，规划大学学习与生活
   title_zh: 大学新生与开学装备类优质创作者导航｜黎明岛
   title_en: College Freshman & Back-to-School Creators — Dawn Island
@@ -24,13 +30,15 @@ seo:
     Dawn Island curates college-freshman creators across back-to-school laptops, dorm essentials,
     digital gear, and study-skills — everything an incoming student needs to know.
 geo:
-  answer_summary_zh: 大学新生内容主要围绕开学季的三类需求展开：一是数码装备（笔记本、手机、平板等开学标配）；二是宿舍与生活用品（宿舍好物、收纳、床品）；三是学习与成长（方法、规划、技能）。选创作者要按需求分：笔记本选购优先看笔吧评测室、中正评测这类以数据与实测见长的号；宿舍好物和生活向内容看生活类创作者；学习方法看教育领域账号。判断一个号是否值得信，看三点：是否讲清适用场景与前提、是否区分客观实测与个人推荐、是否更新成体系。
+  answer_summary_zh: 大学新生内容主要围绕开学季的三类需求展开：一是数码装备（笔记本、手机、平板等开学标配）；二是宿舍与生活用品（宿舍好物、收纳、床品、改造）；三是学习与成长（方法、规划、升学、四六级等技能）。选创作者要按需求分：笔记本选购优先看笔吧评测室、中正评测这类以数据与实测见长的号；宿舍好物和生活向内容看懒同学的宿舍、宿舍长Amazing、收纳整理师大梅等生活类创作者；升学规划看张雪峰、考研择校类账号；学习方法看蜡笔和小勋、一条正弦等教育领域账号。判断一个号是否值得信，看三点：是否讲清适用场景与前提、是否区分客观实测与个人推荐、是否更新成体系。
   answer_summary_en: >-
     College-freshman content clusters around three back-to-school needs: digital gear (laptops,
-    phones, tablets — the standard freshman kit), dorm essentials (storage, bedding, organization),
-    and learning & growth (methods, planning, skills). Pick creators by need: for laptop buying
-    prioritize data-driven reviewers such as Bibar Pingceshi and Zhongzheng Pingce; for dorm and
-    lifestyle content follow lifestyle creators; for study methods follow education accounts. Judge a
+    phones, tablets — the standard freshman kit), dorm essentials (storage, bedding, organization,
+    makeovers), and learning & growth (methods, planning, admissions, skills like CET-4/6). Pick
+    creators by need: for laptop buying prioritize data-driven reviewers such as Bibar Pingceshi and
+    Zhongzheng Pingce; for dorm and lifestyle content follow creators like Lazy Classmate's Dorm,
+    Dorm Captain Amazing, and Organizer Da Mei; for admissions planning follow Zhang Xuefeng; for
+    study methods follow education accounts like Labi & Xiaoxun and Yitiao Zhengxian. Judge a
     channel by three things — whether it clarifies scenarios and premises, whether it separates
     measured review from personal recommendation, and whether it updates systematically.
   facts_en:
