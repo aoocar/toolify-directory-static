@@ -24,14 +24,16 @@
 - 教育学习路线: https://www.limingdao.com/zh/guides/education-learning-path
 - 大学新生笔记本与开学三件套选购指南: https://www.limingdao.com/zh/guides/college-back-to-school-gear
 - 大学新生值得关注的 10 位创作者: https://www.limingdao.com/zh/guides/college-freshman-creators-to-follow
+- 大学新生宿舍好物清单: https://www.limingdao.com/zh/guides/college-dorm-essentials
+- 大学新生学习规划 5 步路线: https://www.limingdao.com/zh/guides/college-study-planning
 - 银发生活值得关注的账号: https://www.limingdao.com/zh/guides/senior-creators-to-follow
 - 银发内容主题: https://www.limingdao.com/zh/guides/senior-content-themes
 
 英文版 (English): https://www.limingdao.com/en
 
 ## 收录规模
-- 165+ 创作者账号（zh + en 双语）
+- 177+ 创作者账号（zh + en 双语）
 - 7 大内容领域
-- 14 篇原创指南
+- 16 篇原创指南
 
 本站定位为 SEO / GEO 用途的创作者导航目录，内容以 Markdown 为单一事实源，定期更新。
