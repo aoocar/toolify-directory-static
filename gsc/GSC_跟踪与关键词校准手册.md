@@ -37,12 +37,36 @@ python3 scripts/gsc-keyword-map.py
 
 ## 2. 从 GSC 导出数据
 
+### 2A. 自动方式（推荐，已固化流水线）
+
+CNB CI 已配置 **crontab 定时任务**（`.cnb.yml` → `main` → `crontab: 30 2 1 * *`），每月 1 日 02:30 自动执行：
+
+```
+导出 GSC 数据（scripts/gsc-export.py，服务账号密钥由密钥仓库 imports 注入）
+  → 重新生成关键词基线（scripts/gsc-keyword-map.py）
+  → 跑审计（scripts/gsc-audit.py）
+  → 提交并推送 CNB main（gsc/export/*.csv + gsc/audit-report.md + gsc/uncovered-queries.csv）
+  → push 事件自动触发 sync-to-github 同步到生产仓库
+```
+
+- 全程**无需手动导出**；数据与报告自动入库留档。
+- 手动触发一次：在 CNB 流水线页面用 `api_trigger`（`gsc-monthly-export-audit`）跑一次即可，或本地：
+
+```bash
+# 本地调试（需服务账号 json）：
+python3 scripts/gsc-export.py --sa-file /path/to/sa.json --days 28 --site limingdao
+```
+
+### 2B. 手动方式（备用）
+
 1. 登录 [Google Search Console](https://search.google.com/search-console)，选择资源 `limingdao.com`（域资源）。
 2. 左侧「**效果**」（Performance）：
    - 日期范围：**最近 28 天**（日常节奏）或 90 天（季度趋势）。
    - **维度切到「查询」**，右上角「导出」→ CSV，得到 `queries.csv`（列：查询/点击/展示/点击率/平均排名）。
    - **维度切到「网页」**，再导一份 `pages.csv`，用于收录/索引体检。
-3. 把 CSV 放到 `gsc/export/` 目录（不入库，属过程数据）。
+3. 把 CSV 放到 `gsc/export/` 目录。
+
+> 服务账号已授权：`aoobee-seo-bot@gen-lang-client-0803005687.iam.gserviceaccount.com`（GSC 完整权限，2026-08-08 由大强在 GSC 后台添加）。
 
 ---
 
@@ -89,7 +113,7 @@ python3 scripts/gsc-audit.py --queries gsc/export/queries.csv [--pages gsc/expor
 | 周期 | 动作 |
 |---|---|
 | 每周 | 顺带瞄一眼 GSC「效果」总览（点击/展示/排名是否有异常波动） |
-| 每月 | 跑完整审计（§1→§3），输出校准建议，人工决策 |
+| 每月 | **自动**（每月 1 日 02:30 crontab 已跑完整导出+审计，数据与报告自动入库）；到点只需查看 `gsc/audit-report.md` + `gsc/uncovered-queries.csv`，做人工决策 |
 | 每季度 | 90 天数据 + 索引编制趋势 + sitemap 健康复核，写入 OPS_MANUAL §16 |
 
 ---
@@ -97,11 +121,15 @@ python3 scripts/gsc-audit.py --queries gsc/export/queries.csv [--pages gsc/expor
 ## 7. 配套命令速查
 
 ```bash
+# 自动导出 GSC 数据（crontab 已固化，可手动/本地跑）
+python3 scripts/gsc-export.py --days 28 --site limingdao   # 流水线内用（密钥来自 imports）
+python3 scripts/gsc-export.py --sa-file /path/to/sa.json --days 28 --site limingdao  # 本地调试
+
 # 重新生成关键词基线（每次内容更新后跑）
 python3 scripts/gsc-keyword-map.py
 
 # 审计
-python3 scripts/gsc-audit.py --queries gsc/export/queries.csv
+python3 scripts/gsc-audit.py --queries gsc/export/queries.csv --pages gsc/export/pages.csv
 
 # 线上体检（GEO 三件套不回退）
 curl -s https://www.limingdao.com/robots.txt | grep -E 'User-agent|Sitemap'
