@@ -9,7 +9,7 @@ category,home-appliances,https://www.limingdao.com/zh/categories/home-appliances
 category,image-generation,https://www.limingdao.com/zh/categories/image-generation,Image Generation AI tools,,领域页（CollectionPage）
 category,lifestyle,https://www.limingdao.com/zh/categories/lifestyle,Lifestyle & Vlog AI creators,,领域页（CollectionPage）
 category,market-insights,https://www.limingdao.com/zh/categories/market-insights,Market insights resources,market report; price alert; supply chain,领域页（CollectionPage）
-category,marketing-seo,https://www.limingdao.com/zh/categories/marketing-seo,Marketing & SEO AI tools,,领域页（CollectionPage）
+category,marketing-seo,https://www.limingdao.com/zh/categories/marketing-seo,Marketing & SEO AI tools,GEO 生成式引擎优化; GEO 是什么; GEO 与 SEO 区别; AI 搜索优化; 品牌被AI推荐; 营销 AI 工具; 内容代运营,领域页（CollectionPage）
 category,office,https://www.limingdao.com/zh/categories/office,办公 效率 创作者,效率工具; 职场技能; 办公软件; 远程协作; 生产力,领域页（CollectionPage）
 category,productivity,https://www.limingdao.com/zh/categories/productivity,Productivity AI tools,,领域页（CollectionPage）
 category,renovation,https://www.limingdao.com/zh/categories/renovation,装修 自媒体 创作者,家装设计; 装修避坑; 家居改造; 装修博主; 全屋定制,领域页（CollectionPage）
@@ -29,6 +29,8 @@ guide,college-study-planning,https://www.limingdao.com/zh/guides/college-study-p
 guide,dorm-essentials-creators-to-follow,https://www.limingdao.com/zh/guides/dorm-essentials-creators-to-follow,宿舍好物推荐,宿舍改造; 宿舍收纳; 宿舍布置; 学生宿舍好物; 宿舍生活博主; 平价宿舍用品,GEO 长文（Article）
 guide,education-creators-to-follow,https://www.limingdao.com/zh/guides/education-creators-to-follow,科普博主推荐,知识区up主; 罗翔说刑法; 李永乐老师; 3Blue1Brown数学; 中科院物理所; 历史科普,GEO 长文（Article）
 guide,education-learning-path,https://www.limingdao.com/zh/guides/education-learning-path,怎么系统自学,自学方法; 科普内容源; 费曼技巧; 知识区怎么用; 跨学科学习,GEO 长文（Article）
+guide,geo-generative-engine-optimization,https://www.limingdao.com/zh/guides/geo-generative-engine-optimization,GEO 生成式引擎优化,GEO 是什么; GEO 与 SEO 区别; 生成式引擎优化; AI 搜索优化; 大模型推荐品牌; 豆包 SEO; DeepSeek SEO; 品牌被AI推荐,GEO 长文（Article）
+guide,geo-keyword-content-checklist,https://www.limingdao.com/zh/guides/geo-keyword-content-checklist,GEO 关键词优化,GEO 内容优化; AI 可见性; 品牌被AI引用; 豆包 回答 品牌; DeepSeek 推荐 品牌; 大模型 收录 内容; AI 问答 SEO,GEO 长文（Article）
 guide,home-appliances-buying-guide,https://www.limingdao.com/zh/guides/home-appliances-buying-guide,家电选购攻略,电视怎么选; 冰箱选购; 洗衣机选购; 空调匹数; 清洁电器避坑,GEO 长文（Article）
 guide,home-appliances-creators-to-follow,https://www.limingdao.com/zh/guides/home-appliances-creators-to-follow,家电博主推荐,家电测评up主; 冰箱洗衣机选购; 电视测评; 家电避坑; 值得关注的家电账号,GEO 长文（Article）
 guide,office-creators-to-follow,https://www.limingdao.com/zh/guides/office-creators-to-follow,办公提效博主推荐,PPT教程博主; Excel教程抖音; WPS技巧; 职场效率up主; Office自学,GEO 长文（Article）
