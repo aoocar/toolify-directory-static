@@ -20,6 +20,12 @@ main:
               echo "SYNC_WARN: push 完成但 SHA 不一致，请检查"
               exit 1
             fi
+        - name: indexnow
+          # 外链建设 / 收录加速（P0）：同步 GitHub 后向 IndexNow（Bing/百度/Yandex）
+          # 主动推送核心 URL，加速爬虫发现新站。key 文件 public/<KEY>.txt 已随本仓部署。
+          script: |
+            set -e
+            python3 scripts/indexnow-submit.py --limit 200 || echo "INDEXNOW_WARN: 推送失败（不阻断部署，可稍后手动重跑）"
   # 每月 1 日 02:30 自动导出 GSC 数据 + 生成关键词基线 + 跑审计 + 提交推送
   # （commit 推送 CNB main 后，上方 push → sync-to-github 会自动把数据同步到 GitHub 生产仓库）
   "crontab: 30 2 1 * *":
@@ -48,12 +54,30 @@ main:
           script: |
             set -e
             python3 scripts/gsc-audit.py --queries gsc/export/queries.csv --pages gsc/export/pages.csv
+        - name: ai-visibility
+          # 月度 AI 可见性复测（随 GSC 审计一起跑）：Common Crawl 语料覆盖 + 搜索引擎品牌词露出
+          # 目标：2 个月内 Common Crawl 覆盖新站 ≥ 1 批次。结果入库留档用于月度趋势对比。
+          script: |
+            set -e
+            mkdir -p geo/monthly
+            OUT="geo/monthly/ai-visibility-$(date +%Y-%m).md"
+            {
+              echo "# 黎明岛 AI 可见性月度复测"
+              echo ""
+              echo "> 复测时间：$(date '+%Y-%m-%d %H:%M:%S %Z')"
+              echo "> 方法：Common Crawl CDX 索引覆盖计数 + 360/必应品牌词露出（详见 scripts/check_ai_visibility.py）"
+              echo "> 目标：2 个月内 CC 覆盖新站 ≥ 1 批次"
+              echo ""
+              python3 scripts/check_ai_visibility.py 2>&1
+            } > "$OUT"
+            echo "AI 可见性复测完成：$OUT"
+            tail -15 "$OUT"
         - name: commit-and-push
           script: |
             set -e
             cd /workspace
             git config user.email "cnb.c4ejfLqtAfAA@noreply.cnb.cool"
             git config user.name "cnb.c4ejfLqtAfAA"
-            git add gsc/export/queries.csv gsc/export/pages.csv gsc/keyword-map.csv gsc/audit-report.md gsc/uncovered-queries.csv
-            git commit -m "chore(gsc): 月度自动导出 GSC 数据 + 关键词审计报告（$(date +%Y-%m-%d)）" || echo "NOTHING_TO_COMMIT"
+            git add gsc/export/queries.csv gsc/export/pages.csv gsc/keyword-map.csv gsc/audit-report.md gsc/uncovered-queries.csv geo/monthly/*.md
+            git commit -m "chore(gsc): 月度自动导出 GSC 数据 + 关键词审计报告 + AI 可见性复测（$(date +%Y-%m-%d)）" || echo "NOTHING_TO_COMMIT"
             git push "https://cnb:${CNB_TOKEN}@cnb.cool/aoobee/limingdao.git" HEAD:main 2>&1 | tail -3 || echo "PUSH_FAILED"
