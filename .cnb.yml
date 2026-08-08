@@ -20,3 +20,40 @@ main:
               echo "SYNC_WARN: push 完成但 SHA 不一致，请检查"
               exit 1
             fi
+  # 每月 1 日 02:30 自动导出 GSC 数据 + 生成关键词基线 + 跑审计 + 提交推送
+  # （commit 推送 CNB main 后，上方 push → sync-to-github 会自动把数据同步到 GitHub 生产仓库）
+  "crontab: 30 2 1 * *":
+    - name: gsc-monthly-export-audit
+      imports:
+        - https://cnb.cool/aoobee/aoobee-secrets/-/blob/main/gen-lang-client-0803005687-0f2590780ae7.json
+      env:
+        GSC_SITE_KEYWORD: limingdao
+        GSC_DAYS: "28"
+      stages:
+        - name: install
+          script: |
+            set -e
+            (apk add --no-cache python3 py3-pip git >/dev/null 2>&1 || true)
+            pip3 install -q --break-system-packages --no-cache-dir google-api-python-client google-auth pyyaml 2>&1 | tail -1 || true
+            python3 --version
+        - name: export
+          script: |
+            set -e
+            python3 scripts/gsc-export.py --days ${GSC_DAYS} --site "${GSC_SITE_KEYWORD}" --out-dir gsc/export
+        - name: keyword-map
+          script: |
+            set -e
+            python3 scripts/gsc-keyword-map.py
+        - name: audit
+          script: |
+            set -e
+            python3 scripts/gsc-audit.py --queries gsc/export/queries.csv --pages gsc/export/pages.csv
+        - name: commit-and-push
+          script: |
+            set -e
+            cd /workspace
+            git config user.email "cnb.c4ejfLqtAfAA@noreply.cnb.cool"
+            git config user.name "cnb.c4ejfLqtAfAA"
+            git add gsc/export/queries.csv gsc/export/pages.csv gsc/keyword-map.csv gsc/audit-report.md gsc/uncovered-queries.csv
+            git commit -m "chore(gsc): 月度自动导出 GSC 数据 + 关键词审计报告（$(date +%Y-%m-%d)）" || echo "NOTHING_TO_COMMIT"
+            git push "https://cnb:${CNB_TOKEN}@cnb.cool/aoobee/limingdao.git" HEAD:main 2>&1 | tail -3 || echo "PUSH_FAILED"
