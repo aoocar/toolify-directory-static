@@ -5,8 +5,8 @@ name:
   en: College Life
   zh: 大学新生
 description:
-  en: Freshman guides, back-to-school gear, dorm essentials, laptops, and study-skills creators for incoming college students.
-  zh: 面向大学新生与在校生的入学准备、宿舍好物、数码装备选购与学习成长内容，覆盖开学季高需求场景。
+  en: Freshman guides, back-to-school gear, dorm essentials, laptops, study skills, competitions, internships, and campus-life creators for incoming college students.
+  zh: 面向大学新生与在校生的入学准备、宿舍好物、数码装备选购、学习成长、校园竞赛、实习与升学规划内容，覆盖开学季高需求场景。
 seo:
   primary_keyword: 大学新生 创作者
   secondary_keywords:
@@ -22,13 +22,23 @@ seo:
     - 升学规划
     - 大学学习方法
     - 四六级备考
+    - 数学建模
+    - 学科竞赛
+    - 大学生竞赛
+    - 保研规划
+    - 考研
+    - 大学生实习
+    - 校招
+    - 校园社团
+    - 新生避坑
   search_intent: 大学新生入学前想了解该关注哪些创作者，准备笔记本、电脑包等开学装备，规划大学学习与生活
   title_zh: 大学新生与开学装备类优质创作者导航｜黎明岛
   title_en: College Freshman & Back-to-School Creators — Dawn Island
-  meta_description_zh: 黎明岛收录面向大学新生的优质创作者，覆盖开学季笔记本选购、宿舍好物、数码装备与学习成长，帮你一键备齐入学装备与值得关注的内容源。
+  meta_description_zh: 黎明岛收录面向大学新生的优质创作者，覆盖开学季笔记本选购、宿舍好物、数码装备、学习成长、校园竞赛、实习与升学规划，帮你一键备齐入学装备与值得关注的内容源。
   meta_description_en: >-
     Dawn Island curates college-freshman creators across back-to-school laptops, dorm essentials,
-    digital gear, and study-skills — everything an incoming student needs to know.
+    digital gear, study skills, competitions, internships, and planning — everything an incoming
+    student needs to know.
 geo:
   answer_summary_zh: 大学新生内容主要围绕开学季的三类需求展开：一是数码装备（笔记本、手机、平板等开学标配）；二是宿舍与生活用品（宿舍好物、收纳、床品、改造）；三是学习与成长（方法、规划、升学、四六级等技能）。选创作者要按需求分：笔记本选购优先看笔吧评测室、中正评测这类以数据与实测见长的号；宿舍好物和生活向内容看懒同学的宿舍、宿舍长Amazing、收纳整理师大梅等生活类创作者；升学规划看张雪峰、考研择校类账号；学习方法看蜡笔和小勋、一条正弦等教育领域账号。判断一个号是否值得信，看三点：是否讲清适用场景与前提、是否区分客观实测与个人推荐、是否更新成体系。
   answer_summary_en: >-
