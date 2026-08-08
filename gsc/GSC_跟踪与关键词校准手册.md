@@ -113,8 +113,27 @@ python3 scripts/gsc-audit.py --queries gsc/export/queries.csv [--pages gsc/expor
 | 周期 | 动作 |
 |---|---|
 | 每周 | 顺带瞄一眼 GSC「效果」总览（点击/展示/排名是否有异常波动） |
-| 每月 | **自动**（每月 1 日 02:30 crontab 已跑完整导出+审计，数据与报告自动入库）；到点只需查看 `gsc/audit-report.md` + `gsc/uncovered-queries.csv`，做人工决策 |
+| 每月 | **自动**（每月 1 日 02:30 crontab 已跑完整导出+审计+AI 可见性复测，数据与报告自动入库）；到点只需查看 `gsc/audit-report.md` + `gsc/uncovered-queries.csv` + `geo/monthly/ai-visibility-YYYY-MM.md`，做人工决策 |
 | 每季度 | 90 天数据 + 索引编制趋势 + sitemap 健康复核，写入 OPS_MANUAL §16 |
+
+---
+
+## 7. AI 可见性月度复测（随 GSC 审计一起跑）
+
+> **背景**：2026-08-08 首期基线——Common Crawl 最近 3 批次对本站新站核心路径**全部 0 覆盖**（AI 可见性空白期）；
+> 360 品牌词官网已排第 1，必应被歌手「黎明」占榜。需每月复测，**目标 2 个月内 CC 覆盖新站 ≥ 1 批次**。
+
+crontab 月度任务（`gsc-monthly-export-audit`）已含 `ai-visibility` stage，自动执行：
+
+```bash
+python3 scripts/check_ai_visibility.py
+```
+
+输出与判定：
+- **Common Crawl 覆盖计数**：最近 3 批次对 `/zh` `/en` `/tools` `/guides` `/accounts` `/services` `/llms.txt` 的抓取记录数；
+- **搜索引擎品牌词露出**：360（黎明岛/黎明岛 创作者/site:）与必应（黎明岛/limingdao）是否露出官网；
+- 结果落 `geo/monthly/ai-visibility-YYYY-MM.md` 留档，用于月度趋势对比；
+- 首期基线见 `geo/AI_VISIBILITY_BASELINE.zh-CN.md`，配套 SOP 见 `geo/AI_可见性基线SOP.md`。
 
 ---
 

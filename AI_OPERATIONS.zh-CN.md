@@ -48,6 +48,25 @@ AI 是**执行搭档，不是自主决策者**。所有「改文件 / 发布 / �
 - 可直接用任意编辑器维护，也可把 Obsidian 打开 `D:\project\codex\toolify\src\content` 当作「带 UI 的数据库管理界面」；两者都只是编辑 `src/content`，没有库 → 站点同步层。
 - 站点数据层唯一入口是 `src/lib/directory.ts` 的 getter 函数；页面 / 组件**不直接读 Markdown**。
 
+### 3.1 品牌词标题规范（「黎明岛 + 领域词」，2026-08-08 起强制）
+
+品牌词「黎明岛」与歌手「黎明」撞名，需用「**黎明岛 + 领域词**」长尾组合破局。
+
+**所有新增 / 修改的内容标题（`title_zh` / `title_en` / 指南 `title`）必须遵守：**
+
+| 内容类型 | 中文格式 | 英文格式 |
+|---|---|---|
+| 账号 `title_zh` / `title_en` | `账号名 - 领域描述 \| 黎明岛` | `Creator - Niche Description \| Dawn Island` |
+| 指南 `seo.title_zh` / `title_en` | `主标题：领域关键词｜黎明岛` | `Main title — Niche Keyword | Dawn Island` |
+| 分类页 `seo.title_zh` / `title_en` | `分类名 - 领域词｜黎明岛` | `Category - Niche | Dawn Island` |
+| 新闻 `title`（zh/en） | 尽量含「黎明岛」或领域词，不加就由页面后缀补 | 同左 |
+
+**执行要求：**
+- 所有新增内容标题**必须**带品牌词（中文 `黎明岛` / 英文 `Dawn Island`），不能只写领域词；
+- 领域词要具体（如「数学可视化科普」「大学生笔记本选购」），避免同质化空标题；
+- 历史遗留未带品牌词的标题（如个别账号/新闻）需在改版时一并补齐；
+- 页面对外显示 title 若由模板兜底拼接（如 `- {t(lang,"brand")}`），内容侧可省略，但**尽量在内容里显式写出**，保证搜索可见性与一致性。
+
 ---
 
 ## 4. 发布控制（直接编辑 src/content）

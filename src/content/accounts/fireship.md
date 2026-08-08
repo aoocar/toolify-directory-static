@@ -45,8 +45,8 @@ seo:
     - AI教程
     - 开发者
   search_intent: informational
-  title_zh: Fireship - AI 开发者教程频道
-  title_en: Fireship - AI Developer Tutorials
+  title_zh: Fireship - AI 开发者教程频道 | 黎明岛
+  title_en: Fireship - AI Developer Tutorials | Dawn Island
   meta_description_zh: Fireship 是 YouTube 上以极速开发者教程闻名的频道，覆盖 AI 工具与大语言模型。
   meta_description_en: >-
     Fireship is a YouTube channel known for rapid-fire developer tutorials covering AI tools and
