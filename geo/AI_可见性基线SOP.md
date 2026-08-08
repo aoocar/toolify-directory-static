@@ -109,7 +109,15 @@ python3 scripts/ai-visibility-baseline.py --regen
 
 # 接入外部模型 API
 python3 scripts/ai-visibility-baseline.py --provider external --endpoint <URL> --api-key <KEY> --model <NAME>
+
+# 补充检测：大模型训练语料（Common Crawl）对本站新站的覆盖计数
+python3 scripts/check_ai_visibility.py
 ```
+
+> 💡 **为什么 AI 全部「未提及」？** 根本原因之一：新站页面尚未进入大模型训练语料。用
+> `scripts/check_ai_visibility.py` 可实测 Common Crawl 最近批次对 `/zh` `/en` `/tools` `/guides`
+> `/accounts` `/services` `/llms.txt` 的覆盖情况（首期基线为 0），详见
+> `geo/AI_VISIBILITY_BASELINE.zh-CN.md`。语料覆盖是「被 AI 引用」的前提，应作为每月基线的前置检查。
 
 ---
 
