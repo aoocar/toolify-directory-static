@@ -104,8 +104,14 @@ export default defineConfig({
       // appear as routes and are excluded from the sitemap automatically.
       changefreq: "weekly",
       priority: 0.7,
-      // keep the external-link interstitial (/exit) out of the sitemap
-      filter: (page) => !page.includes("/exit"),
+      // keep the external-link interstitial (/exit) out of the sitemap;
+      // exclude the bare root URL — it 308-redirects to /zh (see vercel.json),
+      // and sitemap URLs must resolve to 200, not redirects.
+      filter: (page) => {
+        const u = new URL(page);
+        const isRoot = u.pathname === "/";
+        return !page.includes("/exit") && !isRoot;
+      },
       // truthful lastmod: real content update time, not build time (see above)
       serialize: async (item) => {
         const lastmod = await resolveLastmod(item.url);
