@@ -1,0 +1,124 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import JsonLd from "@/components/JsonLd.astro";
+import { getTools, getToolCategoryCounts } from "@/lib/directory";
+import { breadcrumbJsonLd, collectionPageJsonLd } from "@/lib/jsonld";
+import { languages, localizedPath, t, type Lang } from "@/lib/i18n";
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+const tools = await getTools();
+const categoryCounts = await getToolCategoryCounts();
+
+const metaDescription =
+  lang === "zh"
+    ? "黎明岛 AI 工具导航：精选 AI 办公、AI 写作、AI 图像、AI 视频、AI 大模型等 1000+ 优质工具，帮创作者与开发者高效发现、快速上手。"
+    : "Dawn Island AI Tool Navigator: 1000+ curated AI tools across office, writing, image, video, and LLM categories — find the right tool fast.";
+
+const pageTitle =
+  lang === "zh" ? "AI 工具导航 - 精选 1000+ 优质工具 | 黎明岛" : "AI Tool Navigator - 1000+ Curated Tools | Dawn Island";
+
+const siteBase = Astro.site ?? Astro.url;
+const pageUrl = new URL(localizedPath(lang, "/tools"), siteBase).href;
+const collectionLd = collectionPageJsonLd({
+  name: pageTitle,
+  description: metaDescription,
+  url: pageUrl,
+  lang,
+  items: tools.slice(0, 100).map((t) => ({
+    name: t.title,
+    url: new URL(localizedPath(lang, `/tools/${t.slug}`), siteBase).href
+  }))
+});
+const breadcrumbLd = breadcrumbJsonLd({
+  lang,
+  items: [
+    { name: t(lang, "brand"), url: new URL(localizedPath(lang, "/"), siteBase).href },
+    { name: lang === "zh" ? "AI 工具导航" : "AI Tool Navigator", url: pageUrl }
+  ]
+});
+---
+
+<BaseLayout lang={lang} title={pageTitle} description={metaDescription}>
+  <JsonLd data={collectionLd} />
+  <JsonLd data={breadcrumbLd} />
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h1>{lang === "zh" ? "🧰 AI 工具导航" : "🧰 AI Tool Navigator"}</h1>
+        <p class="lead">
+          {
+            lang === "zh"
+              ? "精选 1000+ 优质 AI 工具，覆盖办公、写作、图像、视频、大模型等全领域。旧站多年积累的精选资源已完整迁入，持续维护更新。"
+              : "1000+ curated AI tools across office, writing, image, video, and LLM categories — a decade of hand-picked resources now living on Dawn Island."
+          }
+        </p>
+      </div>
+
+      <div class="category-index">
+        {
+          categoryCounts.map(({ category, count }) => (
+            <a href={localizedPath(lang, `/tools/categories/${encodeURIComponent(category)}`)}>
+              <span>{category}</span>
+              <strong>{count} {lang === "zh" ? "个工具" : "tools"}</strong>
+            </a>
+          ))
+        }
+      </div>
+
+      <div class="section-head compact">
+        <h2>{lang === "zh" ? "全部工具" : "All Tools"}</h2>
+      </div>
+      <div class="tool-list">
+        {
+          tools.map((tool) => (
+            <article class="tool-row">
+              <div class="tool-info">
+                <h3><a href={localizedPath(lang, `/tools/${tool.slug}`)}>{tool.title}</a></h3>
+                {tool.description && <p>{tool.description.slice(0, 140)}{tool.description.length > 140 ? "…" : ""}</p>}
+                {tool.category && <span class="pill">{tool.category}</span>}
+              </div>
+              {
+                tool.url && (
+                  <a class="button secondary" href={localizedPath(lang, `/exit?to=${encodeURIComponent(tool.url)}`)} target="_blank" rel="noopener noreferrer" data-ga-event="exit_click" data-ga-label={`tool:${tool.slug}`}>
+                    {lang === "zh" ? "访问" : "Visit"}
+                  </a>
+                )
+              }
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .tool-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .tool-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--border, #e2e8f0);
+    border-radius: 0.75rem;
+    background: var(--card-bg, #fff);
+  }
+  .tool-info h3 {
+    margin: 0 0 0.25rem;
+    font-size: 1rem;
+  }
+  .tool-info p {
+    margin: 0 0 0.35rem;
+    color: var(--muted, #64748b);
+    font-size: 0.88rem;
+  }
+</style>

@@ -73,7 +73,10 @@ async function resolveLastmod(urlStr) {
   // Static, hand-maintained pages (contact/services/privacy/submit/new/rankings…)
   // have no content-driven update time — leave them without a lastmod so
   // crawlers don't treat them as freshly-changed every build.
-  if (["contact", "services", "privacy", "submit", "new", "rankings"].includes(first)) {
+  // Tools (legacy bookmark migration) also have no content timestamps — the
+  // whole set was imported in one batch, so stamping "now" or the newest
+  // account date on all 1062 pages would be equally misleading.
+  if (["contact", "services", "privacy", "submit", "new", "rankings", "tools"].includes(first)) {
     return undefined;
   }
 

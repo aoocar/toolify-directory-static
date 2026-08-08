@@ -102,6 +102,26 @@ const categories = defineCollection({
   })
 });
 
+/* ── Tools (legacy AI-tool navigation, single-language zh) ──
+ *   Ported from the old Hugo bookmark site (方案 A). One file per tool, the
+ *   filename slug matches the old site's URL slug so a single wildcard 301
+ *   (`/bookmarks/*` → `/zh/tools/*`) recovers all historical link equity.
+ */
+
+const tools = defineCollection({
+  type: "content",
+  schema: z.object({
+    slug: z.string().optional(),
+    title: z.string(),
+    url: z.string().optional(),
+    category: z.string().optional(),
+    subCategory: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    recommend: z.number().optional(),
+    description: z.string().optional()
+  })
+});
+
 /* ── Accounts (core entity) ── */
 
 const accounts = defineCollection({
@@ -151,5 +171,6 @@ export const collections = {
   categories,
   accounts,
   news,
-  guides
+  guides,
+  tools
 };
