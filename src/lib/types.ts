@@ -96,7 +96,7 @@ export type NewsItem = FeedItem & {
   date?: string;
 };
 
-/* Guides are either legacy homepage shortcuts (kind: "link") or original
+/* ── Guides are either legacy homepage shortcuts (kind: "link") or original
    long-form articles (kind: "article") stored one file per language. */
 export type GuideItem = Omit<FeedItem, "url"> & {
   url?: string;
@@ -109,4 +109,17 @@ export type GuideItem = Omit<FeedItem, "url"> & {
   accounts?: string[];
   seo?: SeoFields;
   geo?: GeoFields;
+};
+
+/* ── Tool (legacy AI-tool navigation, ported from the old Hugo site) ── */
+
+export type Tool = {
+  slug: string;
+  title: string;
+  url?: string;
+  category?: string;
+  subCategory?: string;
+  tags?: string[];
+  recommend?: number;
+  description?: string;
 };

@@ -1,6 +1,6 @@
 # 黎明岛 (Dawn Island)
 
-黎明岛是一个全领域优质自媒体创作者导航目录，按 AI、教育、装修、家电、办公、银发生活等领域精选互联网优质账号，帮助读者发现灵感、学习内容策略。站点采用中文 / 英文双语呈现，所有账号均来自真实公开平台档案，不虚构粉丝数与排名。
+黎明岛是一个全领域优质自媒体创作者导航目录，按 AI、教育、装修、家电、办公、银发生活等领域精选互联网优质账号，帮助读者发现灵感、学习内容策略。站点采用中文 / 英文双语呈现，所有账号均来自真实公开平台档案，不虚构粉丝数与排名。同时收录 1055+ 精选 AI 工具导航（旧站多年积累的书签资源），覆盖 AI 写作、AI 图像、AI 视频、AI 办公、AI 开发平台等全领域。
 
 ## 内容领域 (Categories)
 - AI 人工智能: https://www.limingdao.com/zh/categories/ai-content
@@ -10,6 +10,20 @@
 - 办公: https://www.limingdao.com/zh/categories/office
 - 银发生活: https://www.limingdao.com/zh/categories/senior
 - 大学新生: https://www.limingdao.com/zh/categories/college-life
+
+## AI 工具导航 (AI Tool Navigator)
+- AI 工具导航首页: https://www.limingdao.com/zh/tools
+- AI 写作工具: https://www.limingdao.com/zh/tools/categories/AI%E5%86%99%E4%BD%9C
+- AI 图像工具: https://www.limingdao.com/zh/tools/categories/AI%E5%9B%BE%E5%83%8F
+- AI 视频创作工具: https://www.limingdao.com/zh/tools/categories/AI%E8%A7%86%E9%A2%91%E5%88%9B%E4%BD%9C
+- AI 办公工具: https://www.limingdao.com/zh/tools/categories/AI%E5%8A%9E%E5%85%AC
+- AI 开发平台: https://www.limingdao.com/zh/tools/categories/AI%E5%BC%80%E5%8F%91%E5%B9%B3%E5%8F%B0
+- AI 大模型: https://www.limingdao.com/zh/tools/categories/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B
+- AI 搜索引擎: https://www.limingdao.com/zh/tools/categories/AI%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E
+- AI 音频音乐: https://www.limingdao.com/zh/tools/categories/AI%E9%9F%B3%E9%A2%91%E9%9F%B3%E4%B9%90
+- AI 聊天对话: https://www.limingdao.com/zh/tools/categories/AI%E8%81%8A%E5%A4%A9%E5%AF%B9%E8%AF%9D
+- AI 智能体: https://www.limingdao.com/zh/tools/categories/AI%E6%99%BA%E8%83%BD%E4%BD%93
+
 
 ## 创作者指南 (Guides)
 - AI 学习领域值得关注的 10 位创作者: https://www.limingdao.com/zh/guides/ai-content-creators-to-follow
@@ -37,6 +51,7 @@
 
 ## 收录规模
 - 198+ 创作者账号（zh + en 双语）
+- 1055+ 精选 AI 工具（AI 工具导航）
 - 7 大内容领域
 - 20 篇原创指南
 

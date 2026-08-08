@@ -184,7 +184,6 @@ export function websiteJsonLd(opts: {
 
 /** A single breadcrumb entry: a human label and its absolute URL. */
 export type Crumb = { name: string; url: string };
-
 /**
  * schema.org BreadcrumbList. Returns null when there are fewer than two
  * levels (a breadcrumb needs at least Home + current to be meaningful), so
@@ -206,4 +205,35 @@ export function breadcrumbJsonLd(opts: {
       item: it.url
     }))
   };
+}
+
+/**
+ * schema.org SoftwareApplication for tool detail pages. When `appUrl` is
+ * provided it is linked as the software's official URL; the page itself is the
+ * directory entry. Gives AI crawlers an unambiguous "what is this tool" entity.
+ */
+export function softwareAppJsonLd(opts: {
+  name: string;
+  description: string;
+  url: string;
+  brand: string;
+  lang: Lang;
+  appUrl?: string;
+}): Record<string, unknown> {
+  const app: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: opts.name,
+    description: opts.description,
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Web",
+    url: opts.url,
+    inLanguage: opts.lang === "zh" ? "zh-CN" : "en",
+    author: { "@type": "Organization", name: opts.brand },
+    mainEntityOfPage: { "@type": "WebPage", "@id": opts.url }
+  };
+  if (opts.appUrl) {
+    app.sameAs = [opts.appUrl];
+  }
+  return app;
 }

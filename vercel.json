@@ -1,5 +1,10 @@
 {
   "redirects": [
-    { "source": "/", "destination": "/zh", "permanent": true }
+    { "source": "/", "destination": "/zh", "permanent": true },
+    { "source": "/bookmarks/:path*/", "destination": "/zh/tools/:path*", "permanent": true },
+    { "source": "/bookmarks/:path*", "destination": "/zh/tools/:path*", "permanent": true },
+    { "source": "/sub-category/:path*/", "destination": "/zh/tools/categories/:path*", "permanent": true },
+    { "source": "/categories/:path*/", "destination": "/zh/tools/categories/:path*", "permanent": true },
+    { "source": "/tags/:path*/", "destination": "/zh/tools", "permanent": true }
   ]
 }

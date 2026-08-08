@@ -22,6 +22,7 @@ export const dictionary = {
 
     /* nav */
     navAccounts: "Creators",
+    navTools: "AI Tools",
     navPlatforms: "Platforms",
     navCategories: "Niches",
     navRankings: "Rankings",
@@ -54,6 +55,7 @@ export const dictionary = {
     quickBilibili: "Bilibili",
     quickYoutube: "YouTube",
     quickAiCreators: "AI Creators",
+    quickAiTools: "AI Tools",
 
     /* sections */
     today: "Today's Picks",
@@ -177,6 +179,7 @@ export const dictionary = {
 
     /* nav */
     navAccounts: "达人库",
+    navTools: "AI工具",
     navPlatforms: "平台",
     navCategories: "领域",
     navRankings: "排行榜",
@@ -209,6 +212,7 @@ export const dictionary = {
     quickBilibili: "B站",
     quickYoutube: "YouTube",
     quickAiCreators: "AI 创作者",
+    quickAiTools: "AI 工具",
 
     /* sections */
     today: "今日推荐",

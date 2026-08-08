@@ -1,6 +1,6 @@
 import { getCollection } from "astro:content";
 import type { Lang } from "@/lib/i18n";
-import type { Account, Category, Platform, NewsItem, GuideItem } from "@/lib/types";
+import type { Account, Category, Platform, NewsItem, GuideItem, Tool } from "@/lib/types";
 
 export type AccountWithCategories = Account & {
   categoryItems: Category[];
@@ -15,18 +15,20 @@ type Cache = {
   platforms: Platform[];
   news: NewsItem[];
   guides: GuideItem[];
+  tools: Tool[];
 };
 
 let _cache: Cache | null = null;
 
 async function load(): Promise<Cache> {
   if (!_cache) {
-    const [catEntries, accEntries, platEntries, newsEntries, guidesEntries] = await Promise.all([
+    const [catEntries, accEntries, platEntries, newsEntries, guidesEntries, toolEntries] = await Promise.all([
       getCollection("categories"),
       getCollection("accounts"),
       getCollection("platforms"),
       getCollection("news"),
-      getCollection("guides")
+      getCollection("guides"),
+      getCollection("tools")
     ]);
     // `slug` is a reserved field in content collections, so the canonical slug
     // comes from the entry (derived from filename or the frontmatter `slug`),
@@ -52,7 +54,8 @@ async function load(): Promise<Cache> {
         slug: e.data.guideId ?? e.data.slug ?? e.slug,
         date: e.data.date ? new Date(e.data.date).toISOString() : undefined,
         updated: e.data.updated ? new Date(e.data.updated).toISOString() : undefined
-      }))
+      })),
+      tools: toolEntries.map((e) => ({ ...e.data, slug: e.data.slug ?? e.slug }))
     };
   }
   return _cache;
@@ -253,6 +256,35 @@ export async function getGuidesMentioningAccount(accountSlug: string, lang: Lang
       if (tb !== ta) return tb - ta;
       return a.order - b.order;
     });
+}
+
+/* ── Tools (legacy AI-tool navigation) ── */
+
+export async function getTools() {
+  const { tools } = await load();
+  return tools;
+}
+
+export async function getToolBySlug(slug: string) {
+  const { tools } = await load();
+  return tools.find((t) => t.slug === slug);
+}
+
+export async function getToolsByCategory(category: string) {
+  const { tools } = await load();
+  return tools.filter((t) => t.category === category);
+}
+
+export async function getToolCategoryCounts() {
+  const { tools } = await load();
+  const counts = new Map<string, number>();
+  for (const t of tools) {
+    const cat = t.category || "未分类";
+    counts.set(cat, (counts.get(cat) ?? 0) + 1);
+  }
+  return [...counts.entries()]
+    .map(([category, count]) => ({ category, count }))
+    .sort((a, b) => b.count - a.count);
 }
 
 /* ── Formatting ── */
