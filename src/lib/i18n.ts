@@ -91,6 +91,9 @@ export const dictionary = {
     serviceItem3Title: "Ongoing Operations",
     serviceItem3Desc:
       "From publishing schedules to community engagement, we handle day-to-day management so you can focus on your business.",
+    serviceItem4Title: "GEO (Generative Engine Optimization)",
+    serviceItem4Desc:
+      "Get your brand cited first when AI answers your customers — AI-visibility baseline audits across Doubao, DeepSeek, Ernie, Kimi, Qwen, and Tencent Yuanbao, semantic content structuring (short answer + key facts + FAQ), authoritative source building, and monthly AI-answer reviews.",
     servicesCTA: "Get a Free Consultation",
 
     /* submit */
@@ -248,6 +251,9 @@ export const dictionary = {
     serviceItem3Title: "持续代运营",
     serviceItem3Desc:
       "从发布排期到社群互动，我们负责日常运营管理，你只需要专注自己的业务。",
+    serviceItem4Title: "GEO 生成式引擎优化",
+    serviceItem4Desc:
+      "让 AI 在回答客户问题时优先引用你的品牌：豆包、DeepSeek、文心一言、Kimi、通义千问、腾讯元宝 6 大模型 AI 可见性基线调研，语义结构化内容优化（一句话结论 + 关键事实 + FAQ），权威信源布局与月度 AI 回答复盘。",
     servicesCTA: "免费咨询",
 
     /* submit */
