@@ -90,7 +90,43 @@ main:
             git commit -m "chore(gsc): 导出 GSC 数据 + 关键词审计报告 + AI 可见性复测（$(date +%Y-%m-%d)）" || echo "NOTHING_TO_COMMIT"
             git push "https://cnb:${CNB_TOKEN}@cnb.cool/aoobee/limingdao.git" HEAD:main 2>&1 | tail -3 || echo "PUSH_FAILED"
 
+  # ============================================================
+  # Clarity 数据导出流水线
+  # 两种触发方式共用同一套定义（复用锚点）：
+  #   1) crontab  每月 1 日 02:45 自动执行
+  #   2) api_trigger  手动一键触发（随时拉最新 1-3 天会话数据）
+  # 密钥：aoobee-secrets/limingdao-clarity-bot.yml → CLARITY_API_TOKEN
+  # 注意：Clarity API 每项目每天最多 10 次请求，故与 GSC 分开定时、避免超限
+  # ============================================================
+  "crontab: 45 2 1 * *":
+    - &clarity-export
+      name: clarity-export
+      docker:
+        image: python:3.11
+      imports:
+        - https://cnb.cool/aoobee/aoobee-secrets/-/blob/main/limingdao-clarity-bot.yml
+      env:
+        CLARITY_NUM_DAYS: "3"
+      stages:
+        - name: export
+          # 导出最近 3 天：URL（热门页面）+ Source（来源渠道）两个维度
+          # 配额有限（10 次/天），一次调用两个维度控制在 1 次请求内
+          script: |
+            set -e
+            python3 scripts/clarity-export.py --numOfDays ${CLARITY_NUM_DAYS:-3} --dimension1 URL --dimension2 Source --out-dir clarity/export
+        - name: commit-and-push
+          script: |
+            set -e
+            cd /workspace
+            git config user.email "cnb.c4ejfLqtAfAA@noreply.cnb.cool"
+            git config user.name "cnb.c4ejfLqtAfAA"
+            git add clarity/export/*.json clarity/export/*.csv
+            git commit -m "chore(clarity): 导出 Clarity 会话数据（$(date +%Y-%m-%d)）" || echo "NOTHING_TO_COMMIT"
+            git push "https://cnb:${CNB_TOKEN}@cnb.cool/aoobee/limingdao.git" HEAD:main 2>&1 | tail -3 || echo "PUSH_FAILED"
+
 $:
   # 手动触发：随时一键拉最新 GSC 数据（复用上方 crontab 同一套流水线定义）
   api_trigger:
     - *gsc-monthly-export-audit
+    # 手动触发：随时一键拉最新 Clarity 会话数据
+    - *clarity-export
