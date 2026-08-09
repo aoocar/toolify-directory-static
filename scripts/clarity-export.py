@@ -132,6 +132,7 @@ def main():
 
     if status != 200:
         print("FAIL: Clarity API 返回非 200，请检查 token 是否有效/过期、配额是否超限（每天 10 次）")
+        print(f"响应体（前 500 字符）: {body[:500]}")
         sys.exit(1)
 
     try:
