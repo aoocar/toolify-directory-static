@@ -26,10 +26,19 @@ main:
           script: |
             set -e
             python3 scripts/indexnow-submit.py --limit 200 || echo "INDEXNOW_WARN: 推送失败（不阻断部署，可稍后手动重跑）"
-  # 每月 1 日 02:30 自动导出 GSC 数据 + 生成关键词基线 + 跑审计 + 提交推送
-  # （commit 推送 CNB main 后，上方 push → sync-to-github 会自动把数据同步到 GitHub 生产仓库）
+
+  # ============================================================
+  # GSC 数据导出 + 关键词审计 + AI 可见性复测 流水线（复用锚点）
+  # 两种触发方式共用同一套定义：
+  #   1) crontab  每月 1 日 02:30 自动执行
+  #   2) api_trigger  手动一键触发（随时拉最新 28 天数据）
+  # 使用 python:3.11 镜像（默认镜像无 python3/pip3）
+  # ============================================================
   "crontab: 30 2 1 * *":
-    - name: gsc-monthly-export-audit
+    - &gsc-monthly-export-audit
+      name: gsc-monthly-export-audit
+      docker:
+        image: python:3.11
       imports:
         - https://cnb.cool/aoobee/aoobee-secrets/-/blob/main/gen-lang-client-0803005687-0f2590780ae7.json
       env:
@@ -39,8 +48,7 @@ main:
         - name: install
           script: |
             set -e
-            (apk add --no-cache python3 py3-pip git >/dev/null 2>&1 || true)
-            pip3 install -q --break-system-packages --no-cache-dir google-api-python-client google-auth pyyaml 2>&1 | tail -1 || true
+            pip3 install -q --no-cache-dir google-api-python-client google-auth pyyaml 2>&1 | tail -1 || true
             python3 --version
         - name: export
           script: |
@@ -79,5 +87,10 @@ main:
             git config user.email "cnb.c4ejfLqtAfAA@noreply.cnb.cool"
             git config user.name "cnb.c4ejfLqtAfAA"
             git add gsc/export/queries.csv gsc/export/pages.csv gsc/keyword-map.csv gsc/audit-report.md gsc/uncovered-queries.csv geo/monthly/*.md
-            git commit -m "chore(gsc): 月度自动导出 GSC 数据 + 关键词审计报告 + AI 可见性复测（$(date +%Y-%m-%d)）" || echo "NOTHING_TO_COMMIT"
+            git commit -m "chore(gsc): 导出 GSC 数据 + 关键词审计报告 + AI 可见性复测（$(date +%Y-%m-%d)）" || echo "NOTHING_TO_COMMIT"
             git push "https://cnb:${CNB_TOKEN}@cnb.cool/aoobee/limingdao.git" HEAD:main 2>&1 | tail -3 || echo "PUSH_FAILED"
+
+$:
+  # 手动触发：随时一键拉最新 GSC 数据（复用上方 crontab 同一套流水线定义）
+  api_trigger:
+    - *gsc-monthly-export-audit
