@@ -12,12 +12,16 @@ clarity-export.py — 从 Microsoft Clarity Data Export API 导出项目数据
     imports:
       - https://cnb.cool/<org>/<secret-repo>/-/blob/main/limingdao-clarity-bot.yml
     该 yml 的字段会作为环境变量注入：CLARITY_API_TOKEN=xxx
-    （请确认密钥仓库中文件名为 limingdao-clarity-bot.yml，内容为标准冒号 YAML：
-       CLARITY_API_TOKEN: <token>  ）
+    ⚠️ 密钥文件必须为标准冒号 YAML（英文冒号 + 空格 + 半角值）：
+       CLARITY_API_TOKEN: <token>
+    ⚠️ 严禁在值后带 `///` 尾注（如 `CLARITY_API_TOKEN: xxx ///这是注释`），
+       否则 `///这是注释` 会被一并注入 token 值导致鉴权失败；
+       脚本已做防御性剥离（见 get_token），但请务必改回标准格式。
 
 本地运行（可选，供调试）：
     export CLARITY_API_TOKEN=<你的token>
     python3 scripts/clarity-export.py --numOfDays 3 --dimension1 URL --out-dir clarity/export
+    （注意 export 时同样不要带 /// 尾注）
 
 API 说明（微软官方文档《Clarity Data Export API》）：
     GET https://www.clarity.ms/export-data/api/v1/project-live-insights
@@ -57,10 +61,29 @@ VALID_METRICS = {
 
 
 def get_token():
-    """从环境变量读取 Clarity API Token（CNB imports 注入 or 本地 export）。"""
+    """从环境变量读取 Clarity API Token（CNB imports 注入 or 本地 export）。
+
+    防御性清洗：
+      1) 密钥文件必须为标准 YAML（英文冒号 + 空格 + 半角值），例如：
+           CLARITY_API_TOKEN: <token>
+      2) 严禁在值后面带 `///` 尾注（如 `CLARITY_API_TOKEN: xxx ///这是注释`），
+         否则 `///这是注释` 会被一并注入 token 值，导致鉴权失败。
+         若检测到 `///`，此处自动剥离尾注并告警（同时保留原始值供排查）。
+    """
     tok = os.environ.get("CLARITY_API_TOKEN", "").strip()
     if not tok:
         print("FATAL: 缺少 CLARITY_API_TOKEN（请确认流水线 imports 已注入密钥仓库 limingdao-clarity-bot.yml）")
+        sys.exit(2)
+
+    # 剥离 `///` 尾注：若密钥值被误写成 `xxx ///这是注释`，只取 `xxx` 部分
+    if "///" in tok:
+        raw = tok
+        tok = tok.split("///", 1)[0].rstrip()
+        print(f"WARN: CLARITY_API_TOKEN 含 `///` 尾注（{raw!r}），已自动剥离为 {tok!r}。")
+        print("WARN: 请将密钥文件 limingdao-clarity-bot.yml 改为标准 YAML：CLARITY_API_TOKEN: <token>（英文冒号+空格+半角，不要带 /// 注释）")
+
+    if not tok:
+        print("FATAL: CLARITY_API_TOKEN 剥离尾注后为空，请检查密钥文件格式（英文冒号+空格+半角，无 /// 尾注）")
         sys.exit(2)
     return tok
 
