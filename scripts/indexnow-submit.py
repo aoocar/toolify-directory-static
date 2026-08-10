@@ -41,18 +41,31 @@ import urllib.request
 KEY = "88b9bf2dedaf4503a16cbad4681b06e5"
 HOST = "www.limingdao.com"
 SITEMAP_URL = f"https://{HOST}/sitemap-index.xml"
-# 核心优先级路径（优先推送高价值页面）
+# 核心优先级路径（优先推送高价值页面；2026-08-10 加码：补平台页/指南/热门领域/工具分类）
 PRIORITY_PATHS = [
     "/",
     "/zh",
     "/en",
     "/zh/tools",
+    "/en/tools",
     "/zh/accounts",
+    "/en/accounts",
     "/zh/guides",
+    "/en/guides",
     "/zh/services",
+    "/zh/platforms",
+    "/en/platforms",
+    "/zh/categories",
+    "/en/categories",
     "/zh/categories/ai-content",
     "/zh/categories/college-life",
+    "/zh/categories/marketing-seo",
+    "/zh/categories/video-generation",
+    "/zh/tools/categories",
+    "/zh/new",
+    "/en/new",
     "/llms.txt",
+    "/robots.txt",
 ]
 
 UA = "Mozilla/5.0 (compatible; Limingdao-IndexNow/1.0; +https://www.limingdao.com)"

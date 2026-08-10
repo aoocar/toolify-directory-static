@@ -111,14 +111,27 @@ def fetch(num_of_days, dims):
 
 
 def flatten(payload, dim):
-    """把 API 返回的 metricName/information 结构扁平化为行。"""
+    """把 API 返回的 metricName/information 结构扁平化为行。
+
+    按 dim 过滤：只保留该维度聚合的行，让不同维度的 CSV 真正差异化。
+    规则（与 Clarity 返回语义一致）：
+      - dimension=URL    保留 `Url` 非空的行（URL 聚合行，Source 通常为空）
+      - dimension=Source 保留 `Source` 非空的行（来源聚合行，Url 通常为空）；
+                          但 URL×Source 交叉行（两字段都非空）两个维度都会保留，
+                          因为它在两个维度下都有业务含义
+    """
     rows = []
     if not isinstance(payload, list):
         return rows
+    dim_col = "Url" if dim == "URL" else dim
     for metric in payload:
         metric_name = metric.get("metricName", "")
         info_list = metric.get("information", []) or []
         for info in info_list:
+            val = info.get(dim_col)
+            if val is None or str(val).strip() == "":
+                # 该行不含当前维度的取值，跳过（避免全量重复输出）
+                continue
             row = {"metric": metric_name}
             row.update(info)
             rows.append(row)
