@@ -66,6 +66,9 @@ export const dictionary = {
     freeCategories: "All niche categories",
     guides: "Creator Guides",
     news: "Industry Trends",
+    toc: "On this page",
+    relatedGuides: "Related guides",
+    backToTop: "Back to top",
 
     /* account card */
     followers: "followers",
@@ -226,6 +229,9 @@ export const dictionary = {
     freeCategories: "全部领域分类",
     guides: "创作者指南",
     news: "行业动态",
+    toc: "本页目录",
+    relatedGuides: "相关指南",
+    backToTop: "返回顶部",
 
     /* account card */
     followers: "粉丝",

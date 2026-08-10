@@ -40,6 +40,18 @@ const news = await getNews(lang);
 // keep the homepage panel short — the full archive lives at /[lang]/guides
 const guides = await getGuides(lang, 6);
 
+// ---- 首页锚点目录（P2：zh 活跃度 / 快速返回） ----
+// 每个 section 带稳定 id，配合右侧锚点目录快速跳转，减少快速返回事件
+const homeSections = [
+  { id: "today", label: t(lang, "today") },
+  { id: "platforms", label: t(lang, "platformNav") },
+  { id: "categories", label: t(lang, "categories") },
+  { id: "featured", label: t(lang, "featured") },
+  { id: "guides", label: t(lang, "guides") },
+  { id: "all-categories", label: t(lang, "freeCategories") }
+];
+
+
 // WebSite structured data for the homepage. The SearchAction points at the
 // accounts list, which ships a progressive-enhancement client-side filter, so
 // `/accounts?q=` is a real, working search endpoint.
@@ -88,7 +100,14 @@ const websiteLd = websiteJsonLd({
     </div>
   </section>
 
-  <section class="section">
+  {/* 锚点目录：首页长页面的「快速定位」入口（P2） */}
+  <nav class="home-toc" aria-label={t(lang, "toc")}>
+    <div class="container home-toc-inner">
+      {homeSections.map((s) => <a href={`#${s.id}`}>{s.label}</a>)}
+    </div>
+  </nav>
+
+  <section class="section" id="today">
     <div class="container directory-layout">
       <div>
         <div class="section-head compact">
@@ -153,7 +172,7 @@ const websiteLd = websiteJsonLd({
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="platforms">
     <div class="container">
       <div class="section-head">
         <h2>{t(lang, "platformNav")}</h2>
@@ -164,7 +183,7 @@ const websiteLd = websiteJsonLd({
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="categories">
     <div class="container">
       <div class="section-head">
         <h2>{t(lang, "categories")}</h2>
@@ -176,7 +195,7 @@ const websiteLd = websiteJsonLd({
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="featured">
     <div class="container">
       <div class="section-head">
         <h2>{t(lang, "featured")}</h2>
@@ -188,7 +207,8 @@ const websiteLd = websiteJsonLd({
     </div>
   </section>
 
-  <section class="section">
+  {/* 相关指南（P2）：把首页长面板之外的指南入口提到中段，增加停留/互动 */}
+  <section class="section" id="guides">
     <div class="container seo-grid">
       <section class="seo-panel">
         <div class="section-head compact">
@@ -210,7 +230,7 @@ const websiteLd = websiteJsonLd({
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="all-categories">
     <div class="container">
       <div class="section-head compact">
         <h2>{t(lang, "freeCategories")}</h2>
@@ -228,4 +248,18 @@ const websiteLd = websiteJsonLd({
       </div>
     </div>
   </section>
+
+  {/* 返回顶部（P2：快速返回优化——给长首页一个明确的回顶锚点） */}
+  <a class="back-to-top" href="#" data-back-to-top aria-label={t(lang, "backToTop")} title={t(lang, "backToTop")}>
+    ↑
+  </a>
+  <script is:inline>
+    // 平滑回顶：避免原生锚点跳转把 `#` 写进地址栏
+    document.addEventListener("click", function (e) {
+      var el = e.target && e.target.closest ? e.target.closest("[data-back-to-top]") : null;
+      if (!el) return;
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  </script>
 </BaseLayout>

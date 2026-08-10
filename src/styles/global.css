@@ -306,6 +306,68 @@ h1 {
   background: rgba(99, 102, 241, 0.03);
 }
 
+/* --- Homepage TOC (P2: zh engagement / quick-back) --- */
+.home-toc {
+  padding: 4px 0 22px;
+}
+
+.home-toc-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.home-toc-inner a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.home-toc-inner a:hover {
+  border-color: var(--brand-indigo);
+  color: var(--brand-indigo);
+  background: rgba(99, 102, 241, 0.03);
+}
+
+/* scroll-margin so anchored sections aren't hidden under the sticky header */
+.section[id] {
+  scroll-margin-top: 24px;
+}
+
+/* --- Back to top (P2) --- */
+.back-to-top {
+  position: fixed;
+  right: 20px;
+  bottom: 24px;
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  color: var(--brand-indigo);
+  font-size: 18px;
+  font-weight: 800;
+  opacity: 0.9;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.back-to-top:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
 /* --- Main Directory Layout --- */
 .section {
   padding: 40px 0;
