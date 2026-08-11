@@ -1,6 +1,9 @@
 main:
   push:
     - name: sync-to-github
+      # 使用 python:3.11 镜像，确保 indexnow 收录脚本有 python3/pip3 环境
+      docker:
+        image: python:3.11
       imports:
         - https://cnb.cool/aoobee/aoobee-secrets/-/blob/main/limingdao-cnb-sync.yml
       stages:
