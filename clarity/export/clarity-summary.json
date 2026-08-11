@@ -1,72 +1,72 @@
 {
-  "exported_at_utc": "2026-08-09 09:30:34",
+  "exported_at_utc": "2026-08-11 08:22:49",
   "numOfDays": 3,
   "dimensions": [
     "URL",
     "Source"
   ],
   "status": 200,
-  "raw_file": "clarity-20260809-093034.json",
+  "raw_file": "clarity-20260811-082249.json",
   "metrics": [
     {
       "metricName": "DeadClickCount",
-      "rows": 141,
+      "rows": 149,
       "totalSessionCount": 0,
       "totalBotSessionCount": 0,
       "distantUserCount": 0
     },
     {
       "metricName": "ExcessiveScroll",
-      "rows": 141,
+      "rows": 149,
       "totalSessionCount": 0,
       "totalBotSessionCount": 0,
       "distantUserCount": 0
     },
     {
       "metricName": "RageClickCount",
-      "rows": 141,
+      "rows": 149,
       "totalSessionCount": 0,
       "totalBotSessionCount": 0,
       "distantUserCount": 0
     },
     {
       "metricName": "QuickbackClick",
-      "rows": 141,
+      "rows": 149,
       "totalSessionCount": 0,
       "totalBotSessionCount": 0,
       "distantUserCount": 0
     },
     {
       "metricName": "ScriptErrorCount",
-      "rows": 141,
+      "rows": 149,
       "totalSessionCount": 0,
       "totalBotSessionCount": 0,
       "distantUserCount": 0
     },
     {
       "metricName": "ErrorClickCount",
-      "rows": 141,
+      "rows": 149,
       "totalSessionCount": 0,
       "totalBotSessionCount": 0,
       "distantUserCount": 0
     },
     {
       "metricName": "ScrollDepth",
-      "rows": 141,
+      "rows": 148,
       "totalSessionCount": 0,
       "totalBotSessionCount": 0,
       "distantUserCount": 0
     },
     {
       "metricName": "Traffic",
-      "rows": 363,
-      "totalSessionCount": 162,
-      "totalBotSessionCount": 314,
+      "rows": 453,
+      "totalSessionCount": 165,
+      "totalBotSessionCount": 373,
       "distantUserCount": 0
     },
     {
       "metricName": "EngagementTime",
-      "rows": 141,
+      "rows": 149,
       "totalSessionCount": 0,
       "totalBotSessionCount": 0,
       "distantUserCount": 0
