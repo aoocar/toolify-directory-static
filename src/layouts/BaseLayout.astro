@@ -50,6 +50,17 @@ const currentPath = Astro.url.pathname.replace(/^\/(en|zh)/, "") || "/";
     {noindex && <meta name="robots" content="noindex, follow" />}
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="canonical" href={canonicalURL.href} />
+    <!-- ---- Resource hints: warm up third-party connections ---- -->
+    <link rel="dns-prefetch" href="//www.googletagmanager.com" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    <link rel="dns-prefetch" href="//pagead2.googlesyndication.com" />
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin />
+    <link rel="dns-prefetch" href="//hm.baidu.com" />
+    <link rel="preconnect" href="https://hm.baidu.com" crossorigin />
+    <link rel="dns-prefetch" href="//www.clarity.ms" />
+    <link rel="preconnect" href="https://www.clarity.ms" crossorigin />
+    <link rel="dns-prefetch" href="//clarity.ms" />
+    <link rel="preconnect" href="https://clarity.ms" crossorigin />
     {showHreflang && <link rel="alternate" hreflang="zh" href={hrefZh} />}
     {showHreflang && <link rel="alternate" hreflang="en" href={hrefEn} />}
     {showHreflang && <link rel="alternate" hreflang="x-default" href={hrefZh} />}
@@ -69,63 +80,110 @@ const currentPath = Astro.url.pathname.replace(/^\/(en|zh)/, "") || "/";
     <meta name="twitter:description" content={description} />
     <title>{title}</title>
 
-    <!-- Baidu Analytics (hm.js) -->
-    <script is:inline>
-      var _hmt = _hmt || [];
-      (function() {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?a058de7114a65efaa9252887ecfa5a9b";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-      })();
-    </script>
+    <!-- Baidu Analytics (hm.js) -- loaded lazily via the third-party loader below -->
 
-    <!-- Google tag (gtag.js) -->
-    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-WJ8ZP9FSE9"></script>
+    <!-- Google tag (gtag.js) -- loaded lazily via the third-party loader below; stub + pageview config stay inline so tracking still works -->
     <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      // Attach campaign (UTM) params so every pageview carries the original
-      // acquisition source through the site (organic/direct/paid/social…).
-      // gtag sends the full query string by default; we just make the values
-      // explicit and read the first-hit UTM so attribution survives navigation.
+      // ---- Deferred third-party loader (analytics + ads) ----
+      // None of these are on the LCP critical path. Loading them all eagerly in
+      // <head> blocks the main thread (TBT) and hurts LCP, especially on mobile.
+      // We queue them and inject lazily once the page is idle (or on first user
+      // interaction as a fallback), so the initial render stays fast.
+      // Tiny stubs below let any callers that fire before the real scripts
+      // arrive still work (dataLayer / gtag / clarity / _hmt).
       (function () {
-        try {
-          var params = new URLSearchParams(window.location.search);
-          var urlParams = {};
-          ['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function (k) {
-            var v = params.get(k);
-            if (v) urlParams[k] = v;
-          });
-          var sessionUtm = sessionStorage.getItem('lmdao_utm');
-          var firstHit = sessionUtm ? JSON.parse(sessionUtm) : urlParams;
-          if (Object.keys(firstHit).length && !sessionUtm) {
-            try { sessionStorage.setItem('lmdao_utm', JSON.stringify(firstHit)); } catch (e) {}
-          }
-          if (Object.keys(firstHit).length) {
-            gtag('config', 'G-WJ8ZP9FSE9', { page_path: window.location.pathname, ...firstHit });
-          } else {
-            gtag('config', 'G-WJ8ZP9FSE9', { page_path: window.location.pathname });
-          }
-        } catch (e) {
-          gtag('config', 'G-WJ8ZP9FSE9');
+        // ---- Stubs ----
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.clarity = window.clarity || function () { (window.clarity.q = window.clarity.q || []).push(arguments); };
+        window._hmt = window._hmt || [];
+
+        var loaded = false;
+        function loadThirdParty() {
+          if (loaded) return;
+          loaded = true;
+          var d = document;
+
+          // 1) Google tag (gtag.js) — async
+          var gt = d.createElement("script");
+          gt.async = true;
+          gt.src = "https://www.googletagmanager.com/gtag/js?id=G-WJ8ZP9FSE9";
+          d.head.appendChild(gt);
+
+          // 2) Google AdSense — async
+          var ads = d.createElement("script");
+          ads.async = true;
+          ads.crossOrigin = "anonymous";
+          ads.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8752263153695128";
+          d.head.appendChild(ads);
+
+          // 3) Baidu Analytics
+          var hm = d.createElement("script");
+          hm.async = true;
+          hm.src = "https://hm.baidu.com/hm.js?a058de7114a65efaa9252887ecfa5a9b";
+          d.head.appendChild(hm);
+
+          // 4) Microsoft Clarity
+          var cl = d.createElement("script");
+          cl.async = true;
+          cl.src = "https://www.clarity.ms/tag/kn4x488ytp";
+          d.head.appendChild(cl);
+        }
+
+        // Fire on first user gesture if idle loading doesn't happen
+        // (older mobile browsers / heavy throttling).
+        var fired = false;
+        function onUserGesture() {
+          if (fired) return;
+          fired = true;
+          loadThirdParty();
+        }
+        ["scroll", "mousedown", "touchstart", "keydown"].forEach(function (ev) {
+          window.addEventListener(ev, onUserGesture, { passive: true, once: true });
+        });
+
+        // Prefer idle-time loading (after LCP / first paint settles).
+        if ("requestIdleCallback" in window) {
+          window.requestIdleCallback(loadThirdParty, { timeout: 3500 });
+        } else {
+          window.addEventListener("load", loadThirdParty);
         }
       })();
     </script>
 
-    <!-- Microsoft Clarity -->
-    <script is:inline type="text/javascript">
-      (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-      })(window, document, "clarity", "script", "kn4x488ytp");
+    <!-- ---- gtag pageview config ----
+         Fires as soon as gtag.js is ready. The stub above already pushed the
+         pageview onto dataLayer, and gtag.js replays queued commands on load.
+         We keep UTM first-hit attribution via sessionStorage for cross-tool
+         reporting. -->
+    <script is:inline>
+      (function () {
+        function gtagConfig() {
+          try {
+            var params = new URLSearchParams(window.location.search);
+            var urlParams = {};
+            ['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function (k) {
+              var v = params.get(k);
+              if (v) urlParams[k] = v;
+            });
+            var sessionUtm = sessionStorage.getItem('lmdao_utm');
+            var firstHit = sessionUtm ? JSON.parse(sessionUtm) : urlParams;
+            if (Object.keys(firstHit).length && !sessionUtm) {
+              try { sessionStorage.setItem('lmdao_utm', JSON.stringify(firstHit)); } catch (e) {}
+            }
+            var cfg = { page_path: window.location.pathname };
+            if (Object.keys(firstHit).length) Object.assign(cfg, firstHit);
+            window.gtag('config', 'G-WJ8ZP9FSE9', cfg);
+          } catch (e) {
+            window.gtag('config', 'G-WJ8ZP9FSE9');
+          }
+        }
+        gtagConfig();
+      })();
     </script>
 
     <!-- Google AdSense verification (enable Auto ads in the AdSense dashboard after approval; ca-pub-8752263153695128 is the user's legacy account) -->
     <meta name="google-adsense-account" content="ca-pub-8752263153695128" />
-    <script is:inline async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8752263153695128" crossorigin="anonymous"></script>
   </head>
   <body>
     <div class="sponsor-strip">
