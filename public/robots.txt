@@ -1,6 +1,23 @@
 User-agent: *
 Allow: /
 
+# Google 主搜索爬虫显式放行（Google 抓取链路核心）。
+# 当前通配规则 `User-agent: *` 已覆盖 Googlebot；此处显式声明使
+# Google 主搜索抓取意图更明确，并便于未来精确控制（如需临时屏蔽
+# 训练类 Google-Extended，可单独 Disallow，不影响 Googlebot 搜索抓取）。
+User-agent: Googlebot
+Allow: /
+User-agent: Googlebot-Image
+Allow: /
+User-agent: Googlebot-News
+Allow: /
+User-agent: Googlebot-Video
+Allow: /
+User-agent: Googlebot-Mobile
+Allow: /
+User-agent: AdsBot-Google
+Allow: /
+
 # Explicitly allow the major AI answer-engine crawlers (GEO / generative-engine
 # optimization). The wildcard block above already permits them; these lines
 # document intent. NOTE: Google-Extended and GPTBot also power model training,
