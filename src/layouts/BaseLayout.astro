@@ -55,10 +55,9 @@ const currentPath = Astro.url.pathname.replace(/^\/(en|zh)/, "") || "/";
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
     <link rel="dns-prefetch" href="//pagead2.googlesyndication.com" />
     <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin />
+    <!-- clarity.ms / www.clarity.ms 指向同一域，仅预热一个，避免占用宝贵的 preconnect 预算（浏览器约 6 个并发限制） -->
     <link rel="dns-prefetch" href="//www.clarity.ms" />
     <link rel="preconnect" href="https://www.clarity.ms" crossorigin />
-    <link rel="dns-prefetch" href="//clarity.ms" />
-    <link rel="preconnect" href="https://clarity.ms" crossorigin />
     {showHreflang && <link rel="alternate" hreflang="zh" href={hrefZh} />}
     {showHreflang && <link rel="alternate" hreflang="en" href={hrefEn} />}
     {showHreflang && <link rel="alternate" hreflang="x-default" href={hrefZh} />}
@@ -93,49 +92,81 @@ const currentPath = Astro.url.pathname.replace(/^\/(en|zh)/, "") || "/";
         window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
         window.clarity = window.clarity || function () { (window.clarity.q = window.clarity.q || []).push(arguments); };
 
-        var loaded = false;
-        function loadThirdParty() {
-          if (loaded) return;
-          loaded = true;
-          var d = document;
+        var d = document;
+        var started = false;
 
-          // 1) Google tag (gtag.js) — async
-          var gt = d.createElement("script");
-          gt.async = true;
-          gt.src = "https://www.googletagmanager.com/gtag/js?id=G-WJ8ZP9FSE9";
-          d.head.appendChild(gt);
+        // 按优先级逐个注入，避免同一时刻爆发多个第三方网络请求 + 主线程解析，
+        // 进一步压低 LCP/TBT。优先级：GA（数据最要紧）→ Clarity（体验分析）→ AdSense（广告，最不关键，最后才加载）。
+        var queue = [
+          // 1) Google tag (gtag.js)
+          function () {
+            var s = d.createElement("script");
+            s.async = true;
+            s.src = "https://www.googletagmanager.com/gtag/js?id=G-WJ8ZP9FSE9";
+            d.head.appendChild(s);
+          },
+          // 2) Microsoft Clarity
+          function () {
+            var s = d.createElement("script");
+            s.async = true;
+            s.src = "https://www.clarity.ms/tag/kn4x488ytp";
+            d.head.appendChild(s);
+          },
+          // 3) Google AdSense — 最后加载（广告不阻塞数据/体验采集）
+          function () {
+            var s = d.createElement("script");
+            s.async = true;
+            s.crossOrigin = "anonymous";
+            s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8752263153695128";
+            d.head.appendChild(s);
+          }
+        ];
 
-          // 2) Google AdSense — async
-          var ads = d.createElement("script");
-          ads.async = true;
-          ads.crossOrigin = "anonymous";
-          ads.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8752263153695128";
-          d.head.appendChild(ads);
-
-          // 3) Microsoft Clarity
-          var cl = d.createElement("script");
-          cl.async = true;
-          cl.src = "https://www.clarity.ms/tag/kn4x488ytp";
-          d.head.appendChild(cl);
+        function loadNext() {
+          if (started && queue.length) {
+            queue.shift()();
+          }
         }
 
-        // Fire on first user gesture if idle loading doesn't happen
-        // (older mobile browsers / heavy throttling).
-        var fired = false;
+        // 每个空闲片段只加载一个脚本，错峰执行，减少瞬时主线程占用。
+        function pump() {
+          if (started) return;
+          started = true;
+          if ("requestIdleCallback" in window) {
+            // 首帧空闲先拉 GA，随后在更晚的空闲片段逐个补上 Clarity / AdSense。
+            var delays = [3500, 6000, 9000];
+            delays.forEach(function (t) {
+              window.requestIdleCallback(loadNext, { timeout: t });
+            });
+          } else {
+            // 不支持 requestIdleCallback：退化到 load 后逐个错峰。
+            (function step() {
+              if (queue.length) queue.shift()();
+              if (queue.length) setTimeout(step, 800);
+            })();
+          }
+        }
+
+        // 兜底：首次用户交互就尽快把 GA/Clarity 拉起来（AdSense 仍可最后）。
+        var gestureFired = false;
         function onUserGesture() {
-          if (fired) return;
-          fired = true;
-          loadThirdParty();
+          if (gestureFired) return;
+          gestureFired = true;
+          started = true;
+          loadNext();
+          // 交互后再错峰拉起剩下两个
+          setTimeout(function () { if (queue.length) queue.shift()(); }, 500);
+          setTimeout(function () { if (queue.length) queue.shift()(); }, 1500);
         }
         ["scroll", "mousedown", "touchstart", "keydown"].forEach(function (ev) {
           window.addEventListener(ev, onUserGesture, { passive: true, once: true });
         });
 
-        // Prefer idle-time loading (after LCP / first paint settles).
+        // 优先在空闲时加载；空闲回调不可用时退化为 load 事件后错峰加载。
         if ("requestIdleCallback" in window) {
-          window.requestIdleCallback(loadThirdParty, { timeout: 3500 });
+          window.requestIdleCallback(pump, { timeout: 2500 });
         } else {
-          window.addEventListener("load", loadThirdParty);
+          window.addEventListener("load", pump);
         }
       })();
     </script>
