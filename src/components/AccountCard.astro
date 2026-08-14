@@ -21,7 +21,7 @@ const displayTags = lang === "en" ? account.tags.filter(isAscii).slice(0, 3) : a
         <a href={localizedPath(lang, `/accounts/${account.slug}`)}>
           {account.name[lang]}
         </a>
-        {account.verified && <span class="verified-badge" title={t(lang, "verified")}>✓</span>}
+        {account.verified && <span class="verified-badge" title={t(lang, "verified")} role="img" aria-label={t(lang, "verified")}>✓</span>}
       </h3>
       <span class="platform-tag">{account.platformItem?.name[lang] || account.platform}</span>
     </div>

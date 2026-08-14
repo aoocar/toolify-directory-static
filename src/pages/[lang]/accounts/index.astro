@@ -33,7 +33,7 @@ const breadcrumbLd = breadcrumbJsonLd({
       <div class="section-head">
         <h1>{t(lang, "allAccounts")}</h1>
         <form class="search-panel inline-search" action={localizedPath(lang, "/accounts")} method="get" role="search">
-          <input name="q" type="search" placeholder={t(lang, "searchPlaceholder")} />
+          <input name="q" type="search" placeholder={t(lang, "searchPlaceholder")} aria-label={t(lang, "search")} />
           <button class="button" type="submit">{t(lang, "search")}</button>
         </form>
       </div>

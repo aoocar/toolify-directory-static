@@ -171,7 +171,7 @@ const breadcrumbLd = breadcrumbJsonLd({
           <div>
             <h1>
               {account.name[lang]}
-              {account.verified && <span class="verified-badge" title={t(lang, "verified")}>✓</span>}
+              {account.verified && <span class="verified-badge" title={t(lang, "verified")} role="img" aria-label={t(lang, "verified")}>✓</span>}
             </h1>
             <p class="lead">{account.tagline[lang]}</p>
           </div>
@@ -280,23 +280,23 @@ const breadcrumbLd = breadcrumbJsonLd({
           <table class="stats-table">
             <tbody>
               <tr>
-                <td><strong>{t(lang, "followers")}</strong></td>
+                <th scope="row">{t(lang, "followers")}</th>
                 <td>{formatNumber(account.followerCount, lang)}</td>
               </tr>
               <tr>
-                <td><strong>{t(lang, "engagement")}</strong></td>
+                <th scope="row">{t(lang, "engagement")}</th>
                 <td>{formatNumber(account.avgEngagement, lang)}</td>
               </tr>
               <tr>
-                <td><strong>{t(lang, "growth")}</strong></td>
+                <th scope="row">{t(lang, "growth")}</th>
                 <td>{account.growthRate !== undefined ? `+${account.growthRate}%` : "—"}</td>
               </tr>
               <tr>
-                <td><strong>{t(lang, "frequency")}</strong></td>
+                <th scope="row">{t(lang, "frequency")}</th>
                 <td>{frequencyMap[account.contentFrequency]?.[lang] || account.contentFrequency || "—"}</td>
               </tr>
               <tr>
-                <td><strong>{t(lang, "monetization")}</strong></td>
+                <th scope="row">{t(lang, "monetization")}</th>
                 <td><span class="pill select">{monetizationMap[account.monetization]?.[lang] || account.monetization}</span></td>
               </tr>
             </tbody>

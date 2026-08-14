@@ -72,12 +72,12 @@ const websiteLd = websiteJsonLd({
         <p class="eyebrow">🌅 {t(lang, "dailyUpdated")}</p>
         <h1>{t(lang, "heroTitle")}</h1>
         <p class="lead">{t(lang, "heroSubtitle")}</p>
-        <form class="search-panel" action={localizedPath(lang, "/accounts")} method="get">
-          <input name="q" type="search" placeholder={t(lang, "searchPlaceholder")} />
+        <form class="search-panel" action={localizedPath(lang, "/accounts")} method="get" role="search">
+          <input name="q" type="search" placeholder={t(lang, "searchPlaceholder")} aria-label={t(lang, "search")} />
           <button class="button" type="submit">{t(lang, "search")}</button>
         </form>
       </div>
-      <aside class="stats-card" aria-label="Directory stats">
+      <aside class="stats-card" aria-label={t(lang, "ariaStats")}>
         <div class="stat">
           <strong>{latestAccounts.length}</strong>
           <span>{t(lang, "statAccounts")}</span>
@@ -126,7 +126,7 @@ const websiteLd = websiteJsonLd({
                   <div>
                     <h3>
                       <a href={localizedPath(lang, `/accounts/${account.slug}`)}>{account.name[lang]}</a>
-                      {account.verified && <span class="verified-badge" style="color: #6366f1; margin-left: 6px;">✓</span>}
+                      {account.verified && <span class="verified-badge" style="color: #6366f1; margin-left: 6px;" title={t(lang, "verified")} role="img" aria-label={t(lang, "verified")}>✓</span>}
                     </h3>
                     <p>{account.description[lang]}</p>
                     <div class="tag-row">

@@ -88,7 +88,7 @@ const breadcrumbLd = breadcrumbJsonLd({
   <JsonLd data={breadcrumbLd} />
   <section class="section">
     <div class="container guide-container">
-      <nav class="guide-crumbs" aria-label="Breadcrumb">
+      <nav class="guide-crumbs" aria-label={t(lang, "ariaBreadcrumb")}>
         <a href={localizedPath(lang, "/guides")}>{t(lang, "guidesTitle")}</a>
         {category && <span aria-hidden="true">/</span>}
         {
