@@ -39,25 +39,25 @@ const breadcrumbLd = breadcrumbJsonLd({
     <div class="container">
       <div class="section-head">
         <h1>{t(lang, "navRankings")}</h1>
-        <div class="tab-row" role="tablist">
+        <div class="tab-row">
           <a
             class={`tab-button ${activeTab === "followers" ? "active" : ""}`}
             href={`${localizedPath(lang, "/rankings")}?tab=followers`}
-            role="tab"
+            {...(activeTab === "followers" ? { "aria-current": "page" } : {})}
           >
             {t(lang, "rankByFollowers")}
           </a>
           <a
             class={`tab-button ${activeTab === "engagement" ? "active" : ""}`}
             href={`${localizedPath(lang, "/rankings")}?tab=engagement`}
-            role="tab"
+            {...(activeTab === "engagement" ? { "aria-current": "page" } : {})}
           >
             {t(lang, "rankByEngagement")}
           </a>
           <a
             class={`tab-button ${activeTab === "growth" ? "active" : ""}`}
             href={`${localizedPath(lang, "/rankings")}?tab=growth`}
-            role="tab"
+            {...(activeTab === "growth" ? { "aria-current": "page" } : {})}
           >
             {t(lang, "rankByGrowth")}
           </a>

@@ -69,6 +69,11 @@ export const dictionary = {
     toc: "On this page",
     relatedGuides: "Related guides",
     backToTop: "Back to top",
+    skipToContent: "Skip to main content",
+    ariaNavPrimary: "Primary navigation",
+    ariaLanguage: "Language",
+    ariaBreadcrumb: "Breadcrumb",
+    ariaStats: "Directory stats",
 
     /* account card */
     followers: "followers",
@@ -232,6 +237,11 @@ export const dictionary = {
     toc: "本页目录",
     relatedGuides: "相关指南",
     backToTop: "返回顶部",
+    skipToContent: "跳到主要内容",
+    ariaNavPrimary: "主导航",
+    ariaLanguage: "语言",
+    ariaBreadcrumb: "面包屑",
+    ariaStats: "站点数据",
 
     /* account card */
     followers: "粉丝",
