@@ -55,8 +55,6 @@ const currentPath = Astro.url.pathname.replace(/^\/(en|zh)/, "") || "/";
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
     <link rel="dns-prefetch" href="//pagead2.googlesyndication.com" />
     <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin />
-    <link rel="dns-prefetch" href="//hm.baidu.com" />
-    <link rel="preconnect" href="https://hm.baidu.com" crossorigin />
     <link rel="dns-prefetch" href="//www.clarity.ms" />
     <link rel="preconnect" href="https://www.clarity.ms" crossorigin />
     <link rel="dns-prefetch" href="//clarity.ms" />
@@ -80,8 +78,6 @@ const currentPath = Astro.url.pathname.replace(/^\/(en|zh)/, "") || "/";
     <meta name="twitter:description" content={description} />
     <title>{title}</title>
 
-    <!-- Baidu Analytics (hm.js) -- loaded lazily via the third-party loader below -->
-
     <!-- Google tag (gtag.js) -- loaded lazily via the third-party loader below; stub + pageview config stay inline so tracking still works -->
     <script is:inline>
       // ---- Deferred third-party loader (analytics + ads) ----
@@ -90,13 +86,12 @@ const currentPath = Astro.url.pathname.replace(/^\/(en|zh)/, "") || "/";
       // We queue them and inject lazily once the page is idle (or on first user
       // interaction as a fallback), so the initial render stays fast.
       // Tiny stubs below let any callers that fire before the real scripts
-      // arrive still work (dataLayer / gtag / clarity / _hmt).
+      // arrive still work (dataLayer / gtag / clarity).
       (function () {
         // ---- Stubs ----
         window.dataLayer = window.dataLayer || [];
         window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
         window.clarity = window.clarity || function () { (window.clarity.q = window.clarity.q || []).push(arguments); };
-        window._hmt = window._hmt || [];
 
         var loaded = false;
         function loadThirdParty() {
@@ -117,13 +112,7 @@ const currentPath = Astro.url.pathname.replace(/^\/(en|zh)/, "") || "/";
           ads.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8752263153695128";
           d.head.appendChild(ads);
 
-          // 3) Baidu Analytics
-          var hm = d.createElement("script");
-          hm.async = true;
-          hm.src = "https://hm.baidu.com/hm.js?a058de7114a65efaa9252887ecfa5a9b";
-          d.head.appendChild(hm);
-
-          // 4) Microsoft Clarity
+          // 3) Microsoft Clarity
           var cl = d.createElement("script");
           cl.async = true;
           cl.src = "https://www.clarity.ms/tag/kn4x488ytp";
